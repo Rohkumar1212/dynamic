@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart | E-commerce</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="css/plugins.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
+    <script src="script.js"></script>
+    <style>
+        .portfolio-description a img {
+            height: 100px !important;
+            width: 200px !important;
+        }
+
+        .flickity-viewport {
+            height: 320px !important;
+            width: 480px !important;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        /* 🔹 Mobile Responsive Design */
+        @media screen and (max-width: 600px) {
+            .product-card {
+                width: 100%;
+                /* Full width for small screens */
+                max-width: 250px;
+                margin: 0 auto;
+                /* Center the card */
+                background-color: #dbc79b;
+            }
+
+            .container .max-w-3xl .mx-auto {
+                background-color: #dbc79b !important;
+            }
+
+            .flickity-viewport {
+                height: 220px !important;
+                width: 300px !important;
+                padding: 20px;
+                margin-bottom: 30px;
+            }
+
+            .flex-1 h3 {
+                font-size: 18px !important;
+                /* Adjust text size for mobile */
+
+            }
+
+            .text-lg,
+            .text-lg span {
+                font-size: 15px !important;
+                line-height: 25px !important;
+            }
+
+            h3:not(:last-child),
+            .h3:not(:last-child) {
+                margin-bottom: 12px !important;
+
+            }
+
+            .product-card h3,
+            .product-card p,
+            .price {
+                font-size: 15px;
+                /* Adjust text size for mobile */
+            }
+
+            .buttons {
+                flex-direction: column;
+                gap: 6px;
+            }
+
+            .buttons button {
+                font-size: 15px;
+                /* Larger text for mobile */
+                padding: 10px;
+            }
+        }
+
+        #user-profile {
+            position: fixed;
+            float: left;
+            margin-left: 567px;
+            margin-top: 5px;
+            display: ruby;
+        }
+
+        .text-light,
+        .text-light h1,
+        .text-light h2,
+        .text-light h3,
+        .text-light h4,
+        .text-light h5,
+        .text-light h6,
+        .text-light .lead,
+        .text-light p,
+        .text-light a:not(.btn),
+        .text-light a:not(.btn):hover:not(.btn-light),
+        .text-light i,
+        .text-light li,
+        .text-light label,
+        .text-light div:not(.alert),
+        .text-light span:not(.btn-label) {
+            color: #100e0e !important;
+        }
+
+        @media (max-width: 768px) {
+
+            .text-lg,
+            .text-lg span {
+                font-size: 18px !important;
+                line-height: 21px !important;
+            }
+
+            #header[data-transparent="true"]+.fullscreen {
+                top: -80px;
+                margin-bottom: -157px !;
+
+            }
+        }
+
+        @media all and (device-width: 1024px) and (device-height: 1366px) and (orientation:landscape) {
+
+            .buttons button {
+                font-size: 15px;
+                /* Larger text for mobile */
+                padding: 10px;
+            }
+
+            .product-card {
+                width: 100%;
+                /* Full width for small screens */
+                max-width: 250px;
+                margin: 0 auto;
+                /* Center the card */
+                background-color: #dbc79b;
+            }
+
+            .container .max-w-3xl .mx-auto {
+                background-color: #dbc79b !important;
+            }
+
+            .flickity-viewport {
+                height: 220px !important;
+                width: 300px !important;
+                padding: 20px;
+                margin-bottom: 30px;
+            }
+
+            .flex-1 h3 {
+                font-size: 18px !important;
+                /* Adjust text size for mobile */
+
+            }
+
+            .text-lg,
+            .text-lg span {
+                font-size: 15px !important;
+                line-height: 25px !important;
+            }
+
+            h3:not(:last-child),
+            .h3:not(:last-child) {
+                margin-bottom: 12px !important;
+
+            }
+
+            .product-card h3,
+            .product-card p,
+            .price {
+                font-size: 15px;
+                /* Adjust text size for mobile */
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="body-inner">
+        <div id="topbar" class="d-none d-xl-block d-lg-block topbar-transparent topbar-fullwidth dark">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="top-menu">
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="products.html">Features</a></li>
+
+                        </ul>
+                    </div>
+                    <div class="col-md-6 d-none d-sm-block">
+                        <div class="social-icons social-icons-colored-hover">
+                            <ul>
+                                <li class="social-facebook"><a href="https://www.facebook.com/DYNAMICCORRUGATIONS"><i
+                                            class="fab fa-facebook-f"></i></a></li>
+                                <li class="social-twitter"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li class="social-linkedin"><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                                <li class="social-youtube"><a href="#"><i class="fab fa-youtube"></i></a></li>
+                                <li class="social-rss"><a href="#"><i class="fa fa-rss"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header -->
+        <header id="header" data-transparent="true">
+            <div class="header-inner">
+                <div class="container">
+                    <!--Logo-->
+                    <div id="logo"> <a href="index.html"><span class="logo-default"><img class="img-fluid logody"
+                                    src="images/logotran.png" alt=""></span></a> </div>
+                    <!--End: Logo-->
+                    <!-- Search -->
+                    <div id="search"><a id="btn-search-close" class="btn-search-close" aria-label="Close search form"><i
+                                class="icon-x"></i></a>
+                        <form class="search-form" action="" method="get">
+                            <input class="form-control" name="q" type="text" placeholder="Type & Search..." />
+                            <span class="text-muted">Start typing & press "Enter" or "ESC" to close</span>
+                        </form>
+                    </div> <!-- end: search -->
+
+                    <!--Navigation Resposnive Trigger-->
+                    <div id="mainMenu-trigger"> <a class="lines-button x"><span class="lines"></span></a> </div>
+                    <!--end: Navigation Resposnive Trigger-->
+                    <!--Navigation-->
+                    <div id="mainMenu">
+                        <div class="container">
+                            <nav>
+                                <ul>
+                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="about.html">About us</a></li>
+                                    <li><a href="products.html">Product</a></li>
+                                  <li><a href="product-solution.html">Product Solutions</a></li>
+                                    <li><a href="gallery.html">Gallery</a></li>
+                                    <li><a href="contact.html">Contact us</a></li>
+                                </ul>
+
+                            </nav>
+                            <!-- Right Side: Login & Profile Section -->
+
+                            <!--end: Navigation-->
+                        </div>
+                    </div>
+        </header>
+        <!-- end: Header -->
+        <section id="section2" class="fullscreen text-light py-5" style="background-color:#dbc79b;">
+            <div class="container">
+                <div class="max-w-3xl mx-auto  shadow-lg rounded-lg p-6" style="background-color:#e8eef1;">
+                    <h2 class="text-2xl font-bold text-gray-800 border-b pb-3 mb-4">🛒 Your Shopping Cart</h2>
+
+                    <!-- Cart Items -->
+                    <div id="cartContainer" class="space-y-6"></div>
+
+                    <!-- Total Price -->
+                    <div class="flex justify-between items-center border-t pt-4 mt-6">
+                        <span class="text-xl font-semibold text-gray-800">Total:</span>
+                        <span class="text-2xl font-bold text-blue-600"><span id="totalAmount">0</span></span>
+                    </div>
+
+                    <!-- Checkout Button -->
+                    <button id="checkoutBtn"
+                        class="mt-6 w-full bg-blue-600 text-white text-lg font-semibold py-3 rounded-lg hover:bg-blue-700 transition">
+                        Proceed to Checkout
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Content -->
+        <section id="page-content">
+            <div class="container">
+                <hr class="space">
+                <div class="heading-text heading-line text-center">
+                    <h4>Our Products </h4>
+                </div>
+                <!-- Portfolio: Image Zoom -->
+                <div class="portfolio-3-columns">
+                    <!-- portfolio item -->
+                    <div id="portfolio" class="grid-layout portfolio-4-columns" data-margin="0">
+                        <!-- portfolio item -->
+                        <div class="portfolio-item ct-photography ct-media ct-branding ct-Media ct-webdesign">
+                            <div class="portfolio-item-wrap">
+                                <div class="portfolio-slider">
+                                    <div class="carousel" data-items="1" data-loop="true" data-autoplay="true"
+                                        data-animate-in="fadeIn" data-animate-out="fadeOut" data-autoplay="1500">
+                                        <a href="products.html"><img
+                                                src="images/products/18x14.75x10.75 inch RSC Carton.webp" alt=""></a>
+                                        <a href="products.html"><img
+                                                src="images/products/21x12.75x16.75 inch RSC Carton.jpeg" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="portfolio-description" data-lightbox="gallery">
+                                    <a title="Photoshop Mock-up!" data-lightbox="gallery-image"
+                                        href="images/products/18x14.75x11.75 inch RSC Carton.webp"><i
+                                            class="icon-copy"></i></a>
+                                    <a title="Paper Pouch!" data-lightbox="gallery-image"
+                                        href="images/products/18x14.75x10.75 inch RSC Carton.webp" class="hidden"></a>
+                                    <a title="Mock-up" data-lightbox="gallery-image"
+                                        href="images/products/18x14.75x11.75 inch RSC Carton.webp" class="hidden"></a>
+                                    <a title="Mock-up" data-lightbox="gallery-image"
+                                        href="images/products/18x14.75x10.75 inch RSC Carton.webp" class="hidden"></a>
+                                    <a href="gallery.html"><i class="icon-link"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end: portfolio item -->
+                        <!-- portfolio item -->
+                        <div class="portfolio-item ct-photography ct-media ct-branding ct-Media ct-webdesign">
+                            <div class="portfolio-item-wrap">
+                                <div class="portfolio-slider">
+                                    <div class="carousel" data-items="1" data-loop="true" data-autoplay="true"
+                                        data-animate-in="fadeIn" data-animate-out="fadeOut" data-autoplay="1500">
+                                        <a href="products.html"><img
+                                                src="images/products/21x12.75x16.75 inch RSC Carton.jpeg" alt=""></a>
+                                        <a href="products.html"><img
+                                                src="images/products/18x14.75x11.75 inch RSC Carton.webp" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="portfolio-description" data-lightbox="gallery">
+                                    <a title="Photoshop Mock-up!" data-lightbox="gallery-image"
+                                        href="images/products/18x14.75x11.75 inch RSC Carton.webp"><i
+                                            class="icon-copy"></i></a>
+                                    <a title="Paper Pouch!" data-lightbox="gallery-image"
+                                        href="images/products/18x14.75x11.75 inch RSC Carton.webp" class="hidden"></a>
+                                    <a title="Mock-up" data-lightbox="gallery-image"
+                                        href="images/products/18x14.75x11.75 inch RSC Carton.webp" class="hidden"></a>
+                                    <a title="Mock-up" data-lightbox="gallery-image"
+                                        href="images/products/18x14.75x11.75 inch RSC Carton.webp" class="hidden"></a>
+                                    <a href="products.html"><i class="icon-link"></i></a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- end: portfolio item -->
+                        <!-- portfolio item -->
+                        <div class="portfolio-item img-zoom ct-photography ct-media ct-branding ct-Media">
+
+
+                            <div class="portfolio-item-wrap">
+                                <div class="portfolio-slider">
+                                    <div class="carousel" data-items="1" data-loop="true" data-autoplay="true"
+                                        data-animate-in="fadeIn" data-animate-out="fadeOut" data-autoplay="1500">
+                                        <a href="products.html"><img
+                                                src="images/products/18x14.75x18.75 inch RSC Carton.jpg" alt=""></a>
+                                        <a href="#"><img src="images/products/18x14.75x18.75 inch RSC Carton.jpg"
+                                                alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="portfolio-description" data-lightbox="gallery">
+                                    <a title="Photoshop Mock-up!" data-lightbox="gallery-image"
+                                        href="images/products/18x14.75x18.75 inch RSC Carton.jpg"><i
+                                            class="icon-copy"></i></a>
+                                    <a title="Paper Pouch!" data-lightbox="gallery-image"
+                                        href="images/products/18x14.75x18.75 inch RSC Carton.jpg" class="hidden"></a>
+                                    <a title="Mock-up" data-lightbox="gallery-image"
+                                        href="images/products/18x14.75x18.75 inch RSC Carton.jpg" class="hidden"></a>
+                                    <a title="Mock-up" data-lightbox="gallery-image"
+                                        href="images/products/18x14.75x18.75 inch RSC Carton.jpg" class="hidden"></a>
+                                    <a href="products.html"><i class="icon-link"></i></a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- end: portfolio item -->
+
+
+                    </div>
+                    <!-- end: Portfolio: Image Zoom -->
+
+                    <!-- end: Portfolio -->
+
+
+                </div>
+        </section> <!-- end: Content -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const cartContainer = document.getElementById("cartContainer");
+                const totalAmountSpan = document.getElementById("totalAmount");
+                const checkoutBtn = document.getElementById("checkoutBtn");
+
+                let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+                function updateTotalAmount() {
+                    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+                    totalAmountSpan.textContent = `₹${total.toFixed(2)}`;
+                    localStorage.setItem("totalAmount", total.toFixed(2));
+                }
+
+                function updateQuantity(id, change) {
+                    const product = cart.find(item => item.id === id);
+                    if (product) {
+                        product.quantity += change;
+                        if (product.quantity <= 0) {
+                            cart = cart.filter(item => item.id !== id);
+                        }
+                        localStorage.setItem("cart", JSON.stringify(cart));
+                        renderCart();
+                    }
+                }
+
+                function renderCart() {
+                    cartContainer.innerHTML = "";
+
+                    if (cart.length === 0) {
+                        cartContainer.innerHTML = `<p class="text-center text-gray-500">🛍️ Your cart is empty.</p>`;
+                        totalAmountSpan.textContent = "₹0.00";
+                        return;
+                    }
+
+                    cart.forEach(item => {
+                        const cartItemDiv = document.createElement("div");
+                        cartItemDiv.classList.add("flex", "items-center", "justify-between", "border-b", "pb-4");
+
+                        // Ensure correct image URL
+                        const imageUrl = item.image ? item.image : "placeholder.jpg";
+
+                        cartItemDiv.innerHTML = `
+            <div class="flex items-center">
+                <img src="${item.image}" alt="${item.name}" class="w-16 h-16 rounded-lg object-cover">
+                <div class="flex-1 ml-4">
+                    <h3 class="text-lg font-semibold text-gray-800">${item.name}</h3>
+                    <p class="text-sm text-gray-500">₹${item.price.toFixed(2)}</p>
+                    <div class="flex items-center mt-2 space-x-2">
+                        <button class="quantity-btn px-3 py-1 bg-gray-200 text-gray-700 rounded" data-id="${item.id}" data-action="-1">-</button>
+                        <span class="text-lg font-semibold">${item.quantity}</span>
+                        <button class="quantity-btn px-3 py-1 bg-gray-200 text-gray-700 rounded" data-id="${item.id}" data-action="1">+</button>
+                    </div>
+                </div>
+            </div>
+            <p class="text-lg font-semibold text-gray-800">₹${(item.price * item.quantity).toFixed(2)}</p>
+        `;
+
+                        cartContainer.appendChild(cartItemDiv);
+                    });
+
+                    updateTotalAmount();
+                }
+                // Event Delegation for Quantity Buttons
+                cartContainer.addEventListener("click", function (event) {
+                    if (event.target.classList.contains("quantity-btn")) {
+                        const id = event.target.getAttribute("data-id");
+                        const action = parseInt(event.target.getAttribute("data-action"), 10);
+                        updateQuantity(id, action);
+                    }
+                });
+
+                // Checkout Button Click Event
+                checkoutBtn.addEventListener("click", function () {
+                    if (cart.length === 0) {
+                        alert("Your cart is empty!");
+                        return;
+                    }
+                    window.location.href = "dynamiccorrugationspayu/checkout.html";
+                });
+
+                renderCart();
+            });
+        </script>
+        <!-- Footer -->
+        <footer id="footer">
+            <div class="footer-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4  col-lg-2 col-md-4">
+                            <!-- Footer widget area 1 -->
+                            <div class="widget  widget-contact-us"
+                                style="background-image: url('images/world-map-dark.png'); background-position: 50% 20px; background-repeat: no-repeat">
+                                <h4>About Dynamic Corrugations</h4>
+                                <ul class="list-icon">
+                                    <li><i class="fa fa-map-marker-alt"></i>40 K.M. Stone,Vill. Narsinghpur,
+                                        Delhi-Jaipur Highway, Sector-35 Gurugram-122004 (Hr)</li>
+                                    <li><i class="fa fa-phone"></i><a href="tel:+919891040840">+91 9891040840</a></li>
+                                    <li><i class="far fa-envelope"></i><a
+                                            href="mailto:info@dynamiccorrugations.com">info@dynamiccorrugations.com </a>
+                                    </li>
+                                    <li> <br>
+                                        <i class="far fa-clock"></i>Monday - Saturday: <strong>08:00 - 18:30</strong>
+                                        <br>
+                                        Sunday: <strong>Closed</strong>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- end: Footer widget area 1 -->
+                        </div>
+
+                        <div class="col-xl-2 col-lg-2 col-md-4">
+                            <!-- Footer widget area 1 -->
+                            <div class="widget">
+                                <h4>Useful Links</h4>
+                                <ul class="list">
+                                    <li><a href="contact.html">Connect us</a></li>
+                                    <li><a href="#">Privacy Policy</a></li>
+                                    <li><a href="#">Return & Refund Policy</a></li>
+                                    <li><a href="#">Cancellation Policy</a></li>
+                                    <li><a href="#">Terms & Condition</a></li>
+                                </ul>
+                            </div>
+                            <!-- end: Footer widget area 1 -->
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-4">
+                            <!-- Footer widget area 2 -->
+                            <div class="widget">
+                                <h4>Utility pages</h4>
+                                <ul class="list">
+                                    <li><a href="maintenance.html">Corrugated Roll</a></li>
+                                    <li><a href="maintenance.html">Triple Wall Box</a></li>
+                                    <li><a href="maintenance.html">Corrugated Box</a></li>
+                                    <li><a href="maintenance.html">Corrugated Boards</a></li>
+                                    <li><a href="maintenance.html">Pizza Box</a></li>
+                                </ul>
+                            </div>
+                            <!-- end: Footer widget area 2 -->
+                        </div>
+
+
+
+                        <div class="col-lg-4">
+                            <form class="widget-contact-form" novalidate action="contact.php" role="form" method="post">
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1"><i
+                                                class="fa fa-user"></i></span>
+                                    </div>
+                                    <input type="text" aria-required="true" name="widget-contact-form-name"
+                                        class="form-control required name" placeholder="Enter your Name">
+                                </div>
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1"><i
+                                                class="fa fa-envelope"></i></span>
+                                    </div>
+                                    <input type="email" aria-required="true" required name="widget-contact-form-email"
+                                        class="form-control required email" placeholder="Enter your Email">
+                                </div>
+                                <div class="form-group mb-2">
+                                    <textarea type="text" name="widget-contact-form-message" rows="5"
+                                        class="form-control required" placeholder="Enter your Message"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn" type="submit" id="form-submit"><i
+                                            class="fa fa-paper-plane"></i>&nbsp;Send message</button>
+                                </div>
+                            </form>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="copyright-content cta-section">
+                <div class="container">
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <!-- Social icons -->
+                            <div class="social-icons social-icons-colored float-left">
+                                <ul>
+                                    <li class="social-rss"><a href="#"><i class="fa fa-rss"></i></a></li>
+                                    <li class="social-facebook"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li class="social-twitter"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                    <li class="social-vimeo"><a href="#"><i class="fab fa-vimeo"></i></a></li>
+                                    <li class="social-youtube"><a href="#"><i class="fab fa-youtube"></i></a></li>
+                                    <li class="social-pinterest"><a href="#"><i class="fab fa-pinterest"></i></a></li>
+                                    <li class="social-gplus"><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                                </ul>
+                            </div>
+                            <!-- end: Social icons -->
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="copyright-text text-right">&copy; 2025 Dynamic Corrugations. All Rights
+                                Reserved.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- end: Footer --> <!-- FontAwesome for icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+    <div class="fixed-icons">      
+        <!-- WhatsApp Icon -->
+        <a href="https://wa.me/+919891040840" target="_blank">
+            <i class='fab fa-whatsapp' style='font-size:38px;color:rgb(7, 72, 236)'></i>
+        </a>
+        <!-- Call Icon -->
+        <a href="tel:+919891040840" style="color: rgb(0, 0, 255);">
+            <i class="fas fa-phone" style="font-size: 38px;"></i>
+        </a>
+    </div>
+    <a id="scrollTop"><i class="icon-chevron-up"></i><i class="icon-chevron-up"></i></a>
+    <!--Plugins-->
+    <script src="js/jquery.js"></script>
+    <script src="js/plugins.js"></script>
+    <!--Template functions-->
+    <script src="js/functions.js"></script>
+</body>
+
+</html>

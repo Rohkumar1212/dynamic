@@ -1,0 +1,72 @@
+.popup {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background-color: #d0caca;
+    width: 100%;
+    max-width: 700px;
+    padding: 20px;
+    border-radius: 10px;
+    position: absolute;
+    z-index: 1001;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(0);
+    margin-top: 100px;
+    display: inline-block;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 19px;
+    font-size: 31px;
+    cursor: pointer;
+    border: 2px solid black;
+    border-radius: 9px;
+}
+
+.checkbx {
+    display: flex;
+}
+
+input:not([type="checkbox"]):not([type="radio"]), select {
+    line-height: 9px;
+    padding: 6px 8px;
+    min-height: 25px;
+    font-size: 0.9rem;
+}
+
+@media screen and (max-width: 768px) {
+    .popup-content {
+        max-width: 352px;
+        padding: 10px;
+        margin-top: 240px;
+    }
+    label {
+        display: block !important;
+        padding: 3px;
+        text-align: left;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .popup-content {
+        max-width: 360px;
+        padding: 5px;
+        margin-top: 240px;
+    }
+    label {
+        display: block !important;
+        padding: 3px;
+        text-align: left;
+       
+    }
+}

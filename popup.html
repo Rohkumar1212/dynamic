@@ -1,0 +1,65 @@
+  <!-- Popup Structure -->
+  <div class="popup-container" id="popupContainer">
+    <div class="overlay" id="overlay" onclick="togglePopup()"></div>
+
+    <div class="popup" id="quoteForm">
+        <span class="close-btn" onclick="togglePopup()">&times;</span>
+        <h2>Get a Custom Quote 🚀</h2>
+        <form id="quoteRequest" action="send_mail.php" method="post" enctype="multipart/form-data">
+            <label>What’s Your Name?</label>
+            <input type="text" name="name" required>
+
+            <label>Your Email (No spam, promise 🤞)</label>
+            <input type="email" name="email" required>
+
+            <label>Your Digits (Just in case)</label>
+            <input type="number" name="phone">
+
+            <label>Who’s the Genius Behind the Brand?</label>
+            <input type="text" name="brand">
+
+            <label>What Are You Packing?</label>
+            <textarea name="product_details"
+                placeholder="Describe your product – size, weight, fragile, etc."></textarea>
+
+            <label>Pick Your Packaging Style:</label>
+            <select name="packaging_type">
+                <option>Corrugated Boxes</option>
+                <option>Custom-Printed Boxes</option>
+                <option>Eco-Friendly Packaging</option>
+                <option>Protective Materials (Bubble Wrap, Fillers)</option>
+                <option>Not Sure Yet (Help Me Decide!)</option>
+            </select>
+
+            <label>How Many Do You Need?</label>
+            <input type="number" name="quantity">
+
+            <label>When’s the Deadline?</label>
+            <input type="date" name="deadline">
+
+            <label>Got a Budget in Mind?</label>
+            <input type="number" name="budget">
+
+            <label>Fun Add-Ons:</label>
+            <input type="checkbox" name="custom_branding" value="Yes"> I want custom branding (logo, colors, etc.)<br>
+            <input type="checkbox" name="eco_friendly" value="Yes"> I want eco-friendly packaging<br>
+            <input type="checkbox" name="help_choosing" value="Yes"> I need help choosing the right packaging<br>
+
+            <label>Upload Design Files (Optional):</label>
+            <input type="file" name="file_upload">
+
+            <button type="submit">Show Me the Magic ✨</button>
+        </form>
+    </div>
+</div>
+
+    <script>
+        function openForm() {
+            document.getElementById("quoteForm").style.display = "block";
+            document.getElementById("overlay").style.display = "block";
+        }
+        function closeForm() {
+            document.getElementById("quoteForm").style.display = "none";
+            document.getElementById("overlay").style.display = "none";
+        }
+    </script>

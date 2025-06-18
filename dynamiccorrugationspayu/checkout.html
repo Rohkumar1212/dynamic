@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Form</title>
+    <link rel="icon" type="image/png" href="images/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="css/index.css" rel="stylesheet">
+    <style>
+        #quantity {}
+
+        @media (min-width: 1024px) {
+
+            .text-lg,
+            .text-lg span {
+                font-size: 20px;
+                line-height: 40px !important;
+            }
+
+            .inspiro-slider {
+                width: 100%;
+                height: 16vh !important;
+                overflow: hidden;
+                transition: opacity 0.3s ease;
+                min-height: 100%;
+                width: 100%;
+            }
+
+            .fullscreen {
+                min-height: 40vh;
+            }
+
+            .inspiro-slider {
+                height: 14vh !important;
+            }
+
+        }
+
+        @media (max-width: 768px) {
+            .inspiro-slider .container {
+                padding-top: 1px !important;
+                padding-bottom: 4px !important;
+            }
+
+            .text-lg {
+                font-size: 20px;
+                line-height: 30px !important;
+            }
+
+            .inspiro-slider {
+                width: 100%;
+                height: 26vh !important;
+                overflow: hidden;
+                transition: opacity 0.3s ease;
+                min-height: 100%;
+                width: 100%;
+            }
+
+            .inspiro-slider .slide .slide-captions {
+                text-align: center;
+                margin-bottom: 116px !important;
+            }
+
+        }
+
+        @media all and (device-width: 820px) and (device-height: 1180px) and (orientation:landscape) {
+
+            .swiper {
+                width: 100%;
+                height: 508px !important;
+            }
+
+            .inspiro-slider {
+                width: 100%;
+                height: 17vh !important;
+
+            }
+
+            .text-lg {
+                font-size: 20px;
+                line-height: 60px !important;
+            }
+        }
+
+        @media all and (device-width: 1024x) and (device-height: 1366px) and (orientation:landscape) {
+            .fullscreen {
+                width: 100%;
+                height: 100%;
+
+                min-height: 47vh !important;
+            }
+
+            .swiper {
+                width: 100%;
+                height: 508px !important;
+            }
+
+            .inspiro-slider {
+                width: 100%;
+                height: 17vh !important;
+
+            }
+
+            .text-lg {
+                font-size: 20px;
+                line-height: 30px !important;
+            }
+
+            #displayAmount {
+                font-size: 20px;
+            }
+        }
+        #quantity{
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 flex justify-center items-center min-h-screen">
+    <div class="bg-white shadow-lg rounded-xl p-6 w-full max-w-lg">
+        <h2 class="text-2xl font-bold text-center text-gray-800">Order Form</h2>
+        <form id="orderForm" class="space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+                <input type="text" id="billing_customer_name" placeholder="First Name" required
+                    class="p-2 border rounded">
+                <input type="text" id="billing_last_name" placeholder="Last Name" required class="p-2 border rounded">
+            </div>
+            <input type="text" id="billing_address" placeholder="Address" required class="p-2 border rounded w-full">
+            <div class="grid grid-cols-2 gap-4">
+                <input type="text" id="billing_city" placeholder="City" required class="p-2 border rounded">
+                <!-- Dropdown for Indian States -->
+                <select id="stateDropdown" class="p-2 border rounded" onchange="updateBillingState()">
+                    <option value="">Select State</option>
+                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                    <option value="Assam">Assam</option>
+                    <option value="Bihar">Bihar</option>
+                    <option value="Chhattisgarh">Chhattisgarh</option>
+                    <option value="Goa">Goa</option>
+                    <option value="Gujarat">Gujarat</option>
+                    <option value="Haryana">Haryana</option>
+                    <option value="Himachal Pradesh">Himachal Pradesh</option>
+                    <option value="Jharkhand">Jharkhand</option>
+                    <option value="Karnataka">Karnataka</option>
+                    <option value="Kerala">Kerala</option>
+                    <option value="Madhya Pradesh">Madhya Pradesh</option>
+                    <option value="Maharashtra">Maharashtra</option>
+                    <option value="Manipur">Manipur</option>
+                    <option value="Meghalaya">Meghalaya</option>
+                    <option value="Mizoram">Mizoram</option>
+                    <option value="Nagaland">Nagaland</option>
+                    <option value="Odisha">Odisha</option>
+                    <option value="Punjab">Punjab</option>
+                    <option value="Rajasthan">Rajasthan</option>
+                    <option value="Sikkim">Sikkim</option>
+                    <option value="Tamil Nadu">Tamil Nadu</option>
+                    <option value="Telangana">Telangana</option>
+                    <option value="Tripura">Tripura</option>
+                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                    <option value="Uttarakhand">Uttarakhand</option>
+                    <option value="West Bengal">West Bengal</option>
+                    <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                    <option value="Chandigarh">Chandigarh</option>
+                    <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu
+                    </option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                    <option value="Ladakh">Ladakh</option>
+                    <option value="Lakshadweep">Lakshadweep</option>
+                    <option value="Puducherry">Puducherry</option>
+                </select>
+
+
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <input type="text" id="billing_pincode" placeholder="Pincode" required class="p-2 border rounded">
+                <input type="text" id="billing_country" placeholder="Country" required class="p-2 border rounded">
+            </div>
+            <input type="email" id="billing_email" placeholder="Email" required class="p-2 border rounded w-full">
+            <input type="tel" id="billing_phone" placeholder="Phone Number" required class="p-2 border rounded w-full">
+
+            <h3 class="font-semibold">Order Item Price</h3>
+            <div class="grid grid-cols-3 gap-4">
+                <input type="number" id="quantity" placeholder="Units" required class="p-2 border rounded">
+
+                <input type="number" id="userAmount" placeholder="Price" required class="p-2 border rounded w-full">
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 font-medium">Amount to Pay</label>
+                <div class="flex items-center justify-between p-3 border border-gray-300 rounded-lg bg-gray-50">
+                    <span class="text-lg font-semibold text-gray-800">₹<span id="displayAmount">0</span></span>
+                    <input type="number" id="userAmount" class="hidden">
+                </div>
+            </div>
+
+            <!-- Payment Button -->
+            <button type="submit"
+                class="w-full bg-blue-600 text-white text-lg font-semibold p-3 rounded-lg hover:bg-blue-700 transition">
+                Proceed to Pay
+            </button>
+            <p id="message" class="text-center text-green-600 mt-4 hidden"></p>
+
+
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("orderForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const orderData = {
+                order_id: Date.now().toString(),
+                order_date: new Date().toISOString().split("T")[0],
+                pickup_location_id: "7212530",
+                billing_customer_name: document.getElementById("billing_customer_name").value,
+                billing_last_name: document.getElementById("billing_last_name").value,
+                billing_address: document.getElementById("billing_address").value,
+                billing_city: document.getElementById("billing_city").value,
+                billing_pincode: document.getElementById("billing_pincode").value,
+                billing_state: document.getElementById("billing_state").value,
+                billing_country: document.getElementById("billing_country").value,
+                billing_email: document.getElementById("billing_email").value,
+                billing_phone: document.getElementById("billing_phone").value,
+                shipping_customer_name: document.getElementById("billing_customer_name").value,
+                shipping_last_name: document.getElementById("billing_last_name").value,
+                shipping_address: document.getElementById("billing_address").value,
+                shipping_city: document.getElementById("billing_city").value,
+                shipping_pincode: document.getElementById("billing_pincode").value,
+                shipping_state: document.getElementById("billing_state").value,
+                shipping_country: document.getElementById("billing_country").value,
+                shipping_email: document.getElementById("billing_email").value,
+                shipping_phone: document.getElementById("billing_phone").value,
+                shipping_is_billing: true,
+                order_items: [{
+                    name: document.getElementById("item_name").value,
+                    sku: document.getElementById("item_sku").value,
+                    units: parseInt(document.getElementById("quantity").value),
+                    selling_price: document.getElementById("userAmount").value,
+                    discount: "",
+                    tax: "",
+                    hsn: "1234"
+                }],
+                payment_method: "Prepaid",
+                sub_total: document.getElementById("userAmount").value,
+                length: document.getElementById("length").value,
+                breadth: document.getElementById("breadth").value,
+                height: document.getElementById("height").value,
+                weight: document.getElementById("weight").value
+            };
+
+            console.log("Payload being sent:", orderData); // Debugging
+            try {
+                // Step 1: Send Order Data to API
+                const response = await fetch("https://api.dynamiccorrugations.com/order", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(orderData),
+                });
+
+                if (!response.ok) throw new Error("Failed to place order");
+
+                const orderResponse = await response.json(); // Get response from API
+                console.log("Order placed:", orderResponse);
+
+                // Step 2: Prepare PayU Payment Data
+                const key = "EjKBQq"; // Your PayU Key
+                const salt = "8n1jKSQBsYKsLo5gV4KqMlEO9xwzndae"; // Your PayU Salt
+                const txnid = "TXN" + Date.now();
+                const amount = orderData.sub_total;
+                const productinfo = "E-commerce Product";
+                const firstname = orderData.billing_customer_name;
+                const email = orderData.billing_email;
+                const phone = orderData.billing_phone;
+
+                // Step 3: Generate PayU Hash
+                const hash = await generatePayUHash(key, txnid, amount, productinfo, firstname, email, salt);
+
+                // Step 4: Redirect to PayU Payment Page
+                const payUForm = document.createElement("form");
+                payUForm.method = "POST";
+                payUForm.action = "https://pmny.in/PAYUMN/Trt1gF91smeK"; // PayU Test Payment URL
+
+                payUForm.innerHTML = `
+                    <input type="hidden" name="key" value="${key}">
+                    <input type="hidden" name="txnid" value="${txnid}">
+                    <input type="hidden" name="amount" value="${amount}">
+                    <input type="hidden" name="productinfo" value="${productinfo}">
+                    <input type="hidden" name="firstname" value="${firstname}">
+                    <input type="hidden" name="email" value="${email}">
+                    <input type="hidden" name="phone" value="${phone}">
+                    <input type="hidden" name="surl" value="https://dynamiccorrugations.com/payment-success"> 
+                    <input type="hidden" name="furl" value="https://dynamiccorrugations.com/payment-failure">
+                    <input type="hidden" name="hash" value="${hash}"> <input type="hidden" name="phone" value="${phone}">
+                    <input type="hidden" name="surl" value="https://dynamiccorrugations.com/success">
+                    <input type="hidden" name="furl" value="https://dynamiccorrugations.com/failure">
+                    <input type="hidden" name="hash" value="${hash}">
+                `;
+
+                document.body.appendChild(payUForm);
+                payUForm.submit();
+            } catch (error) {
+                console.error("Payment Error:", error);
+                alert("Error processing payment.");
+            }
+        });
+    </script>
+
+
+    <script>
+        async function generatePayUHash(key, txnid, amount, productinfo, firstname, email, salt) {
+            const udf1 = "", udf2 = "", udf3 = "", udf4 = "", udf5 = "";
+            const hashString = `${key}|${txnid}|${amount}|${productinfo}|${firstname}|${email}|${udf1}|${udf2}|${udf3}|${udf4}|${udf5}||||||${salt}`;
+            const encoder = new TextEncoder();
+            const data = encoder.encode(hashString);
+            const hashBuffer = await crypto.subtle.digest("SHA-512", data);
+            return Array.from(new Uint8Array(hashBuffer)).map(byte => byte.toString(16).padStart(2, '0')).join('');
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const totalAmount = localStorage.getItem("totalAmount") || "0";
+            document.getElementById("displayAmount").textContent = totalAmount;
+            document.getElementById("userAmount").value = totalAmount;
+
+            document.getElementById("paymentForm").addEventListener("submit", async function (event) {
+                event.preventDefault();
+
+                const key = "EjKBQq";
+                const salt = "8n1jKSQBsYKsLo5gV4KqMlEO9xwzndae";
+                const txnid = "TXN" + Date.now();
+                const amount = document.getElementById("userAmount").value.trim();
+                const productinfo = "E-commerce Product";
+                const firstname = document.getElementById("billing_customer_name").value.trim();
+                const email = document.getElementById("billing_email").value.trim();
+                const phone = document.getElementById("billing_phone").value.trim();
+                const address = document.getElementById("billing_address").value.trim();
+
+                if (!amount || !firstname || !email || !phone || !address) {
+                    alert("Please fill all the required fields.");
+                    return;
+                }
+
+                const hash = await generatePayUHash(key, txnid, amount, productinfo, firstname, email, salt);
+
+                document.getElementById("key").value = key;
+                document.getElementById("txnid").value = txnid;
+                document.getElementById("amount").value = amount;
+                document.getElementById("hash").value = hash;
+                document.getElementById("firstname").value = firstname;
+                document.getElementById("email").value = email;
+                document.getElementById("phone").value = phone;
+
+                this.submit();
+            });
+        });
+    </script>
+    <script>
+        document.getElementById("orderForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const itemPrice = parseFloat(document.getElementById("userAmount").value);
+            const itemUnits = parseInt(document.getElementById("quantity").value);
+            const totalAmount = itemPrice;
+
+            // Set the total amount in the UI
+            document.getElementById("displayAmount").innerText = totalAmount;
+
+            // Order Data
+            const orderData = {
+                order_id: Date.now().toString(),
+                billing_customer_name: document.getElementById("billing_customer_name").value,
+                billing_email: document.getElementById("billing_email").value,
+                billing_phone: document.getElementById("billing_phone").value,
+                sub_total: totalAmount
+            };
+
+            console.log("Payload being sent:", orderData);
+
+            try {
+                // Generate a unique transaction ID
+                const txnid = "TXN" + Date.now();
+                const amount = orderData.sub_total;
+                const key = "EjKBQq"; // Your PayU Key
+                const salt = "8n1jKSQBsYKsLo5gV4KqMlEO9xwzndae"; // Your PayU Salt
+                const productinfo = "E-commerce Product";
+                const firstname = orderData.billing_customer_name;
+                const email = orderData.billing_email;
+                const phone = orderData.billing_phone;
+
+                // Generate PayU Hash
+                const hash = await generatePayUHash(key, txnid, amount, productinfo, firstname, email, salt);
+
+                // Create Payment Form
+                const payUForm = document.createElement("form");
+                payUForm.method = "POST";
+                payUForm.action = "https://secure.payu.in/_payment"; // ✅ FIXED PayU URL
+
+                payUForm.innerHTML = `
+                <input type="hidden" name="key" value="${key}">
+                <input type="hidden" name="txnid" value="${txnid}">
+                <input type="hidden" name="amount" value="${amount}">
+                <input type="hidden" name="productinfo" value="${productinfo}">
+                <input type="hidden" name="firstname" value="${firstname}">
+                <input type="hidden" name="email" value="${email}">
+                <input type="hidden" name="phone" value="${phone}">
+                <input type="hidden" name="surl" value="https://dynamiccorrugations.com/payment-success.html">
+                <input type="hidden" name="furl" value="https://dynamiccorrugations.com/payment-failure.html">
+                <input type="hidden" name="hash" value="${hash}">
+            `;
+
+                document.body.appendChild(payUForm);
+                payUForm.submit();
+            } catch (error) {
+                console.error("Payment Error:", error);
+                alert("Error processing payment.");
+            }
+        });
+
+        async function generatePayUHash(key, txnid, amount, productinfo, firstname, email, salt) {
+            const hashString = `${key}|${txnid}|${amount}|${productinfo}|${firstname}|${email}|||||||||||${salt}`;
+            const hash = await sha512(hashString);
+            return hash;
+        }
+
+        async function sha512(str) {
+            const buffer = new TextEncoder().encode(str);
+            const hashBuffer = await crypto.subtle.digest("SHA-512", buffer);
+            return Array.from(new Uint8Array(hashBuffer)).map(byte => byte.toString(16).padStart(2, "0")).join("");
+        }
+    </script>
+    <script>
+        function updateBillingState() {
+            const selectedState = document.getElementById("stateDropdown").value;
+            document.getElementById("billing_state").value = selectedState;
+        }
+    </script>
+</body>
+
+</html>
