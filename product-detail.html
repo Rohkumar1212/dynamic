@@ -17,7 +17,7 @@
     <style>
         /* Popup Background */
 .popup {
-    display: none; /* Hidden by default */
+    display: none !important; /* Hidden by default */
     position: fixed;
     top: 0;
     left: 0;
@@ -561,31 +561,7 @@ function showPopup() {
             }
         });
     </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const openPopupLink = document.getElementById("openPopupLink");
-            const popup = document.getElementById("popup");
-            const closePopupBtn = document.getElementById("closePopup");
-
-            // Open popup
-            openPopupLink.addEventListener("click", (event) => {
-                event.preventDefault();
-                popup.classList.remove("hidden");
-            });
-
-            // Close popup when clicking close button
-            closePopupBtn.addEventListener("click", () => {
-                popup.classList.add("hidden");
-            });
-
-            // Close popup when clicking outside popup content
-            popup.addEventListener("click", (event) => {
-                if (event.target === popup) {
-                    popup.classList.add("hidden");
-                }
-            });
-        });
-    </script>
+ 
 </body>
 
 </html>
