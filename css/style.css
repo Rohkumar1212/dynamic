@@ -6,6 +6,9 @@ body .body-inner {
   padding: 0;
   margin: 0;
 }
+.popup-container{
+  display: none!important;
+}
 body .container-wide {
   width: 100%;
   margin: 0 auto;
