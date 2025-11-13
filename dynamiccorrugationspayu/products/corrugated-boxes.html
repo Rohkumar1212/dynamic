@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        .header-inner {
+            padding: 5px 0;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-logo {
+            background: #007bff;
+            color: #fff;
+            padding: 8px 12px;
+            font-weight: 600;
+            border-radius: 8px;
+            font-size: 20px;
+        }
+
+        .brand-info {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .contact-info {
+            text-align: right;
+            font-size: 14px;
+            color: #444;
+        }
+
+        .contact-info a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .product-section {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .product-section h2 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .product-section p {
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .category-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .category-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .category-content {
+            padding: 18px;
+        }
+
+        .category-content h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .category-content p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+
+        .view-btn {
+            color: #007bff;
+            font-weight: 600;
+            font-size: 14px;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="author" content="INSPIRO" />
+    <meta name="description" content="Themeforest Template Polo, html template">
+    <link rel="icon" type="image/png" href="/images/favicon.ico">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Document title -->
+    <!-- Stylesheets & Fonts -->
+    <link href="/css/plugins.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/index.css" rel="stylesheet">
+    <link href="/css/product.css" rel="stylesheet">
+    <script src="/script.js"></script>
+    <script src="/product.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <style>
+        .breadcrumb {
+            text-align: center !important;
+        }
+
+        .kk {
+            display: none;
+        }
+        body{
+
+            background-color: #edebeb;
+        }
+       
+          section{
+
+            background-color: #edebeb;
+        }
+       
+
+        .product {
+            border: 1px solid #ddd;
+            padding: 15px;
+            width: 250px;
+            text-align: center;
+        }
+
+        .product img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+        }
+
+
+
+        .view-cart {
+            display: none;
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="body-inner">
+        <div id="topbar" class="d-none d-xl-block d-lg-block topbar-transparent topbar-fullwidth dark">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="top-menu">
+                            <li><a href="/about.html">About</a></li>
+                            <li><a href="/products.html">Features</a></li>
+
+                        </ul>
+                    </div>
+                    <div class="col-md-6 d-none d-sm-block">
+                        <div class="social-icons social-icons-colored-hover">
+                            <ul>
+                                <li class="social-facebook"><a href="https://www.facebook.com/DYNAMICCORRUGATIONS"><i
+                                            class="fab fa-facebook-f"></i></a></li>
+                                <li class="social-twitter"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li class="social-linkedin"><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                                <li class="social-youtube"><a href="#"><i class="fab fa-youtube"></i></a></li>
+                                <li class="social-rss"><a href="#"><i class="fa fa-rss"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header -->
+        <header id="header" data-transparent="true">
+            <div class="header-inner">
+                <div class="container">
+                    <!--Logo-->
+                    <div id="logo"> <a href="/index.html"><span class="logo-default"><img class="img-fluid logody"
+                                    src="/images/logotran.png" alt=""></span></a> </div>
+                    <!--End: Logo-->
+                    <!-- Search -->
+                    <div id="search"><a id="btn-search-close" class="btn-search-close" aria-label="Close search form"><i
+                                class="icon-x"></i></a>
+                        <form class="search-form" action="" method="get">
+                            <input class="form-control" name="q" type="text" placeholder="Type & Search..." />
+                            <span class="text-muted">Start typing & press "Enter" or "ESC" to close</span>
+                        </form>
+                    </div> <!-- end: search -->
+
+                    <!--Navigation Resposnive Trigger-->
+                    <div id="mainMenu-trigger"> <a class="lines-button x"><span class="lines"></span></a> </div>
+                    <!--end: Navigation Resposnive Trigger-->
+                    <!--Navigation-->
+                    <div id="mainMenu">
+                        <div class="container">
+                            <nav>
+                                <ul>
+                                    <li><a href="/index.html">Home</a></li>
+                                    <li><a href="/about.html">About us</a></li>
+                                    <li><a href="/products.html">Product</a></li>
+
+                                    <li><a href="/gallery.html">Gallery</a></li>
+                                    <li><a href="/contact.html">Contact us</a></li>
+                                </ul>
+
+                            </nav>
+
+                        </div>
+                    </div>
+        </header>
+        <script src="/script.js"></script>
+        <!-- end: Header -->
+        <!-- Page title -->
+        <section id="page-title" class="text-light" data-bg-parallax="/images/products/Packaging-Page-Banner.jpg">
+            <div class="container">
+
+                <div class="breadcrumb text-center">
+                    <ul>
+                        <h1>Products</h1>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <!-- end: Page title -->
+
+        <section class="product-section px-5">
+            <h2>Corrugated Boxes Product Categories</h2>
+            <p>Choose a category to explore products, specs, and bulk pricing.</p>
+
+            <div class="category-grid">
+                <div class="category-card"
+                    onclick="openProduct('dynamiccorrugationspayu/products/15.5 x-13.75-x-11.75-inches.html')">
+                    <img src="/images/products/Corrugated Box/Corrugated Box (15.5 x 13.75 x 11.75 inches).png" alt="Corrugated Box (15.5 x 13.75 x 11.75 inches)">
+                    <div class="category-content">
+                        <h3>Corrugated Box (15.5 x 13.75 x 11.75 inches)</h3>
+                        <p>This sturdy corrugated packaging box is designed to offer superior protection, strength, and
+                            efficiency for your
+                            shipping and storage needs. With dimensions of 15.5 inches (Length) x 13.75 inches (Width) x
+                            11.75 inches (Height), it’s
+                            ideal for packing medium-sized products safely and neatly.
+                        </p>
+                        <span class="view-btn">View products →</span>
+                    </div>
+                </div>
+
+                <div class="category-card"
+                    onclick="openProduct('dynamiccorrugationspayu/products/16 x12.75x 9.75-inches.html')">
+                    <img src="/images/products/Corrugated Box/Corrugated Box (16 x 12.75 x 9.75 inches).png" alt="Corrugated Box (16 x 12.75 x 9.75 inches)">
+                    <div class="category-content">
+                        <h3>Corrugated Box (16 x 12.75 x 9.75 inches)</h3>
+                        <p>This compact and durable corrugated packaging box is perfect for safely storing and shipping
+                            small to medium-sized
+                            items. With dimensions of 16 inches (Length) x 12.75 inches (Width) x 9.75 inches (Height),
+                            it provides the ideal
+                            balance of strength, space, and protection for your packaging needs.</p>
+                        <span class="view-btn">View products →</span>
+                    </div>
+                </div>
+
+                <div class="category-card"
+                    onclick="openProduct('dynamiccorrugationspayu/products/18 x12.75-x-12.75-inches.html')">
+                    <img src="/images/products/Corrugated Box/Corrugated Box (18 x 12.75 x 12.75 inches).png" alt="Corrugated Box (18 x 12.75 x 12.75 inches)">
+                    <div class="category-content">
+                        <h3>Corrugated Box (18 x 12.75 x 12.75 inches)</h3>
+                        <p>This durable and versatile corrugated box is designed to provide superior protection and
+                            strength for your packaging,
+                            storage, and shipping needs. With dimensions of 18 inches (Length) x 12.75 inches (Width) x
+                            12.75 inches (Height), it’s
+                            the perfect size for securely packing medium-weight products.</p>
+                        <span class="view-btn">View products →</span>
+                    </div>
+                </div>
+
+                <div class="category-card"
+                    onclick="openProduct('dynamiccorrugationspayu/products/18 x-17.5-x-19.5-inches.html')">
+                    <img src="/images/products/Corrugated Box/Corrugated Box (18 x 17.5 x 19.5 inches).png" alt="Corrugated Box (18 x 17.5 x 19.5 inches)">
+                    <div class="category-content">
+                        <h3>Corrugated Box (18 x 17.5 x 19.5 inches)</h3>
+                        <p>This premium-quality corrugated packaging box is built for strength, reliability, and
+                            versatility. Measuring 18 inches
+                            (Length) x 17.5 inches (Width) x 19.5 inches (Height), it offers ample space and protection
+                            for shipping, storage, and
+                            packaging of a variety of goods.</p>
+                        <span class="view-btn">View products →</span>
+                    </div>
+                </div>
+
+                <div class="category-card"
+                    onclick="openProduct('dynamiccorrugationspayu/products/18 x 17.5-x-29.5-inches.html')">
+                    <img src="/images/products/Corrugated Box/Corrugated Box (18 x 17.5 x 29.5 inches).png" alt="Corrugated Box (18 x 17.5 x 29.5 inches).png">
+                    <div class="category-content">
+                        <h3>Corrugated Box (18 x 17.5 x 29.5 inches)</h3>
+                        <p>This extra-large corrugated packaging box is engineered to provide superior strength,
+                            stability, and protection for
+                            heavy-duty storage and shipping needs. With dimensions of 18 inches (Length) x 17.5 inches
+                            (Width) x 29.5 inches
+                            (Height), it offers generous capacity for tall or bulky items while maintaining lightweight
+                            durability.
+                        </p>
+                        <span class="view-btn">View products →</span>
+                    </div>
+                </div>
+
+                <div class="category-card"
+                    onclick="openProduct('dynamiccorrugationspayu/products/20 x 12-x-15-inches.html')">
+                    <img src="/images/products/Corrugated Box/Corrugated Box (20 x 12 x 15 inches).png" alt="Corrugated Box (20 x 12 x 15 inches)">
+                    <div class="category-content">
+                        <h3>Corrugated Box (20 x 12 x 15 inches)</h3>
+                        <p>This durable corrugated packaging box is designed to provide excellent protection and
+                            versatility for all your packing,
+                            shipping, and storage needs. With dimensions of 20 inches (Length) x 12 inches (Width) x 15
+                            inches (Height), it’s a
+                            perfect fit for medium-sized products requiring safe and sturdy packaging.</p>
+                        <span class="view-btn">View products →</span>
+                    </div>
+                </div>
+
+
+                <div class="category-card"
+                    onclick="openProduct('dynamiccorrugationspayu/products/21 x 21 x 16-inches.html')">
+                    <img src="/images/products/Corrugated Box/Corrugated Box (21 x 21 x 16 inches).png" alt="L-board Edge Protectors">
+                    <div class="category-content">
+                        <h3>Corrugated Box (21 x 21 x 16 inches)
+                        </h3>
+                        <p>This high-strength corrugated packaging box is designed for maximum protection, durability,
+                            and convenience during
+                            shipping and storage. Measuring 21 inches (Length) x 21 inches (Width) x 16 inches (Height),
+                            it offers a spacious and
+                            reliable solution for securely packing bulky or fragile items.
+                        </p>
+                        <span class="view-btn">View products →</span>
+                    </div>
+                </div>
+
+                <div class="category-card"
+                    onclick="openProduct('dynamiccorrugationspayu/products/32 x 21 x-12-inches.html')">
+                    <img src="/images/products/Corrugated Box/Corrugated Box (32 x 21 x 12 inches).png" alt="Corrugated Box (32 x 21 x 12 inches)">
+                    <div class="category-content">
+                        <h3>Corrugated Box (32 x 21 x 12 inches)
+                        </h3>
+                        <p>This heavy-duty corrugated box is built for secure and efficient packaging of medium to
+                            large-sized goods. Measuring 32
+                            inches (Length) x 21 inches (Width) x 12 inches (Height), it offers ample space and
+                            excellent durability for shipping,
+                            storage, and logistics needs.
+                        </p>
+                        <span class="view-btn">View products →</span>
+                    </div>
+                </div>
+
+                <div class="category-card"
+                    onclick="openProduct('dynamiccorrugationspayu/products/36 x 17.5-x-9.75-inches.html')">
+                    <img src="/images/products/Corrugated Box/Corrugated Box (36 x 17.5 x 9.75 inches).png" alt="Corrugated Box (36 x 17.5 x 9.75 inches)">
+                    <div class="category-content">
+                        <h3>Corrugated Box (36 x 17.5 x 9.75 inches)
+                        </h3>
+                        <p>This extra-long corrugated packaging box is designed to provide superior protection,
+                            strength, and space for wide or
+                            elongated products. With dimensions of 36 inches (Length) x 17.5 inches (Width) x 9.75
+                            inches (Height), it’s ideal for
+                            securely packing large or flat items while ensuring durability during transport and storage.
+
+                        </p>
+                        <span class="view-btn">View products →</span>
+                    </div>
+                </div>
+
+                <div class="category-card"
+                    onclick="openProduct('dynamiccorrugationspayu/products/21 x 11.5-x-16-inches.html')">
+                    <img src="/images/products/Corrugated Box/Corrugated Packaging Box (21 x 11.5 x 16 inches).png" alt="Corrugated Packaging Box (21 x 11.5 x 16 inches)">
+                    <div class="category-content">
+                        <h3>Corrugated Packaging Box (21 x 11.5 x 16 inches)</h3>
+                        <p>This premium quality corrugated box is designed for durability, strength, and secure
+                            packaging. With dimensions of 21
+                            inches (L) x 11.5 inches (W) x 16 inches (H), it’s the perfect choice for shipping, storage,
+                            and packaging a wide range
+                            of products.
+                        </p>
+                        <span class="view-btn">View products →</span>
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+
+
+        <script>
+            function openProduct(page) {
+                // Smooth animation on click
+                document.body.style.opacity = "0";
+                setTimeout(() => {
+                    window.location.href = page;
+                }, 400);
+            }
+
+            // Simple fade-in animation
+            window.onload = () => {
+                document.body.style.opacity = "0";
+                setTimeout(() => {
+                    document.body.style.transition = "opacity 0.8s ease";
+                    document.body.style.opacity = "1";
+                }, 100);
+            };
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+        <div class="container">
+            <!-- Right Side Form -->
+            <h3 class="text-dark text-center mb-3">Get Your Custom Quote</h3>
+            <div class="col-lg-12">
+                <div class="card-box p-4 shadow-lg">
+                    <form id="quoteForm" action="quoteForm" role="form" method="post">
+                        <div class="mb-3">
+                            <label class="form-label">What’s Your Name?</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Your Email (No spam, promise 🤞)</label>
+                            <input type="email" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Your Digits (Just in case)</label>
+                            <input type="number" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Who’s the Genius Behind the Brand?</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">What Are You Packing?</label>
+                            <textarea class="form-control"
+                                placeholder="Describe your product – size, weight, fragile, etc." required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Pick Your Packaging Style:</label>
+                            <select class="form-control">
+                                <option>Corrugated Boxes</option>
+                                <option>Custom-Printed Boxes</option>
+                                <option>Eco-Friendly Packaging</option>
+                                <option>Protective Materials (Bubble Wrap, Fillers)</option>
+                                <option>Not Sure Yet (Help Me Decide!)</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">How Many Do You Need?</label>
+                            <input type="number" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">When’s the Deadline?</label>
+                            <input type="date" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Got a Budget in Mind?</label>
+                            <input type="number" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Extras:</label>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input">
+                                <label class="form-check-label">I want custom branding (logo, colors, etc.).</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input">
+                                <label class="form-check-label">I want eco-friendly packaging.</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input">
+                                <label class="form-check-label">I need help choosing the right packaging.</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Upload Design Files (Optional)</label>
+                            <input type="file" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-dark w-100">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <div class="footer-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4  col-lg-2 col-md-4">
+                            <!-- Footer widget area 1 -->
+                            <div class="widget  widget-contact-us"
+                                style="background-image: url('images/world-map-dark.png'); background-position: 50% 20px; background-repeat: no-repeat">
+                                <h4>About Dynamic Corrugations</h4>
+                                <ul class="list-icon">
+                                    <li><i class="fa fa-map-marker-alt"></i>40 K.M. Stone,Vill. Narsinghpur,
+                                        Delhi-Jaipur Highway, Sector-35 Gurugram-122004 (Hr)</li>
+                                    <li><i class="fa fa-phone"></i><a href="tel:+919891040840">+91 9891040840</a></li>
+                                    <li><i class="far fa-envelope"></i><a
+                                            href="mailto:info@dynamiccorrugations.com">info@dynamiccorrugations.com </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <!-- end: Footer widget area 1 -->
+                        </div>
+
+                        <div class="col-xl-2 col-lg-2 col-md-4">
+                            <!-- Footer widget area 1 -->
+                            <div class="widget">
+                                <h4>Useful Links</h4>
+                                <ul class="list">
+                                    <li><a href="contact.html">Connect us</a></li>
+                                    <li><a href="#">Privacy Policy</a></li>
+                                    <li><a href="#">Return & Refund Policy</a></li>
+                                    <li><a href="#">Cancellation Policy</a></li>
+                                    <li><a href="#">Terms & Condition</a></li>
+                                </ul>
+                            </div>
+                            <!-- end: Footer widget area 1 -->
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-4">
+                            <!-- Footer widget area 2 -->
+                            <div class="widget">
+                                <h4>Utility pages</h4>
+                                <ul class="list">
+                                    <li><a href="maintenance.html">Corrugated Roll</a></li>
+                                    <li><a href="maintenance.html">Triple Wall Box</a></li>
+                                    <li><a href="maintenance.html">Corrugated Box</a></li>
+                                    <li><a href="maintenance.html">Corrugated Boards</a></li>
+                                    <li><a href="maintenance.html">Pizza Box</a></li>
+                                </ul>
+                            </div>
+                            <!-- end: Footer widget area 2 -->
+                        </div>
+                        <div class="col-xl-4 col-lg-2 col-md-4 widget">
+                            <h4>Social links and timiings</h4>
+                            <div class="social-icons social-icons-colored float-left">
+                                <ul>
+                                    <li class="social-facebook"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li class="social-twitter"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                    <li class="social-youtube"><a href="#"><i class="fab fa-youtube"></i></a></li>
+                                    <li class="social-gplus"><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                                </ul>
+                                <br>
+                                <ul class="list">
+                                    <li><i class="far fa-clock"></i> Monday - Saturday:- <strong>08:00 - 18:30</strong>
+                                        <br>
+                                        Sunday: <strong>Closed</strong>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- end: Footer widget area 2 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright-content cta-section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <!-- Social icons -->
+
+                            <div class="copyright-text text-left">&copy; 2025 Dynamic Corrugations. All Rights
+                                Reserved.
+
+                            </div>
+                            <!-- end: Social icons -->
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="copyright-text text-right"><a href="https://dynamiccorrugations.com/">Desinged
+                                    by Dynamic Corrugations</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- end: Footer -->
+    </div>
+    <!-- end: Body Inner -->
+    <!-- Scroll top -->
+
+    <div class="fixed-icons">
+        <!-- WhatsApp Icon -->
+        <a href="https://wa.me/+919891040840" target="_blank">
+            <i class='fab fa-whatsapp' style='font-size:38px;color:rgb(7, 72, 236)'></i>
+        </a>
+        <!-- Call Icon -->
+        <a href="tel:+919891040840" style="color: rgb(0, 0, 255);">
+            <i class="fas fa-phone" style="font-size: 38px;"></i>
+        </a>
+    </div>
+    <!-- FontAwesome for icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+
+    <a id="scrollTop"><i class="icon-chevron-up"></i><i class="icon-chevron-up"></i></a>
+    <!--Plugins-->
+    <script src="js/jquery.js"></script>
+    <script src="js/plugins.js"></script>
+    <!--Template functions-->
+    <script src="js/functions.js"></script>
+</body>
+
+</html>
