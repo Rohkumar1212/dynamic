@@ -6,12 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Checkout Page</title>
     <style>
-        body {
-            font-family: Inter, system-ui, Arial, sans-serif;
-            background: #f6f8fb;
-            padding: 28px;
-            margin: 0
-        }
+    
 
         .wrap {
             max-width: 980px;
@@ -90,51 +85,84 @@
             border: 1px solid #e8eef2;
             margin-bottom: 8px
         }
+        @media (max-width: 480px) {
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .side {
+        margin-top: 12px;
+        
+    }
+}
+
+/* === MOBILE (max-width: 768px) === */
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .side {
+        width: 100%;
+        margin-top: 16px;
+    }
+}
+
     </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <h1>Checkout</h1>
-
-    <div class="grid">
-        <!-- LEFT SIDE -->
-        <div>
-            <div class="cart-list" id="checkoutCartList"></div>
-        <div style="margin-top:12px;padding:12px;background:#fff;border-radius:8px;border:1px solid #f0f3f5">
-            <h3>Shipping details</h3>
-        
-            <!-- BASIC SHIPPING -->
-            <input id="name" class="form-control" placeholder="Full name" />
-            <input id="phone" class="form-control" placeholder="Phone" />
-            <textarea id="address" rows="3" class="form-control" placeholder="Address"></textarea>
-        
-            <h3 style="margin-top:15px">Billing details</h3>
-        
-            <input id="billing_email" class="form-control" placeholder="Email" />
-            <input id="billing_city" class="form-control" placeholder="City" />
-            <input id="billing_state" class="form-control" placeholder="State" />
-            <input id="billing_pincode" class="form-control" placeholder="Pincode" />
-            <input id="billing_country" class="form-control" placeholder="Country" value="India" />
+    <div class="container">
+        <div class="row">
+            <div class="checkout">
+            <div class="wrap">
+                <h1>Checkout</h1>
+            
+                <div class="grid">
+                    <!-- LEFT SIDE -->
+                    <div>
+                        <div class="cart-list" id="checkoutCartList"></div>
+                        <div style="margin-top:12px;padding:12px;background:#fff;border-radius:8px;border:1px solid #f0f3f5">
+                            <h3>Shipping details</h3>
+            
+                            <!-- BASIC SHIPPING -->
+                            <input id="name" class="form-control" placeholder="Full name" />
+                            <input id="phone" class="form-control" placeholder="Phone" />
+                            <textarea id="address" rows="3" class="form-control" placeholder="Address"></textarea>
+            
+                            <h3 style="margin-top:15px">Billing details</h3>
+            
+                            <input id="billing_email" class="form-control" placeholder="Email" />
+                            <input id="billing_city" class="form-control" placeholder="City" />
+                            <input id="billing_state" class="form-control" placeholder="State" />
+                            <input id="billing_pincode" class="form-control" placeholder="Pincode" />
+                            <input id="billing_country" class="form-control" placeholder="Country" value="India" />
+                        </div>
+            
+                    </div>
+            
+                    <!-- RIGHT SIDE -->
+                    <aside class="side">
+                        <div class="total-row"><span>Subtotal</span><strong id="subtotal">₹0</strong></div>
+                        <div class="total-row"><span>Shipping</span><strong id="shipping">₹0</strong></div>
+                        <div class="total-row" style="font-size:18px"><span>Total</span>
+                            <strong id="grandTotal">₹0</strong>
+                        </div>
+            
+                        <button class="primary-btn" id="payBtn" style="margin-top:12px">Pay Now</button>
+                        <div style="margin-top:8px;font-size:13px;color:#666">
+                            Make it payment using PayU payment gateway.
+                        </div>
+                    </aside>
+                </div>
+            </div>
+            </div>
         </div>
 
-        </div>
-
-        <!-- RIGHT SIDE -->
-        <aside class="side">
-            <div class="total-row"><span>Subtotal</span><strong id="subtotal">₹0</strong></div>
-            <div class="total-row"><span>Shipping</span><strong id="shipping">₹0</strong></div>
-            <div class="total-row" style="font-size:18px"><span>Total</span>
-                <strong id="grandTotal">₹0</strong>
-            </div>
-
-            <button class="primary-btn" id="payBtn" style="margin-top:12px">Pay Now</button>
-            <div style="margin-top:8px;font-size:13px;color:#666">
-                Make it payment using PayU payment gateway.
-            </div>
-        </aside>
     </div>
-</div>
+
 <script>    
 
     async function generatePayUHash(key, txnid, amount, productinfo, firstname, email, salt) {
