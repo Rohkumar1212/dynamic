@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>About Us || Dynamic Corrugations</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="author" content="INSPIRO" />
+<meta name="description" content="Themeforest Template Polo, html template">
+<link rel="icon" type="image/png" href="images/favicon.ico">
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- Document title -->
+<!-- Stylesheets & Fonts -->
+<link href="css/plugins.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<link href="css/index.css" rel="stylesheet">
+<style>
+    @media (min-width: 1024px) {
+
+        .text-lg,
+        .text-lg span {
+            font-size: 30px;
+            line-height: 60px !important;
+        }
+
+        .inspiro-slider {
+            width: 100%;
+            height: 16vh !important;
+            overflow: hidden;
+            transition: opacity 0.3s ease;
+            min-height: 100%;
+            width: 100%;
+        }
+
+        .fullscreen {
+            min-height: 40vh;
+        }
+
+        .inspiro-slider {
+            height: 14vh !important;
+        }
+
+    }
+
+    @media (max-width: 1024px) {
+        .inspiro-slider .container {
+            padding-top: 1px !important;
+            padding-bottom: 4px !important;
+        }
+
+        .inspiro-slider {
+            width: 100%;
+            height: 26vh !important;
+            overflow: hidden;
+            transition: opacity 0.3s ease;
+            min-height: 100%;
+            width: 100%;
+        }
+
+        .inspiro-slider .slide .slide-captions {
+            text-align: center;
+            margin-bottom: 116px !important;
+        }
+
+    }
+
+    @media all and (device-width: 820px) and (device-height: 1180px) and (orientation:landscape) {
+
+        .swiper {
+            width: 100%;
+            height: 508px !important;
+        }
+
+        .inspiro-slider {
+            width: 100%;
+            height: 17vh !important;
+
+        }
+
+        .text-lg {
+            font-size: 20px;
+            line-height: 60px !important;
+        }
+    }
+
+    @media all and (device-width: 1024x) and (device-height: 1366px) and (orientation:landscape) {
+        .fullscreen {
+            width: 100%;
+            height: 100%;
+
+            min-height: 47vh !important;
+        }
+
+        .swiper {
+            width: 100%;
+            height: 508px !important;
+        }
+
+        .inspiro-slider {
+            width: 100%;
+            height: 17vh !important;
+
+        }
+
+        .text-lg {
+            font-size: 20px;
+            line-height: 60px !important;
+        }
+    }
+
+    #user-profile {
+        position: fixed;
+        float: left;
+        margin-left: 567px;
+        margin-top: 5px;
+        display: ruby;
+    }
+
+    .inspiro-slider .slide {
+        height: 300px !important;
+    }
+
+    .flickity-slider {
+        height: 300px !important;
+    }
+
+    .slider {
+        height: 300px !important;
+    }
+
+    .inspiro-slider {
+        width: 100%;
+        height: 62vh !important;
+        overflow: hidden;
+        transition: opacity 0.3s ease;
+        min-height: 100%;
+        width: 100%;
+    }
+
+    #topbar.dark.topbar-transparent {
+        background-color: #dec38c;
+        border-bottom: 1px solid rgba(144, 144, 144, 0.25);
+    }
+
+    @media (max-width: 1024px) {
+        .inspiro-slider .container {
+            padding-top: 1px !important;
+            padding-bottom: 4px !important;
+        }
+
+        .inspiro-slider {
+            width: 100%;
+            height: 26vh !important;
+            overflow: hidden;
+            transition: opacity 0.3s ease;
+            min-height: 100%;
+            width: 100%;
+        }
+
+        .inspiro-slider .slide .slide-captions {
+            text-align: center;
+            margin-bottom: 116px !important;
+        }
+
+    }
+
+    /* Responsive */
+    @media (min-width: 1080px) {
+        .inspiro-slider {
+            width: 100%;
+            height: 42vh !important;
+            overflow: hidden;
+            transition: opacity 0.3s ease;
+            min-height: 100%;
+            width: 100%;
+        }
+    }
+</style>
+</head>
+
+<body>
+    <div class="body-inner">
+        <div id="topbar" class="d-none d-xl-block d-lg-block topbar-transparent topbar-fullwidth dark">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="top-menu">
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="products.html">Features</a></li>
+
+                        </ul>
+                    </div>
+                    <div class="col-md-6 d-none d-sm-block">
+                        <div class="social-icons social-icons-colored-hover">
+                            <ul>
+                                <li class="social-facebook"><a href="https://www.facebook.com/DYNAMICCORRUGATIONS"><i
+                                            class="fab fa-facebook-f"></i></a></li>
+                                <li class="social-twitter"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li class="social-linkedin"><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                                <li class="social-youtube"><a href="#"><i class="fab fa-youtube"></i></a></li>
+                                <li class="social-rss"><a href="#"><i class="fa fa-rss"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <header id="header" data-transparent="true">
+            <div class="header-inner">
+                <div class="container">
+                    <!--Logo-->
+                    <div id="logo"> <a href="index.html"><span class="logo-default"><img class="img-fluid logody"
+                                    src="images/logotran.png" alt=""></span></a> </div>
+                    <!--End: Logo-->
+                    <!-- Search -->
+                    <div id="search"><a id="btn-search-close" class="btn-search-close" aria-label="Close search form"><i
+                                class="icon-x"></i></a>
+                        <form class="search-form" action="" method="get">
+                            <input class="form-control" name="q" type="text" placeholder="Type & Search..." />
+                            <span class="text-muted">Start typing & press "Enter" or "ESC" to close</span>
+                        </form>
+                    </div> <!-- end: search -->
+
+                    <!--Navigation Resposnive Trigger-->
+                    <div id="mainMenu-trigger"> <a class="lines-button x"><span class="lines"></span></a> </div>
+                    <!--end: Navigation Resposnive Trigger-->
+                    <!--Navigation-->
+                    <div id="mainMenu">
+                        <div class="container">
+                            <nav>
+                                <ul>
+                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="about.html">About us</a></li>
+                                    <li><a href="products.html">Product</a></li>
+                                   
+                                    <li><a href="gallery.html">Gallery</a></li>
+                                    <li><a href="contact.html">Contact us</a></li>
+                                </ul>
+
+                            </nav>
+                            <!-- Right Side: Login & Profile Section -->
+
+                            <!--end: Navigation-->
+                        </div>
+                    </div>
+        </header>
+        <script src="script.js"></script>
+
+        <div id="slider" class="inspiro-slider dots-creative" data-height-xs="160">
+            <!-- Slide 2 -->
+            <div class="slide kenburns" data-bg-parallax="images/products/about-banner.jpg">
+                <div class="bg-overlay"></div>
+                <div class="container">
+                    <div class="slide-captions text-center text-light">
+                        <!-- Captions -->
+                        <span class="strong">Who we are</span>
+                        <h1>About our company</h1>
+                        <!-- end: Captions -->
+                    </div>
+                </div>
+            </div>
+            <!-- end: Slide 2 -->
+
+        </div>
+        <!--end: Inspiro Slider -->
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="heading-text heading-section">
+                            <h2>Who We Are</h2>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="row">
+                            <div class="col-lg-6">At Dynamic Corrugations, we’re not just packaging experts — we’re
+                                passionate about creating solutions that protect your products and elevate your brand.
+                                With decades of experience in the packaging industry, we specialize in high-quality,
+                                custom corrugated packaging that meets the unique needs of businesses of all sizes.
+                            </div>
+
+                            <div class="col-lg-6">From startups to established enterprises, we provide tailored
+                                packaging that ensures your goods arrive in perfect condition, while also reflecting the
+                                integrity of your brand.</div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="section3" class="fullscreen text-light py-5"
+            style="background-image: url('homepages/branding/images/background-3.png'); background-size: cover;">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h1 class="text-medium">Our Core Values</h1>
+                    <p class="lead">We stand by our values, driving innovation, sustainability, and customer
+                        satisfaction through every package we create.</p>
+                </div>
+
+                <div class="row text-center">
+                    <!-- Value 1: Innovation -->
+                    <div class="col-lg-3 mb-4">
+                        <div class="custom-card card-hover"
+                            style="background-color: #4e717d; padding: 20px; border-radius: 10px; transition: all 0.3s ease-in-out;">
+                            <h3>💡 Innovation</h3>
+                            <p>We believe in staying one step ahead, exploring new materials, <br>techniques, and
+                                solutions
+                                to enhance packaging functionality and reduce environmental impact.</p>
+                        </div>
+                    </div>
+
+                    <!-- Value 2: Sustainability -->
+                    <div class="col-lg-3 mb-4">
+                        <div class="custom-card card-hover"
+                            style="background-color: #547557; padding: 20px; border-radius: 10px; transition: all 0.3s ease-in-out;">
+                            <h3>🌱 Sustainability</h3>
+                            <p>Eco-friendly packaging isn’t just a trend — it’s our future. We prioritize sustainable
+                                sourcing, recyclability, and renewable materials to protect both your product and the
+                                planet.</p>
+                        </div>
+                    </div>
+
+                    <!-- Value 3: Quality -->
+                    <div class="col-lg-3 mb-4">
+                        <div class="custom-card card-hover"
+                            style="background-color: #613131; padding: 20px; border-radius: 10px; transition: all 0.3s ease-in-out;">
+                            <h3>🔧 Quality</h3>
+                            <p>We don’t compromise on quality. <br>Every box, every design, and every custom solution
+                                undergoes rigorous quality control to ensure durability and functionality.</p>
+                        </div>
+                    </div>
+
+                    <!-- Value 4: Customer-Centricity -->
+                    <div class="col-lg-3 mb-4">
+                        <div class="custom-card card-hover"
+                            style="background-color: #477b7d; padding: 20px; border-radius: 10px; transition: all 0.3s ease-in-out;">
+                            <h3>🤝 Customer-Centricity</h3>
+                            <p>Our customers are at the heart of everything we do. We offer personalized service and
+                                tailored solutions to meet your packaging needs with precision and care.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Add the following CSS for hover effect and transitions -->
+        <style>
+            .custom-card {
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 6px rgba(96, 93, 93, 0.1);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+
+            .custom-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+            }
+
+            .card-hover {
+                background-color: #f9f9f9;
+            }
+
+            .custom-card h3 {
+                color: #333;
+                margin-bottom: 10px;
+                font-size: 1.5rem;
+                font-weight: bold;
+            }
+
+            .custom-card p {
+                color: #555;
+                font-size: 1rem;
+            }
+
+            /* Hover effects */
+            .custom-card:hover {
+                transform: scale(1.05);
+                background-color: #e36c6c;
+            }
+        </style>
+
+        <section>
+            <div class="container">
+                <h2>Our History</h2>
+                <p>Founded in [Year], Dynamic Corrugations began with a simple but powerful idea: to offer packaging
+                    that goes beyond the norm and helps businesses make a lasting impression.
+                </p>
+                <p>What started as a small packaging supplier has grown into a leading name in custom corrugated
+                    packaging solutions, trusted by brands across industries such as retail, e-commerce, food &
+                    beverage, and more.
+                    Our journey is rooted in a passion for perfection, and over the years, .</p>
+                <p>we’ve built a team of experts who share our commitment to quality and sustainability. Together, we’ve
+                    delivered millions of packaging solutions that not only protect but help businesses thrive in
+                    today’s competitive market.</p>
+            </div>
+        </section>
+        <section>
+            <div class="container">
+                <div class="heading-text heading-section text-center mb-5">
+                    <h2>Our Mission</h2>
+                    <p>We aim to deliver packaging that does more than just protect; we create packaging that works for
+                        your business, enhances your product experience, and contributes to a sustainable future. Our
+                        mission is simple: To provide smart, efficient, and eco-friendly packaging solutions that help
+                        businesses grow and succeed.</p>
+                    <p>At Dynamic Corrugations, we’re constantly innovating, pushing the boundaries of packaging, and
+                        redefining what’s possible. Whether it’s the strength of our materials or the creativity of our
+                        designs, we are committed to delivering superior solutions that exceed expectations.</p>
+                </div>
+
+                <div class="row">
+                    <!-- Card 1: Innovation -->
+                    <div class="col-lg-4 mb-4">
+                        <div class="icon-box effect medium border center p-4">
+                            <div class="icon mb-3">
+                                <a href="#"><i class="fa fa-lightbulb"></i></a>
+                            </div>
+                            <h3>💡 Innovation</h3>
+                            <p>We stay ahead of the curve by exploring new materials, techniques, and solutions to
+                                improve packaging functionality while reducing environmental impact.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Sustainability -->
+                    <div class="col-lg-4 mb-4">
+                        <div class="icon-box effect medium border center p-4">
+                            <div class="icon mb-3">
+                                <a href="#"><i class="fa fa-leaf"></i></a>
+                            </div>
+                            <h3>🌱 Sustainability</h3>
+                            <p>Eco-friendly packaging is not just a trend—it’s our future. We prioritize sustainable
+                                sourcing, recyclability, and renewable materials to protect both your product and the
+                                planet.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Quality -->
+                    <div class="col-lg-4 mb-4">
+                        <div class="icon-box effect medium border center p-4">
+                            <div class="icon mb-3">
+                                <a href="#"><i class="fa fa-cogs"></i></a>
+                            </div>
+                            <h3>🔧 Quality</h3>
+                            <p>We never compromise on quality. Each design and packaging solution undergoes rigorous
+                                quality control to ensure durability and functionality.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Customer-Centricity -->
+                    <div class="col-lg-4 mb-4">
+                        <div class="icon-box effect medium border center p-4">
+                            <div class="icon mb-3">
+                                <a href="#"><i class="fa fa-users"></i></a>
+                            </div>
+                            <h3>🤝 Customer-Centricity</h3>
+                            <p>Our customers are at the heart of everything we do. From personalized service to tailored
+                                solutions, we ensure that your packaging needs are met with precision and care.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 5: Efficiency -->
+                    <div class="col-lg-4 mb-4">
+                        <div class="icon-box effect medium border center p-4">
+                            <div class="icon mb-3">
+                                <a href="#"><i class="fa fa-clock"></i></a>
+                            </div>
+                            <h3>⏱️ Efficiency</h3>
+                            <p>Our streamlined processes ensure that we deliver top-quality packaging solutions quickly
+                                and reliably, keeping your operations running smoothly.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 6: Creativity -->
+                    <div class="col-lg-4 mb-4">
+                        <div class="icon-box effect medium border center p-4">
+                            <div class="icon mb-3">
+                                <a href="#"><i class="fa fa-brain"></i></a>
+                            </div>
+                            <h3>🎨 Creativity</h3>
+                            <p>We are passionate about designing packaging that enhances your product’s experience. Each
+                                design is carefully crafted to reflect your brand’s uniqueness.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Additional CSS to enhance styling -->
+        <style>
+            .icon-box {
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                background-color: #fff;
+                border-radius: 10px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                text-align: center;
+                padding: 20px;
+            }
+
+            .icon-box:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+            }
+
+            .icon-box .icon {
+                font-size: 2.5rem;
+                color: #007bff;
+            }
+
+            .icon-box h3 {
+                margin-top: 20px;
+                font-size: 1.5rem;
+                color: #333;
+            }
+
+            .icon-box p {
+                color: #555;
+                font-size: 1rem;
+            }
+
+            .heading-section h2 {
+                font-size: 2.5rem;
+                color: #333;
+            }
+
+            .heading-section p {
+                font-size: 1.125rem;
+                color: #555;
+            }
+
+            .container {
+                max-width: 1140px;
+            }
+
+            .text-xl {
+                font-size: 25px;
+                line-height: 30px;
+            }
+
+            .icon-box.border .icon {
+                border: 3px solid #333;
+                text-align: center;
+                border-radius: 50%;
+                background-color: transparent;
+                padding: 9px;
+            }
+        </style>
+
+        <section class="bg-gray-50 py-12" style="background-color: #fadca3;">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-gray-800">What We Do</h2>
+                    <p class="text-lg text-gray-600 mt-2">Our specialized packaging solutions are designed to meet your
+                        exact needs.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Custom Packaging Solutions -->
+                    <div
+                        class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition duration-300 ease-in-out">
+                        <h3 class="text-xl font-semibold text-gray-800">Custom Packaging Solutions</h3>
+                        <p class="text-gray-600 mt-4">We specialize in designing custom packaging that aligns with your
+                            brand’s identity. From intricate box designs to specific structural requirements, we ensure
+                            your packaging stands out and provides optimum protection.</p>
+                    </div>
+                    <!-- Eco-Friendly Options -->
+                    <div
+                        class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition duration-300 ease-in-out">
+                        <h3 class="text-xl font-semibold text-gray-800">Eco-Friendly Options</h3>
+                        <p class="text-gray-600 mt-4">We’re dedicated to helping you minimize your environmental
+                            footprint with eco-friendly packaging materials that are 100% recyclable and sustainable.
+                        </p>
+                    </div>
+                    <!-- Protective Packaging -->
+                    <div
+                        class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition duration-300 ease-in-out">
+                        <h3 class="text-xl font-semibold text-gray-800">Protective Packaging</h3>
+                        <p class="text-gray-600 mt-4">Whether it’s fragile, heavy, or temperature-sensitive, we create
+                            packaging that offers optimal protection during transit, keeping your products safe and
+                            secure.</p>
+                    </div>
+                    <!-- Bulk & Wholesale Orders -->
+                    <div
+                        class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition duration-300 ease-in-out">
+                        <h3 class="text-xl font-semibold text-gray-800">Bulk & Wholesale Orders</h3>
+                        <p class="text-gray-600 mt-4">With our efficient manufacturing processes, we handle bulk orders
+                            of any size, ensuring timely delivery without compromising on quality.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white py-12">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-gray-800">Why Choose Us?</h2>
+                    <p class="text-lg text-gray-600 mt-2">Discover why Dynamic Corrugations is your ideal packaging
+                        partner.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+                    <!-- Reliability -->
+                    <div
+                        class="bg-blue-50 p-6 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition duration-300 ease-in-out">
+                        <h3 class="text-xl font-semibold text-blue-800">Reliability</h3>
+                        <p class="text-gray-600 mt-4">When you choose Dynamic Corrugations, you choose a partner that
+                            you can count on. We pride ourselves on delivering packaging solutions that are on time,
+                            every time.</p>
+                    </div>
+                    <!-- Expert Support -->
+                    <div
+                        class="bg-blue-50 p-6 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition duration-300 ease-in-out">
+                        <h3 class="text-xl font-semibold text-blue-800">Expert Support</h3>
+                        <p class="text-gray-600 mt-4">Our dedicated team is always here to offer expert advice, answer
+                            your questions, and guide you through the packaging process.</p>
+                    </div>
+                    <!-- Competitive Pricing -->
+                    <div
+                        class="bg-blue-50 p-6 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition duration-300 ease-in-out">
+                        <h3 class="text-xl font-semibold text-blue-800">Competitive Pricing</h3>
+                        <p class="text-gray-600 mt-4">We provide high-quality solutions at competitive prices, making
+                            sure you get the best value for your investment.</p>
+                    </div>
+                    <!-- Fast Turnaround -->
+                    <div
+                        class="bg-blue-50 p-6 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition duration-300 ease-in-out">
+                        <h3 class="text-xl font-semibold text-blue-800">Fast Turnaround</h3>
+                        <p class="text-gray-600 mt-4">We know time is crucial in business. Our efficient production
+                            processes ensure that you get your packaging exactly when you need it.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="box-fancy section-fullwidth text-light p-b-0">
+            <div class="row">
+                <div style="background-color:#917d5d" class="col-lg-4">
+                    <h1 class="text-lg text-uppercase">01.</h1>
+                    <h3>OUR FUTURE</h3>
+                    <span>Looking ahead, we’re excited to continue innovating and expanding our range of solutions to
+                        meet the evolving needs of businesses in an ever-changing world. Whether it’s embracing new
+                        technologies like smart packaging or continuing to push for greener solutions, we are ready for
+                        what’s next.</span>
+                </div>
+
+                <div style="background-color:#a08c6c" class="col-lg-4">
+                    <h1 class="text-lg text-uppercase">02.</h1>
+                    <h3>INNOVATION</h3>
+                    <span>At Dynamic Corrugations, we’re committed to evolving with the times while staying true to our
+                        core values of quality, innovation, and sustainability. Our team is always looking for ways to
+                        incorporate cutting-edge technologies and methods to enhance our packaging solutions.</span>
+                </div>
+
+                <div style="background-color:#ad9979" class="col-lg-4">
+                    <h1 class="text-lg text-uppercase">03.</h1>
+                    <h3>SUSTAINABILITY</h3>
+                    <span>We continue to prioritize sustainability in all aspects of our work. Our efforts to develop
+                        eco-friendly solutions ensure that we not only meet the needs of today but also preserve
+                        resources for future generations. We are dedicated to making a positive environmental impact
+                        through every product we create.</span>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Footer -->
+        <footer id="footer">
+            <div class="footer-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4  col-lg-2 col-md-4">
+                            <!-- Footer widget area 1 -->
+                            <div class="widget  widget-contact-us"
+                                style="background-image: url('images/world-map-dark.png'); background-position: 50% 20px; background-repeat: no-repeat">
+                                <h4>About Dynamic Corrugations</h4>
+                                <ul class="list-icon">
+                                    <li><i class="fa fa-map-marker-alt"></i>40 K.M. Stone,Vill. Narsinghpur,
+                                        Delhi-Jaipur Highway, Sector-35 Gurugram-122004 (Hr)</li>
+                                    <li><i class="fa fa-phone"></i><a href="tel:+919891040840">+91 9891040840</a></li>
+                                    <li><i class="far fa-envelope"></i><a
+                                            href="mailto:mail@dynamiccorrugations.com">mail@dynamiccorrugations.com </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <!-- end: Footer widget area 1 -->
+                        </div>
+
+                        <div class="col-xl-2 col-lg-2 col-md-4">
+                            <!-- Footer widget area 1 -->
+                            <div class="widget">
+                                <h4>Useful Links</h4>
+                                <ul class="list">
+                                    <li><a href="contact.html">Connect us</a></li>
+                                    <li><a href="#">Privacy Policy</a></li>
+                                    <li><a href="#">Return & Refund Policy</a></li>
+                                    <li><a href="#">Cancellation Policy</a></li>
+                                    <li><a href="#">Terms & Condition</a></li>
+                                </ul>
+                            </div>
+                            <!-- end: Footer widget area 1 -->
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-4">
+                            <!-- Footer widget area 2 -->
+                            <div class="widget">
+                                <h4>Utility pages</h4>
+                                <ul class="list">
+                                    <li><a href="maintenance.html">Corrugated Roll</a></li>
+                                    <li><a href="maintenance.html">Triple Wall Box</a></li>
+                                    <li><a href="maintenance.html">Corrugated Box</a></li>
+                                    <li><a href="maintenance.html">Corrugated Boards</a></li>
+                                    <li><a href="maintenance.html">Pizza Box</a></li>
+                                </ul>
+                            </div>
+                            <!-- end: Footer widget area 2 -->
+                        </div>
+                        <div class="col-xl-4 col-lg-2 col-md-4 widget">
+                            <h4>Social links and timiings</h4>
+                            <div class="social-icons social-icons-colored float-left">
+                                <ul>
+                                    <li class="social-facebook"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li class="social-twitter"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                    <li class="social-youtube"><a href="#"><i class="fab fa-youtube"></i></a></li>
+                                    <li class="social-gplus"><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                                </ul>
+                                <br>
+                                <ul class="list">
+                                    <li><i class="far fa-clock"></i> Monday - Saturday:- <strong>08:00 - 18:30</strong>
+                                        <br>
+                                        Sunday: <strong>Closed</strong>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- end: Footer widget area 2 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright-content cta-section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <!-- Social icons -->
+
+                            <div class="copyright-text text-left">&copy; 2025 Dynamic Corrugations. All Rights
+                                Reserved.
+
+                            </div>
+                            <!-- end: Social icons -->
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="copyright-text text-right"><a href="https://dynamiccorrugations.com/">Desinged
+                                    by Dynamic Corrugations</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- end: Footer -->
+    </div>
+    <!-- end: Body Inner -->
+    <!-- Scroll top -->
+    <style>
+        .fixed-icons {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .fixed-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgb(114, 236, 132);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+        }
+
+        .fixed-icons i {
+            font-size: 34px;
+        }
+    </style>
+
+    <div class="fixed-icons">
+        <!-- WhatsApp Icon -->
+        <a href="https://wa.me/+919891040840" target="_blank">
+            <i class='fab fa-whatsapp' style='font-size:38px;color:rgb(7, 72, 236)'></i>
+        </a>
+        <!-- Call Icon -->
+        <a href="tel:+919891040840" style="color: rgb(0, 0, 255);">
+            <i class="fas fa-phone" style="font-size: 38px;"></i>
+        </a>
+    </div>
+
+    <!-- FontAwesome for icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+
+    <a id="scrollTop"><i class="icon-chevron-up"></i><i class="icon-chevron-up"></i></a>
+    <!--Plugins-->
+    <script src="js/jquery.js"></script>
+    <script src="js/plugins.js"></script>
+    <!--Template functions-->
+    <script src="js/functions.js"></script>
+</body>
+
+</html>

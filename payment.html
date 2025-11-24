@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
+    <style>
+
+/* 🔹 Mobile Responsive Design */
+@media screen and (max-width: 600px) {
+    .product-card {
+        width: 100%; /* Full width for small screens */
+        max-width: 250px;
+        margin: 0 auto; /* Center the card */
+    }
+
+    .product-card h4,
+    .product-card p,
+    .price {
+        font-size: 15px; /* Adjust text size for mobile */
+    }
+
+    .buttons {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .buttons button {
+        font-size: 15px; /* Larger text for mobile */
+        padding: 10px;
+    }
+}
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .product {
+            border: 1px solid #ddd;
+            padding: 15px;
+            width: 250px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+        .product img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .product h3 {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+        .product p {
+            color: gray;
+        }
+        .price {
+            font-size: 18px;
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Confirm Payment</h2>
+    <p id="finalTotal"></p>
+    <button id="payNow">Pay Now</button>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            let total = cart.reduce((acc, item) => acc + item.price * item.quantity, 50); // ₹50 shipping
+    
+            document.getElementById("finalTotal").innerText = `Total Payable: ₹${total}`;
+    
+            document.getElementById("payNow").addEventListener("click", function () {
+                alert("Payment Successful!");
+                localStorage.removeItem("cart");
+                window.location.href = "thank-you.html";
+            });
+        });
+    </script>
+    
+</body>
+</html>

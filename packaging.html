@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page - Dynamic Corrugations</title>
+    <link href="css/plugins.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
+    <link href="css/product.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <style>
+        /* Core Product Section */
+        .core-product-section {
+            padding: 60px 0;
+            background-color: #f8f9fa;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* CTA Card Styling */
+        .cta-card {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .cta-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+
+        .cta-text {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 25px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #0056b3;
+            transform: translateY(-5px);
+        }
+
+        .cta-button:active {
+            background-color: #003366;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 767px) {
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .section-description {
+                font-size: 1rem;
+            }
+
+            .cta-card {
+                padding: 20px;
+            }
+
+            .cta-title {
+                font-size: 1.5rem;
+            }
+
+            .cta-button {
+                font-size: 1rem;
+                padding: 10px 25px;
+            }
+        }
+
+        /* Product Card Styles */
+        .product-card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-card h4 {
+            font-size: 1.2rem;
+            margin-top: 15px;
+        }
+
+        .product-card p {
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .btn-primary {
+            width: 100%;
+            background-color: #007bff;
+            border-color: #007bff;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        .product-card .icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #007bff;
+        }
+
+        .product-card:hover .icon {
+            color: #0056b3;
+        }
+
+
+        .text-center {
+            color: #333;
+            font-weight: bold;
+        }
+
+        /* General Styles */
+
+        /* Section Styling */
+        .product-solutions-section,
+        .core-product-section {
+            padding: 60px 0;
+            background-color: #a4ede8;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .section-description {
+            font-size: 1.125rem;
+            color: #555;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            margin-bottom: 40px;
+        }
+
+        /* Call-to-Action (CTA) Card */
+        .cta-card {
+            background-color: #f1f3f5;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+        }
+
+        .cta-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .cta-text {
+            font-size: 1rem;
+            color: #777;
+            margin-bottom: 20px;
+        }
+
+        .cta-button {
+            padding: 10px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #54f74e;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 768px) {
+
+            .product-solutions-section,
+            .core-product-section {
+                padding: 40px 20px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .cta-button {
+                font-size: 1rem;
+                padding: 8px 20px;
+            }
+
+            .cta-card {
+                padding: 20px;
+            }
+        }
+    </style>
+    <script>document.addEventListener("DOMContentLoaded", function () {
+            const productContainer = document.getElementById("productContainer");
+            const gridProductContainer = document.getElementById("gridProductContainer");
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+            // Update cart UI by checking which products are in the cart
+            function updateCartUI() {
+                cart.forEach((item) => {
+                    const viewCartBtn = document.querySelector(`.view-cart[data-id="${item.id}"]`);
+                    if (viewCartBtn) {
+                        viewCartBtn.style.display = "inline-block";
+                    }
+                });
+            }
+
+            // Function to generate product HTML
+            function generateProductHTML(product, index) {
+                let imageUrl = product.images ? `https://api.dynamiccorrugations.com/${product.images}` : "placeholder.jpg";
+                const productCard = `
+            <div class="${index < 6 ? 'swiper-slide' : 'col-md-4 grid-item'}">
+              <img src="${imageUrl}" alt="${product.name}">
+              <h4 class="heading">${product.name}</h4>
+              <p>${product.description}</p>
+              <div class="buttons">
+                <span class="price">₹${product.price}</span>      
+                <span class="price kk">${index < 6 ? '₹' + product.price : ''}</span>
+                <a href="product-detail.html" class="customize-link">
+                  <button class="customize-button" data-id="${product.id}">🎨 Customize</button>
+                </a>
+              </div>
+              <div class="buttons">
+                <button class="add-to-cart" data-id="${product.id}" data-name="${product.name}" data-price="${product.price}" data-image="${imageUrl}">Add to Cart</button>
+                <button class="view-cart" data-id="${product.id}">View Cart</button>
+              </div>
+            </div>
+          `;
+                return productCard;
+            }
+
+            // Fetch products from API and render them
+            fetch("https://api.dynamiccorrugations.com/items")
+                .then((response) => response.json())
+                .then((data) => {
+                    if (!data || !data.data || data.data.length === 0) {
+                        productContainer.innerHTML = "<p>No products found.</p>";
+                        gridProductContainer.innerHTML = "<p>No products found.</p>";
+                        return;
+                    }
+
+                    data.data.forEach((product, index) => {
+                        const productHTML = generateProductHTML(product, index);
+                        if (index < 6) {
+                            productContainer.innerHTML += productHTML;
+                        } else {
+                            gridProductContainer.innerHTML += productHTML;
+                        }
+                    });
+
+                    // Initialize Swiper
+                    new Swiper(".mySwiper", {
+                        slidesPerView: 3,
+                        spaceBetween: 10,
+                        pagination: {
+                            el: ".swiper-pagination",
+                            clickable: true,
+                        },
+                        navigation: {
+                            nextEl: ".swiper-button-next",
+                            prevEl: ".swiper-button-prev",
+                        },
+                    });
+
+
+                    document.addEventListener("click", function (event) {
+                        if (event.target.matches(".customize-button")) {
+                            const { id, name, price, image } = event.target.dataset;
+                            console.log("Product data:", { id, name, price, image }); // Debugging line
+
+                            if (id && name && price && image) {
+                                localStorage.setItem("selectedProduct", JSON.stringify({ id, name, price, image }));
+                            } else {
+                                console.error("Missing product data.");
+                            }
+                        }
+                    });
+
+                    // Event delegation for click events
+                    document.addEventListener("click", function (event) {
+                        const { id, name, price, image } = event.target.dataset;
+
+                        if (event.target.matches(".add-to-cart")) {
+                            addToCart(id, name, parseFloat(price), image);
+                            event.target.nextElementSibling.style.display = "inline-block";
+                        }
+
+                        if (event.target.matches(".view-cart")) {
+                            window.location.href = `cart.html?id=${id}`;
+                        }
+
+                        if (event.target.matches(".customize-button")) {
+                            const { id, name, price, image } = event.target.dataset;
+                            console.log("Product data:", { id, name, price, image }); // Debugging line
+
+                            if (id && name && price && image) {
+                                localStorage.setItem("selectedProduct", JSON.stringify({ id, name, price, image }));
+                            } else {
+                                console.error("Missing product data.");
+                            }
+                        }
+                        if (event.target.matches(".customize-button")) {
+                            localStorage.setItem("selectedProduct", JSON.stringify({ id, name, price, image }));
+                        }
+                    });
+
+                    updateCartUI();
+                })
+                .catch((error) => {
+                    console.error("Error fetching products:", error);
+                    productContainer.innerHTML = "<p>Failed to load products.</p>";
+                    gridProductContainer.innerHTML = "<p>Failed to load products.</p>";
+                });
+
+            // Function to add product to the cart
+            function addToCart(id, name, price, image) {
+                const existingProduct = cart.find((item) => item.id === id);
+                if (existingProduct) {
+                    existingProduct.quantity += 1;
+                } else {
+                    cart.push({ id, name, price, quantity: 1, image });
+                }
+                localStorage.setItem("cart", JSON.stringify(cart));
+            }
+        });
+
+    </script>
+</head>
+
+<body>
+    <!-- Body Inner -->
+    <div class="body-inner">
+        <div id="topbar" class="d-none d-xl-block d-lg-block topbar-transparent topbar-fullwidth dark">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="top-menu">
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="products.html">Features</a></li>
+
+                        </ul>
+                    </div>
+                    <div class="col-md-6 d-none d-sm-block">
+                        <div class="social-icons social-icons-colored-hover">
+                            <ul>
+                                <li class="social-facebook"><a href="https://www.facebook.com/DYNAMICCORRUGATIONS"><i
+                                            class="fab fa-facebook-f"></i></a></li>
+                                <li class="social-twitter"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li class="social-linkedin"><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                                <li class="social-youtube"><a href="#"><i class="fab fa-youtube"></i></a></li>
+                                <li class="social-rss"><a href="#"><i class="fa fa-rss"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header -->
+        <header id="header" data-transparent="true">
+            <div class="header-inner">
+                <div class="container">
+                    <!--Logo-->
+                    <div id="logo"> <a href="index.html"><span class="logo-default"><img class="img-fluid logody"
+                                    src="images/logotran.png" alt=""></span></a> </div>
+                    <!--End: Logo-->
+                    <!-- Search -->
+                    <div id="search"><a id="btn-search-close" class="btn-search-close" aria-label="Close search form"><i
+                                class="icon-x"></i></a>
+                        <form class="search-form" action="" method="get">
+                            <input class="form-control" name="q" type="text" placeholder="Type & Search..." />
+                            <span class="text-muted">Start typing & press "Enter" or "ESC" to close</span>
+                        </form>
+                    </div> <!-- end: search -->
+
+                    <!--Navigation Resposnive Trigger-->
+                    <div id="mainMenu-trigger"> <a class="lines-button x"><span class="lines"></span></a> </div>
+                    <!--end: Navigation Resposnive Trigger-->
+                    <!--Navigation-->
+                    <div id="mainMenu">
+                        <div class="container">
+                            <nav>
+                                <ul>
+                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="about.html">About us</a></li>
+                                    <li><a href="products.html">Product</a></li>
+                                 
+                                    <li><a href="gallery.html">Gallery</a></li>
+                                    <li><a href="contact.html">Contact us</a></li>
+                                </ul>
+
+                            </nav>
+                            <!-- Right Side: Login & Profile Section -->
+
+                            <!--end: Navigation-->
+                        </div>
+                    </div>
+        </header>
+        <!-- end: Header -->
+        <section id="page-title" class="text-light" data-bg-parallax="images/products/packing.webp">
+            <div class="container">
+                <div class="page-title">
+                    <h1>Featured Products</h1>
+                </div>
+                <div class="breadcrumb">
+                    <ul>
+                        <li><a href="#">Home</a>
+                        </li>
+                        <li><a href="#">Featured Products</a>
+                        </li>
+                        <li class="active"><a href="#">Featured Products</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <!-- Additional Packaging Products -->
+        <section id="additional-products" class="my-5">
+            <h2 class="text-center mb-4">Other Packaging Products</h2>
+            <div class="row g-4">
+                <!-- Pizza Boxes -->
+                <div class="col-md-3">
+                    <div class="product-card p-3 text-center">
+                        <img src="images/products/21x21x16 inch RSC Carton.webp" alt="Pizza Boxes" class="product-img">
+                        <h4 class="mt-3">Pizza Boxes</h4>
+                        <p>Available in multiple sizes and customizable with your branding.</p>
+                        <a href="products.html" class="btn btn-primary">Shop Pizza Boxes</a>
+                    </div>
+                </div>
+
+                <!-- Corrugated Rolls -->
+                <div class="col-md-3">
+                    <div class="product-card p-3 text-center">
+                        <img src="images/products/21x12.75x16.75 inch RSC Carton.jpeg" alt="Corrugated Rolls"
+                            class="product-img">
+                        <h4 class="mt-3">Corrugated Rolls</h4>
+                        <p>Perfect for wrapping and cushioning delicate items.</p>
+                        <a href="products.html" class="btn btn-primary">Shop Corrugated Rolls</a>
+                    </div>
+                </div>
+
+                <!-- Angle Boards -->
+                <div class="col-md-3">
+                    <div class="product-card p-3 text-center">
+                        <img src="images/products/18x14.75x18.75 inch RSC Carton.jpg" alt="Angle Boards"
+                            class="product-img">
+                        <h4 class="mt-3">Angle Boards</h4>
+                        <p>Essential for corner protection of heavy-duty packages.</p>
+                        <a href="products.html" class="btn btn-primary">Shop Angle Boards</a>
+                    </div>
+                </div>
+
+                <!-- Triple Wall Boxes -->
+                <div class="col-md-3">
+                    <div class="product-card p-3 text-center">
+                        <img src="images/products/18x14.75x10.75 inch RSC Carton.webp" alt="Triple Wall Boxes"
+                            class="product-img">
+                        <h4 class="mt-3">Triple Wall Boxes</h4>
+                        <p>Heavy-duty packaging with superior strength.</p>
+                        <a href="products.html" class="btn btn-primary">Shop Triple Wall Boxes</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Core Product Introduction -->
+        <section id="core-product" class="my-5">
+            <h2 class="text-center mt-4">Our Core Product: Corrugated Boxes</h2>
+            <p class="text-center mb-4">Find the perfect packaging solution for your products</p>
+
+            <div class="row g-4">
+                <!-- Small Box Product -->
+                <div class="col-md-3">
+                    <div class="product-card p-3 text-center">
+                        <div class="icon">
+                            <i class="fa fa-box"></i>
+                        </div>
+                        <h4>Small Box</h4>
+                        <p>5" x 5" x 5" to 10" x 10" x 10"</p>
+                        <a href="products.html" class="btn btn-primary">Shop Small Box</a>
+                    </div>
+                </div>
+
+                <!-- Medium Box Product -->
+                <div class="col-md-3">
+                    <div class="product-card p-3 text-center">
+                        <div class="icon">
+                            <i class="fa fa-box-open"></i>
+                        </div>
+                        <h4>Medium Box</h4>
+                        <p>10" x 10" x 10" to 15" x 15" x 15"</p>
+                        <a href="products.html" class="btn btn-primary">Shop Medium Box</a>
+                    </div>
+                </div>
+
+                <!-- Large Box Product -->
+                <div class="col-md-3">
+                    <div class="product-card p-3 text-center">
+                        <div class="icon">
+                            <i class="fa fa-cogs"></i>
+                        </div>
+                        <h4>Large Box</h4>
+                        <p>15" x 15" x 15" to 24" x 24" x 24"</p>
+                        <a href="products.html" class="btn btn-primary">Shop Large Box</a>
+                    </div>
+                </div>
+
+                <!-- Extra Large Box Product -->
+                <div class="col-md-3">
+                    <div class="product-card p-3 text-center">
+                        <div class="icon">
+                            <i class="fa fa-archive"></i>
+                        </div>
+                        <h4>Extra Large Box</h4>
+                        <p>24" x 24" x 24" and beyond</p>
+                        <a href="products.html" class="btn btn-primary">Shop Extra Large Box</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Product Solutions Section -->
+        <section id="product-solutions" class="product-solutions-section">
+            <div class="container">
+                <h2 class="section-title text-center">The Ultimate Packaging Solutions for Every Business Need</h2>
+                <p class=" text-center">
+                    At Dynamic Corrugations, we believe that packaging should not only protect your products but elevate
+                    your brand.
+                    That’s why we offer a wide variety of packaging solutions tailored to meet the needs of businesses
+                    of all sizes.
+                    Explore our premium Corrugated Boxes in 20 different size options, as well as our extensive range of
+                    other packaging products.
+                </p>
+            </div>
+        </section>
+
+        <section id="core-product" class="core-product-section">
+            <div class="container">
+                <h2 class="section-title text-center">Corrugated Boxes</h2>
+                <p class="text-center ">
+                    Protecting Your Products, One Box at a Time. We understand that your product is unique, and so is
+                    your packaging requirement.
+                    That’s why we offer 20 different size options for our corrugated boxes — whether you need a small
+                    box for delicate items or a large one for bulkier products, we’ve got the perfect fit for you.
+                </p>
+
+                <div class="cta-card">
+                    <h3 class="cta-title">Explore Our Corrugated Boxes</h3>
+                    <p class="cta-text">Choose from 20 different size options and customize your packaging.</p>
+                    <a href="products.html" class="cta-button">Browse Corrugated Boxes</a>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="optimized-section" class="my-5">
+            <div class="container">
+                <div class="row align-items-center">
+                    <!-- Left Column: Image -->
+                    <div class="col-md-6">
+                        <img src="images/products/img (20).jpg" alt="Product Image" class="img-fluid rounded">
+                    </div>
+
+                    <!-- Right Column: Content -->
+                    <div class="col-md-6">
+                        <h2 class="section-title">Why Choose Our Product?</h2>
+                        <p class="text-muted">Our product offers unparalleled quality and durability, designed to
+                            meet your specific needs. Whether you're looking for a reliable packaging solution or
+                            enhanced performance, we’ve got you covered.</p>
+                        <ul>
+                            <li><strong>Durability:</strong> Built to last, ensuring your products are safely
+                                delivered.</li>
+                            <li><strong>Customizable:</strong> Tailored options to suit your business needs.</li>
+                            <li><strong>Eco-Friendly:</strong> Sustainable packaging that protects both your
+                                products and the planet.</li>
+                        </ul>
+                        <a href="products.html" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- How It Works Section -->
+        <section id="how-it-works" class="my-5">
+            <div class="container">
+                <h2 class="section-title text-center mb-4">How It Works</h2>
+                <div class="row">
+                    <!-- Step 1 -->
+                    <div class="col-md-3 mb-4">
+                        <div class="step-card p-4 text-center border rounded shadow-sm">
+                            <i class="fas fa-search fa-3x mb-3 text-primary"></i>
+                            <h4 class="step-title">Choose Your Product</h4>
+                            <p class="step-description">Browse through our product catalog and select the size or
+                                type that best fits your needs.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="col-md-3 mb-4">
+                        <div class="step-card p-4 text-center border rounded shadow-sm">
+                            <i class="fas fa-paint-brush fa-3x mb-3 text-primary"></i>
+                            <h4 class="step-title">Customize Your Packaging</h4>
+                            <p class="step-description">We offer printing and branding options for most products to
+                                make your packaging stand out.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="col-md-3 mb-4">
+                        <div class="step-card p-4 text-center border rounded shadow-sm">
+                            <i class="fas fa-shopping-cart fa-3x mb-3 text-primary"></i>
+                            <h4 class="step-title">Place Your Order</h4>
+                            <p class="step-description">With fast processing and competitive pricing, we’ll get your
+                                packaging to you on time.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="col-md-3 mb-4">
+                        <div class="step-card p-4 text-center border rounded shadow-sm">
+                            <i class="fas fa-box-open fa-3x mb-3 text-primary"></i>
+                            <h4 class="step-title">Get Packaging That Works</h4>
+                            <p class="step-description">Receive your packaging ready to protect, ship, and deliver
+                                your products with confidence.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section text-center">
+            <div class="container">
+                <h1>Ready to level up your packaging game?</h1>
+                <p style="color: #191716;">Let’s make your products pop. Like, for real.</p>
+
+                <!-- CTA Buttons -->
+                <a class="cta-btn" style="color: #191716;" href="product-solution.html">
+                    Start Customizing Now 🚀
+                </a>
+                <a href="contact.html" class="cta-btn" style="color: #191716;">📩 Get a Quote</a>
+
+                <!-- Popup Modal -->
+                <div id="popup" class="popup">
+                    <div class="popup-content">
+                        <h2 class="text-center popheading" style="color: #721c24;">Get a Custom Quote</h2>
+                        <span id="closePopup" class="close">&times;</span>
+
+                        <!-- Form Content -->
+                        <form id="quoteRequest" action="send_mail.php" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <!-- Left Section -->
+                                <div class="col-md-6">
+                                    <label>What’s Your Name?</label>
+                                    <input type="text" class="form-control" name="name" required>
+
+                                    <label>Your Email (No spam, promise 🤞)</label>
+                                    <input type="email" class="form-control" name="email" required>
+
+                                    <label>Your Digits (Just in case)</label>
+                                    <input type="number" class="form-control" name="phone">
+
+                                    <label>Who’s the Genius Behind the Brand?</label>
+                                    <input type="text" class="form-control" name="brand">
+
+                                    <label>What Are You Packing?</label>
+                                    <textarea name="product_details" class="form-control"
+                                        placeholder="Describe your product – size, weight, fragile, etc."></textarea>
+
+                                    <label>Pick Your Packaging Style:</label>
+                                    <select name="packaging_type" class="form-control">
+                                        <option>Corrugated Boxes</option>
+                                        <option>Custom-Printed Boxes</option>
+                                        <option>Eco-Friendly Packaging</option>
+                                        <option>Protective Materials (Bubble Wrap, Fillers)</option>
+                                        <option>Not Sure Yet (Help Me Decide!)</option>
+                                    </select>
+                                </div>
+
+                                <!-- Right Section -->
+                                <div class="col-md-6">
+                                    <label>How Many Do You Need?</label>
+                                    <input type="number" class="form-control" name="quantity">
+
+                                    <label>When’s the Deadline?</label>
+                                    <input type="date" class="form-control" name="deadline">
+
+                                    <label>Got a Budget in Mind?</label>
+                                    <input type="number" class="form-control" name="budget">
+
+                                    <label>Fun Add-Ons:</label><br>
+                                    <input type="checkbox" name="custom_branding" value="Yes"> I want custom branding
+                                    (logo, colors, etc.)<br>
+
+                                    <label>Upload Design Files (Optional):</label>
+                                    <input type="file" class="form-control" name="file_upload">
+
+                                    <button type="submit" class="btn btn-primary mt-3">Show Me the Magic ✨</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Footer -->
+        <footer id="footer">
+            <div class="footer-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4  col-lg-2 col-md-4">
+                            <!-- Footer widget area 1 -->
+                            <div class="widget  widget-contact-us"
+                                style="background-image: url('images/world-map-dark.png'); background-position: 50% 20px; background-repeat: no-repeat">
+                                <h4>About Dynamic Corrugations</h4>
+                                <ul class="list-icon">
+                                    <li><i class="fa fa-map-marker-alt"></i>40 K.M. Stone,Vill. Narsinghpur,
+                                        Delhi-Jaipur Highway, Sector-35 Gurugram-122004 (Hr)</li>
+                                    <li><i class="fa fa-phone"></i><a href="tel:+919891040840">+91 9891040840</a></li>
+                                    <li><i class="far fa-envelope"></i><a
+                                            href="mailto:mail@dynamiccorrugations.com">mail@dynamiccorrugations.com </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <!-- end: Footer widget area 1 -->
+                        </div>
+
+                        <div class="col-xl-2 col-lg-2 col-md-4">
+                            <!-- Footer widget area 1 -->
+                            <div class="widget">
+                                <h4>Useful Links</h4>
+                                <ul class="list">
+                                    <li><a href="contact.html">Connect us</a></li>
+                                    <li><a href="#">Privacy Policy</a></li>
+                                    <li><a href="#">Return & Refund Policy</a></li>
+                                    <li><a href="#">Cancellation Policy</a></li>
+                                    <li><a href="#">Terms & Condition</a></li>
+                                </ul>
+                            </div>
+                            <!-- end: Footer widget area 1 -->
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-4">
+                            <!-- Footer widget area 2 -->
+                            <div class="widget">
+                                <h4>Utility pages</h4>
+                                <ul class="list">
+                                    <li><a href="maintenance.html">Corrugated Roll</a></li>
+                                    <li><a href="maintenance.html">Triple Wall Box</a></li>
+                                    <li><a href="maintenance.html">Corrugated Box</a></li>
+                                    <li><a href="maintenance.html">Corrugated Boards</a></li>
+                                    <li><a href="maintenance.html">Pizza Box</a></li>
+                                </ul>
+                            </div>
+                            <!-- end: Footer widget area 2 -->
+                        </div>
+                        <div class="col-xl-4 col-lg-2 col-md-4 widget">
+                            <h4>Social links and timiings</h4>
+                            <div class="social-icons social-icons-colored float-left">
+                                <ul>
+                                    <li class="social-facebook"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li class="social-twitter"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                    <li class="social-youtube"><a href="#"><i class="fab fa-youtube"></i></a></li>
+                                    <li class="social-gplus"><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                                </ul>
+                                <br>
+                                <ul class="list">
+                                    <li><i class="far fa-clock"></i> Monday - Saturday:- <strong>08:00 - 18:30</strong>
+                                        <br>
+                                        Sunday: <strong>Closed</strong>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- end: Footer widget area 2 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright-content cta-section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <!-- Social icons -->
+
+                            <div class="copyright-text text-left">&copy; 2025 Dynamic Corrugations. All Rights
+                                Reserved.
+
+                            </div>
+                            <!-- end: Social icons -->
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="copyright-text text-right"><a href="https://dynamiccorrugations.com/">Desinged
+                                    by Dynamic Corrugations</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- end: Footer -->
+    </div>
+    <!-- end: Body Inner -->
+    <!-- Scroll top -->
+    <style>
+        /* CTA Section Styling */
+        .cta-section {
+            padding: 60px 0;
+            background-color: #f1f3f5;
+            text-align: center;
+        }
+
+        .cta-section h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            color: #191716;
+            margin-bottom: 30px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            margin: 10px;
+            text-decoration: none;
+            color: white;
+        }
+
+        .cta-btn button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-btn button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Popup Modal Styling */
+        .popup {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
+
+        .popup-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 800px;
+            position: relative;
+        }
+
+        .popup-content h2 {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #721c24;
+        }
+
+        .popup-content .close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 30px;
+            font-weight: bold;
+            color: #aaa;
+            cursor: pointer;
+        }
+
+        .popup-content .close:hover {
+            color: black;
+        }
+
+        /* Form Styling */
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            padding: 10px 20px;
+            color: white;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .fixed-icons {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .fixed-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgb(114, 236, 132);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+        }
+
+        .fixed-icons i {
+            font-size: 34px;
+        }
+    </style>
+<div class="fixed-icons">      
+    <!-- WhatsApp Icon -->
+    <a href="https://wa.me/+919891040840" target="_blank">
+        <i class='fab fa-whatsapp' style='font-size:38px;color:rgb(7, 72, 236)'></i>
+    </a>
+    <!-- Call Icon -->
+    <a href="tel:+919891040840" style="color: rgb(0, 0, 255);">
+        <i class="fas fa-phone" style="font-size: 38px;"></i>
+    </a>
+</div>
+
+    <!-- FontAwesome for icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+
+    <a id="scrollTop"><i class="icon-chevron-up"></i><i class="icon-chevron-up"></i></a>
+    <!--Plugins-->
+    <script src="js/jquery.js"></script>
+    <script src="js/plugins.js"></script>
+    <!--Template functions-->
+    <script src="js/functions.js"></script>
+
+</body>
+
+</html>

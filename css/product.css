@@ -1,0 +1,612 @@
+.swiper {
+    width: 100%;
+    height: 417px !important;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: #333;
+    color: white;
+}
+
+.cart a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.product-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.product {
+    background: white;
+    padding: 15px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    border-radius: 8px;
+    text-align: center;
+    border-radius: 20px;
+}
+
+.product:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.product img {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+    transition: transform 0.3s ease;
+}
+
+.product:hover img {
+    transform: scale(1.05);
+}
+
+.product-card h4 {
+    font-size: 13px !important;
+    margin: 10px 0;
+    color: #333;
+}
+
+h4 {
+    font-size: 15px !important;
+    margin: 10px 0;
+    color: #333;
+}
+
+.product-card p {
+    font-size: 12px;
+    color: #555;
+}
+p {
+    font-size: 14px;
+    color: #555;
+}
+
+.price {
+    font-size: 14px;
+    font-weight: bold;
+    color: #e91e63;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.buttons button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.add-to-cart {
+    background: #28a745;
+    color: white;
+}
+
+.add-to-cart:hover {
+    background: #218838;
+}
+
+.view-cart {
+    background: #007bff;
+    color: white;
+    display: none;
+}
+.price{
+    font-size: 16px;
+    font-weight: bold;
+    color: #e91e63;
+    background: #28a745;
+    color: white;
+    padding: auto;
+}
+.price:hover {
+    background: #218838;
+}
+#topbar.dark.topbar-transparent {
+    background-color: #dec38c;
+    border-bottom: 1px solid rgba(144, 144, 144, 0.25);
+}
+.inquiry-section {
+    background: url(homepages/branding/images/background-4.png) no-repeat center;
+    background-size: cover;
+    color: white;
+    padding: 20px 0  !important;
+
+}
+
+
+.view-cart:hover {
+    background: #0056b3;
+}
+
+@media screen and (max-width: 768px) {
+    .product-container {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        padding: 15px;
+    }
+
+    .product-card img {
+        max-height: 150px;
+    }
+    .product img {
+        max-height: 150px;
+    }
+
+    .product-card h4 {
+        font-size: 15px;
+    }
+
+    .product-card p,
+    .price {
+        font-size: 14px;
+    }
+}
+@media all and (device-width: 820px) and (device-height: 1180px) and (orientation:landscape) {
+ 
+.swiper {
+    width: 100%;
+    height: 508px !important;
+}
+.inspiro-slider {
+    width: 100%;
+    height: 17vh !important;
+   
+}
+.text-lg, .text-lg span {
+    font-size: 20px;
+    line-height: 60px !important;
+}
+
+}
+@media all and (device-width: 1024px) and (device-height: 1366px) and (orientation:landscape) {
+  
+    .product-container {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        padding: 15px;
+    }
+
+    .product-card img {
+        max-height: 150px;
+    }
+    .product img {
+        max-height: 150px;
+    }
+
+    .product-card h4 {
+        font-size: 15px;
+    }
+    .text-lg .font-semibold .text-gray-800 {
+        font-size: 20px !important;
+        line-height: 60px !important;
+    }
+    .product-card p,
+    .price {
+        font-size: 14px;
+    }
+}
+
+
+@media screen and (max-width: 480px) {
+    .product-container {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        padding: 10px;
+    }
+    #productContainer {
+        padding: 0px !important;
+    }
+    .product-card img {
+        max-height: 130px;
+    }
+
+    .buttons {
+        flex-direction: column;
+        gap: 5px;
+        display: flow !important;
+    }
+    .swiper-slide {
+        flex-shrink: 0;
+        width: 100% ! important;
+        height: 100%;
+        position: relative;
+        transition-property: transform;
+        display: block;
+    }
+    .swiper {
+        width: 100%;
+        height: 400px;
+    }
+
+    .buttons button {
+        font-size: 12px;
+        padding: 8px;
+    }
+   
+}
+
+.swiper {
+    width: 100%;
+    height: 6000px;
+}
+#productContainer{
+    padding: 10px;
+}
+.swiper {
+    width: 100%;
+    padding: 20px;
+}
+
+.swiper-slide {
+    text-align: center;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.swiper-slide img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.price {
+    font-weight: bold;
+    color: rgb(243, 247, 243);
+}
+
+.buttons {
+    margin-top: 10px;
+}
+
+.buttons button {
+    margin: 5px;
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.add-to-cart {
+    background: rgb(55, 231, 55);
+    color: white;
+}
+
+.view-cart {
+    background: black;
+    color: white;
+    display: none;
+}
+
+.swiper {
+    width: 100%;
+    height: 350px;
+}
+
+.swiper-slide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.swiper-slide img {
+    max-width: 100%;
+    height: 200px;
+    object-fit: contain;
+}
+
+.price {
+    font-size: 15px;
+    font-weight: bold;
+    color: #f4f9f5;
+    padding: 10px;
+}
+
+.buttons {
+    margin-top: 10px;
+}
+
+.add-to-cart,
+.view-cart {
+    margin: 5px;
+}
+
+.swiper {
+    width: 100%;
+    padding: 20px;
+}
+
+.swiper-slide {
+    text-align: center;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.swiper-slide img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.price {
+   
+    font-weight: bold;
+    color: rgb(9, 10, 9);
+    padding: 8px 12px;
+    font-size: 15px;
+    margin: 5px;
+    padding: 10px 32px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.buttons {
+    margin-top: 10px;
+}
+
+.buttons button {
+    margin: 5px;
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.add-to-cart {
+    background: green;
+    color: white;
+}
+
+.view-cart {
+    background: black;
+    color: white;
+    display: none;
+}
+
+.product-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+}
+.product-card:hover {
+    transform: scale(1.05);
+}
+.product-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+.btn-primary {
+    width: 100%;
+}
+.breadcrumb{
+    display: block;
+}
+
+.swiper {
+    width: 100%;
+    padding: 90px;
+}
+
+.swiper-slide {
+    text-align: center;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.swiper-slide img,
+.grid-item img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+
+
+.buttons {
+    margin-top: 10px;
+}
+
+.buttons button {
+    margin: 5px;
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.add-to-cart {
+    background: green;
+    color: white;
+}
+
+.view-cart {
+    background: black;
+    color: white;
+    display: none;
+}
+
+.grid-container {
+    padding: 20px;
+}
+
+.grid-item {
+    text-align: center;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+
+.swiper {
+    width: 100%;
+    padding: 20px;
+}
+
+.swiper-slide,
+.grid-item {
+    text-align: center;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+
+.size-select{
+    display: none;
+}
+/* Ensure consistent image size */
+.swiper-slide img,
+.grid-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* Price styling */
+.price {
+    word-wrap: 200px;
+    font-weight: bold;
+    color: rgb(248, 6, 6);
+}
+
+/* Button styles */
+.buttons {
+    margin-top: 10px;
+    display: flex;
+    gap: 5px;
+}
+
+.buttons button {
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.add-to-cart {
+    background: green;
+    color: white;
+}
+
+.view-cart {
+    background: black;
+    color: white;
+    display: none;
+}
+
+.grid-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 10px;
+    height: 100%;
+}
+
+.grid-item .heading {
+    padding-top: 6px;
+}
+
+/* Ensure consistent height for product descriptions */
+
+/* Ensure buttons stay aligned */
+.buttons {
+    margin-top: auto;
+    /* Pushes buttons to the bottom */
+    display: flex;
+    gap: 5px;
+}
+
+/* Grid container styling */
+.grid-container {
+    padding: 20px;
+}
+
+/* Ensure equal height for all paragraphs */
+.grid-item p {
+    min-height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
+/* Remove option if needed */
+.grid-item p:has(button) {
+    display: none;
+}
+ 
+.fixed-icons {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.fixed-icons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgb(114, 236, 132);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+}
+
+.fixed-icons i {
+    font-size: 34px;
+}

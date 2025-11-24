@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Product — Corrugated Box</title>
+    <style>
+        :root {
+            --accent: #246bff;
+            --muted: #556
+        }
+
+        body {
+            font-family: Inter, system-ui, Arial, sans-serif;
+            background: #f6f8fb;
+            margin: 0;
+            padding: 28px
+        }
+
+        .container {
+            max-width: 980px;
+            margin: 20px auto;
+            background: #fff;
+            border-radius: 10px;
+            padding: 18px;
+            box-shadow: 0 8px 30px rgba(12, 20, 40, .06)
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: 360px 1fr;
+            gap: 20px;
+            align-items: start
+        }
+
+        .gallery {
+            background: #fafcff;
+            padding: 16px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center
+        }
+
+        .gallery img#mainImage {
+            width: 280px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, .06)
+        }
+
+        .thumbs {
+            display: flex;
+            gap: 8px
+        }
+
+        .thumbs img {
+            width: 56px;
+            height: 44px;
+            object-fit: cover;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 2px solid transparent
+        }
+
+        .thumbs img:hover {
+            border-color: #ddd
+        }
+
+        .details-section h1 {
+            font-size: 20px;
+            margin: 0 0 6px
+        }
+
+        .product-category {
+            font-size: 13px;
+            color: var(--muted)
+        }
+
+        .title-row {
+            display: flex;
+            gap: 12px;
+            align-items: center
+        }
+
+        .rating {
+            font-size: 13px;
+            color: #c59a00
+        }
+
+        .price {
+            font-weight: 800;
+            font-size: 18px
+        }
+
+        .short-desc {
+            color: #334;
+            margin: 12px 0 18px
+        }
+
+        .option-card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 14px;
+            border: 1px solid #eef3f6
+        }
+
+        label {
+            font-weight: 600;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 6px
+        }
+
+        select.custom,
+        input.custom {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #e3e8ea
+        }
+
+        .quality-list {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 8px
+        }
+
+        .quality-item {
+            padding: 8px 12px;
+            border-radius: 8px;
+            background: #f4f7f8;
+            cursor: pointer;
+            border: 1px solid transparent
+        }
+
+        .quality-item.active {
+            background: #eaf3ff;
+            border-color: #cfe5ff
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 8px;
+            flex-wrap: wrap
+        }
+
+        .qty-wrap {
+            display: flex;
+            align-items: center;
+            gap: 6px
+        }
+
+        .qty-wrap button {
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid #e3e8ea;
+            background: #fff;
+            cursor: pointer
+        }
+
+        .qty-wrap input {
+            width: 60px;
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #e3e8ea;
+            text-align: center
+        }
+
+        .primary-btn {
+            background: var(--accent);
+            color: #fff;
+            padding: 12px 18px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 700
+        }
+
+        .outline-btn {
+            background: transparent;
+            border: 1px solid #cfd9ff;
+            padding: 10px 14px;
+            border-radius: 8px;
+            cursor: pointer
+        }
+
+        .view-cart {
+            background: #fff;
+            border: 1px solid #e3e8ea;
+            padding: 10px 12px;
+            border-radius: 8px;
+            cursor: pointer
+        }
+
+        .meta-row {
+            display: flex;
+            gap: 8px;
+            margin-top: 14px
+        }
+
+        .chip {
+            background: #fff;
+            padding: 8px 10px;
+            border-radius: 999px;
+            border: 1px solid #eaf0f3;
+            font-size: 13px
+        }
+
+        /* cart modal */
+        .cart-modal {
+            position: fixed;
+            right: 20px;
+            top: 80px;
+            width: 360px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .12);
+            padding: 14px;
+            transform: translateY(-10px) scale(.98);
+            opacity: 0;
+            pointer-events: none;
+            transition: all .18s;
+            z-index: 9999
+        }
+
+        .cart-modal.open {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+            pointer-events: auto
+        }
+
+        .cart-modal h2 {
+            margin: 0 0 10px;
+            font-size: 18px
+        }
+
+        .cart-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px dashed #eee
+        }
+
+        .cart-row img {
+            width: 56px;
+            height: 44px;
+            object-fit: cover;
+            border-radius: 6px
+        }
+
+        .cart-info {
+            flex: 1
+        }
+
+        .cart-footer {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 12px
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 16px
+        }
+
+        .cart-modal .primary-btn {
+            width: 100%
+        }
+
+        /* toast */
+        .toast {
+            position: fixed;
+            bottom: 22px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(20, 30, 60, .95);
+            color: #fff;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-weight: 700;
+            z-index: 10000
+        }
+
+        @media (max-width:880px) {
+            .layout {
+                grid-template-columns: 1fr
+            }
+
+            .cart-modal {
+                left: 20px;
+                right: 20px;
+                top: auto;
+                bottom: 20px;
+                width: auto
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="layout">
+
+            <!-- LEFT: gallery -->
+            <div class="gallery">
+                <!-- using your uploaded image path as the product image -->
+                <img id="mainImage" src="/mnt/data/bde374b4-7f25-48c7-a3ea-6bd51e64b440.png" alt="Box">
+                <div class="thumbs">
+                    <img src="/mnt/data/bde374b4-7f25-48c7-a3ea-6bd51e64b440.png" onclick="changeImage(this)" alt="">
+                    <img src="/mnt/data/bde374b4-7f25-48c7-a3ea-6bd51e64b440.png" onclick="changeImage(this)" alt="">
+                    <img src="/mnt/data/bde374b4-7f25-48c7-a3ea-6bd51e64b440.png" onclick="changeImage(this)" alt="">
+                </div>
+            </div>
+
+            <!-- RIGHT: Details -->
+            <div class="details-section">
+                <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px">
+                    <div>
+                        <span class="product-category">Box Making • RSC Carton</span>
+                        <div class="title-row">
+                            <h1 id="productTitle">Corrugated Box (15.5 x 13.75 x 11.75 inches)</h1>
+                            <div class="rating" aria-hidden="true">⭐ ⭐ ⭐ ⭐ ☆ (4.3)</div>
+                        </div>
+                    </div>
+                    <div style="text-align:right">
+                        <div class="price" id="productPrice">₹ 320 / pc</div>
+                        <div style="font-size:12px; color:#556">MOQ: 50 pcs</div>
+                    </div>
+                </div>
+
+                <p class="short-desc" id="productDescription">
+                    Strong RSC (Regular Slotted Container) corrugated carton — ideal for heavy / fragile goods.
+                    Eco-friendly kraft finish available.
+                </p>
+
+                <!-- selectors -->
+                <div class="option-card" role="region" aria-label="Size and quality selection">
+
+                    <div class="size-select" aria-labelledby="sizeLabel">
+                        <label id="sizeLabel">Select Box Size</label>
+                        <select id="sizeSelect" class="custom" onchange="updateSizePreview()">
+                            <option value="21x21x16_in" data-inches="21 × 21 × 16 in" data-px="2016×2016×1536">21 × 21 ×
+                                16 in — Standard</option>
+                            <option value="23.21x21_in" data-inches="23.21 × 21 in" data-px="2229 × 2016">23.21 × 21 in
+                                — Client Sheet</option>
+                            <option value="18x18x12_in" data-inches="18 × 18 × 12 in" data-px="1728 × 1728 × 1152">18 ×
+                                18 × 12 in</option>
+                            <option value="custom" data-inches="Custom size" data-px="">Custom (enter below)</option>
+                        </select>
+
+                        <div style="margin-top:10px; display:flex; gap:8px; align-items:center;">
+                            <input id="customSize" class="custom" type="text" placeholder="e.g. 22 x 22 x 14 in"
+                                style="flex:1;display:none" />
+                        </div>
+
+                        <div class="size-help" id="sizeHelp">Selected: <strong id="selectedSize">21 × 21 × 16
+                                in</strong> — approx <strong id="selectedPx">2016×2016×1536 px</strong></div>
+                    </div>
+
+                    <div class="quality-select" aria-labelledby="qualityLabel" style="margin-top:12px">
+                        <label id="qualityLabel">Select Box Quality / Material</label>
+                        <div class="quality-list" id="qualityList" role="radiogroup" aria-label="Quality types">
+                            <div tabindex="0" class="quality-item active" data-key="single-wall"
+                                onclick="selectQuality(this)">Single Wall — 3 ply</div>
+                            <div tabindex="0" class="quality-item" data-key="double-wall" onclick="selectQuality(this)">
+                                Double Wall — 5 ply</div>
+                            <div tabindex="0" class="quality-item" data-key="kraft" onclick="selectQuality(this)">Kraft
+                                — Natural Finish</div>
+                            <div tabindex="0" class="quality-item" data-key="corrugated" onclick="selectQuality(this)">
+                                Corrugated — Heavy Duty</div>
+                            <div tabindex="0" class="quality-item" data-key="rsc" onclick="selectQuality(this)">RSC
+                                Standard</div>
+                        </div>
+                        <div class="size-help" style="margin-top:10px">Tip: Double wall and Corrugated are best for
+                            heavy products. Kraft gives premium look.</div>
+                    </div>
+                </div>
+
+                <!-- controls -->
+                <div class="controls" role="group" aria-label="quantity and actions">
+                    <div class="qty-wrap" aria-label="quantity control">
+                        <button type="button" onclick="decreaseQty()">-</button>
+                        <input id="qty" type="number" min="1" value="0" aria-label="Quantity" />
+                        <button type="button" onclick="increaseQty()">+</button>
+                    </div>
+
+                    <button class="primary-btn" id="addToCartBtn" onclick="handleAddToCart()">Add to Cart</button>
+                    <button class="outline-btn" onclick="addToCartView()">Add & View Cart</button>
+
+                    <button class="share-whatsapp" onclick="shareWhatsApp()" title="Share via WhatsApp">Share on
+                        WhatsApp</button>
+
+                    <button class="view-cart" onclick="toggleCart()">🛒 View Cart</button>
+                </div>
+
+                <!-- metadata / chips -->
+                <div class="meta-row" aria-hidden="true">
+                    <div class="chip">Lead time: 7–10 days</div>
+                    <div class="chip">Bulk discount available</div>
+                    <div class="chip">Eco-friendly kraft option</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CART MODAL (floating) -->
+    <div id="cartModal" class="cart-modal" aria-hidden="true">
+        <h2>Your Cart</h2>
+        <div id="cartList"></div>
+
+        <div class="cart-footer">
+            <div class="total-row">
+                <span>Total:</span>
+                <strong id="cartTotal">₹0</strong>
+            </div>
+            <button class="primary-btn" id="proceedBtn">Proceed to Payment</button>
+            <div class="checkout-note" style="font-size:13px;color:var(--muted)">You will be redirected to the checkout
+                page to complete payment.</div>
+        </div>
+    </div>
+
+    <script>
+        /*******************************
+         * Simple cart flow (index.html)
+         *
+         * - Add to cart: stores item into localStorage 'cart'
+         * - After Add to cart: modal opens (shows View Cart data)
+         * - Proceed to Payment: saves checkoutCart & redirects to checkout.html
+         *******************************/
+
+        // DOM references
+        const sizeSelect = document.getElementById('sizeSelect');
+        const selectedSizeEl = document.getElementById('selectedSize');
+        const selectedPxEl = document.getElementById('selectedPx');
+        const customSizeInput = document.getElementById('customSize');
+        const qtyInput = document.getElementById('qty');
+        const cartModal = document.getElementById('cartModal');
+        const cartList = document.getElementById('cartList');
+        const cartTotalEl = document.getElementById('cartTotal');
+        const proceedBtn = document.getElementById('proceedBtn');
+        const addToCartBtn = document.getElementById('addToCartBtn');
+
+        const BASE_PRICE = 320;
+
+        // initialize preview
+        updateSizePreview();
+
+        // helpers
+        function changeImage(el) { document.getElementById('mainImage').src = el.src; }
+        sizeSelect.addEventListener('change', updateSizePreview);
+
+        function updateSizePreview() {
+            const opt = sizeSelect.options[sizeSelect.selectedIndex];
+            const inches = opt.getAttribute('data-inches') || opt.text;
+            const px = opt.getAttribute('data-px') || '—';
+            selectedSizeEl.innerText = inches;
+            selectedPxEl.innerText = px;
+            if (opt.value === 'custom') {
+                customSizeInput.style.display = 'block';
+                customSizeInput.focus();
+            } else {
+                customSizeInput.style.display = 'none';
+                customSizeInput.value = '';
+            }
+        }
+
+        function getSelectedSize() {
+            const opt = sizeSelect.options[sizeSelect.selectedIndex];
+            if (opt.value === 'custom' && customSizeInput.value.trim()) return customSizeInput.value.trim();
+            return opt.getAttribute('data-inches') || opt.text;
+        }
+
+        function selectQuality(el) {
+            document.querySelectorAll('.quality-item').forEach(i => i.classList.remove('active'));
+            el.classList.add('active');
+        }
+        function getSelectedQuality() {
+            return document.querySelector('.quality-item.active')?.innerText || 'Standard';
+        }
+
+        function increaseQty() { qtyInput.value = Math.max(1, parseInt(qtyInput.value || 1)) + 1 }
+        function decreaseQty() { qtyInput.value = Math.max(1, parseInt(qtyInput.value || 1) - 1) }
+
+        function computePrice(sizeText, qualityText, qty) {
+            let mult = 1;
+            if (qualityText.toLowerCase().includes('double')) mult = 1.6;
+            if (qualityText.toLowerCase().includes('corrugated')) mult = 1.4;
+            if (qualityText.toLowerCase().includes('kraft')) mult = 1.25;
+            return Math.round(BASE_PRICE * mult * qty);
+        }
+
+        // load cart from localStorage on start
+        function loadCart() {
+            try { return JSON.parse(localStorage.getItem('cart') || '[]'); }
+            catch (e) { return []; }
+        }
+        function saveCart(cart) { localStorage.setItem('cart', JSON.stringify(cart)); }
+
+        function handleAddToCart() {
+            const qty = parseInt(qtyInput.value || 1);
+            const size = getSelectedSize();
+            const quality = getSelectedQuality();
+            const img = document.getElementById('mainImage').src;
+            const price = computePrice(size, quality, qty);
+
+            // Use a stable product id scheme (size+quality) so duplicates increment
+            const id = btoa(size + '|' + quality); // quick unique-ish id
+            const cart = loadCart();
+            const existing = cart.find(i => i.id === id);
+            if (existing) {
+                existing.qty += qty;
+                existing.price = computePrice(size, quality, existing.qty);
+            } else {
+                cart.push({ id, title: `${size} • ${quality}`, qty, price, img, meta: { size, quality } });
+            }
+            saveCart(cart);
+
+            // open cart to show item and allow proceed
+            openCart();
+            animateAddToCart();
+            showToast(`${qty} x ${size} (${quality}) added to cart`);
+            updateCartUI();
+        }
+
+        function addToCartView() {
+            handleAddToCart();
+            openCart();
+        }
+
+        function updateCartUI() {
+            const cart = loadCart();
+            cartList.innerHTML = '';
+            if (!cart.length) {
+                cartList.innerHTML = '<div style="color:#667;padding:8px">Your cart is empty</div>';
+                cartTotalEl.innerText = '₹0';
+                return;
+            }
+            let total = 0;
+            cart.forEach(item => {
+                total += item.price;
+                const div = document.createElement('div');
+                div.className = 'cart-row';
+                div.innerHTML = `
+          <img src="${item.img}" alt="cart item">
+          <div class="cart-info">
+            <div style="font-weight:800">${escapeHtml(item.title)}</div>
+            <div style="font-size:13px;color:#556">Qty: ${item.qty}</div>
+          </div>
+          <div style="font-weight:800">₹${item.price}</div>
+        `;
+                const removeBtn = document.createElement('button');
+                removeBtn.innerText = 'Remove';
+                removeBtn.style.marginLeft = '8px';
+                removeBtn.style.background = 'transparent';
+                removeBtn.style.border = 'none';
+                removeBtn.style.color = '#d33';
+                removeBtn.style.cursor = 'pointer';
+                removeBtn.onclick = () => { removeCartItem(item.id); };
+                div.appendChild(removeBtn);
+                cartList.appendChild(div);
+            });
+            cartTotalEl.innerText = `₹${total}`;
+        }
+
+        function removeCartItem(id) {
+            const cart = loadCart();
+            const idx = cart.findIndex(i => i.id === id);
+            if (idx > -1) cart.splice(idx, 1);
+            saveCart(cart);
+            updateCartUI();
+            showToast('Item removed');
+        }
+
+        function clearCart() { localStorage.removeItem('cart'); updateCartUI(); showToast('Cart cleared') }
+
+        function openCart() {
+            updateCartUI();
+            cartModal.classList.add('open');
+            // focus proceed
+            proceedBtn.focus();
+        }
+        function toggleCart() {
+            if (cartModal.classList.contains('open')) cartModal.classList.remove('open');
+            else openCart();
+        }
+
+        // proceed: store checkoutCart and go to checkout.html
+        proceedBtn.addEventListener('click', function () {
+            const cart = loadCart();
+            if (!cart.length) { showToast('Cart is empty'); return; }
+            localStorage.setItem('checkoutCart', JSON.stringify(cart));
+            // Optionally you could send to server here to create an order ID
+            window.location.href = 'checkout.html';
+        });
+
+        // small visual toast
+        function showToast(msg = 'Saved') {
+            const t = document.createElement('div');
+            t.className = 'toast';
+            t.innerText = msg;
+            document.body.appendChild(t);
+            setTimeout(() => { t.style.transition = 'opacity .25s'; t.style.opacity = '0'; setTimeout(() => t.remove(), 250); }, 1500);
+        }
+
+        function animateAddToCart() {
+            addToCartBtn.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.04)' }, { transform: 'scale(1)' }], { duration: 240 });
+        }
+
+        // close cart when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!cartModal.contains(e.target) && !e.target.closest('.view-cart') && cartModal.classList.contains('open')) {
+                cartModal.classList.remove('open');
+            }
+        });
+
+        // helper to escape html
+        function escapeHtml(text) {
+            const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+            return String(text).replace(/[&<>"']/g, m => map[m]);
+        }
+
+        // allow keyboard to select qualities
+        document.querySelectorAll('.quality-item').forEach(el => {
+            el.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectQuality(el); } });
+        });
+
+        // initialize cart UI on load
+        document.addEventListener('DOMContentLoaded', updateCartUI);
+    </script>
+</body>
+
+</html>

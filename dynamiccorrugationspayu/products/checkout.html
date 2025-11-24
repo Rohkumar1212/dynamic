@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Checkout Page</title>
+    <link rel="icon" type="image/png" href="/images/favicon.ico">
+
+    <style>
+        body {
+            font-family: Inter, system-ui, Arial, sans-serif;
+            background: #f6f8fb;
+            padding: 28px;
+            margin: 0
+        }
+
+        .wrap {
+            max-width: 980px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .06)
+        }
+
+        h1 {
+            margin: 0 0 14px
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 360px;
+            gap: 18px
+        }
+
+        .cart-list {
+            background: #fafafa;
+            padding: 12px;
+            border-radius: 8px
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            padding: 8px;
+            border-bottom: 1px solid #eee
+        }
+
+        .cart-item img {
+            width: 72px;
+            height: 54px;
+            object-fit: cover;
+            border-radius: 6px
+        }
+
+        .side {
+            background: #fff;
+            border-radius: 8px;
+            padding: 14px;
+            border: 1px solid #f0f3f5
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px
+        }
+
+        .primary-btn {
+            background: #246bff;
+            color: #fff;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+            font-weight: 700
+        }
+
+        .small {
+            font-size: 13px;
+            color: #666
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #e8eef2;
+            margin-bottom: 8px
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <h1>Checkout</h1>
+
+        <div class="grid">
+            <!-- LEFT SIDE -->
+            <div>
+                <div class="cart-list" id="checkoutCartList"></div>
+                <div style="margin-top:12px;padding:12px;background:#fff;border-radius:8px;border:1px solid #f0f3f5">
+                    <h3>Shipping details</h3>
+
+                    <!-- BASIC SHIPPING -->
+                    <input id="name" class="form-control" placeholder="Full name" />
+                    <input id="phone" class="form-control" placeholder="Phone" />
+                    <textarea id="address" rows="3" class="form-control" placeholder="Address"></textarea>
+
+                    <h3 style="margin-top:15px">Billing details</h3>
+
+                    <input id="billing_email" class="form-control" placeholder="Email" />
+                    <input id="billing_city" class="form-control" placeholder="City" />
+                    <input id="billing_state" class="form-control" placeholder="State" />
+                    <input id="billing_pincode" class="form-control" placeholder="Pincode" />
+                    <input id="billing_country" class="form-control" placeholder="Country" value="India" />
+                </div>
+
+            </div>
+
+            <!-- RIGHT SIDE -->
+            <aside class="side">
+                <div class="total-row"><span>Subtotal</span><strong id="subtotal">₹0</strong></div>
+                <div class="total-row"><span>Shipping</span><strong id="shipping">₹0</strong></div>
+                <div class="total-row" style="font-size:18px"><span>Total</span>
+                    <strong id="grandTotal">₹0</strong>
+                </div>
+
+                <button class="primary-btn" id="payBtn" style="margin-top:12px">Pay Now</button>
+                <div style="margin-top:8px;font-size:13px;color:#666">
+                    Make it payment using PayU payment gateway.
+                </div>
+            </aside>
+        </div>
+    </div>
+    <script>
+
+        async function generatePayUHash(key, txnid, amount, productinfo, firstname, email, salt) {
+            const hashString =
+                `${key}|${txnid}|${amount}|${productinfo}|${firstname}|${email}|||||||||||${salt}`;
+
+            const buffer = new TextEncoder().encode(hashString);
+            const hashBuffer = await crypto.subtle.digest("SHA-512", buffer);
+
+            return Array.from(new Uint8Array(hashBuffer))
+                .map(byte => byte.toString(16).padStart(2, "0"))
+                .join("");
+        }
+
+        /* ============================================================
+           1) LOAD CART FROM LOCAL STORAGE
+        ============================================================ */
+        let stored = JSON.parse(localStorage.getItem("checkoutCart") || "[]");
+
+        const checkoutCartList = document.getElementById("checkoutCartList");
+        const subtotalEl = document.getElementById("subtotal");
+        const shippingEl = document.getElementById("shipping");
+        const grandTotalEl = document.getElementById("grandTotal");
+        const payBtn = document.getElementById("payBtn");
+
+        let subtotal = 0;
+
+        /* ============================================================
+           2) RENDER CART ITEMS
+        ============================================================ */
+        function renderCheckoutItems() {
+            checkoutCartList.innerHTML = "";
+            subtotal = 0;
+
+            if (!stored.length) {
+                checkoutCartList.innerHTML =
+                    '<div style="padding:12px;color:#666">No items in cart.</div>';
+                updateTotals();
+                return;
+            }
+
+            stored.forEach((item, index) => {
+                // Ensure image is valid
+                const imgSrc = item.image || item.img || "";
+
+                const row = document.createElement("div");
+                row.className = "cart-item";
+
+                row.innerHTML = `
+            <img src="${imgSrc}"
+                style="width:90px;height:90px;object-fit:cover;border-radius:6px">
+
+            <div style="flex:1;padding-left:10px">
+                <div style="font-weight:700">${item.title}</div>
+                <div style="font-size:13px;color:#888">Qty: ${item.qty}</div>
+                <div style="font-size:13px">Unit Price: ₹${item.unitPrice}</div>
+            </div>
+
+            <strong>₹${item.totalPrice}</strong>
+
+            <button data-index="${index}" class="removeBtn"
+                style="margin-left:12px;color:red">
+                ✖
+            </button>
+        `;
+
+                checkoutCartList.appendChild(row);
+                subtotal += Number(item.totalPrice);
+            });
+
+            updateTotals();
+        }
+
+        /* ============================================================
+           3) UPDATE TOTALS
+        ============================================================ */
+        function updateTotals() {
+            subtotalEl.innerText = `₹${subtotal}`;
+            const shipping = subtotal === 0 ? 0 : subtotal >= 2000 ? 0 : 50;
+            shippingEl.innerText = `₹${shipping}`;
+            grandTotalEl.innerText = `₹${subtotal + shipping}`;
+        }
+
+        /* Remove Cart Item */
+        checkoutCartList.addEventListener("click", (e) => {
+            if (!e.target.classList.contains("removeBtn")) return;
+
+            const index = Number(e.target.dataset.index);
+            stored.splice(index, 1);
+
+            localStorage.setItem("checkoutCart", JSON.stringify(stored));
+            renderCheckoutItems();
+        });
+
+        renderCheckoutItems();
+
+        /* ============================================================
+         5) PAYMENT PROCESS START  (FINAL BEST VERSION)
+      ============================================================ */
+        async function simulatePayment() {
+
+            if (!stored.length) {
+                alert("Your cart is empty");
+                return;
+            }
+
+            const name = document.getElementById("name").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const address = document.getElementById("address").value.trim();
+            const billing_email = document.getElementById("billing_email").value.trim();
+            const billing_city = document.getElementById("billing_city").value.trim();
+            const billing_state = document.getElementById("billing_state").value.trim();
+            const billing_pincode = document.getElementById("billing_pincode").value.trim();
+            const billing_country = document.getElementById("billing_country").value.trim();
+
+            if (!name || !phone || !address || !billing_email || !billing_city || !billing_state || !billing_pincode) {
+                alert("Please fill all shipping & billing details");
+                return;
+            }
+
+            payBtn.disabled = true;
+            payBtn.innerText = "Processing...";
+
+            const totalAmount = Number(grandTotalEl.innerText.replace("₹", ""));
+
+            /* ===========================
+               1) BUILD ORDER DATA
+            ============================ */
+            const orderData = {
+                order_id: "ORD" + Date.now(),
+                customer: {
+                    name,
+                    phone,
+                    address,
+                    email: billing_email,
+                    city: billing_city,
+                    state: billing_state,
+                    pincode: billing_pincode,
+                    country: billing_country
+                },
+                items: stored,
+                totalAmount: totalAmount
+            };
+
+            try {
+                /* ===========================
+                   2) SEND ORDER TO BACKEND
+                ============================ */
+                await fetch("http://147.93.108.191:8081/order", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(orderData)
+                });
+
+                /* ===========================
+                   3) PAYU PAYMENT GATEWAY
+                ============================ */
+
+                const key = "EjKBQq";       // ✅ Your PayU Key
+                const salt = "8n1jKSQBsYKsLo5gV4KqMlEO9xwzndae";  // ✅ Your PayU Salt
+
+                const txnid = "TXN" + Date.now();
+                const amount = totalAmount;
+                const productinfo = "Corrugated Box Order";
+                const firstname = name;
+                const email = billing_email;
+
+                // Generate Hash
+                const hash = await generatePayUHash(
+                    key, txnid, amount, productinfo, firstname, email, salt
+                );
+
+                if (!hash) {
+                    alert("Hash generation failed. HTTPS required.");
+                    return;
+                }
+
+                /* ===========================
+                   4) AUTO SUBMIT PAYU FORM
+                ============================ */
+
+                const form = document.createElement("form");
+                form.method = "POST";
+                form.action = "https://secure.payu.in/_payment";   // LIVE PAYU URL
+
+                const fields = {
+                    key,
+                    txnid,
+                    amount,
+                    productinfo,
+                    firstname,
+                    email,
+                    phone,
+                    surl: "https://dynamiccorrugations.com/payment-success.html",
+                    furl: "https://dynamiccorrugations.com/payment-failure.html",
+                    hash
+                };
+
+                Object.entries(fields).forEach(([name, value]) => {
+                    const input = document.createElement("input");
+                    input.type = "hidden";
+                    input.name = name;
+                    input.value = value;
+                    form.appendChild(input);
+                });
+
+                document.body.appendChild(form);
+                form.submit();
+
+            } catch (error) {
+                console.error(error);
+                alert("Something went wrong");
+                payBtn.disabled = false;
+                payBtn.innerText = "Pay Now";
+            }
+        }
+
+        payBtn.addEventListener("click", simulatePayment);
+    </script>
+</body>
+
+</html>
