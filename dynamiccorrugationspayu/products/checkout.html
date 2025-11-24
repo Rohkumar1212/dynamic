@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Checkout</title>
+    <title>Checkout Page</title>
     <style>
         body {
             font-family: Inter, system-ui, Arial, sans-serif;
@@ -135,9 +135,7 @@
         </aside>
     </div>
 </div>
-
-
-<script>
+<script>    
 
     async function generatePayUHash(key, txnid, amount, productinfo, firstname, email, salt) {
             const hashString =
@@ -356,9 +354,5 @@
 
     payBtn.addEventListener("click", simulatePayment);
 </script>
-
-
-
 </body>
-
 </html>
