@@ -68,14 +68,14 @@ h4 {
     color: #555;
 }
 p {
-    font-size: 12px;
+    font-size: 14px;
     color: #555;
 }
 
 .price {
     font-size: 14px;
     font-weight: bold;
-    color: #e91e63;
+    color: #e91e63 !important;
 }
 
 .buttons {
@@ -113,7 +113,7 @@ p {
     font-weight: bold;
     color: #e91e63;
     background: #28a745;
-    color: white;
+    
     padding: auto;
 }
 .price:hover {
@@ -270,10 +270,6 @@ p {
     margin-bottom: 10px;
 }
 
-.price {
-    font-weight: bold;
-    color: rgb(243, 247, 243);
-}
 
 .buttons {
     margin-top: 10px;
@@ -322,7 +318,7 @@ p {
 .price {
     font-size: 15px;
     font-weight: bold;
-    color: #f4f9f5;
+ 
     padding: 10px;
 }
 
@@ -359,7 +355,7 @@ p {
 }
 
 .price {
-    background-color: rgb(0, 166, 255);
+    
     font-weight: bold;
     color: rgb(9, 10, 9);
     padding: 8px 12px;
@@ -508,7 +504,7 @@ p {
 /* Price styling */
 .price {
     font-weight: bold;
-    color: rgb(247, 247, 247);
+
 }
 
 /* Button styles */
