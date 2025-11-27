@@ -125,7 +125,7 @@
             background: var(--card-bg);
             border-radius: 16px;
             padding: 18px;
-            box-shadow: 0 6px 22px rgba(50, 60, 80, 0.06);
+          
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -637,14 +637,194 @@
                 <div class="image-section" aria-hidden="false">
                     <img id="mainImage" class="main-image" alt="Box product image"
                         src="/images/products/Corrugated Box/Corrugated Box  18-x-15-x-16-inches.jpeg" />
-                    <div class="thumbnail-gallery" aria-label="Product image thumbnails">
-                        <img src="/images/products/Corrugated Box/Corrugated Box  18-x-15-x-16-inches.jpeg"
-                            alt="thumb 1" onclick="changeImage(this)">
-                        <img src="/images/products/Corrugated Box/Corrugated Box  18-x-15-x-16-inches.jpeg"
-                            alt="thumb 2" onclick="changeImage(this)">
-                        <img src="/images/products/Corrugated Box/Corrugated Box  18-x-15-x-16-inches.jpeg"
-                            alt="thumb 3" onclick="changeImage(this)">
+                  <style>
+                    .product-gallery {
+                        display: flex;
+                        gap: 20px;
+                        flex-wrap: wrap;
+                    }
+                
+                    .product-gallery .main-image-box {
+                        flex: 1 1 350px;
+                    }
+                
+                    .product-gallery .main-image-box img {
+                        width: 100%;
+                        border-radius: 8px;
+                        object-fit: cover;
+                    }
+                
+                    /* Slider (Right Side) */
+                    .slider-box {
+                        flex: 1 1 250px;
+                        max-width: 350px;
+                    }
+                
+                    .thumb-slider {
+                        display: flex;
+                        overflow-x: auto;
+                        gap: 10px;
+                        scroll-behavior: smooth;
+                        padding-bottom: 10px;
+                    }
+                
+                    .thumb-slider img {
+                        width: 80px;
+                        height: 80px;
+                        border-radius: 6px;
+                        object-fit: cover;
+                        cursor: pointer;
+                        border: 2px solid transparent;
+                        transition: 0.3s;
+                    }
+                
+                    .thumb-slider img:hover {
+                        border-color: #333;
+                    }
+                
+                    /* Hide scrollbar (nice clean UI) */
+                    .thumb-slider::-webkit-scrollbar {
+                        display: none;
+                    }
+                </style>
+                
+                <div class="product-gallery">
+                    <!-- LEFT MAIN IMAGE -->
+                   <div class="image-section" aria-hidden="false">
+                
+                
+                    <style>
+                        .product-gallery {
+                            display: flex;
+                            gap: 20px;
+                            flex-wrap: wrap;
+                            margin-top: 15px;
+                        }
+                
+                        .main-image-box {
+                            flex: 1 1 350px;
+                        }
+                
+                        .main-image-box img {
+                            width: 100%;
+                            border-radius: 8px;
+                            object-fit: cover;
+                        }
+                
+                        .slider-box {
+                            flex: 1 1 250px;
+                            max-width: 350px;
+                            position: relative;
+                        }
+                
+                        .thumb-slider {
+                            display: flex;
+                            overflow-x: auto;
+                            gap: 10px;
+                            scroll-behavior: smooth;
+                            padding-bottom: 10px;
+                        }
+                
+                        .thumb-slider::-webkit-scrollbar {
+                            display: none;
+                        }
+                
+                        .thumb-slider img {
+                            width: 80px;
+                            height: 80px;
+                            border-radius: 6px;
+                            object-fit: cover;
+                            cursor: pointer;
+                            border: 2px solid transparent;
+                            transition: 0.3s;
+                        }
+                
+                        .thumb-slider img:hover {
+                            border-color: #333;
+                        }
+                
+                        /* BUTTONS */
+                        .move-btn {
+                            position: absolute;
+                            top: 40%;
+                            transform: translateY(-50%);
+                            width: 32px;
+                            height: 32px;
+                            background: #000000a8;
+                            color: #fff;
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            cursor: pointer;
+                            user-select: none;
+                            font-size: 20px;
+                            z-index: 10;
+                        }
+                
+                        .move-left {
+                            left: -15px;
+                        }
+                
+                        .move-right {
+                            right: -15px;
+                        }
+                    </style>
+                
+                    <div class="product-gallery">
+                
+                      
+                        <!-- RIGHT SLIDER WITH BUTTONS -->
+                        <div class="slider-box">
+                
+                            <!-- LEFT & RIGHT BUTTONS -->
+                            <div class="move-btn move-left" onclick="moveSlider(-120)">‹</div>
+                            <div class="move-btn move-right" onclick="moveSlider(120)">›</div>
+                
+                            <div class="thumb-slider" id="thumbSlider">
+                                <img src="/images/products/Corrugated Box/Corrugated Box  18-x-15-x-16-inches.jpeg"
+                                    onclick="changeImage(this)">
+                                <img src="/images/products/Corrugated Box/box-1.jpeg" onclick="changeImage(this)">
+                                <img src="/images/products/Corrugated Box/Corrugated Box  18-x-15-x-16-inches.jpeg" onclick="changeImage(this)">
+                                <img src="/images/products/Corrugated Box/box-2.jpeg" onclick="changeImage(this)">
+                                <img src="/images/products/Corrugated Box/Corrugated Box  18-x-15-x-16-inches.jpeg" onclick="changeImage(this)">
+                                <img src="/images/products/Corrugated Box/Corrugated Box  18-x-15-x-16-inches.jpeg" onclick="changeImage(this)">
+                            </div>
+                
+                           
+                        </div>
+                
                     </div>
+                
+                    <script>
+                       function changeImage(img) {
+                            const main = document.getElementById("mainImage");
+
+                            main.src = img.src;
+
+                            const currentHeight = main.clientHeight;
+                            main.style.height = (currentHeight + 30) + "px";
+
+                            selectedProductImage = img.src;
+                        }
+
+
+                        function moveSlider(amount) {
+                            document.getElementById("thumbSlider").scrollLeft += amount;
+                        }
+                    </script>
+                
+                   
+                </div>
+
+                </div>
+                
+                <script>
+                    function changeImage(img) {
+                        document.getElementById("mainImage").src = img.src;
+                    }
+                </script>
+
                     <div style="margin-top:12px; font-size:13px; color:#415; text-align:center">High-resolution
                         packaging
                         photos — click thumbnails to change</div>
@@ -697,12 +877,10 @@
                         <div class="quality-select" aria-labelledby="qualityLabel" style="margin-top:12px">
                             <label id="qualityLabel">Select Box Quality / Material</label>
                             <div class="quality-list" id="qualityList" role="radiogroup" aria-label="Quality types">
-                                <div tabindex="0" class="quality-item active" data-key="single-wall"
-                                    onclick="selectQuality(this)">
-                                    Single Wall — 3 ply</div>
+                               
                                 <div tabindex="0" class="quality-item" data-key="double-wall"
                                     onclick="selectQuality(this)">
-                                    Double Wall — 5 ply</div>
+                                    Double Wall – 5-ply</div>
                                 <div tabindex="0" class="quality-item" data-key="kraft" onclick="selectQuality(this)">
                                     Kraft
                                     — Natural Finish</div>
@@ -877,7 +1055,7 @@
 
                     <!-- metadata / chips -->
                     <div class="meta-row" aria-hidden="true">
-                        <div class="chip">Lead time: 7–10 days</div>
+                        <div class="chip">Lead time: 4-5 days</div>
                         <div class="chip">Bulk discount available</div>
                         <div class="chip">Eco-friendly kraft option available</div>
                     </div>
@@ -1230,12 +1408,9 @@
 
                 <div id="detailsTab" class="tab-content active">
                     <h3>Box Making – Details & Features</h3>
-                    <p>
-                        This RSC carton is produced using industrial corrugation technology and is available in both
-                        single-wall and double-wall
-                        grades. We use high-quality kraft paper facings and water-based adhesive. Custom printing and
-                        adhesive/PE-lamination
-                        options are available.
+                    <p>This RSC carton is produced using industrial corrugation technology and is available in double-wall grade. We use
+                    high-quality kraft paper facings and water-based adhesive.
+
                     </p>
                     <ul>
                         <li><b>Design:</b> Regular Slotted Container (RSC)</li>
@@ -1246,10 +1421,10 @@
 
                 <div id="specsTab" class="tab-content">
                     <h3>Specifications & Key Features</h3>
-                    <p>Fluting Options: B, C, BC, E (single/double-wall)</p>
+                    <p>Fluting : BC (double-wall)</p>
                     <p>Paper Grades: 120–250 GSM kraft liners</p>
-                    <p>Finishing Options: Plain, Printed (one/two colour), Varnish, Lamination</p>
-                    <p>Strength: ECT 32–44 / Burst 300–600 kPa (depending on grade)</p>
+                    <p>Finishing: Plain</p>
+                    <p>Strength: ECT 32–44 / Burst 300–600 kPa</p>
                 </div>
 
                 <div id="shippingTab" class="tab-content">
