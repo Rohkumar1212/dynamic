@@ -750,7 +750,7 @@
                             transform: translateY(-50%);
                             width: 32px;
                             height: 32px;
-                            background: #000000a8;
+                            background: #00000040;
                             color: #fff;
                             border-radius: 50%;
                             display: flex;
@@ -775,45 +775,75 @@
                 
                       
                         <!-- RIGHT SLIDER WITH BUTTONS -->
-                        <div class="slider-box">
-                
-                            <!-- LEFT & RIGHT BUTTONS -->
-                            <div class="move-btn move-left" onclick="moveSlider(-120)">‹</div>
-                            <div class="move-btn move-right" onclick="moveSlider(120)">›</div>
-                
-                            <div class="thumb-slider" id="thumbSlider">
-                                <img src="/images/products/Corrugated Box/Corrugated Box  18-x-15-x-16-inches.jpeg"
-                                    onclick="changeImage(this)">
-                                <img src="/images/products/Corrugated Box/box-1.jpeg" onclick="changeImage(this)">
-                                <img src="/images/products/Corrugated Box/Corrugated Box  18-x-15-x-16-inches.jpeg" onclick="changeImage(this)">
-                                <img src="/images/products/Corrugated Box/box-2.jpeg" onclick="changeImage(this)">
-                                <img src="/images/products/Corrugated Box/Corrugated Box  18-x-15-x-16-inches.jpeg" onclick="changeImage(this)">
-                                <img src="/images/products/Corrugated Box/Corrugated Box  18-x-15-x-16-inches.jpeg" onclick="changeImage(this)">
-                            </div>
-                
-                           
+                    <div class="slider-box">
+                    
+                        <div class="move-btn move-left" onclick="moveSlider(-120)">‹</div>
+                        <div class="move-btn move-right" onclick="moveSlider(120)">›</div>
+                    
+                        <div class="thumb-slider" id="thumbSlider">
+                            <img src="/images/products/Corrugated Box/Corrugated Box-18.jpeg"
+                                onclick="changeImage(this)">
+                            <img src="/images/products/Corrugated Box/Corrugated Box  18-x-15-x-16-inches.jpeg"
+                                onclick="changeImage(this)">
+                            <img src="/images/products/Corrugated Box/box-1.jpeg" onclick="changeImage(this)">
+                            <img src="/images/products/Corrugated Box/Corrugated Box  18-x-15-x-16-inches.jpeg"
+                                onclick="changeImage(this)">
+                            <img src="/images/products/Corrugated Box/box-2.jpeg" onclick="changeImage(this)">
+                            <img src="/images/products/Corrugated Box/Corrugated Box  18-x-15-x-16-inches.jpeg"
+                                onclick="changeImage(this)">
                         </div>
+                    
+                    </div>
                 
                     </div>
                 
-                    <script>
-                       function changeImage(img) {
-                            const main = document.getElementById("mainImage");
+                  <script>
+                    function moveSlider(amount) {
+                        document.getElementById("thumbSlider").scrollLeft += amount;
+                    }
 
-                            main.src = img.src;
+                    // AUTO SLIDE
+                    let autoSlideInterval;
 
-                            const currentHeight = main.clientHeight;
-                            main.style.height = (currentHeight + 30) + "px";
+                    function startAutoSlide() {
+                        const slider = document.getElementById("thumbSlider");
+                        autoSlideInterval = setInterval(() => {
+                            slider.scrollLeft += 120;
 
-                            selectedProductImage = img.src;
-                        }
+                            // When reaching end → go back to start
+                            if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 5) {
+                                slider.scrollLeft = 0;
+                            }
+                        }, 2000); // 2 seconds
+                    }
+
+                    function stopAutoSlide() {
+                        clearInterval(autoSlideInterval);
+                    }
+
+                    // Start auto-slide after page fully loads
+                    document.addEventListener("DOMContentLoaded", startAutoSlide);
+
+                    // Optional: Stop auto-slide when hovered
+                    document.getElementById("thumbSlider").addEventListener("mouseover", stopAutoSlide);
+                    document.getElementById("thumbSlider").addEventListener("mouseout", startAutoSlide);
+
+                    function changeImage(img) {
+                        const main = document.getElementById("mainImage");
+
+                        main.src = img.src;
+
+                        const currentHeight = main.clientHeight;
+                        main.style.height = (currentHeight + 30) + "px";
+
+                        selectedProductImage = img.src;
+                    }
 
 
-                        function moveSlider(amount) {
-                            document.getElementById("thumbSlider").scrollLeft += amount;
-                        }
-                    </script>
-                
+                    function moveSlider(amount) {
+                        document.getElementById("thumbSlider").scrollLeft += amount;
+                    }
+                </script>
                    
                 </div>
 
@@ -832,19 +862,20 @@
 
 
                 <div class="details-section">
-                    <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px">
+                    <div class="box-mobile" style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px">
                         <div>
                             <span class="product-category">Box Making • RSC Carton</span>
                             <div class="title-row">
                                 <h1 id="productTitle">Corrugated Box (18 × 15 × 16 inches) - For Heavy / Fragile Goods
                                 </h1>
-                                <div class="rating" aria-hidden="true">⭐ ⭐ ⭐ ⭐ ☆ (4.3)</div>
+                               
                             </div>
                         </div>
-                        <div style="text-align:right">
-                            <div class="price" id="productPrice">₹ 320 / pc</div>
-                            <div style="font-size:12px; color:#556">MOQ: 50 pcs</div>
-                        </div>
+                    <div style="text-align:left" class="w-50">
+                        <div class="price" id="productPrice">₹ 320 / pc</div>
+                        <div style="font-size:12px; color:#556">MOQ: 50 pcs</div>
+                        <div class="rating" aria-hidden="true">⭐ ⭐ ⭐ ⭐ ☆ (4.3)</div>
+                    </div>
                     </div>
 
                     <p class="short-desc" id="productDescription">

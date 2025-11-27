@@ -758,7 +758,7 @@
                                 transform: translateY(-50%);
                                 width: 32px;
                                 height: 32px;
-                                background: #000000a8;
+                                background: #00000040;
                                 color: #fff;
                                 border-radius: 50%;
                                 display: flex;
@@ -783,33 +783,60 @@
             
             
                             <!-- RIGHT SLIDER WITH BUTTONS -->
-                            <div class="slider-box">
-            
-                                <!-- LEFT & RIGHT BUTTONS -->
-                                <div class="move-btn move-left" onclick="moveSlider(-120)">‹</div>
-                                <div class="move-btn move-right" onclick="moveSlider(120)">›</div>
-            
-                                <div class="thumb-slider" id="thumbSlider">
-                                    <img src="/images/products/Corrugated Box/Corrugated Box 23x17.75x17.75-inch-rsc-carton.jpeg"
-                                        onclick="changeImage(this)">
-                                    <img src="/images/products/Corrugated Box/Corrugated Box 23x17.75x17.75-inch-rsc-carton.jpeg"
-                                        onclick="changeImage(this)">
-                                    <img src="/images/products/Corrugated Box/box-1.jpeg"
-                                        onclick="changeImage(this)">
-                                    <img src="/images/products/Corrugated Box/Corrugated Box 23x17.75x17.75-inch-rsc-carton.jpeg"
-                                        onclick="changeImage(this)">
-                                    <img src="/images/products/Corrugated Box/box-2.jpeg"
-                                        onclick="changeImage(this)">
-                                    <img src="/images/products/Corrugated Box/Corrugated Box 23x17.75x17.75-inch-rsc-carton.jpeg"
-                                        onclick="changeImage(this)">
-                                </div>
-            
-            
+                        <div class="slider-box">
+                        
+                            <div class="move-btn move-left" onclick="moveSlider(-120)">‹</div>
+                            <div class="move-btn move-right" onclick="moveSlider(120)">›</div>
+                        
+                            <div class="thumb-slider" id="thumbSlider">
+                                <img src="/images/products/Corrugated Box/Corrugated Box-23.jpeg"
+                                    onclick="changeImage(this)">
+                                <img src="/images/products/Corrugated Box/Corrugated Box 23x17.75x17.75-inch-rsc-carton.jpeg"
+                                    onclick="changeImage(this)">
+                                <img src="/images/products/Corrugated Box/box-1.jpeg" onclick="changeImage(this)">
+                                <img src="/images/products/Corrugated Box/Corrugated Box 23x17.75x17.75-inch-rsc-carton.jpeg"
+                                    onclick="changeImage(this)">
+                                <img src="/images/products/Corrugated Box/box-2.jpeg" onclick="changeImage(this)">
+                                <img src="/images/products/Corrugated Box/Corrugated Box 23x17.75x17.75-inch-rsc-carton.jpeg"
+                                    onclick="changeImage(this)">
                             </div>
+                        
+                        </div>
+
             
                         </div>
             
                         <script>
+                            function moveSlider(amount) {
+                                    document.getElementById("thumbSlider").scrollLeft += amount;
+                                }
+
+                                // AUTO SLIDE
+                                let autoSlideInterval;
+
+                                function startAutoSlide() {
+                                    const slider = document.getElementById("thumbSlider");
+                                    autoSlideInterval = setInterval(() => {
+                                        slider.scrollLeft += 120;
+
+                                        // When reaching end → go back to start
+                                        if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 5) {
+                                            slider.scrollLeft = 0;
+                                        }
+                                    }, 2000); // 2 seconds
+                                }
+
+                                function stopAutoSlide() {
+                                    clearInterval(autoSlideInterval);
+                                }
+
+                                // Start auto-slide after page fully loads
+                                document.addEventListener("DOMContentLoaded", startAutoSlide);
+
+                                // Optional: Stop auto-slide when hovered
+                                document.getElementById("thumbSlider").addEventListener("mouseover", stopAutoSlide);
+                                document.getElementById("thumbSlider").addEventListener("mouseout", startAutoSlide);
+
                             function changeImage(img) {
                                 const main = document.getElementById("mainImage");
 
@@ -845,7 +872,7 @@
 
 
                 <div class="details-section">
-                    <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px">
+                    <div class="box-mobile" style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px">
                         <div>
                             <span class="product-category">Box Making • RSC Carton</span>
                             <div class="title-row">
@@ -853,12 +880,13 @@
                                     Shifting
 
                                 </h1>
-                                <div class="rating" aria-hidden="true">⭐ ⭐ ⭐ ⭐ ☆ (4.3)</div>
+                              
                             </div>
                         </div>
-                        <div style="text-align:right">
+                        <div style="text-align:left" class="w-50">
                             <div class="price" id="productPrice">₹ 320 / pc</div>
                             <div style="font-size:12px; color:#556">MOQ: 50 pcs</div>
+                            <div class="rating" aria-hidden="true">⭐ ⭐ ⭐ ⭐ ☆ (4.3)</div>
                         </div>
                     </div>
 
@@ -886,9 +914,7 @@
                         <div class="quality-select" aria-labelledby="qualityLabel" style="margin-top:12px">
                             <label id="qualityLabel">Select Box Quality / Material</label>
                             <div class="quality-list" id="qualityList" role="radiogroup" aria-label="Quality types">
-                                <div tabindex="0" class="quality-item active" data-key="single-wall"
-                                    onclick="selectQuality(this)">
-                                    Single Wall — 3 ply</div>
+                               
                                 <div tabindex="0" class="quality-item" data-key="double-wall"
                                     onclick="selectQuality(this)">
                                     Double Wall — 5 ply</div>
@@ -1066,7 +1092,7 @@
 
                     <!-- metadata / chips -->
                     <div class="meta-row" aria-hidden="true">
-                        <div class="chip">Lead time: 7–10 days</div>
+                        <div class="chip">Lead time: 4-5 days</div>
                         <div class="chip">Bulk discount available</div>
                         <div class="chip">Eco-friendly Kraft Option Available
                         </div>
@@ -1420,8 +1446,9 @@
 
                 <div id="detailsTab" class="tab-content active">
                     <h3>Box Making – Details & Features</h3>
-                    <p>This carton is manufactured using high-strength kraft liners and precision corrugation to ensure durability during
-                    shifting and transit. Glue seams are reinforced for better holding strength.
+                    <p>This RSC carton is produced using industrial corrugation technology and is available in double-wall grade. We use
+                    high-quality kraft paper facings and water-based adhesive.
+
 
 
                     </p>
@@ -1436,17 +1463,10 @@
 
                 <div id="specsTab" class="tab-content">
                     <h3>Specifications & Key Features</h3>
-                    <p>Fluting Options: B, C, BC (single or double wall)
-                    </p>
-                    <p>Paper GSM: 120–250 GSM kraft
-                    </p>
-                    <p>Spacious volume ideal for mixed items
-                    </p>
-                    <p>Suitable for packing clothes, books, utensils, appliances, decor, and general household/office
-                        items
-                    </p>
-                    <p>Sturdy construction for safe stacking and transport
-                    </p>
+                <p>Fluting : BC (double-wall)</p>
+                <p>Paper Grades: 120–250 GSM kraft liners</p>
+                <p>Finishing: Plain</p>
+                <p>Strength: ECT 32–44 / Burst 300–600 kPa</p>
                 </div>
 
                 <div id="shippingTab" class="tab-content">
