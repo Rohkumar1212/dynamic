@@ -18091,6 +18091,10 @@ nav {
       width: 300px;
       height: 230px;
     }
+    .box-mobile
+    {
+      display: block !important;
+    }
 
     .side {
         width: 100%;
