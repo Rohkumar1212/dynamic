@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>   
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="author" content="INSPIRO" />
+    <meta name="description" content="Themeforest Template Polo, html template">
+    <link rel="icon" type="image/png" href="/images/favicon.ico">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Document title -->
+    <!-- Stylesheets & Fonts -->
+    <link href="/css/plugins.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/index.css" rel="stylesheet">
+    <link href="/css/product.css" rel="stylesheet">
+    <link href="/css/box.css" rel="stylesheet">
+    <script src="/script.js"></script>
+    <script src="/product.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+   
+<style>/* --- DEFAULT GRID (Desktop & Large Screens) --- */
+
+@media (min-width: 1200px) {
+    .h3, h3 {
+        font-size: 1.25rem;
+    }
+}
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 24px;
+    padding: 20px 0;
+}
+
+/* --- LARGE TABLETS / SMALL LAPTOPS (max-width: 1200px) --- */
+@media (max-width: 1200px) {
+    .category-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+    }
+}
+
+/* --- TABLETS (max-width: 992px) --- */
+@media (max-width: 992px) {
+    .category-grid {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 18px;
+    }
+}
+
+/* --- MOBILES (max-width: 768px) --- */
+@media (max-width: 768px) {
+    .category-grid {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+    }
+}
+
+/* --- SMALL MOBILES (max-width: 480px) --- */
+@media (max-width: 480px) {
+    .category-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+}
+</style>
+</head>
+
+<body>
+    <div class="body-inner">
+        <div id="topbar" class="d-none d-xl-block d-lg-block topbar-transparent topbar-fullwidth dark">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="top-menu">
+                            <li><a href="/about.html">About</a></li>
+                            <li><a href="/products.html">Features</a></li>
+
+                        </ul>
+                    </div>
+                    <div class="col-md-6 d-none d-sm-block">
+                        <div class="social-icons social-icons-colored-hover">
+                            <ul>
+                                <li class="social-facebook"><a href="https://www.facebook.com/DYNAMICCORRUGATIONS"><i
+                                            class="fab fa-facebook-f"></i></a></li>
+                                <li class="social-twitter"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li class="social-linkedin"><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                                <li class="social-youtube"><a href="#"><i class="fab fa-youtube"></i></a></li>
+                                <li class="social-rss"><a href="#"><i class="fa fa-rss"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header -->
+        <header id="header" data-transparent="true">
+            <div class="header-inner">
+                <div class="container">
+                    <!--Logo-->
+                    <div id="logo"> <a href="/index.html"><span class="logo-default"><img class="img-fluid logody"
+                                    src="/images/logotran.png" alt=""></span></a> </div>
+                    <!--End: Logo-->
+                    <!-- Search -->
+                    <div id="search"><a id="btn-search-close" class="btn-search-close" aria-label="Close search form"><i
+                                class="icon-x"></i></a>
+                        <form class="search-form" action="" method="get">
+                            <input class="form-control" name="q" type="text" placeholder="Type & Search..." />
+                            <span class="text-muted">Start typing & press "Enter" or "ESC" to close</span>
+                        </form>
+                    </div> <!-- end: search -->
+
+                    <!--Navigation Resposnive Trigger-->
+                    <div id="mainMenu-trigger"> <a class="lines-button x"><span class="lines"></span></a> </div>
+                    <!--end: Navigation Resposnive Trigger-->
+                    <!--Navigation-->
+                    <div id="mainMenu">
+                        <div class="container">
+                            <nav>
+                                <ul>
+                                    <li><a href="/index.html">Home</a></li>
+                                    <li><a href="/about.html">About us</a></li>
+                                    <li><a href="/products.html">Product</a></li>
+
+                                    <li><a href="/gallery.html">Gallery</a></li>
+                                    <li><a href="/contact.html">Contact us</a></li>
+                                </ul>
+
+                            </nav>
+
+                        </div>
+                    </div>
+        </header>
+        <script src="/script.js"></script>
+        <!-- end: Header -->
+        <!-- Page title -->
+        <section id="page-title" class="text-light" data-bg-parallax="/images/products/Packaging-Page-Banner.jpg">
+            <div class="container">
+
+                <div class="breadcrumb text-center">
+                    <ul>
+                        <h1>Products</h1>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <!-- end: Page title -->
+
+        <section class="product-section px-5">
+            <h2>Corrugated Boxes Product Categories</h2>
+            <p>Choose a category to explore products, specs, and bulk pricing.</p>
+
+            <div class="category-grid">
+
+                <div class="category-card" onclick="openProduct('../products/18-x-15-x-16-inches.html')">
+                    <img src="/images/products/Corrugated Box/Corrugated Box  18-x-15-x-16-inches.jpeg"
+                        alt="Corrugated Box (18 x 15 x 16 inches).png">
+                    <div class="category-content">
+                        <h3>Corrugated Box (18 × 15 × 16 inches) - For Heavy / Fragile Goods</h3>
+                        <p>A strong RSC (Regular Slotted Container) corrugated carton designed especially for heavy and fragile items. Available in
+                        an eco-friendly kraft finish for added appeal.
+                        </p>
+                        <a href="../products/18-x-15-x-16-inches.html"><span class="view-btn">Get more details →</span></a>
+                    </div>
+                </div>
+
+                <div class="category-card" onclick="openProduct('../products/23x17.75x17.75-inch-rsc-carton.html')">
+                    <img src="/images/products/Corrugated Box/Corrugated Box 23x17.75x17.75-inch-rsc-carton.jpeg"
+                        alt="Corrugated Box (23 x 17.75 x 17.75).png">
+                    <div class="category-content">
+                        <h3>Corrugated Box (23 × 17.75 × 17.75 inches) For For General Shifting</h3>
+                        <p>A spacious and durable RSC corrugated carton ideal for  <strong> household shifting, office relocation, storage, and multi-item
+                        packing.</strong> Designed to handle mixed-category goods safely and efficiently.
+ </p>
+                        <a href="../products/23x17.75x17.75-inch-rsc-carton.html"><span class="view-btn">Get more details →</span></a>
+                    </div>
+                </div>
+
+                <div class="category-card" onclick="openProduct('../products/26×15.75×17.75-inches.html')">
+                    <img src="/images/products/Corrugated Box/Corrugated Box  26×15.75×17.75-inches.jpeg"
+                        alt="Corrugated Box (26 × 15.75 × 17.75 inches).png">
+                    <div class="category-content">
+                        <h3>Corrugated Box (26 × 15.75 × 17.75 inches) – For Lightweight Items (Clothes, Fabrics, Soft Goods)</h3>
+                        <p>A spacious and lightweight RSC corrugated carton ideal for packing  <strong> clothes, linens, garments, soft goods, textiles,
+                        cushions, and general lightweight items. </strong>Designed for maximum volume with easy handling during shifting, storage, and
+                        e-commerce dispatch.
+                        </p>
+                        <a href="../products/26×15.75×17.75-inches.html"><span class="view-btn">Get more details →</span></a>
+                    </div>
+                </div>
+              
+
+            </div>
+        </section>
+
+
+        <script>
+            function openProduct(page) {
+                // Smooth animation on click
+                document.body.style.opacity = "0";
+                setTimeout(() => {
+                    window.location.href = page;
+                }, 400);
+            }
+
+            // Simple fade-in animation
+            window.onload = () => {
+                document.body.style.opacity = "0";
+                setTimeout(() => {
+                    document.body.style.transition = "opacity 0.8s ease";
+                    document.body.style.opacity = "1";
+                }, 100);
+            };
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+        <div class="container">
+            <!-- Right Side Form -->
+            <h3 class="text-dark text-center mb-3">Get Your Custom Quote</h3>
+            <div class="col-lg-12">
+                <div class="card-box p-4 shadow-lg">
+                    <form id="quoteForm" action="quoteForm" role="form" method="post">
+                        <div class="mb-3">
+                            <label class="form-label">What’s Your Name?</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Your Email (No spam, promise 🤞)</label>
+                            <input type="email" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Your Digits (Just in case)</label>
+                            <input type="number" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Who’s the Genius Behind the Brand?</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">What Are You Packing?</label>
+                            <textarea class="form-control"
+                                placeholder="Describe your product – size, weight, fragile, etc." required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Pick Your Packaging Style:</label>
+                            <select class="form-control">
+                                <option>Corrugated Boxes</option>
+                                <option>Custom-Printed Boxes</option>
+                                <option>Eco-Friendly Packaging</option>
+                                <option>Protective Materials (Bubble Wrap, Fillers)</option>
+                                <option>Not Sure Yet (Help Me Decide!)</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">How Many Do You Need?</label>
+                            <input type="number" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">When’s the Deadline?</label>
+                            <input type="date" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Got a Budget in Mind?</label>
+                            <input type="number" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Extras:</label>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input">
+                                <label class="form-check-label">I want custom branding (logo, colors, etc.).</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input">
+                                <label class="form-check-label">I want eco-friendly packaging.</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input">
+                                <label class="form-check-label">I need help choosing the right packaging.</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Upload Design Files (Optional)</label>
+                            <input type="file" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-dark w-100">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <div class="footer-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4  col-lg-2 col-md-4">
+                            <!-- Footer widget area 1 -->
+                            <div class="widget  widget-contact-us"
+                                style="background-image: url('images/world-map-dark.png'); background-position: 50% 20px; background-repeat: no-repeat">
+                                <h4>About Dynamic Corrugations</h4>
+                                <ul class="list-icon">
+                                    <li><i class="fa fa-map-marker-alt"></i>40 K.M. Stone,Vill. Narsinghpur,
+                                        Delhi-Jaipur Highway, Sector-35 Gurugram-122004 (Hr)</li>
+                                    <li><i class="fa fa-phone"></i><a href="tel:+919891040840">+91 9891040840</a></li>
+                                    <li><i class="far fa-envelope"></i><a
+                                            href="mailto:info@dynamiccorrugations.com">info@dynamiccorrugations.com </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <!-- end: Footer widget area 1 -->
+                        </div>
+
+                        <div class="col-xl-2 col-lg-2 col-md-4">
+                            <!-- Footer widget area 1 -->
+                            <div class="widget">
+                                <h4>Useful Links</h4>
+                                <ul class="list">
+                                    <li><a href="contact.html">Connect us</a></li>
+                                    <li><a href="#">Privacy Policy</a></li>
+                                    <li><a href="#">Return & Refund Policy</a></li>
+                                    <li><a href="#">Cancellation Policy</a></li>
+                                    <li><a href="#">Terms & Condition</a></li>
+                                </ul>
+                            </div>
+                            <!-- end: Footer widget area 1 -->
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-4">
+                            <!-- Footer widget area 2 -->
+                            <div class="widget">
+                                <h4>Utility pages</h4>
+                                <ul class="list">
+                                    <li><a href="maintenance.html">Corrugated Roll</a></li>
+                                    <li><a href="maintenance.html">Triple Wall Box</a></li>
+                                    <li><a href="maintenance.html">Corrugated Box</a></li>
+                                    <li><a href="maintenance.html">Corrugated Boards</a></li>
+                                    <li><a href="maintenance.html">Pizza Box</a></li>
+                                </ul>
+                            </div>
+                            <!-- end: Footer widget area 2 -->
+                        </div>
+                        <div class="col-xl-4 col-lg-2 col-md-4 widget">
+                            <h4>Social links and timiings</h4>
+                            <div class="social-icons social-icons-colored float-left">
+                                <ul>
+                                    <li class="social-facebook"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li class="social-twitter"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                    <li class="social-youtube"><a href="#"><i class="fab fa-youtube"></i></a></li>
+                                    <li class="social-gplus"><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                                </ul>
+                                <br>
+                                <ul class="list">
+                                    <li><i class="far fa-clock"></i> Monday - Saturday:- <strong>08:00 - 18:30</strong>
+                                        <br>
+                                        Sunday: <strong>Closed</strong>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- end: Footer widget area 2 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright-content cta-section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <!-- Social icons -->
+
+                            <div class="copyright-text text-left">&copy; 2025 Dynamic Corrugations. All Rights
+                                Reserved.
+
+                            </div>
+                            <!-- end: Social icons -->
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="copyright-text text-right"><a href="https://dynamiccorrugations.com/">Desinged
+                                    by Dynamic Corrugations</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- end: Footer -->
+    </div>
+    <!-- end: Body Inner -->
+    <!-- Scroll top -->
+
+    <div class="fixed-icons">
+        <!-- WhatsApp Icon -->
+        <a href="https://wa.me/+919891040840" target="_blank">
+            <i class='fab fa-whatsapp' style='font-size:38px;color:rgb(7, 72, 236)'></i>
+        </a>
+        <!-- Call Icon -->
+        <a href="tel:+919891040840" style="color: rgb(0, 0, 255);">
+            <i class="fas fa-phone" style="font-size: 38px;"></i>
+        </a>
+    </div>
+    <!-- FontAwesome for icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+
+    <a id="scrollTop"><i class="icon-chevron-up"></i><i class="icon-chevron-up"></i></a>
+    <!--Plugins-->
+    <script src="js/jquery.js"></script>
+    <script src="js/plugins.js"></script>
+    <!--Template functions-->
+    <script src="js/functions.js"></script>
+</body>
+
+</html>
