@@ -18077,6 +18077,60 @@ nav {
         margin-top: 20px;
     }
 }
+
+.fixed-icons {
+    position: fixed;
+    right: 25px;
+    bottom: 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    z-index: 9999;
+}
+
+/* Common Icon Style */
+.fixed-icons .icon {
+    width: 50px;
+    height: 50px;
+    background: #4cff8a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: 0.35s ease;
+    border: 3px solid transparent;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+}
+
+/* Icon style */
+.fixed-icons .icon i {
+    font-size: 42px;
+    color: #0038ff;
+    transition: 0.3s ease-in-out;
+}
+
+/* Hover effects */
+.fixed-icons .icon:hover {
+    transform: scale(1.17) translateY(-4px);
+    border-color: #0038ff;
+    box-shadow: 0 10px 25px rgba(0, 56, 255, 0.4);
+}
+
+/* Icon color glow */
+.fixed-icons .icon:hover i {
+    color: #001dad;
+}
+
+/* Individual color overrides (optional) */
+.whatsapp {
+    background: #63ff96;
+}
+
+.call {
+    background: #63ff96;
+}
+
  .slideimg{
       width: 300px;
       height: 230px;
