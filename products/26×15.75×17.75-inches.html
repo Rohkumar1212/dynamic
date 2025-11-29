@@ -43,13 +43,62 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <style>
+        .product-gallery {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+    
+        .product-gallery .main-image-box {
+            flex: 1 1 350px;
+        }
+    
+        .product-gallery .main-image-box img {
+            width: 100%;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+    
+        /* Slider (Right Side) */
+        .slider-box {
+            flex: 1 1 250px;
+            max-width: 350px;
+        }
+    
+        .thumb-slider {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            scroll-behavior: smooth;
+            padding-bottom: 10px;
+        }
+    
+        .thumb-slider img {
+            width: 80px;
+            height: 80px;
+            border-radius: 6px;
+            object-fit: cover;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: 0.3s;
+        }
+    
+        .thumb-slider img:hover {
+            border-color: #333;
+        }
+    
+        /* Hide scrollbar (nice clean UI) */
+        .thumb-slider::-webkit-scrollbar {
+            display: none;
+        }
+    
         .price {
             color: #ff5722;
             font-weight: 800;
             display: contents;
             font-size: 20px !important;
         }
-
+    
         :root {
             --accent: #007bff;
             --accent-2: #ff6b00;
@@ -61,11 +110,11 @@
             --max-width: 2229px;
             /* 23.21 in at 96dpi */
         }
-
+    
         * {
             box-sizing: border-box
         }
-
+    
         body {
             font-family: Inter, system-ui, Segoe UI, Roboto, "Helvetica Neue", Arial;
             background: linear-gradient(120deg, #f7fbff 0%, #f4f7fb 40%, #eef7f6 100%);
@@ -76,9 +125,9 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-
+    
         }
-
+    
         /* Animated gradient frame behind main content */
         .page-frame {
             width: 100%;
@@ -90,7 +139,7 @@
             position: relative;
             overflow: visible;
         }
-
+    
         /* subtle animated gradient ribbon */
         .page-frame::before {
             content: "";
@@ -103,21 +152,21 @@
             transform-origin: center;
             filter: blur(18px);
         }
-
+    
         @keyframes slow-rotate {
             0% {
                 transform: rotate(0);
             }
-
+    
             50% {
                 transform: rotate(3deg) translateY(-3px);
             }
-
+    
             100% {
                 transform: rotate(0);
             }
         }
-
+    
         /* Layout */
         .product-row {
             display: flex;
@@ -126,7 +175,7 @@
             justify-content: space-between;
             flex-wrap: wrap;
         }
-
+    
         .image-section {
             min-width: 45%;
             flex: 1;
@@ -138,7 +187,7 @@
             flex-direction: column;
             align-items: center;
         }
-
+    
         .main-image {
             width: 100%;
             max-width: 820px;
@@ -150,11 +199,11 @@
             background: linear-gradient(180deg, #fff, #fafcff);
             padding: 12px;
         }
-
+    
         .main-image:hover {
             transform: scale(1.01)
         }
-
+    
         .thumbnail-gallery {
             margin-top: 16px;
             display: flex;
@@ -162,7 +211,7 @@
             flex-wrap: wrap;
             justify-content: center;
         }
-
+    
         .thumbnail-gallery img {
             width: 110px;
             height: 80px;
@@ -172,12 +221,12 @@
             border: 3px solid transparent;
             transition: all .22s;
         }
-
+    
         .thumbnail-gallery img:hover {
             transform: translateY(-6px);
             border-color: var(--accent)
         }
-
+    
         /* Details area */
         .details-section {
             min-width: 40%;
@@ -188,7 +237,7 @@
             padding: 24px 26px;
             box-shadow: 0 8px 30px rgba(0, 123, 255, 0.04);
         }
-
+    
         .product-category {
             display: inline-block;
             background: var(--accent);
@@ -199,7 +248,7 @@
             font-size: 13px;
             box-shadow: 0 6px 18px rgba(0, 123, 255, 0.06);
         }
-
+    
         .title-row {
             margin-top: 14px;
             display: flex;
@@ -207,32 +256,32 @@
             gap: 12px;
             justify-content: space-between;
         }
-
+    
         h1 {
             font-size: 20px;
             margin: 0;
             color: #073067
         }
-
+    
         .rating {
             color: #f0b429;
             font-weight: 600;
             font-size: 14px
         }
-
+    
         .price {
             margin-top: 14px;
             font-size: 26px;
             color: var(--accent-2);
             font-weight: 800;
         }
-
+    
         .short-desc {
             margin-top: 14px;
             color: #334155;
             line-height: 1.6
         }
-
+    
         /* Box size + quality selectors */
         .option-card {
             margin-top: 18px;
@@ -240,7 +289,7 @@
             gap: 18px;
             flex-wrap: wrap;
         }
-
+    
         .size-select,
         .quality-select {
             background: #fff;
@@ -250,7 +299,7 @@
             min-width: 300px;
             flex: 1;
         }
-
+    
         .size-select label,
         .quality-select label {
             font-weight: 700;
@@ -258,7 +307,7 @@
             margin-bottom: 8px;
             color: #1b3658
         }
-
+    
         select.custom,
         input[type="text"].custom {
             width: 100%;
@@ -269,20 +318,20 @@
             font-size: 15px;
             outline: none;
         }
-
+    
         .size-help {
             font-size: 13px;
             color: #577;
             margin-top: 6px;
         }
-
+    
         /* quality radios */
         .quality-list {
             display: flex;
             gap: 12px;
             flex-wrap: wrap
         }
-
+    
         .quality-item {
             padding: 10px 14px;
             border-radius: 10px;
@@ -294,13 +343,13 @@
             font-size: 14px;
             color: #213;
         }
-
+    
         .quality-item.active {
             background: linear-gradient(90deg, rgba(0, 150, 136, 0.12), rgba(0, 123, 255, 0.08));
             border-color: rgba(0, 123, 255, 0.18);
             box-shadow: 0 8px 18px rgba(0, 123, 255, 0.06)
         }
-
+    
         /* controls */
         .controls {
             margin-top: 22px;
@@ -309,7 +358,7 @@
             align-items: center;
             flex-wrap: wrap;
         }
-
+    
         .qty-wrap {
             display: flex;
             gap: 8px;
@@ -319,7 +368,7 @@
             border-radius: 10px;
             border: 1px solid #e8f0fb
         }
-
+    
         .qty-wrap button {
             background: var(--accent);
             color: #fff;
@@ -329,7 +378,7 @@
             cursor: pointer;
             font-weight: 700
         }
-
+    
         .qty-wrap input {
             width: 66px;
             text-align: center;
@@ -338,7 +387,7 @@
             border: 1px solid #d8e6ff;
             font-weight: 700
         }
-
+    
         .primary-btn {
             background: linear-gradient(90deg, var(--accent), #0062d8);
             color: #fff;
@@ -350,12 +399,12 @@
             box-shadow: 0 12px 30px rgba(0, 123, 255, 0.12);
             transition: transform .12s ease, box-shadow .12s;
         }
-
+    
         .primary-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 18px 40px rgba(0, 123, 255, 0.15)
         }
-
+    
         .outline-btn {
             background: transparent;
             color: var(--accent);
@@ -365,7 +414,7 @@
             cursor: pointer;
             font-weight: 700;
         }
-
+    
         /* small action buttons row */
         .action-row {
             margin-top: 12px;
@@ -374,7 +423,7 @@
             flex-wrap: wrap;
             align-items: center
         }
-
+    
         .share-whatsapp {
             background: linear-gradient(90deg, #25D366, #1DA851);
             color: #fff;
@@ -387,7 +436,7 @@
             gap: 10px;
             align-items: center;
         }
-
+    
         .view-cart {
             background: linear-gradient(90deg, #6a1b9a, #7b2fb5);
             color: #fff;
@@ -397,7 +446,7 @@
             cursor: pointer;
             font-weight: 800;
         }
-
+    
         /* Tabs + description area - full width */
         .tabs {
             margin-top: 30px;
@@ -406,14 +455,14 @@
             border-radius: 14px;
             box-shadow: 0 8px 32px rgba(20, 30, 60, 0.04);
         }
-
+    
         .tab-buttons {
             display: flex;
             gap: 12px;
             border-bottom: 1px solid #eef3fb;
             padding-bottom: 8px
         }
-
+    
         .tab-buttons button {
             background: transparent;
             border: none;
@@ -423,18 +472,18 @@
             color: #42526e;
             border-bottom: 3px solid transparent;
         }
-
+    
         .tab-buttons button.active {
             color: var(--accent);
             border-bottom-color: var(--accent)
         }
-
+    
         .tab-content {
             margin-top: 18px;
             color: #384;
             line-height: 1.65
         }
-
+    
         /* related + reviews area */
         .meta-row {
             display: flex;
@@ -442,7 +491,7 @@
             margin-top: 18px;
             flex-wrap: wrap
         }
-
+    
         .chip {
             background: rgba(0, 0, 0, 0.04);
             padding: 8px 12px;
@@ -450,7 +499,7 @@
             font-weight: 700;
             color: #123;
         }
-
+    
         /* Cart modal */
         .cart-modal {
             position: fixed;
@@ -468,13 +517,13 @@
             pointer-events: none;
             transition: opacity .18s ease, transform .18s ease;
         }
-
+    
         .cart-modal.open {
             opacity: 1;
             transform: translateY(0);
             pointer-events: auto
         }
-
+    
         .cart-item {
             display: flow;
             gap: 12px;
@@ -482,7 +531,7 @@
             padding: 10px 0;
             border-bottom: 1px dashed #e9f0ff
         }
-
+    
         .cart-item img {
             width: 72px;
             height: 56px;
@@ -490,7 +539,7 @@
             border-radius: 8px;
             border: 1px solid #eef6ff
         }
-
+    
         .cart-actions {
             display: flex;
             gap: 8px;
@@ -498,7 +547,7 @@
             margin-top: 12px;
             justify-content: flex-end
         }
-
+    
         /* AI badge */
         .ai-badge {
             position: absolute;
@@ -516,21 +565,21 @@
             transform: translateY(-6px);
             animation: pulse 2.8s infinite;
         }
-
+    
         @keyframes pulse {
             0% {
                 transform: translateY(-6px) scale(1)
             }
-
+    
             50% {
                 transform: translateY(-10px) scale(1.03)
             }
-
+    
             100% {
                 transform: translateY(-6px) scale(1)
             }
         }
-
+    
         .ai-dot {
             width: 10px;
             height: 10px;
@@ -539,34 +588,319 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
             opacity: .95;
         }
-
+    
         /* small responsive */
         @media (max-width:1100px) {
-
+    
             .image-section,
             .details-section {
                 min-width: 100%;
                 max-width: 100%
             }
-
+    
             .main-image {
                 height: 420px
             }
         }
-
+    
         @media (max-width:640px) {
             .main-image {
                 height: 300px
             }
-
+    
             .ai-badge {
                 display: none
             }
-
+    
             .size-select,
             .quality-select {
                 min-width: 100%
             }
+        }
+    
+        .cart-modal {
+            position: fixed;
+            top: 0;
+            right: -420px;
+            width: 380px;
+            height: 100vh;
+            background: white;
+            box-shadow: -3px 0 12px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            transition: 0.3s;
+            z-index: 9999;
+        }
+    
+        .cart-modal.open {
+            right: 0;
+        }
+    
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+    
+        .close-cart {
+            border: none;
+            background: none;
+            font-size: 22px;
+            cursor: pointer;
+        }
+    
+        .cart-item {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+    
+        .remove-btn {
+            padding: 4px 5px;
+            background: red;
+            color: white;
+            font-size: 8px;
+            border: none;
+            cursor: pointer;
+            border-radius: 6px;
+        }
+    
+        .total-row {
+            margin: 15px 0;
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+        }
+    
+        .moq-wrapper {
+            display: inline-flex;
+            align-items: center;
+            gap: 18px;
+            padding: 5px 10px;
+            border-radius: 28px;
+            background: #ffffff;
+            border: 1.4px solid #d7d7d7;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.4s ease;
+        }
+    
+        /* Multi-color animated gradient overlay */
+        .moq-wrapper::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 150%;
+            height: 100%;
+            background: linear-gradient(120deg,
+                    #ff0077,
+                    #ff9800,
+                    #ffe600,
+                    #25d366,
+                    #0099ff,
+                    #8a2be2);
+            background-size: 400%;
+            opacity: 0;
+            transition: 0.5s ease-in-out;
+            z-index: 1;
+        }
+    
+        /* Hover: show animated gradient */
+        .moq-wrapper:hover::before {
+            left: 0;
+            opacity: 0.25;
+            animation: animateGradient 3s linear infinite;
+        }
+    
+        @keyframes animateGradient {
+            0% {
+                background-position: 0% 50%;
+            }
+    
+            50% {
+                background-position: 100% 50%;
+            }
+    
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    
+        /* Content stays above gradient */
+        .moq-wrapper p,
+        .moq-wrapper b {
+            position: relative;
+            z-index: 2;
+        }
+    
+        /* Text styling */
+        .moq-wrapper p {
+            margin: 0;
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+        }
+    
+        .moq-wrapper b {
+            color: #0064ff;
+        }
+    
+        /* Responsive for mobile */
+        @media (max-width: 480px) {
+            .moq-wrapper {
+                width: 100%;
+                border-radius: 22px;
+                padding: 10px 14px;
+                gap: 12px;
+            }
+        }
+    
+    
+        /* Wrapper Layout */
+        .location-wrapper {
+            display: flex;
+            flex-wrap: inherit;
+            gap: 15px;
+            padding: 10px 0;
+            width: 100%;
+        }
+    
+        /* Labels */
+        .location-wrapper h6,
+        .location-wrapper label {
+            width: 100%;
+            margin: 0;
+            font-size: 15px;
+            font-weight: 600;
+        }
+    
+        /* Select Fields */
+        .location-wrapper select {
+            width: 100%;
+            max-width: 320px;
+            padding: 10px 14px;
+            border: 1.6px solid #d8d8d8;
+            border-radius: 8px;
+            background: #fff;
+            font-size: 15px;
+            outline: none;
+            transition: 0.25s ease;
+        }
+    
+        .location-wrapper select:focus {
+            border-color: #0066ff;
+            box-shadow: 0 0 6px rgba(0, 102, 255, 0.35);
+        }
+    
+        /* Quantity / MOQ Section */
+        .moq-wrapper {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 15px;
+        }
+    
+        .moq-wrapper p {
+            margin: 0;
+            font-size: 15px;
+            font-weight: 500;
+        }
+    
+        /* Responsive Fix: Mobile */
+        @media (max-width: 768px) {
+            .location-wrapper {
+                gap: 10px;
+                display: flex;
+            }
+    
+            .location-wrapper select {
+                max-width: 50%;
+            }
+    
+            .moq-wrapper {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    
+        .product-gallery {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+    
+        .main-image-box {
+            flex: 1 1 350px;
+        }
+    
+        .main-image-box img {
+            width: 100%;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+    
+        .slider-box {
+            flex: 1 1 250px;
+            max-width: 350px;
+            position: relative;
+        }
+    
+        .thumb-slider {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            scroll-behavior: smooth;
+            padding-bottom: 10px;
+        }
+    
+        .thumb-slider::-webkit-scrollbar {
+            display: none;
+        }
+    
+        .thumb-slider img {
+            width: 80px;
+            height: 80px;
+            border-radius: 6px;
+            object-fit: cover;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: 0.3s;
+        }
+    
+        .thumb-slider img:hover {
+            border-color: #333;
+        }
+    
+        /* BUTTONS */
+        .move-btn {
+            position: absolute;
+            top: 40%;
+            transform: translateY(-50%);
+            width: 32px;
+            height: 32px;
+            background: #00000040;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            user-select: none;
+            font-size: 20px;
+            z-index: 10;
+        }
+    
+        .move-left {
+            left: -15px;
+        }
+    
+        .move-right {
+            right: -15px;
         }
     </style>
 </head>
@@ -933,166 +1267,607 @@
 
 
                             </div>
+
+                             <div class="location-wrapper">
+                            
+                            
+                            
+                                <select id="stateSelect" onchange="loadCities()">
+                                    <option value="">-- Select State --</option>
+                                    <option value="delhi">Delhi</option>
+                                    <option value="haryana">Haryana</option>
+                                    <option value="uttarpradesh">Uttar Pradesh</option>
+                                    <option value="rajasthan">Rajasthan</option>
+                                    <option value="other">Other State</option>
+                                </select>
+                            
+                            
+                                <select id="citySelect" onchange="updateMOQ()">
+                                    <option value="">-- Select City --</option>
+                                </select>
+                            </div>
+                            
+                            
+                            <div class="moq-wrapper">
+                                <p>MOQ per set: <b id="moqValue">50</b> pcs</p>
+                                <p>Number of Sets</p>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- controls -->
-                    <div class="controls" role="group" aria-label="quantity and actions">
-                        <div class="qty-wrap" aria-label="quantity control">
-                            <button type="button" onclick="decreaseQty()">-</button>
-                            <input id="qty" type="number" min="1" value="0" aria-label="Quantity" />
-                            <button type="button" onclick="increaseQty()">+</button>
+                            <script>
+                                // STATE → CITY DATA
+                                const cityData = {
+                                    delhi: ["New Delhi", "South Delhi", "North Delhi", "West Delhi", "East Delhi", "Central Delhi"],
+
+                                    haryana: ["Gurgaon", "Faridabad", "Panipat", "Rohtak", "Sonipat"],
+
+                                    uttarpradesh: ["Noida", "Greater Noida", "Ghaziabad", "Meerut"],
+
+                                    rajasthan: ["Alwar", "Bharatpur"]
+                                };
+
+
+                                // LOAD CITIES BASED ON STATE
+                                function loadCities() {
+                                    const state = document.getElementById("stateSelect").value;
+                                    const citySelect = document.getElementById("citySelect");
+
+                                    // RESET CITY DROPDOWN
+                                    citySelect.innerHTML = `<option value="">-- Select City --</option>`;
+
+                                    if (cityData[state]) {
+                                        cityData[state].forEach(city => {
+                                            citySelect.innerHTML += `<option value="${city.toLowerCase()}">${city}</option>`;
+                                        });
+                                    } else {
+                                        citySelect.innerHTML += `<option value="other">Other City</option>`;
+                                    }
+                                }
+                            </script>
+                            
+                            <!-- controls -->
+                           <style>
+                            /* Quantity UI */
+                            .qty-wrap {
+                                display: flex;
+                                align-items: center;
+                                gap: 10px;
+                                background: #f7f7ff;
+                                padding: 10px 15px;
+                                border-radius: 10px;
+                                margin-bottom: 15px;
+                            }
+                        
+                            .qty-wrap button {
+                                width: 35px;
+                                height: 35px;
+                                background: #4a6bff;
+                                color: #fff;
+                                border: none;
+                                border-radius: 8px;
+                                font-size: 18px;
+                                cursor: pointer;
+                            }
+                        
+                            .qty-wrap input {
+                                width: 60px;
+                                text-align: center;
+                                font-size: 18px;
+                                border: none;
+                                background: transparent;
+                            }
+                        
+                            /* Main Buttons */
+                            .primary-btn,
+                            .outline-btn,
+                            .view-cart {
+                                width: 100%;
+                                padding: 12px;
+                                margin-top: 10px;
+                                border-radius: 10px;
+                                cursor: pointer;
+                                font-size: 16px;
+                            }
+                        
+                            .primary-btn {
+                                background: #4a6bff;
+                                color: white;
+                                border: none;
+                            }
+                        
+                            .outline-btn {
+                                border: 2px solid #4a6bff;
+                                background: white;
+                                color: #4a6bff;
+                            }
+                        
+                            .view-cart {
+                                background: #e8ecff;
+                                border: none;
+                                color: #2a3fcb;
+                                font-weight: 600;
+                            }
+                        
+                            /* Quantity Popup Card */
+                            #popupCard {
+                                position: fixed;
+                                top: 20px;
+                                right: 20px;
+                                width: 250px;
+                                background: white;
+                                padding: 15px 20px;
+                                border-radius: 15px;
+                                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+                                opacity: 0;
+                                transform: translateY(-20px);
+                                transition: all 0.35s ease;
+                                pointer-events: none;
+                            }
+                        
+                            #popupCard.show {
+                                opacity: 1;
+                                transform: translateY(0);
+                            }
+                        
+                            .popup-title {
+                                font-size: 18px;
+                                font-weight: 600;
+                                margin-bottom: 8px;
+                            }
+                        
+                            .popup-row {
+                                margin: 3px 0;
+                                font-size: 15px;
+                            }
+                        
+                            /* Add to Cart Confirmation Popup */
+                            #confirmPopup {
+                                position: fixed;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 100%;
+                                background: rgba(0, 0, 0, 0.45);
+                                display: none;
+                                justify-content: center;
+                                align-items: center;
+                            }
+                        
+                            .confirm-box {
+                                background: white;
+                                padding: 25px;
+                                width: 300px;
+                                text-align: center;
+                                border-radius: 15px;
+                                animation: fadeIn 0.3s ease;
+                            }
+                        
+                            @keyframes fadeIn {
+                                from {
+                                    opacity: 0;
+                                }
+                        
+                                to {
+                                    opacity: 1;
+                                }
+                            }
+                        
+                            .confirm-btn {
+                                padding: 10px 18px;
+                                margin: 10px;
+                                border-radius: 8px;
+                                cursor: pointer;
+                                border: none;
+                                font-size: 15px;
+                            }
+                        
+                            .yes-btn {
+                                background: #4a6bff;
+                                color: white;
+                            }
+                        
+                            .no-btn {
+                                background: #d7dcff;
+                                color: #2a3fcb;
+                            }
+                        </style>
+                        
+                        
+                        
+                        <!-- ====================== MAIN CONTROLS ========================= -->
+                        
+                        <div class="controls" role="group" aria-label="quantity and actions">
+                        
+                            <div class="qty-wrap">
+                                <button onclick="decreaseSets()">-</button>
+                                <input id="qty" type="number" value="1" min="1">
+                                <button onclick="increaseSets()">+</button>
+                            </div>
+                        
+                            <button class="primary-btn" id="addToCartBtn" onclick="openConfirmPopup()">Add to Cart</button>
+                            <button class="outline-btn" onclick="addToCartView()">Add & View Cart</button>
+                            <button class="view-cart" onclick="toggleCart()">🛒 View Cart</button>
+                        
                         </div>
+                        
+                        
+                        
+                        <!-- ============== Quantity Change Popup ============== -->
+                        <div id="popupCard">
+                            <div class="popup-title">Updated</div>
+                            <div class="popup-row">Quantity: <span id="pQty">1</span></div>
+                            <div class="popup-row">MOQ: <span id="pMoq">5</span></div>
+                            <div class="popup-row">Price: <span id="pPrice">100</span></div>
+                            <div class="popup-row">Total: <span id="pTotal">100</span></div>
+                        </div>
+                        
+                        <!-- ============== ADD TO CART CONFIRMATION POPUP ============== -->
+                        <div id="confirmPopup">
+                            <div class="confirm-box">
+                                <h3>Are you sure?</h3>
+                                <p>Do you really want to add this item to the cart?</p>
+                                <button class="confirm-btn yes-btn" onclick="confirmAdd()">Yes, Add</button>
+                                <button class="confirm-btn no-btn" onclick="closeConfirmPopup()">No</button>
+                            </div>
+                        </div>
+                             <script>
+                            const qtyInput = document.getElementById("qty");
+                            const popup = document.getElementById("popupCard");
+                            const confirmPopup = document.getElementById("confirmPopup");
 
-                        <button class="primary-btn" id="addToCartBtn" onclick="handleAddToCart()">Add to Cart</button>
-                        <button class="outline-btn" onclick="addToCartView()">Add & View Cart</button>
+                            const price = 100;
+                            const moq = 5;
 
-                        <button class="share-whatsapp" onclick="shareWhatsApp()">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                <path d="M20.5 3.5L3.5 20.5" stroke="white" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                </path>
-                            </svg>
-                            Share on WhatsApp
-                        </button>
+                            /* ============= QTY POPUP ============= */
+                            function updatePopup() {
+                                let qty = parseInt(qtyInput.value);
+                                if (qty < 1) qty = 1;
 
-                        <button class="view-cart" onclick="toggleCart()">🛒 View Cart</button>
-                    </div>
-                    <script>
-                        let cart = [];
+                                document.getElementById("pQty").innerText = qty;
+                                document.getElementById("pMoq").innerText = moq;
+                                document.getElementById("pPrice").innerText = price;
+                                document.getElementById("pTotal").innerText = qty * price;
 
-                        // UPDATE SIZE
-                        function updateSizePreview() {
-                            const sizeSelect = document.getElementById("sizeSelect");
-                            const customField = document.getElementById("customSize");
+                                popup.classList.add("show");
 
-                            const selected = sizeSelect.options[sizeSelect.selectedIndex];
-                            const inches = selected.dataset.inches;
-                            const px = selected.dataset.px;
-
-                            if (sizeSelect.value === "custom") {
-                                customField.style.display = "block";
-                                document.getElementById("selectedSize").innerText = "Custom";
-                                document.getElementById("selectedPx").innerText = "--";
-                            } else {
-                                customField.style.display = "none";
-                                document.getElementById("selectedSize").innerText = inches;
-                                document.getElementById("selectedPx").innerText = px;
-                            }
-                        }
-
-                        // QUALITY SELECT
-                        function selectQuality(el) {
-                            document.querySelectorAll(".quality-item").forEach(q => q.classList.remove("active"));
-                            el.classList.add("active");
-                        }
-
-                        // QTY
-                        function increaseQty() {
-                            let qty = document.getElementById("qty");
-                            qty.value = parseInt(qty.value) + 1;
-                        }
-                        function decreaseQty() {
-                            let qty = document.getElementById("qty");
-                            if (qty.value > 1) qty.value = parseInt(qty.value) - 1;
-                        }
-
-                        // ADD TO CART
-                        function handleAddToCart() {
-                            const title = document.getElementById("productTitle").innerText;
-                            const price = parseInt(document.getElementById("productPrice").innerText.replace(/[^0-9]/g, ""));
-                            const qty = parseInt(document.getElementById("qty").value);
-
-                            const sizeSelect = document.getElementById("sizeSelect");
-                            const size = sizeSelect.value === "custom"
-                                ? document.getElementById("customSize").value.trim()
-                                : sizeSelect.options[sizeSelect.selectedIndex].dataset.inches;
-
-                            const quality = document.querySelector(".quality-item.active").innerText;
-
-                            const item = {
-                                id: Date.now(),
-                                title,
-                                qty,
-                                image: document.getElementById("mainImage").src,
-                                size,
-                                quality,
-                                unitPrice: price,
-                                totalPrice: price * qty
-                            };
-
-                            cart.push(item);
-                            updateCartUI();
-                            alert("Added to cart!");
-                        }
-
-                        // ADD & VIEW CART
-                        function addToCartView() {
-                            handleAddToCart();
-                            toggleCart();
-                        }
-
-                        // OPEN/CLOSE CART
-                        function toggleCart() {
-                            document.getElementById("cartModal").classList.toggle("open");
-                            updateCartUI();
-                        }
-
-                        // REMOVE ITEM
-                        function removeCartItem(id) {
-                            cart = cart.filter(item => item.id !== id);
-                            updateCartUI();
-                        }
-
-                        // UPDATE CART UI
-                        function updateCartUI() {
-                            const list = document.getElementById("cartList");
-                            const totalEl = document.getElementById("cartTotal");
-
-                            list.innerHTML = "";
-                            let total = 0;
-
-                            if (cart.length === 0) {
-                                list.innerHTML = "<p>Your cart is empty.</p>";
-                                totalEl.innerText = "₹0";
-                                return;
+                                setTimeout(() => {
+                                    popup.classList.remove("show");
+                                }, 1500);
                             }
 
-                            cart.forEach(item => {
-                                total += item.totalPrice;
-
-                                list.innerHTML += `
-                                <div class="cart-item">
-                                    <strong>${item.title}</strong><br>
-                                    Size: ${item.size}<br>
-                                    Quality: ${item.quality}<br>
-                                    Qty: ${item.qty}<br>
-                                    Price: ₹${item.totalPrice}
-                                    <br>
-                                    <button class="remove-btn" onclick="removeCartItem(${item.id})">Remove</button>
-                                </div>
-                            `;
-                            });
-
-                            totalEl.innerText = "₹" + total;
-                        }
-
-                        // PROCEED TO PAYMENT
-                        function proceedToPayment() {
-                            if (cart.length === 0) {
-                                alert("Your cart is empty!");
-                                return;
+                            function increaseSets() {
+                                qtyInput.value = parseInt(qtyInput.value) + 1;
+                                updatePopup();
                             }
 
-                            const totalPrice = cart.reduce((sum, item) => sum + item.totalPrice, 0);
+                            function decreaseSets() {
+                                if (qtyInput.value > 1) {
+                                    qtyInput.value = parseInt(qtyInput.value) - 1;
+                                    updatePopup();
+                                }
+                            }
 
-                            // Save to next page (checkout)
-                            localStorage.setItem("checkoutCart", JSON.stringify(cart));
-                            localStorage.setItem("totalAmount", totalPrice);
 
-                            window.location.href = "checkout.html";
-                        }
-                    </script>
+
+                            /* ============= ADD TO CART CONFIRMATION ============= */
+                            function openConfirmPopup() {
+                                confirmPopup.style.display = "flex";
+                            }
+
+                            function closeConfirmPopup() {
+                                confirmPopup.style.display = "none";
+                            }
+
+                            function confirmAdd() {
+                                closeConfirmPopup();
+                                alert("Item added to cart successfully!");
+                            }
+
+
+
+                            /* Additional Buttons */
+                            function addToCartView() {
+                                alert("Added & opening cart...");
+                            }
+
+                            function toggleCart() {
+                                alert("Opening cart...");
+                            }
+                        </script>
+                            
+                            <script>
+                                /* -------------------------------------
+                                   GLOBAL CART + MOQ SYSTEM
+                                --------------------------------------- */
+                                let cart = [];
+                                const BOX_RATE = 320;
+
+
+                                /* -------------------------------------
+                                   UPDATE MOQ BASED ON CITY
+                                --------------------------------------- */
+                                function updateMOQ() {
+                                    let city = document.getElementById("citySelect").value.toLowerCase();
+
+                                    const NCR_CITIES = [
+                                        "noida",
+                                        "greater noida",
+                                        "ghaziabad"
+                                    ];
+
+                                    let moq = NCR_CITIES.includes(city) ? 15 : 50;
+                                    document.getElementById("moqValue").innerText = moq;
+                                }
+
+
+                                /* -------------------------------------
+                                   SET BUTTONS
+                                --------------------------------------- */
+                                function increaseSets() {
+                                    let qty = document.getElementById("qty");
+                                    qty.value = parseInt(qty.value || 1) + 1;
+                                }
+
+                                function decreaseSets() {
+                                    let qty = document.getElementById("qty");
+                                    let val = parseInt(qty.value || 1);
+                                    qty.value = val > 1 ? val - 1 : 1;
+                                }
+
+
+                                /* -------------------------------------
+                                   ADD TO CART — WITH CITY CHECK
+                                --------------------------------------- */
+                                function handleAddToCart() {
+                                    const city = document.getElementById("citySelect").value;
+
+                                    if (!city) {
+                                        alert("Please select your city before adding to cart.");
+                                        return;
+                                    }
+
+                                    const sets = parseInt(document.getElementById("qty").value || 1);
+                                    const moq = parseInt(document.getElementById("moqValue").innerText || 50);
+
+                                    const totalPcs = sets * moq;
+                                    const totalPrice = totalPcs * BOX_RATE;
+
+                                    const item = {
+                                        id: Date.now(),
+                                        title: document.getElementById("productTitle").innerText,
+                                        sets,
+                                        moq,
+                                        totalPcs,
+                                        price: totalPrice
+                                    };
+
+                                    cart.push(item);
+                                    updateCartUI();
+                                }
+
+                                /* ADD & OPEN */
+                                function addToCartView() {
+                                    handleAddToCart();
+
+                                    const city = document.getElementById("citySelect").value;
+                                    if (city) toggleCart();
+                                }
+
+
+                                /* -------------------------------------
+                                   UPDATE CART UI
+                                --------------------------------------- */
+                                function updateCartUI() {
+                                    const list = document.getElementById("cartList");
+                                    const totalEl = document.getElementById("cartTotal");
+
+                                    list.innerHTML = "";
+                                    let total = 0;
+
+                                    if (!cart.length) {
+                                        list.innerHTML = "<p>Your cart is empty.</p>";
+                                        totalEl.innerText = "₹0";
+                                        return;
+                                    }
+
+                                    cart.forEach(item => {
+                                        total += item.price;
+
+                                        list.innerHTML += `
+                                                            <div class="cart-item">
+                                                                <strong>${item.title}</strong><br>
+                                                                Sets: ${item.sets}<br>
+                                                                MOQ: ${item.moq} pcs<br>
+                                                                Total Pcs: ${item.totalPcs}<br>
+                                                                Price: ₹${item.price}<br><br>
+                                                                <button class="remove-btn" onclick="removeItem(${item.id})">Remove</button>
+                                                            </div>
+                                                        `;
+                                    });
+
+                                    totalEl.innerText = "₹" + total;
+                                }
+
+
+                                function removeItem(id) {
+                                    cart = cart.filter(i => i.id !== id);
+                                    updateCartUI();
+                                }
+
+
+                                /* -------------------------------------
+                                   OPEN/CLOSE CART SIDEBAR
+                                --------------------------------------- */
+                                function toggleCart() {
+                                    document.getElementById("cartModal").classList.toggle("open");
+                                }
+
+
+                                /* -------------------------------------
+                                   CHECKOUT — MUST SELECT CITY BEFORE PROCEED
+                                --------------------------------------- */
+                                function proceedToPayment() {
+                                    const city = document.getElementById("citySelect").value;
+
+                                    if (!cart.length) {
+                                        alert("Your cart is empty!");
+                                        return;
+                                    }
+
+                                    if (!city) {
+                                        alert("Please select your city before proceeding to payment.");
+                                        return;
+                                    }
+
+                                    const totalPrice = cart.reduce((sum, i) => sum + i.price, 0);
+
+                                    // Save for checkout.html
+                                    localStorage.setItem("checkoutCart", JSON.stringify(cart));
+                                    localStorage.setItem("totalAmount", totalPrice);
+                                    localStorage.setItem("selectedCity", city);
+
+                                    // Go to checkout page
+                                    window.location.href =
+                                        "checkout.html";
+                                }
+                            </script>
+                            
+                            <script>
+                                /* -------------------------------------
+                                   GLOBAL CART + MOQ SYSTEM
+                                --------------------------------------- */
+                                let cart = [];
+                                const BOX_RATE = 320;
+
+
+                                /* MOQ based on city */
+                                function updateMOQ() {
+                                    let city = document.getElementById("citySelect").value.toLowerCase();
+
+                                    // NCR cities (you can add more here if needed)
+                                    const NCR_CITIES = [
+                                        "noida",
+                                        "greater noida",
+                                        "ghaziabad"
+                                    ];
+
+                                    let moq = NCR_CITIES.includes(city) ? 15 : 50;
+                                    document.getElementById("moqValue").innerText = moq;
+                                }
+
+
+                                /* -------------------------------------
+                                   SET BUTTONS
+                                --------------------------------------- */
+                                function increaseSets() {
+                                    let qty = document.getElementById("qty");
+                                    qty.value = parseInt(qty.value || 1) + 1;
+                                }
+
+                                function decreaseSets() {
+                                    let qty = document.getElementById("qty");
+                                    const val = parseInt(qty.value || 1);
+                                    qty.value = val > 1 ? val - 1 : 1;
+                                }
+
+
+                                /* -------------------------------------
+                                   ADD TO CART (SET × MOQ × 320)
+                                --------------------------------------- */
+                                function handleAddToCart() {
+                                    const sets = parseInt(document.getElementById("qty").value || 1);
+                                    const moq = parseInt(document.getElementById("moqValue").innerText || 50);
+
+                                    const totalPcs = sets * moq;
+                                    const totalPrice = totalPcs * BOX_RATE;
+
+                                    const item = {
+                                        id: Date.now(),
+                                        title: document.getElementById("productTitle").innerText,
+                                        sets,
+                                        moq,
+                                        totalPcs,
+                                        price: totalPrice
+                                    };
+
+                                    cart.push(item);
+                                    updateCartUI();
+                                }
+
+                                /* ADD & OPEN */
+                                function addToCartView() {
+                                    handleAddToCart();
+                                    toggleCart();
+                                }
+
+
+                                /* -------------------------------------
+                                   UPDATE CART SIDEBAR
+                                --------------------------------------- */
+                                function updateCartUI() {
+                                    const list = document.getElementById("cartList");
+                                    const totalEl = document.getElementById("cartTotal");
+
+                                    list.innerHTML = "";
+                                    let total = 0;
+
+                                    if (!cart.length) {
+                                        list.innerHTML = "<p>Your cart is empty.</p>";
+                                        totalEl.innerText = "₹0";
+                                        return;
+                                    }
+
+                                    cart.forEach(item => {
+                                        total += item.price;
+
+                                        list.innerHTML += `
+                                                        <div class="cart-item">
+                                                            <strong>${item.title}</strong><br>
+                                                            Sets: ${item.sets}<br>
+                                                            MOQ: ${item.moq} pcs<br>
+                                                            Total Pcs: ${item.totalPcs}<br>
+                                                            Price: ₹${item.price}<br><br>
+                                                            <button class="remove-btn" onclick="removeItem(${item.id})">Remove</button>
+                                                        </div>
+                                                    `;
+                                    });
+
+                                    totalEl.innerText = "₹" + total;
+                                }
+
+                                function removeItem(id) {
+                                    cart = cart.filter(i => i.id !== id);
+                                    updateCartUI();
+                                }
+
+
+                                /* OPEN/CLOSE CART */
+                                function toggleCart() {
+                                    document.getElementById("cartModal").classList.toggle("open");
+                                }
+
+
+                                /* -------------------------------------
+                                   PAYMENT → GO TO CHECKOUT PAGE
+                                --------------------------------------- */
+                                function proceedToPayment() {
+                                    if (!cart.length) {
+                                        alert("Your cart is empty");
+                                        return;
+                                    }
+
+                                    const totalPrice = cart.reduce((sum, i) => sum + i.price, 0);
+
+                                    // Save data for checkout page
+                                    localStorage.setItem("checkoutCart", JSON.stringify(cart));
+                                    localStorage.setItem("totalAmount", totalPrice);
+
+                                    // Redirect to your live checkout page
+                                    window.location.href = "checkout.html";
+                                }
+                            </script>
+
 
                     <!-- metadata / chips -->
                     <div class="meta-row" aria-hidden="true">
@@ -1645,12 +2420,13 @@
 
     <div class="fixed-icons">
         <!-- WhatsApp Icon -->
-        <a href="https://wa.me/+919891040840" target="_blank">
-            <i class='fab fa-whatsapp' style='font-size:38px;color:rgb(7, 72, 236)'></i>
+        <a href="https://wa.me/+919891040840" target="_blank" class="icon whatsapp">
+            <i class="fab fa-whatsapp"></i>
         </a>
+
         <!-- Call Icon -->
-        <a href="tel:+919891040840" style="color: rgb(0, 0, 255);">
-            <i class="fas fa-phone" style="font-size: 38px;"></i>
+        <a href="tel:+919891040840" class="icon call">
+            <i class="fas fa-phone"></i>
         </a>
     </div>
 
