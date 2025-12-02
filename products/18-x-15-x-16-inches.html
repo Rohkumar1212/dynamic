@@ -1169,63 +1169,109 @@
                     </p>
 
                     <!-- selectors -->
-                    <div class="option-card" role="region" aria-label="Size and quality selection">
-
-                        <div class="size-select" aria-labelledby="sizeLabel">
-                            <label id="sizeLabel">Select Box Size</label>
-                            <select id="sizeSelect" class="custom" onchange="updateSizePreview()">
-                                <option value="18×15×16_in" data-inches="18 × 15 × 16 in" data-px="2016×2016×1536">18 ×
-                                    15 × 16 in — Standard</option>
-
+                    <div class="quality-select" aria-labelledby="qualityLabel" style="margin-top:12px">
+                        <label id="qualityLabel">Select Box Quality / Material</label>
+                        <div class="quality-list" id="qualityList" role="radiogroup" aria-label="Quality types">
+                    
+                            <div tabindex="0" class="quality-item" data-key="double-wall" onclick="selectQuality(this)">
+                                Double Wall — 5 ply</div>
+                            <div tabindex="0" class="quality-item" data-key="kraft" onclick="selectQuality(this)">
+                                Kraft – Premium Finish
+                            </div>
+                            <div tabindex="0" class="quality-item" data-key="corrugated" onclick="selectQuality(this)">
+                                Corrugated — Heavy Duty</div>
+                    
+                        </div>
+                        <div class="size-help" style="margin-top:10px">Tip: For shifting purposes, 5-ply or
+                            heavy-duty corrugated options are recommended for better load handling.
+                    
+                        </div>
+                    
+                        <div class="location-wrapper">
+                    
+                    
+                            <select id="stateSelect" onchange="loadCities()">
+                                <option value="">-- Select State --</option>
+                                <option value="delhi">IN NCR</option>
+                                <option value="other">Out of NCR</option>
                             </select>
-
-                            <div style="margin-top:10px; display:flex; gap:8px; align-items:center;">
-                                <input id="customSize" class="custom" type="text" placeholder="e.g. 22 x 22 x 14 in"
-                                    style="flex:1;display:none" />
-                            </div>
-
-                            <div class="size-help" id="sizeHelp">Selected: <strong id="selectedSize">21 × 21 × 16
-                                    in</strong> — approx <strong id="selectedPx">2016×2016×1536 px</strong></div>
+                    
+                            <select id="citySelect" onchange="updateMOQ()">
+                                <option value="">-- Select City --</option>
+                            </select>
+                    
+                    
                         </div>
-
-                        <div class="quality-select" aria-labelledby="qualityLabel" style="margin-top:12px">
-                            <label id="qualityLabel">Select Box Quality / Material</label>
-                            <div class="quality-list" id="qualityList" role="radiogroup" aria-label="Quality types">
-                        
-                                <div tabindex="0" class="quality-item" data-key="double-wall" onclick="selectQuality(this)">
-                                    Double Wall — 5 ply</div>
-                                <div tabindex="0" class="quality-item" data-key="kraft" onclick="selectQuality(this)">
-                                    Kraft – Premium Finish
-                                </div>
-                                <div tabindex="0" class="quality-item" data-key="corrugated" onclick="selectQuality(this)">
-                                    Corrugated — Heavy Duty</div>
-                        
+                    
+                        <div id="moqPopup" class="moq-inline-popup">
+                            <div class="moq-inline-content">
+                                <span class="close-btn" onclick="closeMoqPopup()">×</span>
+                                <p id="moqText"></p>
+                                <p id="priceText"></p>
                             </div>
-                            <div class="size-help" style="margin-top:10px">Tip: For shifting purposes, 5-ply or heavy-duty corrugated options
-                                are recommended for better load handling.
-                        
-                            </div>
-                        
-                            <div class="location-wrapper">
-                        
-                        
-                        <select id="stateSelect" onchange="loadCities()">
-                            <option value="">-- Select State --</option>
-                            <option value="delhi">IN NCR</option>
-                            <option value="other">Out of NCR</option>
-                        </select>
-                        
-                        <select id="citySelect" onchange="updateMOQ()">
-                            <option value="">-- Select City --</option>
-                        </select>
-                        
-                        
                         </div>
-                        
-                        
+                        <style>
+                            /* Container — Hidden by Default */
+                            .moq-inline-popup {
+                                display: none;
+                                position: relative;
+                                margin-top: 8px;
+                            }
+                    
+                            /* Popup Box */
+                            .moq-inline-content {
+                                background: #ffffffcc;
+                                backdrop-filter: blur(10px);
+                                border-radius: 12px;
+                                padding: 12px 16px;
+                                width: 100%;
+                                border-left: 4px solid #8e44ad;
+                                box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+                                animation: slideDown 0.25s ease-out;
+                            }
+                    
+                            /* Slide-down animation */
+                            @keyframes slideDown {
+                                from {
+                                    opacity: 0;
+                                    transform: translateY(-10px);
+                                }
+                    
+                                to {
+                                    opacity: 1;
+                                    transform: translateY(0);
+                                }
+                            }
+                    
+                            /* Close Button */
+                            .close-btn {
+                                float: right;
+                                font-size: 18px;
+                                cursor: pointer;
+                                color: #555;
+                                margin-left: 8px;
+                            }
+                    
+                            .close-btn:hover {
+                                color: #e74c3c;
+                            }
+                    
+                            /* Text */
+                            #moqText,
+                            #priceText {
+                                margin: 4px 0;
+                                font-size: 16px;
+                                color: #333;
+                            }
+                    
+                            #moqText b,
+                            #priceText b {
+                                color: #8e44ad;
+                            }
+                        </style>
+                    
                         <div class="moq-wrapper">
                             <p>MOQ per set: <b id="moqValue">10</b> pcs</p>
-                        </div>
                         </div>
                     </div>
                     <script>
@@ -1276,51 +1322,150 @@
                                 moqValue.textContent = "10"; // Default
                             }
                         }
+
+                        /* QUANTITY BUTTONS WITH POPUP */
+                        function increaseSets() {
+                            let qtyBox = document.getElementById("qty");
+                            qtyBox.value = parseInt(qtyBox.value || 1) + 1;
+
+                            const moq = getMOQ();
+                            const qty = parseInt(qtyBox.value);
+
+                            showMoqPopup(moq, qty);
+                        }
+
+                        function decreaseSets() {
+                            let qtyBox = document.getElementById("qty");
+                            let qty = parseInt(qtyBox.value || 1);
+
+                            if (qty > 1) qty--;
+                            qtyBox.value = qty;
+
+                            const moq = getMOQ();
+                            showMoqPopup(moq, qty);
+                        }
+
+
+                        /* MANUAL CLOSE BUTTON */
+                        function closeMoqPopup() {
+                            document.getElementById("moqPopup").style.display = "none";
+                        }
                     </script>
+
+                    <!-- controls -->
+                    
 
                     <!-- controls -->
                     <div class="controls" role="group" aria-label="quantity and actions">
                         <div class="qty-wrap">
                             <!-- SET SELECTION -->
-
+                    
                             <button onclick="decreaseSets()">-</button>
                             <input id="qty" type="number" value="1" min="1">
                             <button onclick="increaseSets()">+</button>
                         </div>
-
+                    
                         <button class="primary-btn" id="addToCartBtn" onclick="handleAddToCart()">Add to Cart</button>
                         <button class="outline-btn" onclick="addToCartView()">Add & View Cart</button>
-
+                        <button class="whatsapp-btn" onclick="sendWhatsAppOrder()">📩 Send on WhatsApp</button>
+                    
                         <button class="view-cart" onclick="toggleCart()">🛒 View Cart</button>
                     </div>
+                    <style>
+                        .whatsapp-btn {
+                            width: 30%;
+                            background: #25D366;
+                            color: white;
+                            border: none;
+                            padding: 10px;
+                            border-radius: 8px;
+                            margin-top: -2px;
+                            font-size: 13px;
+                            font-weight: 600;
+                            cursor: pointer;
+                            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+                            transition: 0.3s;
+                        }
+                    
+                        .whatsapp-btn:hover {
+                            background: #1ebe5d;
+                            transform: scale(1.03);
+                        }
+                    </style>
+                    
+                    <script>
+                        function sendWhatsAppOrder() {
+                            if (!cart.length) {
+                                alert("Your cart is empty!");
+                                return;
+                            }
 
+                            let phone = "919891040840";  // <-- Replace with business WhatsApp number
+
+                            let message = "*🛍️ New Cart Order Summary*%0A%0A";
+
+                            cart.forEach((item, index) => {
+                                message += `*${index + 1}. ${item.title}*%0A`;
+                                message += `Sets: ${item.sets}%0A`;
+                                message += `MOQ: ${item.moq}%0A`;
+                                message += `Total Pcs: ${item.totalPcs}%0A`;
+                                message += `Price: ₹${item.price}%0A`;
+
+                                if (item.image) {
+                                    message += `Image: ${item.image}%0A`;
+                                }
+
+                                message += `%0A-------------------------%0A%0A`;
+                            });
+
+                            const totalPrice = cart.reduce((sum, i) => sum + i.price, 0);
+
+                            message += `*Grand Total: ₹${totalPrice}*%0A%0A`;
+                            message += "Please confirm your order.";
+
+                            let whatsappURL = `https://wa.me/${phone}?text=${message}`;
+
+                            window.open(whatsappURL, "_blank");
+                        }
+                    </script>
+                    
+                    
                     <script>
                         /* -------------------------------------
                            GLOBAL CART + MOQ SYSTEM
                         --------------------------------------- */
                         let cart = [];
                         const BOX_RATE = 320;
+                        /* Update MOQ + Show Inline Popup */
+                        function updateMOQ() {
+                            const city = document.getElementById("citySelect").value;
+                            const moqValue = document.getElementById("moqValue");
 
+                            const ncrCities = cityData.delhi.map(c => c.toLowerCase());
+                            let moq = ncrCities.includes(city) ? 10 : 15;
 
-                        /* -------------------------------------
-                           UPDATE MOQ BASED ON CITY
-                        --------------------------------------- */
-                           function updateMOQ() {
-                                let city = document.getElementById("citySelect").value.toLowerCase();
+                            moqValue.textContent = moq;
 
-                                // NCR cities → All lowercase for correct matching
-                                const NCR_CITIES = [
-                                    "new delhi", "noida", "greater noida", "ghaziabad",
-                                    "south delhi", "north delhi", "west delhi", "east delhi",
-                                    "central delhi", "gurgaon", "faridabad", "meerut"
-                                ];
+                            // Quantity (default 1)
+                            let qty = 1;
+                            let price = moq * qty * BOX_RATE;
 
-                                let moq = NCR_CITIES.includes(city) ? 10 : 15;
+                            // Update Popup Content
+                            document.getElementById("moqText").innerHTML = `MOQ Required: <b>${moq}</b> pcs`;
+                            document.getElementById("priceText").innerHTML = `Price (MOQ × ${qty} × ${BOX_RATE}): <b>₹${price}</b>`;
 
-                                document.getElementById("moqValue").innerText = moq;
-                            }
+                            // Show Popup
+                            const popup = document.getElementById("moqPopup");
+                            popup.style.display = "block";
 
+                            // Auto-close after 3 seconds
+                            setTimeout(() => popup.style.display = "none", 3000);
+                        }
 
+                        /* Close Popup */
+                        function closeMoqPopup() {
+                            document.getElementById("moqPopup").style.display = "none";
+                        }
 
                         /* -------------------------------------
                            SET BUTTONS
@@ -1332,7 +1477,7 @@
 
                         function decreaseSets() {
                             let qty = document.getElementById("qty");
-                            let val = parseInt(qty.value || 1);
+                            const val = parseInt(qty.value || 1);
                             qty.value = val > 1 ? val - 1 : 1;
                         }
 
@@ -1377,7 +1522,7 @@
 
 
                         /* -------------------------------------
-                           UPDATE CART UI
+                           UPDATE CART SIDEBAR
                         --------------------------------------- */
                         function updateCartUI() {
                             const list = document.getElementById("cartList");
@@ -1396,20 +1541,19 @@
                                 total += item.price;
 
                                 list.innerHTML += `
-                                <div class="cart-item">
-                                    <strong>${item.title}</strong><br>
-                                    Sets: ${item.sets}<br>
-                                    MOQ: ${item.moq} pcs<br>
-                                    Total Pcs: ${item.totalPcs}<br>
-                                    Price: ₹${item.price}<br><br>
-                                    <button class="remove-btn" onclick="removeItem(${item.id})">Remove</button>
-                                </div>
-                            `;
+                                                            <div class="cart-item">
+                                                                <strong>${item.title}</strong><br>
+                                                                Sets: ${item.sets}<br>
+                                                                MOQ: ${item.moq} pcs<br>
+                                                                Total Pcs: ${item.totalPcs}<br>
+                                                                Price: ₹${item.price}<br><br>
+                                                                <button class="remove-btn" onclick="removeItem(${item.id})">Remove</button>
+                                                            </div>
+                                                        `;
                             });
 
                             totalEl.innerText = "₹" + total;
                         }
-
 
                         function removeItem(id) {
                             cart = cart.filter(i => i.id !== id);
@@ -1417,17 +1561,15 @@
                         }
 
 
-                        /* -------------------------------------
-                           OPEN/CLOSE CART SIDEBAR
-                        --------------------------------------- */
+                        /* OPEN/CLOSE CART */
                         function toggleCart() {
                             document.getElementById("cartModal").classList.toggle("open");
                         }
 
 
                         /* -------------------------------------
-                           CHECKOUT — MUST SELECT CITY BEFORE PROCEED
-                        --------------------------------------- */
+                                     CHECKOUT — MUST SELECT CITY BEFORE PROCEED
+                                  --------------------------------------- */
                         function proceedToPayment() {
                             const city = document.getElementById("citySelect").value;
 
@@ -1451,144 +1593,9 @@
                             // Go to checkout page
                             window.location.href =
                                 "checkout.html";
+
                         }
                     </script>
-
-                    <script>
-                        /* -------------------------------------
-                           GLOBAL CART + MOQ SYSTEM
-                        --------------------------------------- */
-                        let cart = [];
-                        const BOX_RATE = 320;
-
-
-                        /* MOQ based on city */
-                        function updateMOQ() {
-                            let city = document.getElementById("citySelect").value.toLowerCase();
-
-                            // NCR cities (you can add more here if needed)
-                            const NCR_CITIES = [
-                                "noida",
-                                "greater noida",
-                                "ghaziabad"
-                            ];
-
-                            let moq = NCR_CITIES.includes(city) ? 15 : 50;
-                            document.getElementById("moqValue").innerText = moq;
-                        }
-
-
-                        /* -------------------------------------
-                           SET BUTTONS
-                        --------------------------------------- */
-                        function increaseSets() {
-                            let qty = document.getElementById("qty");
-                            qty.value = parseInt(qty.value || 1) + 1;
-                        }
-
-                        function decreaseSets() {
-                            let qty = document.getElementById("qty");
-                            const val = parseInt(qty.value || 1);
-                            qty.value = val > 1 ? val - 1 : 1;
-                        }
-
-
-                        /* -------------------------------------
-                           ADD TO CART (SET × MOQ × 320)
-                        --------------------------------------- */
-                        function handleAddToCart() {
-                            const sets = parseInt(document.getElementById("qty").value || 1);
-                            const moq = parseInt(document.getElementById("moqValue").innerText || 50);
-
-                            const totalPcs = sets * moq;
-                            const totalPrice = totalPcs * BOX_RATE;
-
-                            const item = {
-                                id: Date.now(),
-                                title: document.getElementById("productTitle").innerText,
-                                sets,
-                                moq,
-                                totalPcs,
-                                price: totalPrice
-                            };
-
-                            cart.push(item);
-                            updateCartUI();
-                        }
-
-                        /* ADD & OPEN */
-                        function addToCartView() {
-                            handleAddToCart();
-                            toggleCart();
-                        }
-
-
-                        /* -------------------------------------
-                           UPDATE CART SIDEBAR
-                        --------------------------------------- */
-                        function updateCartUI() {
-                            const list = document.getElementById("cartList");
-                            const totalEl = document.getElementById("cartTotal");
-
-                            list.innerHTML = "";
-                            let total = 0;
-
-                            if (!cart.length) {
-                                list.innerHTML = "<p>Your cart is empty.</p>";
-                                totalEl.innerText = "₹0";
-                                return;
-                            }
-
-                            cart.forEach(item => {
-                                total += item.price;
-
-                                list.innerHTML += `
-                            <div class="cart-item">
-                                <strong>${item.title}</strong><br>
-                                Sets: ${item.sets}<br>
-                                MOQ: ${item.moq} pcs<br>
-                                Total Pcs: ${item.totalPcs}<br>
-                                Price: ₹${item.price}<br><br>
-                                <button class="remove-btn" onclick="removeItem(${item.id})">Remove</button>
-                            </div>
-                        `;
-                            });
-
-                            totalEl.innerText = "₹" + total;
-                        }
-
-                        function removeItem(id) {
-                            cart = cart.filter(i => i.id !== id);
-                            updateCartUI();
-                        }
-
-
-                        /* OPEN/CLOSE CART */
-                        function toggleCart() {
-                            document.getElementById("cartModal").classList.toggle("open");
-                        }
-
-
-                        /* -------------------------------------
-                           PAYMENT → GO TO CHECKOUT PAGE
-                        --------------------------------------- */
-                        function proceedToPayment() {
-                            if (!cart.length) {
-                                alert("Your cart is empty");
-                                return;
-                            }
-
-                            const totalPrice = cart.reduce((sum, i) => sum + i.price, 0);
-
-                            // Save data for checkout page
-                            localStorage.setItem("checkoutCart", JSON.stringify(cart));
-                            localStorage.setItem("totalAmount", totalPrice);
-
-                            // Redirect to your live checkout page
-                            window.location.href = "https://dynamiccorrugations.com/dynamiccorrugationspayu/products/checkout.html";
-                        }
-                    </script>
-
 
                     <!-- metadata / chips -->
                     <div class="meta-row" aria-hidden="true">
