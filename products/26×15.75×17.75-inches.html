@@ -1250,82 +1250,95 @@
                         <div class="quality-select" aria-labelledby="qualityLabel" style="margin-top:12px">
                             <label id="qualityLabel">Select Box Quality / Material</label>
                             <div class="quality-list" id="qualityList" role="radiogroup" aria-label="Quality types">
-                                <div tabindex="0" class="quality-item active" data-key="single-wall"
-                                    onclick="selectQuality(this)">
-                                    Single Wall — 3 ply</div>
-
+                        
+                                <div tabindex="0" class="quality-item" data-key="double-wall" onclick="selectQuality(this)">
+                                    Double Wall — 5 ply</div>
                                 <div tabindex="0" class="quality-item" data-key="kraft" onclick="selectQuality(this)">
                                     Kraft – Premium Finish
                                 </div>
-                                <div tabindex="0" class="quality-item" data-key="corrugated"
-                                    onclick="selectQuality(this)">
-                                    Corrugated — Lightweight Category</div>
-
+                                <div tabindex="0" class="quality-item" data-key="corrugated" onclick="selectQuality(this)">
+                                    Corrugated — Heavy Duty</div>
+                        
                             </div>
-                            <div class="size-help" style="margin-top:10px">Tip: 3-ply kraft is ideal for clothes and
-                                soft items; choose heavy-duty only if stacking height is more.
-
-
+                            <div class="size-help" style="margin-top:10px">Tip: For shifting purposes, 5-ply or heavy-duty corrugated options
+                                are recommended for better load handling.
+                        
                             </div>
-
-                             <div class="location-wrapper">
+                        
+                            <div class="location-wrapper">
+                        
+                        
+                        
+                            <select id="stateSelect" onchange="loadCities()">
+                                <option value="">-- Select State --</option>
+                                <option value="delhi">IN NCR</option>
+                                <option value="other">Out of NCR</option>
+                            </select>
+                            
+                            <select id="citySelect" onchange="updateMOQ()">
+                                <option value="">-- Select City --</option>
+                            </select>
                             
                             
-                            
-                                <select id="stateSelect" onchange="loadCities()">
-                                    <option value="">-- Select State --</option>
-                                    <option value="delhi">Delhi</option>
-                                    <option value="haryana">Haryana</option>
-                                    <option value="uttarpradesh">Uttar Pradesh</option>
-                                    <option value="rajasthan">Rajasthan</option>
-                                    <option value="other">Other State</option>
-                                </select>
-                            
-                            
-                                <select id="citySelect" onchange="updateMOQ()">
-                                    <option value="">-- Select City --</option>
-                                </select>
                             </div>
                             
                             
                             <div class="moq-wrapper">
-                                <p>MOQ per set: <b id="moqValue">50</b> pcs</p>
-                                <p>Number of Sets</p>
+                                <p>MOQ per set: <b id="moqValue">10</b> pcs</p>
                             </div>
+                        
                         </div>
                     </div>
 
-                            <script>
-                                // STATE → CITY DATA
-                                const cityData = {
-                                    delhi: ["New Delhi", "South Delhi", "North Delhi", "West Delhi", "East Delhi", "Central Delhi"],
+                        <script>
+                            // STATE → CITY DATA
+                            const cityData = {
+                                delhi: [
+                                    "New Delhi", "Noida", "Greater Noida", "Ghaziabad",
+                                    "South Delhi", "North Delhi", "West Delhi", "East Delhi",
+                                    "Central Delhi", "Gurgaon", "Faridabad", "Meerut"
+                                ],
+                            };
 
-                                    haryana: ["Gurgaon", "Faridabad", "Panipat", "Rohtak", "Sonipat"],
+                            // LOAD CITIES BASED ON STATE
+                            function loadCities() {
+                                const state = document.getElementById("stateSelect").value;
+                                const citySelect = document.getElementById("citySelect");
 
-                                    uttarpradesh: ["Noida", "Greater Noida", "Ghaziabad", "Meerut"],
+                                citySelect.innerHTML = `<option value="">-- Select City --</option>`;
 
-                                    rajasthan: ["Alwar", "Bharatpur"]
-                                };
-
-
-                                // LOAD CITIES BASED ON STATE
-                                function loadCities() {
-                                    const state = document.getElementById("stateSelect").value;
-                                    const citySelect = document.getElementById("citySelect");
-
-                                    // RESET CITY DROPDOWN
-                                    citySelect.innerHTML = `<option value="">-- Select City --</option>`;
-
-                                    if (cityData[state]) {
-                                        cityData[state].forEach(city => {
-                                            citySelect.innerHTML += `<option value="${city.toLowerCase()}">${city}</option>`;
-                                        });
-                                    } else {
-                                        citySelect.innerHTML += `<option value="other">Other City</option>`;
-                                    }
+                                if (cityData[state]) {
+                                    // Add NCR cities
+                                    cityData[state].forEach(city => {
+                                        citySelect.innerHTML += `<option value="${city.toLowerCase()}">${city}</option>`;
+                                    });
+                                } else {
+                                    // OUT OF NCR
+                                    citySelect.innerHTML += `<option value="other">Other City</option>`;
                                 }
-                            </script>
-                            
+
+                                // Reset MOQ when state changes
+                                updateMOQ();
+                            }
+
+                            // SET MOQ BASED ON CITY
+                            function updateMOQ() {
+                                const city = document.getElementById("citySelect").value;
+                                const moqValue = document.getElementById("moqValue");
+
+                                // NCR cities (10 pcs)
+                                const ncrCities = cityData.delhi.map(c => c.toLowerCase());
+
+                                if (ncrCities.includes(city)) {
+                                    moqValue.textContent = "10";
+                                } else if (city === "other" || city !== "") {
+                                    // Out of NCR (15 pcs)
+                                    moqValue.textContent = "15";
+                                } else {
+                                    moqValue.textContent = "10"; // Default
+                                }
+                            }
+                        </script>
                             <!-- controls -->
                            <style>
                             /* Quantity UI */
@@ -1741,21 +1754,20 @@
                                 const BOX_RATE = 320;
 
 
-                                /* MOQ based on city */
-                                function updateMOQ() {
-                                    let city = document.getElementById("citySelect").value.toLowerCase();
+                                  function updateMOQ() {
+                                        let city = document.getElementById("citySelect").value.toLowerCase();
 
-                                    // NCR cities (you can add more here if needed)
-                                    const NCR_CITIES = [
-                                        "noida",
-                                        "greater noida",
-                                        "ghaziabad"
-                                    ];
+                                        // NCR cities → All lowercase for correct matching
+                                        const NCR_CITIES = [
+                                            "new delhi", "noida", "greater noida", "ghaziabad",
+                                            "south delhi", "north delhi", "west delhi", "east delhi",
+                                            "central delhi", "gurgaon", "faridabad", "meerut"
+                                        ];
 
-                                    let moq = NCR_CITIES.includes(city) ? 15 : 50;
-                                    document.getElementById("moqValue").innerText = moq;
-                                }
+                                        let moq = NCR_CITIES.includes(city) ? 10 : 15;
 
+                                        document.getElementById("moqValue").innerText = moq;
+                                    }
 
                                 /* -------------------------------------
                                    SET BUTTONS
@@ -2249,40 +2261,27 @@
 
                 <div id="shippingTab" class="tab-content">
                     <h3>Shipping & Minimum Order</h3>
-                    <p>All orders are shipped pan-India using secure packing methods.
-
+                    <p>India-wide shipping available. MOQ starts from 50 units for custom-size boxes. Bulk orders are
+                        palletized for safe
+                        handling.
+                
                     </p>
-                    <ul>
-                        <li><b>MOQ:-</b>Household Shifting / Moving</li>
-                        <li><b>Lead Time:</b> Office Relocation</li>
-                        <li>Bulk orders can be palletized for safe transit.</li>
-
-                    </ul>
-
                 </div>
 
-                <div id="faqsTab" class="tab-content">
-                    <h3>Ideal Use
-
-                    </h3>
-                    <p>Perfect for:</p>
-                    <ul>
-                        <li>Garment packing
-                        </li>
-                        <li>Clothes & fabrics
-                        </li>
-                        <li>Soft toys & lightweight decor
-                        </li>
-                        <li>Warehouse & apparel storage
-                        </li>
-                        <li>E-commerce clothing shipments
-                        </li>
-                        <li>Lightweight multi-item packing during shifting
-                        </li>
-                    </ul>
-
-                </div>
-
+            <div id="faqsTab" class="tab-content">
+                <h3>Ideal Use
+            
+                </h3>
+                <p>Perfect for:</p>
+                <ul>
+                    <li>Household Shifting / Moving</li>
+                    <li>Office Relocation</li>
+                    <li>Packing Multiple Goods Together</li>
+                    <li>Storage & Warehouse Use</li>
+                    <li>E-commerce Bulk Packing</li>
+                </ul>
+            
+            </div>
             </div>
 
             <!-- small related / reviews -->

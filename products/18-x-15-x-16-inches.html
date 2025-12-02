@@ -1191,79 +1191,89 @@
                         <div class="quality-select" aria-labelledby="qualityLabel" style="margin-top:12px">
                             <label id="qualityLabel">Select Box Quality / Material</label>
                             <div class="quality-list" id="qualityList" role="radiogroup" aria-label="Quality types">
-                                <div tabindex="0" class="quality-item active" data-key="single-wall"
-                                    onclick="selectQuality(this)">
-                                    Single Wall — 3 ply</div>
-                                <div tabindex="0" class="quality-item" data-key="double-wall"
-                                    onclick="selectQuality(this)">
+                        
+                                <div tabindex="0" class="quality-item" data-key="double-wall" onclick="selectQuality(this)">
                                     Double Wall — 5 ply</div>
                                 <div tabindex="0" class="quality-item" data-key="kraft" onclick="selectQuality(this)">
-                                    Kraft
-                                    — Natural Finish</div>
-                                <div tabindex="0" class="quality-item" data-key="corrugated"
-                                    onclick="selectQuality(this)">
+                                    Kraft – Premium Finish
+                                </div>
+                                <div tabindex="0" class="quality-item" data-key="corrugated" onclick="selectQuality(this)">
                                     Corrugated — Heavy Duty</div>
-
+                        
                             </div>
-                            <div class="size-help" style="margin-top:10px">Tip: For fragile or heavy goods, we recommend
-                                Double Wall or Corrugated heavy duty. Kraft gives a premium look.
+                            <div class="size-help" style="margin-top:10px">Tip: For shifting purposes, 5-ply or heavy-duty corrugated options
+                                are recommended for better load handling.
+                        
                             </div>
-                           
-                        <div class="location-wrapper">
                         
-                           
-                        
-                            <select id="stateSelect" onchange="loadCities()">
-                                <option value="">-- Select State --</option>
-                                <option value="delhi">Delhi</option>
-                                <option value="haryana">Haryana</option>
-                                <option value="uttarpradesh">Uttar Pradesh</option>
-                                <option value="rajasthan">Rajasthan</option>
-                                <option value="other">Other State</option>
-                            </select>
+                            <div class="location-wrapper">
                         
                         
-                            <select id="citySelect" onchange="updateMOQ()">
-                                <option value="">-- Select City --</option>
-                            </select>
+                        <select id="stateSelect" onchange="loadCities()">
+                            <option value="">-- Select State --</option>
+                            <option value="delhi">IN NCR</option>
+                            <option value="other">Out of NCR</option>
+                        </select>
+                        
+                        <select id="citySelect" onchange="updateMOQ()">
+                            <option value="">-- Select City --</option>
+                        </select>
+                        
+                        
                         </div>
                         
                         
-        <div class="moq-wrapper">
-            <p>MOQ per set: <b id="moqValue">50</b> pcs</p>
-            <p>Number of Sets</p>
-        </div>
-
-
+                        <div class="moq-wrapper">
+                            <p>MOQ per set: <b id="moqValue">10</b> pcs</p>
+                        </div>
                         </div>
                     </div>
                     <script>
                         // STATE → CITY DATA
                         const cityData = {
-                            delhi: ["New Delhi", "South Delhi", "North Delhi", "West Delhi", "East Delhi", "Central Delhi"],
-
-                            haryana: ["Gurgaon", "Faridabad", "Panipat", "Rohtak", "Sonipat"],
-
-                            uttarpradesh: ["Noida", "Greater Noida", "Ghaziabad", "Meerut"],
-
-                            rajasthan: ["Alwar", "Bharatpur"]
+                            delhi: [
+                                "New Delhi", "Noida", "Greater Noida", "Ghaziabad",
+                                "South Delhi", "North Delhi", "West Delhi", "East Delhi",
+                                "Central Delhi", "Gurgaon", "Faridabad", "Meerut"
+                            ],
                         };
-
 
                         // LOAD CITIES BASED ON STATE
                         function loadCities() {
                             const state = document.getElementById("stateSelect").value;
                             const citySelect = document.getElementById("citySelect");
 
-                            // RESET CITY DROPDOWN
                             citySelect.innerHTML = `<option value="">-- Select City --</option>`;
 
                             if (cityData[state]) {
+                                // Add NCR cities
                                 cityData[state].forEach(city => {
                                     citySelect.innerHTML += `<option value="${city.toLowerCase()}">${city}</option>`;
                                 });
                             } else {
+                                // OUT OF NCR
                                 citySelect.innerHTML += `<option value="other">Other City</option>`;
+                            }
+
+                            // Reset MOQ when state changes
+                            updateMOQ();
+                        }
+
+                        // SET MOQ BASED ON CITY
+                        function updateMOQ() {
+                            const city = document.getElementById("citySelect").value;
+                            const moqValue = document.getElementById("moqValue");
+
+                            // NCR cities (10 pcs)
+                            const ncrCities = cityData.delhi.map(c => c.toLowerCase());
+
+                            if (ncrCities.includes(city)) {
+                                moqValue.textContent = "10";
+                            } else if (city === "other" || city !== "") {
+                                // Out of NCR (15 pcs)
+                                moqValue.textContent = "15";
+                            } else {
+                                moqValue.textContent = "10"; // Default
                             }
                         }
                     </script>
@@ -1295,18 +1305,21 @@
                         /* -------------------------------------
                            UPDATE MOQ BASED ON CITY
                         --------------------------------------- */
-                        function updateMOQ() {
-                            let city = document.getElementById("citySelect").value.toLowerCase();
+                           function updateMOQ() {
+                                let city = document.getElementById("citySelect").value.toLowerCase();
 
-                            const NCR_CITIES = [
-                                "noida",
-                                "greater noida",
-                                "ghaziabad"
-                            ];
+                                // NCR cities → All lowercase for correct matching
+                                const NCR_CITIES = [
+                                    "new delhi", "noida", "greater noida", "ghaziabad",
+                                    "south delhi", "north delhi", "west delhi", "east delhi",
+                                    "central delhi", "gurgaon", "faridabad", "meerut"
+                                ];
 
-                            let moq = NCR_CITIES.includes(city) ? 15 : 50;
-                            document.getElementById("moqValue").innerText = moq;
-                        }
+                                let moq = NCR_CITIES.includes(city) ? 10 : 15;
+
+                                document.getElementById("moqValue").innerText = moq;
+                            }
+
 
 
                         /* -------------------------------------

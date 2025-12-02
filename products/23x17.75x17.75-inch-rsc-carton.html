@@ -1267,61 +1267,75 @@
                             <div class="location-wrapper">
                             
                             
+                            <select id="stateSelect" onchange="loadCities()">
+                                <option value="">-- Select State --</option>
+                                <option value="delhi">IN NCR</option>
+                                <option value="other">Out of NCR</option>
+                            </select>
                             
-                                <select id="stateSelect" onchange="loadCities()">
-                                    <option value="">-- Select State --</option>
-                                    <option value="delhi">Delhi</option>
-                                    <option value="haryana">Haryana</option>
-                                    <option value="uttarpradesh">Uttar Pradesh</option>
-                                    <option value="rajasthan">Rajasthan</option>
-                                    <option value="other">Other State</option>
-                                </select>
+                            <select id="citySelect" onchange="updateMOQ()">
+                                <option value="">-- Select City --</option>
+                            </select>
                             
-                            
-                                <select id="citySelect" onchange="updateMOQ()">
-                                    <option value="">-- Select City --</option>
-                                </select>
+                          
                             </div>
                             
                             
                             <div class="moq-wrapper">
-                                <p>MOQ per set: <b id="moqValue">50</b> pcs</p>
-                                <p>Number of Sets</p>
+                                <p>MOQ per set: <b id="moqValue">10</b> pcs</p>
                             </div>
-
                         </div>
                     </div>
-            <script>
-                // STATE → CITY DATA
-                const cityData = {
-                    delhi: ["New Delhi", "South Delhi", "North Delhi", "West Delhi", "East Delhi", "Central Delhi"],
+         <script>
+            // STATE → CITY DATA
+            const cityData = {
+                delhi: [
+                    "New Delhi", "Noida", "Greater Noida", "Ghaziabad",
+                    "South Delhi", "North Delhi", "West Delhi", "East Delhi",
+                    "Central Delhi", "Gurgaon", "Faridabad", "Meerut"
+                ],
+            };
 
-                    haryana: ["Gurgaon", "Faridabad", "Panipat", "Rohtak", "Sonipat"],
+            // LOAD CITIES BASED ON STATE
+            function loadCities() {
+                const state = document.getElementById("stateSelect").value;
+                const citySelect = document.getElementById("citySelect");
 
-                    uttarpradesh: ["Noida", "Greater Noida", "Ghaziabad", "Meerut"],
+                citySelect.innerHTML = `<option value="">-- Select City --</option>`;
 
-                    rajasthan: ["Alwar", "Bharatpur"]
-                };
-
-
-                // LOAD CITIES BASED ON STATE
-                function loadCities() {
-                    const state = document.getElementById("stateSelect").value;
-                    const citySelect = document.getElementById("citySelect");
-
-                    // RESET CITY DROPDOWN
-                    citySelect.innerHTML = `<option value="">-- Select City --</option>`;
-
-                    if (cityData[state]) {
-                        cityData[state].forEach(city => {
-                            citySelect.innerHTML += `<option value="${city.toLowerCase()}">${city}</option>`;
-                        });
-                    } else {
-                        citySelect.innerHTML += `<option value="other">Other City</option>`;
-                    }
+                if (cityData[state]) {
+                    // Add NCR cities
+                    cityData[state].forEach(city => {
+                        citySelect.innerHTML += `<option value="${city.toLowerCase()}">${city}</option>`;
+                    });
+                } else {
+                    // OUT OF NCR
+                    citySelect.innerHTML += `<option value="other">Other City</option>`;
                 }
-            </script>
-            
+
+                // Reset MOQ when state changes
+                updateMOQ();
+            }
+
+            // SET MOQ BASED ON CITY
+            function updateMOQ() {
+                const city = document.getElementById("citySelect").value;
+                const moqValue = document.getElementById("moqValue");
+
+                // NCR cities (10 pcs)
+                const ncrCities = cityData.delhi.map(c => c.toLowerCase());
+
+                if (ncrCities.includes(city)) {
+                    moqValue.textContent = "10";
+                } else if (city === "other" || city !== "") {
+                    // Out of NCR (15 pcs)
+                    moqValue.textContent = "15";
+                } else {
+                    moqValue.textContent = "10"; // Default
+                }
+            }
+        </script>
+
             <!-- controls -->
             <div class="controls" role="group" aria-label="quantity and actions">
                 <div class="qty-wrap">
@@ -1338,162 +1352,7 @@
                 <button class="view-cart" onclick="toggleCart()">🛒 View Cart</button>
             </div>
             
-            <script>
-                /* -------------------------------------
-                   GLOBAL CART + MOQ SYSTEM
-                --------------------------------------- */
-                let cart = [];
-                const BOX_RATE = 320;
-
-
-                /* -------------------------------------
-                   UPDATE MOQ BASED ON CITY
-                --------------------------------------- */
-                function updateMOQ() {
-                    let city = document.getElementById("citySelect").value.toLowerCase();
-
-                    const NCR_CITIES = [
-                        "noida",
-                        "greater noida",
-                        "ghaziabad"
-                    ];
-
-                    let moq = NCR_CITIES.includes(city) ? 15 : 50;
-                    document.getElementById("moqValue").innerText = moq;
-                }
-
-
-                /* -------------------------------------
-                   SET BUTTONS
-                --------------------------------------- */
-                function increaseSets() {
-                    let qty = document.getElementById("qty");
-                    qty.value = parseInt(qty.value || 1) + 1;
-                }
-
-                function decreaseSets() {
-                    let qty = document.getElementById("qty");
-                    let val = parseInt(qty.value || 1);
-                    qty.value = val > 1 ? val - 1 : 1;
-                }
-
-
-                /* -------------------------------------
-                   ADD TO CART — WITH CITY CHECK
-                --------------------------------------- */
-                function handleAddToCart() {
-                    const city = document.getElementById("citySelect").value;
-
-                    if (!city) {
-                        alert("Please select your city before adding to cart.");
-                        return;
-                    }
-
-                    const sets = parseInt(document.getElementById("qty").value || 1);
-                    const moq = parseInt(document.getElementById("moqValue").innerText || 50);
-
-                    const totalPcs = sets * moq;
-                    const totalPrice = totalPcs * BOX_RATE;
-
-                    const item = {
-                        id: Date.now(),
-                        title: document.getElementById("productTitle").innerText,
-                        sets,
-                        moq,
-                        totalPcs,
-                        price: totalPrice
-                    };
-
-                    cart.push(item);
-                    updateCartUI();
-                }
-
-                /* ADD & OPEN */
-                function addToCartView() {
-                    handleAddToCart();
-
-                    const city = document.getElementById("citySelect").value;
-                    if (city) toggleCart();
-                }
-
-
-                /* -------------------------------------
-                   UPDATE CART UI
-                --------------------------------------- */
-                function updateCartUI() {
-                    const list = document.getElementById("cartList");
-                    const totalEl = document.getElementById("cartTotal");
-
-                    list.innerHTML = "";
-                    let total = 0;
-
-                    if (!cart.length) {
-                        list.innerHTML = "<p>Your cart is empty.</p>";
-                        totalEl.innerText = "₹0";
-                        return;
-                    }
-
-                    cart.forEach(item => {
-                        total += item.price;
-
-                        list.innerHTML += `
-                                            <div class="cart-item">
-                                                <strong>${item.title}</strong><br>
-                                                Sets: ${item.sets}<br>
-                                                MOQ: ${item.moq} pcs<br>
-                                                Total Pcs: ${item.totalPcs}<br>
-                                                Price: ₹${item.price}<br><br>
-                                                <button class="remove-btn" onclick="removeItem(${item.id})">Remove</button>
-                                            </div>
-                                        `;
-                    });
-
-                    totalEl.innerText = "₹" + total;
-                }
-
-
-                function removeItem(id) {
-                    cart = cart.filter(i => i.id !== id);
-                    updateCartUI();
-                }
-
-
-                /* -------------------------------------
-                   OPEN/CLOSE CART SIDEBAR
-                --------------------------------------- */
-                function toggleCart() {
-                    document.getElementById("cartModal").classList.toggle("open");
-                }
-
-
-                /* -------------------------------------
-                   CHECKOUT — MUST SELECT CITY BEFORE PROCEED
-                --------------------------------------- */
-                function proceedToPayment() {
-                    const city = document.getElementById("citySelect").value;
-
-                    if (!cart.length) {
-                        alert("Your cart is empty!");
-                        return;
-                    }
-
-                    if (!city) {
-                        alert("Please select your city before proceeding to payment.");
-                        return;
-                    }
-
-                    const totalPrice = cart.reduce((sum, i) => sum + i.price, 0);
-
-                    // Save for checkout.html
-                    localStorage.setItem("checkoutCart", JSON.stringify(cart));
-                    localStorage.setItem("totalAmount", totalPrice);
-                    localStorage.setItem("selectedCity", city);
-
-                    // Go to checkout page
-                    window.location.href =
-                        "checkout.html";
-                }
-            </script>
+          
             
             <script>
                 /* -------------------------------------
@@ -1502,21 +1361,20 @@
                 let cart = [];
                 const BOX_RATE = 320;
 
+    function updateMOQ() {
+        let city = document.getElementById("citySelect").value.toLowerCase();
 
-                /* MOQ based on city */
-                function updateMOQ() {
-                    let city = document.getElementById("citySelect").value.toLowerCase();
+        // NCR cities → All lowercase for correct matching
+        const NCR_CITIES = [
+            "new delhi", "noida", "greater noida", "ghaziabad",
+            "south delhi", "north delhi", "west delhi", "east delhi",
+            "central delhi", "gurgaon", "faridabad", "meerut"
+        ];
 
-                    // NCR cities (you can add more here if needed)
-                    const NCR_CITIES = [
-                        "noida",
-                        "greater noida",
-                        "ghaziabad"
-                    ];
+        let moq = NCR_CITIES.includes(city) ? 10 : 15;
 
-                    let moq = NCR_CITIES.includes(city) ? 15 : 50;
-                    document.getElementById("moqValue").innerText = moq;
-                }
+        document.getElementById("moqValue").innerText = moq;
+    }
 
 
                 /* -------------------------------------
