@@ -1600,18 +1600,21 @@
                                 /* -------------------------------------
                                    UPDATE MOQ BASED ON CITY
                                 --------------------------------------- */
-                                function updateMOQ() {
-                                    let city = document.getElementById("citySelect").value.toLowerCase();
+                                  function updateMOQ() {
+                                        let city = document.getElementById("citySelect").value.toLowerCase();
 
-                                    const NCR_CITIES = [
-                                        "noida",
-                                        "greater noida",
-                                        "ghaziabad"
-                                    ];
+                                        // NCR cities → All lowercase for correct matching
+                                        const NCR_CITIES = [
+                                            "new delhi", "noida", "greater noida", "ghaziabad",
+                                            "south delhi", "north delhi", "west delhi", "east delhi",
+                                            "central delhi", "gurgaon", "faridabad", "meerut"
+                                        ];
 
-                                    let moq = NCR_CITIES.includes(city) ? 15 : 50;
-                                    document.getElementById("moqValue").innerText = moq;
-                                }
+                                        let moq = NCR_CITIES.includes(city) ? 10 : 15;
+
+                                        document.getElementById("moqValue").innerText = moq;
+                                    }
+
 
 
                                 /* -------------------------------------
@@ -1769,6 +1772,7 @@
                                         document.getElementById("moqValue").innerText = moq;
                                     }
 
+                                    
                                 /* -------------------------------------
                                    SET BUTTONS
                                 --------------------------------------- */
