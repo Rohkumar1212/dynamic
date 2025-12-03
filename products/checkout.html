@@ -1,321 +1,250 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>Checkout - Dynamic Corrugations</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script>
-    document.querySelectorAll("textarea").forEach(t => {
-        t.addEventListener("input", function () {
-            if (this.value.trim().length > 0) {
-                this.classList.add("has-text");
-            } else {
-                this.classList.remove("has-text");
-            }
+    <meta charset="UTF-8">
+    <title>Checkout - Dynamic Corrugations</title>
+    <link href="/css/checkout.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/images/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        document.querySelectorAll("textarea").forEach(t => {
+            t.addEventListener("input", function () {
+                if (this.value.trim().length > 0) {
+                    this.classList.add("has-text");
+                } else {
+                    this.classList.remove("has-text");
+                }
+            });
         });
-    });
-</script>
+    </script>
 
-<style>
-    body{
-       
-        background-color: #f1eded;
-    }
-/* Section Box */
-.checkout-section {
-    margin-top: 20px;
-    padding: 20px;
-    background: #ffffff;
-    border-radius: 14px;
-    border: 1px solid #e7eaee;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.04);
-}
-
-/* Titles */
-.section-title {
-    font-size: 20px;
-    margin-bottom: 12px;
-    color: #1a1a1a;
-    font-weight: 700;
-}
-
-/* Floating input wrapper */
-.form-group {
-    position: relative;
-    margin-bottom: 20px;
-}
-
-/* Inputs */
-.form-input {
-    width: 100%;
-    padding: 14px 12px 6px 12px;
-    border: 1.6px solid #cfd6e1;
-    border-radius: 10px;
-    background: #f9fafb;
-    font-size: 16px;
-    transition: 0.25s ease;
-    outline: none;
-}
-
-/* Focus Effect */
-.form-input:focus {
-    border-color: #005ad3;
-    background: #fff;
-    box-shadow: 0 0 0 4px rgba(0,90,211,0.15);
-}
-
-/* Floating Labels */
-.form-label {
-    position: absolute;
-    top: 14px;
-    left: 14px;
-    color: #777;
-    font-size: 15px;
-    pointer-events: none;
-    transition: 0.2s ease;
-}
-
-/* FLOAT WHEN TYPED OR FOCUSED */
-.form-input:focus + .form-label,
-.form-input:not(:placeholder-shown) + .form-label {
-    top: -7px;
-    left: 10px;
-    background: #fff;
-    padding: 0 6px;
-    font-size: 13px;
-    color: #005ad3;
-}
-
-/* Textarea style */
-textarea.form-input {
-    resize: none;
-    height: 90px;
-}
-
-.container {
-    max-width:1200px;
-    margin:auto;
-    padding:20px;
-}
-.checkout h1 {
-    margin-bottom:20px;
-}
-.grid {
-    display:grid;
-    grid-template-columns: 1fr 350px;
-    gap:20px;
-}
-.cart-list {
-    background:#fff;
-    padding:15px;
-    border-radius:10px;
-    border:1px solid #eee;
-}
-.cart-item {
-    padding:12px 0;
-    border-bottom:1px solid #eee;
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-.side {
-    background:#fff;
-    padding:15px;
-    border-radius:10px;
-    border:1px solid #eee;
-}
-.form-control {
-    width:100%;
-    padding:10px;
-    border:1px solid #ddd;
-    margin-top:10px;
-    border-radius:6px;
-}
-.primary-btn {
-    width:100%;
-    background:#005ad3;
-    color:white;
-    text-align:center;
-    padding:12px;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:16px;
-}
-.primary-btn:disabled {
-    background:#999;
-}
-.total-row {
-    display:flex;
-    justify-content:space-between;
-    margin:8px 0;
-    font-size:16px;
-}
-.removeBtn {
-    background:none;
-    border:none;
-    color:red;
-    font-size:18px;
-    cursor:pointer;
-}
-
-  /* Responsive for mobile */
-    @media (max-width: 480px) {
-        .grid {
-    display: block;
-    grid-template-columns: 1fr 350px;
-    gap: 20px;
-}
-.form-group {
-    position: relative;
-    margin-bottom: 20px;
-    padding: 10px;
-    margin-left: -20px;
-}
-.cart-item {
-    padding: 12px 0;
-    border-bottom: 1px solid #eee;
-    display: block;
-    align-items: center;
-    gap: 10px;
-}
-    }
-.form-group {
-    position: relative;
-    margin-bottom: 20px;
-    padding: 3px;
-    padding-right: 20px;
-  
-}
-
-</style>
 </head>
 
 
 <body>
-<div class="container">
+    <div class="container">
 
-    <h1 class="text-center">Checkout Page</h1>
+        <h1 class="text-center">Checkout Page</h1>
 
-    <div class="grid">
-        <!-- LEFT SIDE -->
-        <div>
-            <div class="cart-list" id="checkoutCartList"></div>
+        <div class="grid">
+            <!-- LEFT SIDE -->
+            <div>
+                <div class="cart-list" id="checkoutCartList"></div>
+                <h3 class="section-title">Your Details</h3>
+<div class="checkout-section form-row px-10">
+   
 
-        <div class="checkout-section px-10">
-            <h3 class="section-title">Shipping Details</h3>
-        
-            <div class="form-group">
-                <input id="name" class="form-input" required>
-                <label for="name" class="form-label">Full Name</label>
-            </div>
-        
-            <div class="form-group">
-                <input id="phone" class="form-input" required>
-                <label for="phone" class="form-label">Phone Number</label>
-            </div>
-        
-            <div class="form-group">
-                <textarea id="address" class="form-input" rows="3" required></textarea>
-                <label for="address" class="form-label">Full Address</label>
-            </div>
-        
-            <h3 class="section-title">Billing Details</h3>
-        
-            <div class="form-group">
-                <input id="billing_email" class="form-input" required>
-                <label class="form-label">Email</label>
-            </div>
-        
-            <div class="form-group">
-                <input id="billing_city" class="form-input" required>
-                <label class="form-label">City</label>
-            </div>
-        
-            <div class="form-group">
-                <input id="billing_state" class="form-input" required>
-                <label class="form-label">State</label>
-            </div>
-        
-            <div class="form-group">
-                <input id="billing_pincode" class="form-input" required>
-                <label class="form-label">Pincode</label>
-            </div>
-        
-            <div class="form-group">
-                <input id="billing_country" class="form-input" value="India" required>
-                <label class="form-label">Country</label>
-            </div>
-        </div>
+    <div class="form-group">
+        <input id="name" class="form-input" required>
+        <label for="name" class="form-label">Full Name</label>
+    </div>
 
-        </div>
+    <div class="form-group">
+        <input id="phone" class="form-input" required>
+        <label for="phone" class="form-label">Phone Number</label>
+    </div>
 
-        <!-- RIGHT SIDE -->
-        <aside class="side">
+    <div class="form-group">
+        <textarea id="address" class="form-input" rows="3" required></textarea>
+        <label for="address" class="form-label">Full Address</label>
+    </div>
 
-            <label><strong>GST</strong></label>
-            <select id="gstSelect" class="form-control" onchange="updateTotals()">
-                <option value="0">No GST</option>
-                <option value="18">IGST 18%</option>
-                <option value="9_9">CGST 9% + SGST 9%</option>
-            </select>
 
-            <div class="total-row"><span>Subtotal</span><strong id="subtotal">₹0</strong></div>
-            <div class="total-row"><span>GST</span><strong id="gstAmount">₹0</strong></div>
-            <div class="total-row"><span>Shipping</span><strong id="shipping">₹0</strong></div>
 
-            <div class="total-row" style="font-size:20px">
-                <span><b>Total</b></span>
-                <strong id="grandTotal">₹0</strong>
-            </div>
+    <div class="form-group">
+        <input id="billing_email" class="form-input" required>
+        <label class="form-label">Email</label>
+    </div>
 
-            <button class="primary-btn" id="payBtn" style="margin-top:15px">Pay Now</button>
-            <p style="font-size:13px;color:#777;margin-top:10px">
-                Payments are securely processed using PayU India.
-            </p>
-        </aside>
+    <div class="form-group">
+        <input id="billing_city" class="form-input" required>
+        <label class="form-label">City</label>
+    </div>
+
+    <div class="form-group">
+        <input id="billing_state" class="form-input" required>
+        <label class="form-label">State</label>
+    </div>
+
+    <div class="form-group">
+        <input id="billing_pincode" class="form-input" required>
+        <label class="form-label">Pincode</label>
+    </div>
+
+    <div class="form-group">
+        <input id="billing_country" class="form-input" value="India" required>
+        <label class="form-label">Country</label>
     </div>
 </div>
 
 
-<script>
-/* ============================================================
-   LOAD CART FROM LOCAL STORAGE
-============================================================ */
-let stored = JSON.parse(localStorage.getItem("checkoutCart") || "[]");
+<!-- BILLING -->
+<h3 class="section-title">Billing Address</h3>
 
-const checkoutCartList = document.getElementById("checkoutCartList");
-const subtotalEl = document.getElementById("subtotal");
-const gstAmountEl = document.getElementById("gstAmount");
-const shippingEl = document.getElementById("shipping");
-const grandTotalEl = document.getElementById("grandTotal");
-const gstSelect = document.getElementById("gstSelect");
-const payBtn = document.getElementById("payBtn");
+<div class="form-row">
+    <div class="form-group">
+        <input id="billing_company" class="form-input" required placeholder="">
+        <label class="form-label">Company Name *</label>
+    </div>
 
-let subtotal = 0;
+    <div class="form-group">
+        <input id="billing_email" class="form-input" required placeholder="">
+        <label class="form-label">Email *</label>
+    </div>
+</div>
+
+<div class="form-row">
+    <div class="form-group">
+        <input id="billing_postcode" class="form-input" required placeholder="">
+        <label class="form-label">Postcode *</label>
+    </div>
+
+    <div class="form-group">
+        <input id="billing_city" class="form-input" required placeholder="">
+        <label class="form-label">City *</label>
+    </div>
+</div>
+
+<div class="form-row">
+    <div class="form-group">
+        <input id="billing_state" class="form-input" required placeholder="">
+        <label class="form-label">State *</label>
+    </div>
+
+    <div class="form-group">
+        <input id="billing_country" class="form-input" required placeholder="" value="India">
+        <label class="form-label">Country *</label>
+    </div>
+</div>
+
+<div class="form-group">
+    <input id="billing_address1" class="form-input" required placeholder="">
+    <label class="form-label">Address Line 1 *</label>
+</div>
+
+<div class="form-group">
+    <input id="billing_address2" class="form-input" placeholder="">
+    <label class="form-label">Address Line 2</label>
+</div>
+
+<div class="form-group">
+    <input id="billing_address3" class="form-input" placeholder="">
+    <label class="form-label">Address Line 3</label>
+</div>
 
 
-/* ============================================================
-   RENDER ITEMS
-============================================================ */
-function renderCheckoutItems() {
-    checkoutCartList.innerHTML = "";
-    subtotal = 0;
+<!-- DELIVERY -->
+<h3 class="section-title">Delivery Address</h3>
 
-    if (!stored.length) {
-        checkoutCartList.innerHTML = "<div>No items in cart.</div>";
-        updateTotals();
-        return;
-    }
+<label class="same-address">
+    <input type="checkbox" id="sameAsBilling" onchange="copyBillingToShipping()" style="margin-right:10px;">
+    Same as my billing address
+</label>
 
-    stored.forEach((item, index) => {
-  
-           const imgSrc = item.image || item.img || "";
+<div class="form-row">
+    <div class="form-group">
+        <input id="shipping_postcode" class="form-input" required placeholder="">
+        <label class="form-label">Postcode *</label>
+    </div>
 
-        const row = document.createElement("div");
-        row.className = "cart-item";
+    <div class="form-group">
+        <input id="shipping_city" class="form-input" required placeholder="">
+        <label class="form-label">City *</label>
+    </div>
+</div>
 
-        row.innerHTML = `
+<div class="form-row">
+    <div class="form-group">
+        <input id="shipping_address1" class="form-input" required placeholder="">
+        <label class="form-label">Address Line 1 *</label>
+    </div>
+
+    <div class="form-group">
+        <input id="shipping_country" class="form-input" required placeholder="" value="India">
+        <label class="form-label">Country *</label>
+    </div>
+</div>
+
+<div class="form-group">
+    <input id="shipping_address2" class="form-input" placeholder="">
+    <label class="form-label">Address Line 2</label>
+</div>
+
+<div class="form-group">
+    <input id="shipping_address3" class="form-input" placeholder="">
+    <label class="form-label">Address Line 3</label>
+</div>
+
+
+            </div>
+
+            <!-- RIGHT SIDE -->
+            <aside class="side">
+
+                <label><strong>GST</strong></label>
+                <select id="gstSelect" class="form-control" onchange="updateTotals()">
+                    <option value="0">No GST</option>
+                    <option value="18">IGST 18%</option>
+                    <option value="9_9">CGST 9% + SGST 9%</option>
+                </select>
+
+                <div class="total-row"><span>Subtotal</span><strong id="subtotal">₹0</strong></div>
+                <div class="total-row"><span>GST</span><strong id="gstAmount">₹0</strong></div>
+                <div class="total-row"><span>Shipping</span><strong id="shipping">₹0</strong></div>
+
+                <div class="total-row" style="font-size:20px">
+                    <span><b>Total</b></span>
+                    <strong id="grandTotal">₹0</strong>
+                </div>
+
+                <button class="primary-btn" id="payBtn" style="margin-top:15px">Pay Now</button>
+                <p style="font-size:13px;color:#777;margin-top:10px">
+                    Payments are securely processed using PayU India.
+                </p>
+            </aside>
+        </div>
+    </div>
+
+
+    <script>
+        /* ============================================================
+           LOAD CART FROM LOCAL STORAGE
+        ============================================================ */
+        let stored = JSON.parse(localStorage.getItem("checkoutCart") || "[]");
+
+        const checkoutCartList = document.getElementById("checkoutCartList");
+        const subtotalEl = document.getElementById("subtotal");
+        const gstAmountEl = document.getElementById("gstAmount");
+        const shippingEl = document.getElementById("shipping");
+        const grandTotalEl = document.getElementById("grandTotal");
+        const gstSelect = document.getElementById("gstSelect");
+        const payBtn = document.getElementById("payBtn");
+
+        let subtotal = 0;
+
+
+        /* ============================================================
+           RENDER ITEMS
+        ============================================================ */
+        function renderCheckoutItems() {
+            checkoutCartList.innerHTML = "";
+            subtotal = 0;
+
+            if (!stored.length) {
+                checkoutCartList.innerHTML = "<div>No items in cart.</div>";
+                updateTotals();
+                return;
+            }
+
+            stored.forEach((item, index) => {
+
+                const imgSrc = item.image || item.img || "";
+
+                const row = document.createElement("div");
+                row.className = "cart-item";
+
+                row.innerHTML = `
           <img src="${imgSrc}"
                 style="width:90px;height:90px;object-fit:cover;border-radius:6px">
             <div style="flex:1">
@@ -330,134 +259,131 @@ function renderCheckoutItems() {
             <button class="removeBtn" data-index="${index}">✖</button>
         `;
 
-        checkoutCartList.appendChild(row);
-        subtotal += Number(item.price);
-    });
+                checkoutCartList.appendChild(row);
+                subtotal += Number(item.price);
+            });
 
-    updateTotals();
-}
-
-
-/* ============================================================
-   GST + TOTAL CALCULATION
-============================================================ */
-function updateTotals() {
-    subtotalEl.innerText = "₹" + subtotal;
-
-    let gst = 0;
-    const gstOption = gstSelect.value;
-
-    if (gstOption === "18") gst = subtotal * 0.18;
-    if (gstOption === "9_9") gst = subtotal * 0.18;
-
-    gstAmountEl.innerText = "₹" + gst.toFixed(2);
-
-    const shipping = subtotal > 0 ? 0 : 0;
-    shippingEl.innerText = "₹" + shipping;
-
-    grandTotalEl.innerText = "₹" + (subtotal + gst + shipping).toFixed(2);
-}
-
-renderCheckoutItems();
-
-
-/* ============================================================
-   REMOVE ITEM
-============================================================ */
-checkoutCartList.addEventListener("click", (e) => {
-    if (!e.target.classList.contains("removeBtn")) return;
-
-    const index = Number(e.target.dataset.index);
-    stored.splice(index, 1);
-
-    localStorage.setItem("checkoutCart", JSON.stringify(stored));
-    renderCheckoutItems();
-});
-
-
-/* ============================================================
-   PAYU HASH GENERATOR (SHA512)
-============================================================ */
-async function generatePayUHash(key, txnid, amount, productinfo, firstname, email, salt) {
-    const str = `${key}|${txnid}|${amount}|${productinfo}|${firstname}|${email}|||||||||||${salt}`;
-    const buffer = new TextEncoder().encode(str);
-    const hashBuffer = await crypto.subtle.digest("SHA-512", buffer);
-    return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, "0")).join("");
-}
-
-
-/* ============================================================
-   PAYMENT FUNCTION
-============================================================ */
-async function processPayment() {
-
-    if (!stored.length) {
-        alert("Your cart is empty");
-        return;
-    }
-
-    let name = document.getElementById("name").value.trim();
-    let phone = document.getElementById("phone").value.trim();
-    let address = document.getElementById("address").value.trim();
-    let email = document.getElementById("billing_email").value.trim();
-    let city = document.getElementById("billing_city").value.trim();
-    let state = document.getElementById("billing_state").value.trim();
-    let pincode = document.getElementById("billing_pincode").value.trim();
-
-    if (!name || !phone || !address || !email || !city || !state || !pincode) {
-        alert("Please fill all shipping & billing details");
-        return;
-    }
-
-    payBtn.disabled = true;
-    payBtn.innerText = "Processing...";
-
-    const totalAmount = Number(grandTotalEl.innerText.replace("₹", ""));
-    const key = "EjKBQq";       // ✅ Your PayU Key
-    const salt = "MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDY3Pv7uXln8Qc5QPirbdYXKk/AKeRfWUyU51ntrB9se8tEj+dhUWxjtqtQrQVw6lXZwypgGo+GDHJTrhlohcpLzs8ZRlXikh5HfBKfW1mDR1jKWjle2KYWj3wDAOkyCi0kdEci2tq4OQZS/oJrEXZ7NRe7WF/CiXmvm75oVBYeJxCd0kJjUB8zGt5USoMvbwkRMpku0ES5I+ZonxZRH5ufzOixjRXRtwrLd5EyVjEFDiqOajQ7k02vYybTlJzvnM6NSUVGfo5/pU/kRBrii+rUMwVGBkBPpv3mPYzJOGeAjniHIuTkjcjcC1FkOk+3lKcqIq0tl2wL2qaFxNOV/3e1AgMBAAECggEAdl+hmBT0xRzWwZTKZ+DLdNeespjrVHSNDdZ+yvIiMPgdyy31sbRdQsyKFL5s8uamt/gFIHI/F3+hxDWLHvewpdKcTwKKjOMPbhu2mo+le7gtKj83g6MkfboSih0sLSlK3NQvpEHsE5Tk89aC3+inULd5XcTueGTMLGQJ+i6z5/6POe2kyezGJxtHs3oWsIiL34J14Gdbd+hdtL7dV98z3j2Q1Jp/pgHBV7fOV13/3nJzdd1Olan/Bvx75y3om6nC/hZuoM5G0wOe/pC6T+SrUdmITP1VTKeLQRPGZmrdyA4dgmAhrgP5AcEoYtLKYDCNWa3EDvHLhC3qUmf0pA33PQKBgQD5YUAxES/ii30ptdIVPVrKhxSa1u/ARvdrLmKur/srmMNjY+OLGPQ7cPJVSa+oz7x+HllWAevbmW4Vl9emRZqJde5Khtj4W5ZuIDLqJ9WCa1/Cen3We4Aczb3Js5WBs7qRh9OU2iMLwHcwzyYP6dfRTZuOgtE3DWc84n7eFL+JqwKBgQDensFLLpsCPT/z/T3wvFWFQ6INSyp2smxyUTI8Mz1405SsVuQ2zAP43uU6MnxxzlpTfZtuWEdTRz7rowwBc5yW41kVylMZZf/pNtVsHyStP62Nuz2g8GCPJwEqMoRYpNi6j4vaoJX70dxu0H79fn9GCnonkk7hcfE1YXK/4hVkHwKBgBZ0UEBayNIAN1PjIDhzXtJvmUZb5hiNC0gmVBJgnCAP0EAJxXpH0+3qPJe7W8q6ccF1YBvjbmZGiWf+VReOmtyXts4VGEI8lO3zjkIRNiNZIbU0LFJ8qkttpxIbTnHwSfNCpKV5gsBTIyhM7qNuLdWVxFTvqIDpfws3Za7/dUOjAoGAfj9twuMlSPnPQOEGtXU40qBuUDemVzYMRjBB2t38KH9kuu9z8Jd2UTamrIBhDnFFzD9ZXBR4LoQi7KLEdjZIQVGg/biFs8uie3F7SxvGQvHvzIa5BoILYGNwR6vqXhLuTa6GU2/qXqq+5aEbw0pvhxr9918DmNpzPiCLYMIn+2UCgYAWYhoMlZYgGH8XFtiOKs+8LJ84NCMyNE81/8PVdmlHkPxePjr3pJqTyHipJ9F6tikuiAEyiAN8HMRNECKIfUDEIASaQEjeaJ6WiMCsc1j9yz1chUXIeprhqlopic+TqT/5Vd1ojipcOdrKY75vJS5Zmg/X4wgEpnrCbk9krYkeYw==";  // ✅ Your PayU Salt
- const txnid = "TXN" + Date.now();
-    const productinfo = "Corrugated Box Order";
-
-    const hash = await generatePayUHash(key, txnid, totalAmount, productinfo, name, email, salt);
-
-    const form = document.createElement("form");
-    form.method = "POST";
-    form.action = "https://secure.payu.in/_payment";
-
-    const fields = {
-        key, txnid,
-        amount: totalAmount,
-        productinfo,
-        firstname: name,
-        email,
-        phone,
-        surl: "https://dynamiccorrugations.com/payment-success.html",
-        furl: "https://dynamiccorrugations.com/payment-failure.html",
-        hash
-    };
-
-    Object.entries(fields).forEach(([k, v]) => {
-        let i = document.createElement("input");
-        i.type = "hidden"; i.name = k; i.value = v;
-        form.appendChild(i);
-    });
-
-    document.body.appendChild(form);
-    form.submit();
-}
-
-payBtn.addEventListener("click", processPayment);
-
-</script>
-<script>
-    setInterval(function () {
-        const threshold = 160;
-        if (window.outerWidth - window.innerWidth > threshold ||
-            window.outerHeight - window.innerHeight > threshold) {
-            window.location.href = "https://dynamiccorrugations.com";
+            updateTotals();
         }
-    }, 1000);
-</script>
+
+
+        /* ============================================================
+           GST + TOTAL CALCULATION
+        ============================================================ */
+        function updateTotals() {
+            subtotalEl.innerText = "₹" + subtotal;
+
+            let gst = 0;
+            const gstOption = gstSelect.value;
+
+            if (gstOption === "18") gst = subtotal * 0.18;
+            if (gstOption === "9_9") gst = subtotal * 0.18;
+
+            gstAmountEl.innerText = "₹" + gst.toFixed(2);
+
+            const shipping = subtotal > 0 ? 0 : 0;
+            shippingEl.innerText = "₹" + shipping;
+
+            grandTotalEl.innerText = "₹" + (subtotal + gst + shipping).toFixed(2);
+        }
+
+        renderCheckoutItems();
+
+
+        /* ============================================================
+           REMOVE ITEM
+        ============================================================ */
+        checkoutCartList.addEventListener("click", (e) => {
+            if (!e.target.classList.contains("removeBtn")) return;
+
+            const index = Number(e.target.dataset.index);
+            stored.splice(index, 1);
+
+            localStorage.setItem("checkoutCart", JSON.stringify(stored));
+            renderCheckoutItems();
+        });
+
+
+        /* ============================================================
+           PAYU HASH GENERATOR (SHA512)
+        ============================================================ */
+        async function generatePayUHash(key, txnid, amount, productinfo, firstname, email, salt) {
+            const str = `${key}|${txnid}|${amount}|${productinfo}|${firstname}|${email}|||||||||||${salt}`;
+            const buffer = new TextEncoder().encode(str);
+            const hashBuffer = await crypto.subtle.digest("SHA-512", buffer);
+            return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, "0")).join("");
+        }
+
+        async function processPayment() {
+
+            if (!stored.length) {
+                alert("Your cart is empty");
+                return;
+            }
+
+            let name = document.getElementById("name").value.trim();
+            let phone = document.getElementById("phone").value.trim();
+            let address = document.getElementById("address").value.trim();
+            let email = document.getElementById("billing_email").value.trim();
+            let city = document.getElementById("billing_city").value.trim();
+            let state = document.getElementById("billing_state").value.trim();
+            let pincode = document.getElementById("billing_pincode").value.trim();
+
+            if (!name || !phone || !address || !email || !city || !state || !pincode) {
+                alert("Please fill all shipping & billing details");
+                return;
+            }
+
+            payBtn.disabled = true;
+            payBtn.innerText = "Processing...";
+
+            const totalAmount = Number(grandTotalEl.innerText.replace("₹", ""));
+            const key = "EjKBQq";       // ✅ Your PayU Key
+            const salt = "MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDY3Pv7uXln8Qc5QPirbdYXKk/AKeRfWUyU51ntrB9se8tEj+dhUWxjtqtQrQVw6lXZwypgGo+GDHJTrhlohcpLzs8ZRlXikh5HfBKfW1mDR1jKWjle2KYWj3wDAOkyCi0kdEci2tq4OQZS/oJrEXZ7NRe7WF/CiXmvm75oVBYeJxCd0kJjUB8zGt5USoMvbwkRMpku0ES5I+ZonxZRH5ufzOixjRXRtwrLd5EyVjEFDiqOajQ7k02vYybTlJzvnM6NSUVGfo5/pU/kRBrii+rUMwVGBkBPpv3mPYzJOGeAjniHIuTkjcjcC1FkOk+3lKcqIq0tl2wL2qaFxNOV/3e1AgMBAAECggEAdl+hmBT0xRzWwZTKZ+DLdNeespjrVHSNDdZ+yvIiMPgdyy31sbRdQsyKFL5s8uamt/gFIHI/F3+hxDWLHvewpdKcTwKKjOMPbhu2mo+le7gtKj83g6MkfboSih0sLSlK3NQvpEHsE5Tk89aC3+inULd5XcTueGTMLGQJ+i6z5/6POe2kyezGJxtHs3oWsIiL34J14Gdbd+hdtL7dV98z3j2Q1Jp/pgHBV7fOV13/3nJzdd1Olan/Bvx75y3om6nC/hZuoM5G0wOe/pC6T+SrUdmITP1VTKeLQRPGZmrdyA4dgmAhrgP5AcEoYtLKYDCNWa3EDvHLhC3qUmf0pA33PQKBgQD5YUAxES/ii30ptdIVPVrKhxSa1u/ARvdrLmKur/srmMNjY+OLGPQ7cPJVSa+oz7x+HllWAevbmW4Vl9emRZqJde5Khtj4W5ZuIDLqJ9WCa1/Cen3We4Aczb3Js5WBs7qRh9OU2iMLwHcwzyYP6dfRTZuOgtE3DWc84n7eFL+JqwKBgQDensFLLpsCPT/z/T3wvFWFQ6INSyp2smxyUTI8Mz1405SsVuQ2zAP43uU6MnxxzlpTfZtuWEdTRz7rowwBc5yW41kVylMZZf/pNtVsHyStP62Nuz2g8GCPJwEqMoRYpNi6j4vaoJX70dxu0H79fn9GCnonkk7hcfE1YXK/4hVkHwKBgBZ0UEBayNIAN1PjIDhzXtJvmUZb5hiNC0gmVBJgnCAP0EAJxXpH0+3qPJe7W8q6ccF1YBvjbmZGiWf+VReOmtyXts4VGEI8lO3zjkIRNiNZIbU0LFJ8qkttpxIbTnHwSfNCpKV5gsBTIyhM7qNuLdWVxFTvqIDpfws3Za7/dUOjAoGAfj9twuMlSPnPQOEGtXU40qBuUDemVzYMRjBB2t38KH9kuu9z8Jd2UTamrIBhDnFFzD9ZXBR4LoQi7KLEdjZIQVGg/biFs8uie3F7SxvGQvHvzIa5BoILYGNwR6vqXhLuTa6GU2/qXqq+5aEbw0pvhxr9918DmNpzPiCLYMIn+2UCgYAWYhoMlZYgGH8XFtiOKs+8LJ84NCMyNE81/8PVdmlHkPxePjr3pJqTyHipJ9F6tikuiAEyiAN8HMRNECKIfUDEIASaQEjeaJ6WiMCsc1j9yz1chUXIeprhqlopic+TqT/5Vd1ojipcOdrKY75vJS5Zmg/X4wgEpnrCbk9krYkeYw==";  // ✅ Your PayU Salt
+            const txnid = "TXN" + Date.now();
+            const productinfo = "Corrugated Box Order";
+
+            const hash = await generatePayUHash(key, txnid, totalAmount, productinfo, name, email, salt);
+
+            const form = document.createElement("form");
+            form.method = "POST";
+            form.action = "https://secure.payu.in/_payment";
+
+            const fields = {
+                key, txnid,
+                amount: totalAmount,
+                productinfo,
+                firstname: name,
+                email,
+                phone,
+                surl: "https://dynamiccorrugations.com/payment-success.html",
+                furl: "https://dynamiccorrugations.com/payment-failure.html",
+                hash
+            };
+
+            Object.entries(fields).forEach(([k, v]) => {
+                let i = document.createElement("input");
+                i.type = "hidden"; i.name = k; i.value = v;
+                form.appendChild(i);
+            });
+
+            document.body.appendChild(form);
+            form.submit();
+        }
+
+        payBtn.addEventListener("click", processPayment);
+
+    </script>
+    <script>
+        setInterval(function () {
+            const threshold = 160;
+            if (window.outerWidth - window.innerWidth > threshold ||
+                window.outerHeight - window.innerHeight > threshold) {
+                window.location.href = "https://dynamiccorrugations.com";
+            }
+        }, 1000);
+    </script>
 
 </body>
+
 </html>

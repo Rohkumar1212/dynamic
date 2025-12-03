@@ -1133,11 +1133,27 @@
                     </div>
 
                     <script>
-                        function changeImage(img) {
-                            document.getElementById("mainImage").src = img.src;
-                        }
-                    </script>
+                        
+                       function changeImage(img) {
+                            const main = document.getElementById("mainImage");
 
+                            main.classList.add("fade-out");
+
+                            setTimeout(() => {
+                                main.src = img.src;
+                                main.classList.remove("fade-out");
+                            }, 150);
+                        }
+
+                    </script>
+<style>.main-img {
+    transition: opacity .2s ease;
+}
+
+.fade-out {
+    opacity: 0.3;
+}
+</style>
                     <div style="margin-top:12px; font-size:13px; color:#415; text-align:center">High-resolution
                         packaging
                         photos — click thumbnails to change</div>
@@ -1186,6 +1202,9 @@
                             heavy-duty corrugated options are recommended for better load handling.
                     
                         </div>
+                        <div class="size-help" style="margin-top:10px"><strong>Our MOQ is 10 units for NCR and 50 units for non-NCR regions.
+                                Please select the appropriate option from the dropdown.
+                            </strong></div>
                     
                         <div class="location-wrapper">
                     
@@ -1317,7 +1336,7 @@
                                 moqValue.textContent = "10";
                             } else if (city === "other" || city !== "") {
                                 // Out of NCR (15 pcs)
-                                moqValue.textContent = "15";
+                                moqValue.textContent = "50";
                             } else {
                                 moqValue.textContent = "10"; // Default
                             }
@@ -1361,7 +1380,7 @@
                             <!-- SET SELECTION -->
                     
                             <button onclick="decreaseSets()">-</button>
-                            <input id="qty" type="number" value="1" min="1">
+                              <input id="qty" type="number" value="0" min="1">
                             <button onclick="increaseSets()">+</button>
                         </div>
                     
@@ -1421,7 +1440,7 @@
                             const totalPrice = cart.reduce((sum, i) => sum + i.price, 0);
 
                             message += `*Grand Total: ₹${totalPrice}*%0A%0A`;
-                            message += "Please confirm your order.";
+                            message += "Please help us in placing an order..";
 
                             let whatsappURL = `https://wa.me/${phone}?text=${message}`;
 
@@ -1442,7 +1461,7 @@
                             const moqValue = document.getElementById("moqValue");
 
                             const ncrCities = cityData.delhi.map(c => c.toLowerCase());
-                            let moq = ncrCities.includes(city) ? 10 : 15;
+                            let moq = ncrCities.includes(city) ? 10 : 50;
 
                             moqValue.textContent = moq;
 
@@ -1505,7 +1524,8 @@
                                 sets,
                                 moq,
                                 totalPcs,
-                                price: totalPrice
+                                price: totalPrice,
+                                
                             };
 
                             cart.push(item);
@@ -1542,6 +1562,7 @@
 
                                 list.innerHTML += `
                                                             <div class="cart-item">
+                                                               
                                                                 <strong>${item.title}</strong><br>
                                                                 Sets: ${item.sets}<br>
                                                                 MOQ: ${item.moq} pcs<br>
@@ -2234,7 +2255,7 @@
                 id: Date.now(),
                 title: size + ' • ' + quality,
                 qty, price: computePrice(size, quality, qty),
-                img: document.getElementById('mainImage').src
+                img: document.getElementById('mainImage')
             };
             cart.push(item);
             animateAddToCart();
@@ -2258,7 +2279,7 @@
                 const div = document.createElement('div');
                 div.className = 'cart-item';
                 div.innerHTML = `
-          <img src="${i.img}" alt="cart item" />
+          <img src="/images/products/Corrugated Box/Corrugated Box-23.jpeg" alt="cart item" />
           <div style="flex:1">
             <div style="font-weight:800">${i.title}</div>
             <div style="font-size:13px;color:#556">Qty: ${i.qty} • ₹${i.price}</div>

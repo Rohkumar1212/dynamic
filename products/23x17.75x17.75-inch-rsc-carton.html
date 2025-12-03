@@ -1268,7 +1268,8 @@
                                 heavy-duty corrugated options are recommended for better load handling.
 
                             </div>
-
+<div class="size-help" style="margin-top:10px"><strong>Our MOQ is 10 units for NCR and 50 units for non-NCR regions. Please select the appropriate option from the dropdown.
+</strong></div>
                             <div class="location-wrapper">
 
 
@@ -1400,7 +1401,7 @@
                                 moqValue.textContent = "10";
                             } else if (city === "other" || city !== "") {
                                 // Out of NCR (15 pcs)
-                                moqValue.textContent = "15";
+                                moqValue.textContent = "50";
                             } else {
                                 moqValue.textContent = "10"; // Default
                             }
@@ -1441,7 +1442,7 @@
                             <!-- SET SELECTION -->
 
                             <button onclick="decreaseSets()">-</button>
-                            <input id="qty" type="number" value="1" min="1">
+                              <input id="qty" type="number" value="0" min="1">
                             <button onclick="increaseSets()">+</button>
                         </div>
 
@@ -1501,7 +1502,7 @@
         const totalPrice = cart.reduce((sum, i) => sum + i.price, 0);
 
         message += `*Grand Total: ₹${totalPrice}*%0A%0A`;
-        message += "Please confirm your order.";
+       message += "Please help us in placing an order.";
 
         let whatsappURL = `https://wa.me/${phone}?text=${message}`;
 
@@ -1522,7 +1523,7 @@
                             const moqValue = document.getElementById("moqValue");
 
                             const ncrCities = cityData.delhi.map(c => c.toLowerCase());
-                            let moq = ncrCities.includes(city) ? 10 : 15;
+                            let moq = ncrCities.includes(city) ? 10 : 50;
 
                             moqValue.textContent = moq;
 
@@ -1702,7 +1703,8 @@
                         </button>
                     </div>
 
-                    const sizeSelect = document.getElementById('sizeSelect');
+                    const selectedProductImage = document.getElementById('selectedProductImage');
+                      const sizeSelect = document.getElementById('sizeSelect');
                     const selectedSizeEl = document.getElementById('selectedSize');
                     const selectedPxEl = document.getElementById('selectedPx');
                     const customSizeInput = document.getElementById('customSize');
@@ -1828,7 +1830,7 @@
                             div.className = 'cart-row';
 
                             div.innerHTML = `
-                    <img src="${item.image}" alt="cart item" 
+                    <img src="images/products/Corrugated Box/Corrugated Box 23x17.75x17.75-inch-rsc-carton.jpeg" alt="cart item" 
                         style="width:60px;height:60px;object-fit:cover;border-radius:6px">
         
                     <div class="cart-info">
@@ -2386,7 +2388,7 @@
                 const div = document.createElement('div');
                 div.className = 'cart-item';
                 div.innerHTML = `
-          <img src="${i.img}" alt="cart item" />
+          <img src="images/products/Corrugated Box/Corrugated Box 23x17.75x17.75-inch-rsc-carton.jpeg" alt="cart item" />
           <div style="flex:1">
             <div style="font-weight:800">${i.title}</div>
             <div style="font-size:13px;color:#556">Qty: ${i.qty} • ₹${i.price}</div>

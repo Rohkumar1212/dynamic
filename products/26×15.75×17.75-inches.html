@@ -1274,7 +1274,9 @@
                                 heavy-duty corrugated options are recommended for better load handling.
                         
                             </div>
-                        
+                        <div class="size-help" style="margin-top:10px"><strong>Our MOQ is 10 units for NCR and 50 units for non-NCR regions.
+                                Please select the appropriate option from the dropdown.
+                            </strong></div>
                             <div class="location-wrapper">
                         
                         
@@ -1406,7 +1408,7 @@
                                     moqValue.textContent = "10";
                                 } else if (city === "other" || city !== "") {
                                     // Out of NCR (15 pcs)
-                                    moqValue.textContent = "15";
+                                    moqValue.textContent = "50";
                                 } else {
                                     moqValue.textContent = "10"; // Default
                                 }
@@ -1582,7 +1584,7 @@
                                 <!-- SET SELECTION -->
                         
                                 <button onclick="decreaseSets()">-</button>
-                                <input id="qty" type="number" value="1" min="1">
+                                <input id="qty" type="number" value="0" min="1">
                                 <button onclick="increaseSets()">+</button>
                             </div>
                         
@@ -1660,7 +1662,7 @@
                                     const totalPrice = cart.reduce((sum, i) => sum + i.price, 0);
 
                                     message += `*Grand Total: ₹${totalPrice}*%0A%0A`;
-                                    message += "Please confirm your order.";
+                                   message += "Please help us in placing an order.";
 
                                     let whatsappURL = `https://wa.me/${phone}?text=${message}`;
 
@@ -1681,7 +1683,7 @@
                                     const moqValue = document.getElementById("moqValue");
 
                                     const ncrCities = cityData.delhi.map(c => c.toLowerCase());
-                                    let moq = ncrCities.includes(city) ? 10 : 15;
+                                    let moq = ncrCities.includes(city) ? 10 : 50;
 
                                     moqValue.textContent = moq;
 
