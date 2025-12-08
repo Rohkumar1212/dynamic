@@ -1251,17 +1251,19 @@
 
                         <div class="quality-select" aria-labelledby="qualityLabel" style="margin-top:12px">
                             <label id="qualityLabel">Select Box Quality / Material</label>
-                            <div class="quality-list" id="qualityList" role="radiogroup" aria-label="Quality types">
-
-                                <div tabindex="0" class="quality-item" data-key="double-wall"
-                                    onclick="selectQuality(this)">
-                                    Double Wall — 5 ply</div>
-                                <div tabindex="0" class="quality-item" data-key="kraft" onclick="selectQuality(this)">
+                            
+                            <div class="quality-list" id="qualityList" role="radiogroup">
+                                <div tabindex="0" class="quality-item active" onclick="selectQuality(this)">
+                                    Double Wall — 5 ply
+                                </div>
+                            
+                                <div tabindex="0" class="quality-item" onclick="selectQuality(this)">
                                     Kraft – Premium Finish
                                 </div>
-                                <div tabindex="0" class="quality-item" data-key="corrugated"
-                                    onclick="selectQuality(this)">
-                                    Corrugated — Heavy Duty</div>
+                            
+                                <div tabindex="0" class="quality-item" onclick="selectQuality(this)">
+                                    Corrugated — Heavy Duty
+                                </div>
 
                             </div>
                             <div class="size-help" style="margin-top:10px">Tip: For shifting purposes, 5-ply or
@@ -1359,6 +1361,17 @@
                         </div>
                     </div>
                     <script>
+                              function selectQuality(el) {
+                                    // remove old active class
+                                    document.querySelectorAll(".quality-item").forEach(q => q.classList.remove("active"));
+
+                                    // add active to clicked item
+                                    el.classList.add("active");
+
+                                    // store selected quality
+                                    selectedQuality = el.innerText.trim();
+                                }
+
                         // STATE → CITY DATA
                         const cityData = {
                             delhi: [
@@ -1487,6 +1500,7 @@
 
         cart.forEach((item, index) => {
             message += `*${index + 1}. ${item.title}*%0A`;
+              message += `Quality: ${item.quality}%0A`;
             message += `Sets: ${item.sets}%0A`;
             message += `MOQ: ${item.moq}%0A`;
             message += `Total Pcs: ${item.totalPcs}%0A`;
@@ -1583,6 +1597,7 @@
                             const item = {
                                 id: Date.now(),
                                 title: document.getElementById("productTitle").innerText,
+                                quality: selectedQuality,  
                                 sets,
                                 moq,
                                 totalPcs,
@@ -1624,6 +1639,7 @@
                                 list.innerHTML += `
                                         <div class="cart-item">
                                             <strong>${item.title}</strong><br>
+                                              Quality: ${item.quality}<br>
                                             Sets: ${item.sets}<br>
                                             MOQ: ${item.moq} pcs<br>
                                             Total Pcs: ${item.totalPcs}<br>
