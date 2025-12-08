@@ -1740,6 +1740,7 @@
                                 --------------------------------------- */
                                 function handleAddToCart() {
                                     const city = document.getElementById("citySelect").value;
+                                    const productImage = document.getElementById("mainImage").src;
 
                                     if (!city) {
                                         alert("Please select your city before adding to cart.");
@@ -1754,10 +1755,10 @@
 
                                     const item = {
                                         id: Date.now(),
+                                        image: productImage,
                                         title: document.getElementById("productTitle").innerText,
-                                          quality: selectedQuality, 
-                                        sets,
-                                        
+                                        quality: selectedQuality, 
+                                        sets,                                        
                                         moq,
                                         totalPcs,
                                         price: totalPrice
@@ -1797,6 +1798,7 @@
 
                                         list.innerHTML += `
                                                                     <div class="cart-item">
+                                                                        <img src="${item.image}" class="cart-img" alt="Product">
                                                                         <strong>${item.title}</strong><br>
                                                                           Quality: ${item.quality}<br>
                                                                         Sets: ${item.sets}<br>
@@ -1923,7 +1925,9 @@ function closeMoqPopup() {
 
                                     const item = {
                                         id: Date.now(),
+                                        image: productImage,                                        
                                         title: document.getElementById("productTitle").innerText,
+                                         quality: selectedQuality,
                                         sets,
                                         moq,
                                         totalPcs,
@@ -1962,6 +1966,7 @@ function closeMoqPopup() {
 
                                         list.innerHTML += `
                                                         <div class="cart-item">
+                                                            <img src="${item.image}" class="cart-img" alt="Product">
                                                             <strong>${item.title}</strong><br>
                                                                Quality: ${item.quality}<br>
                                                             Sets: ${item.sets}<br>
