@@ -1189,17 +1189,18 @@
                         <label id="qualityLabel">Select Box Quality / Material</label>
                         
                         <div class="quality-list" id="qualityList" role="radiogroup">
-                            <div tabindex="0" class="quality-item active" onclick="selectQuality(this)">
-                                Double Wall — 5 ply
-                            </div>
+                        <div class="quality-item" data-key="double-wall" onclick="selectQuality(this)">
+                            Double Wall — 5 ply
+                        </div>
                         
-                            <div tabindex="0" class="quality-item" onclick="selectQuality(this)">
-                                Kraft – Premium Finish
-                            </div>
+                        <div class="quality-item" data-key="kraft" onclick="selectQuality(this)">
+                            Kraft – Premium Finish
+                        </div>
                         
-                            <div tabindex="0" class="quality-item" onclick="selectQuality(this)">
-                                Corrugated — Heavy Duty
-                            </div>
+                        <div class="quality-item" data-key="corrugated" onclick="selectQuality(this)">
+                            Corrugated — Heavy Duty
+                        </div>
+
                     
                         </div>
                         <div class="size-help" style="margin-top:10px">Tip: For shifting purposes, 5-ply or
@@ -1298,16 +1299,19 @@
                         </div>
                     </div>
                     <script>
-                          function selectQuality(el) {
-                                // remove old active class
+                        function selectQuality(el) {
+
+                                // remove previous selection
                                 document.querySelectorAll(".quality-item").forEach(q => q.classList.remove("active"));
 
-                                // add active to clicked item
+                                // highlight clicked item
                                 el.classList.add("active");
 
-                                // store selected quality
+                                // set new quality
                                 selectedQuality = el.innerText.trim();
                             }
+
+
                         // STATE → CITY DATA
                         const cityData = {
                             delhi: [
@@ -1522,6 +1526,11 @@
                         function handleAddToCart() {
                             const city = document.getElementById("citySelect").value;
                              const productImage = document.getElementById("mainImage").src;
+
+                              if (!selectedQuality) {
+                                alert("Please select a box quality before adding to cart.");
+                                return;
+                            }
 
                             if (!city) {
                                 alert("Please select your city before adding to cart.");

@@ -1261,13 +1261,18 @@
                             <label id="qualityLabel">Select Box Quality / Material</label>
                             <div class="quality-list" id="qualityList" role="radiogroup" aria-label="Quality types">
                         
-                                <div tabindex="0" class="quality-item" data-key="double-wall" onclick="selectQuality(this)">
-                                    Double Wall — 5 ply</div>
-                                <div tabindex="0" class="quality-item" data-key="kraft" onclick="selectQuality(this)">
-                                    Kraft – Premium Finish
-                                </div>
-                                <div tabindex="0" class="quality-item" data-key="corrugated" onclick="selectQuality(this)">
-                                    Corrugated — Heavy Duty</div>
+                            <div class="quality-item" data-key="double-wall" onclick="selectQuality(this)">
+                                Double Wall — 5 ply
+                            </div>
+                            
+                            <div class="quality-item" data-key="kraft" onclick="selectQuality(this)">
+                                Kraft – Premium Finish
+                            </div>
+                            
+                            <div class="quality-item" data-key="corrugated" onclick="selectQuality(this)">
+                                Corrugated — Heavy Duty
+                            </div>
+
                         
                             </div>
                             <div class="size-help" style="margin-top:10px">Tip: For shifting purposes, 5-ply or
@@ -1365,17 +1370,18 @@
                             </div>
                         </div>
                     </div>
-                        <script>
-                                  function selectQuality(el) {
-                                        // remove old active class
-                                        document.querySelectorAll(".quality-item").forEach(q => q.classList.remove("active"));
+                        <script>function selectQuality(el) {
 
-                                        // add active to clicked item
-                                        el.classList.add("active");
+                                // remove previous selection
+                                document.querySelectorAll(".quality-item").forEach(q => q.classList.remove("active"));
 
-                                        // store selected quality
-                                        selectedQuality = el.innerText.trim();
-                                    }
+                                // highlight clicked item
+                                el.classList.add("active");
+
+                                // set new quality
+                                selectedQuality = el.innerText.trim();
+                            }
+
 
                             // STATE → CITY DATA
                             const cityData = {
