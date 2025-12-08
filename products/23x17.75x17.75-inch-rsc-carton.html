@@ -1251,16 +1251,16 @@
 
                         <div class="quality-select" aria-labelledby="qualityLabel" style="margin-top:12px">
                             <label id="qualityLabel">Select Box Quality / Material</label>
-                            
+
                             <div class="quality-list" id="qualityList" role="radiogroup">
                                 <div class="quality-item" data-key="double-wall" onclick="selectQuality(this)">
                                     Double Wall — 5 ply
                                 </div>
-                                
+
                                 <div class="quality-item" data-key="kraft" onclick="selectQuality(this)">
                                     Kraft – Premium Finish
                                 </div>
-                                
+
                                 <div class="quality-item" data-key="corrugated" onclick="selectQuality(this)">
                                     Corrugated — Heavy Duty
                                 </div>
@@ -1271,8 +1271,14 @@
                                 heavy-duty corrugated options are recommended for better load handling.
 
                             </div>
-<div class="size-help" style="margin-top:10px"><strong>Our MOQ is 10 units for NCR and 50 units for non-NCR regions. Please select the appropriate option from the dropdown.
-</strong></div>
+                            <div class="size-help" style="margin-top:10px"><strong>Our MOQ is 10 pieces for NCR and 50 pieces
+                                    for non-NCR regions. Please select the appropriate option from the dropdown.
+                                </strong>
+                          
+                            </div>
+                            <div class="size-help" style="margin-top:10px"><strong>Shipping bundle - 1 bundle= 5 pieces
+                                </strong>
+                            </div>
                             <div class="location-wrapper">
 
 
@@ -1297,6 +1303,9 @@
                                 </div>
                             </div>
                             <style>
+                                 .moq-inline-content{
+                                display: none;
+                            }
                                 /* Container — Hidden by Default */
                                 .moq-inline-popup {
                                     display: none;
@@ -1357,22 +1366,22 @@
                             </style>
 
                             <div class="moq-wrapper">
-                                <p>MOQ per set: <b id="moqValue">10</b> pcs</p>
+                                <p>MOQ: <b id="moqValue">10</b> pcs</p>
                             </div>
                         </div>
                     </div>
                     <script>
-                             function selectQuality(el) {
+                        function selectQuality(el) {
 
-                                    // remove previous selection
-                                    document.querySelectorAll(".quality-item").forEach(q => q.classList.remove("active"));
+                            // remove previous selection
+                            document.querySelectorAll(".quality-item").forEach(q => q.classList.remove("active"));
 
-                                    // highlight clicked item
-                                    el.classList.add("active");
+                            // highlight clicked item
+                            el.classList.add("active");
 
-                                    // set new quality
-                                    selectedQuality = el.innerText.trim();
-                                }
+                            // set new quality
+                            selectedQuality = el.innerText.trim();
+                        }
 
 
                         // STATE → CITY DATA
@@ -1458,7 +1467,7 @@
                             <!-- SET SELECTION -->
 
                             <button onclick="decreaseSets()">-</button>
-                              <input id="qty" type="number" value="0" min="1">
+                            <input id="qty" type="number" value="0" min="1">
                             <button onclick="increaseSets()">+</button>
                         </div>
 
@@ -1468,64 +1477,64 @@
 
                         <button class="view-cart" onclick="toggleCart()">🛒 View Cart</button>
                     </div>
-<style>
-    .whatsapp-btn {
-        width: 30%;
-        background: #25D366;
-        color: white;
-        border: none;
-        padding: 10px;
-        border-radius: 8px;
-        margin-top: -2px;
-        font-size: 13px;
-        font-weight: 600;
-        cursor: pointer;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        transition: 0.3s;
-    }
+                    <style>
+                        .whatsapp-btn {
+                            width: 30%;
+                            background: #25D366;
+                            color: white;
+                            border: none;
+                            padding: 10px;
+                            border-radius: 8px;
+                            margin-top: -2px;
+                            font-size: 13px;
+                            font-weight: 600;
+                            cursor: pointer;
+                            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+                            transition: 0.3s;
+                        }
 
-    .whatsapp-btn:hover {
-        background: #1ebe5d;
-        transform: scale(1.03);
-    }
-</style>
+                        .whatsapp-btn:hover {
+                            background: #1ebe5d;
+                            transform: scale(1.03);
+                        }
+                    </style>
 
-<script>
-    function sendWhatsAppOrder() {
-        if (!cart.length) {
-            alert("Your cart is empty!");
-            return;
-        }
+                    <script>
+                        function sendWhatsAppOrder() {
+                            if (!cart.length) {
+                                alert("Your cart is empty!");
+                                return;
+                            }
 
-        let phone = "919891040840";  // <-- Replace with business WhatsApp number
+                            let phone = "919891040840";  // <-- Replace with business WhatsApp number
 
-        let message = "*🛍️ New Cart Order Summary*%0A%0A";
+                            let message = "*🛍️ New Cart Order Summary*%0A%0A";
 
-        cart.forEach((item, index) => {
-            message += `*${index + 1}. ${item.title}*%0A`;
-              message += `Quality: ${item.quality}%0A`;
-            message += `Sets: ${item.sets}%0A`;
-            message += `MOQ: ${item.moq}%0A`;
-            message += `Total Pcs: ${item.totalPcs}%0A`;
-            message += `Price: ₹${item.price}%0A`;
+                            cart.forEach((item, index) => {
+                                message += `*${index + 1}. ${item.title}*%0A`;
+                                message += `Quality: ${item.quality}%0A`;
+                                message += `Sets: ${item.sets}%0A`;
+                                message += `MOQ: ${item.moq}%0A`;
+                                message += `Total Pcs: ${item.totalPcs}%0A`;
+                                message += `Price: ₹${item.price}%0A`;
 
-            if (item.image) {
-                message += `Image: ${item.image}%0A`;
-            }
+                                if (item.image) {
+                                    message += `Image: ${item.image}%0A`;
+                                }
 
-            message += `%0A-------------------------%0A%0A`;
-        });
+                                message += `%0A-------------------------%0A%0A`;
+                            });
 
-        const totalPrice = cart.reduce((sum, i) => sum + i.price, 0);
+                            const totalPrice = cart.reduce((sum, i) => sum + i.price, 0);
 
-        message += `*Grand Total: ₹${totalPrice}*%0A%0A`;
-       message += "Please help us in placing an order.";
+                            message += `*Grand Total: ₹${totalPrice}*%0A%0A`;
+                            message += "Please help us in placing an order.";
 
-        let whatsappURL = `https://wa.me/${phone}?text=${message}`;
+                            let whatsappURL = `https://wa.me/${phone}?text=${message}`;
 
-        window.open(whatsappURL, "_blank");
-    }
-</script>
+                            window.open(whatsappURL, "_blank");
+                        }
+                    </script>
 
 
                     <script>
@@ -1585,7 +1594,7 @@
                         --------------------------------------- */
                         function handleAddToCart() {
                             const city = document.getElementById("citySelect").value;
-                             const productImage = document.getElementById("mainImage").src;
+                            const productImage = document.getElementById("mainImage").src;
 
                             if (!city) {
                                 alert("Please select your city before adding to cart.");
@@ -1602,7 +1611,7 @@
                                 id: Date.now(),
                                 image: productImage,
                                 title: document.getElementById("productTitle").innerText,
-                                quality: selectedQuality,  
+                                quality: selectedQuality,
                                 sets,
                                 moq,
                                 totalPcs,
@@ -1726,7 +1735,7 @@
                     </div>
 
                     const selectedProductImage = document.getElementById('selectedProductImage');
-                      const sizeSelect = document.getElementById('sizeSelect');
+                    const sizeSelect = document.getElementById('sizeSelect');
                     const selectedSizeEl = document.getElementById('selectedSize');
                     const selectedPxEl = document.getElementById('selectedPx');
                     const customSizeInput = document.getElementById('customSize');
