@@ -958,8 +958,6 @@
                     </div>
         </header>
         <div class="page-frame" role="main" aria-label="Product details for box">
-
-
             <div class="product-row">
                 <!-- LEFT: Images -->
                 <div class="image-section" aria-hidden="false">
@@ -1207,14 +1205,7 @@
                             heavy-duty corrugated options are recommended for better load handling.
                     
                         </div>
-                        <div class="size-help" style="margin-top:10px"><strong>Our MOQ is 10 pieces for NCR and 50 pieces for non-NCR regions. 
-                                Please select the appropriate option from the dropdown.
-                            </strong>
-                        
-                        <div class="size-help" style="margin-top:10px"><strong>Shipping bundle - 1 bundle= 5 pieces
-                            </strong>
-                        </div>
-                    
+                       
                         <div class="location-wrapper">
                     
                     
@@ -1317,78 +1308,81 @@
                                 // set new quality
                                 selectedQuality = el.innerText.trim();
                             }
+  /* ------------------------------
+     NCR CITIES
+  -------------------------------*/
+    const cityData = {
+        delhi: [
+            "New Delhi", "Noida", "Greater Noida", "Ghaziabad",
+            "South Delhi", "North Delhi", "West Delhi", "East Delhi",
+            "Central Delhi", "Gurgaon", "Faridabad", "Meerut"
+        ],
+    };
 
+    /* ------------------------------
+       GET CURRENT MOQ (10 or 50)
+    -------------------------------*/
+    function getMOQ() {
+        const city = document.getElementById("citySelect").value;
+        const ncrCities = cityData.delhi.map(c => c.toLowerCase());
+        return ncrCities.includes(city) ? 10 : 50;
+    }
 
-                        // STATE → CITY DATA
-                        const cityData = {
-                            delhi: [
-                                "New Delhi", "Noida", "Greater Noida", "Ghaziabad",
-                                "South Delhi", "North Delhi", "West Delhi", "East Delhi",
-                                "Central Delhi", "Gurgaon", "Faridabad", "Meerut"
-                            ],
-                        };
+    /* ------------------------------
+       UPDATE MOQ + UPDATE QTY FIELD
+    -------------------------------*/
+    function updateMOQ() {
+        const moq = getMOQ();
+        const qtyBox = document.getElementById("qty");
 
-                        // LOAD CITIES BASED ON STATE
-                        function loadCities() {
-                            const state = document.getElementById("stateSelect").value;
-                            const citySelect = document.getElementById("citySelect");
+        qtyBox.min = moq;       // set minimum allowed qty
+        qtyBox.value = moq;     // automatically update qty
+        document.getElementById("moqValue").innerText = moq;
+    }
 
-                            citySelect.innerHTML = `<option value="">-- Select City --</option>`;
+    /* ------------------------------
+       LOAD CITIES BASED ON STATE
+    -------------------------------*/
+    function loadCities() {
+        const state = document.getElementById("stateSelect").value;
+        const citySelect = document.getElementById("citySelect");
 
-                            if (cityData[state]) {
-                                // Add NCR cities
-                                cityData[state].forEach(city => {
-                                    citySelect.innerHTML += `<option value="${city.toLowerCase()}">${city}</option>`;
-                                });
-                            } else {
-                                // OUT OF NCR
-                                citySelect.innerHTML += `<option value="other">Other City</option>`;
-                            }
+        citySelect.innerHTML = `<option value="">-- Select City --</option>`;
 
-                            // Reset MOQ when state changes
-                            updateMOQ();
-                        }
+        if (cityData[state]) {
+            cityData[state].forEach(city => {
+                citySelect.innerHTML += `<option value="${city.toLowerCase()}">${city}</option>`;
+            });
+        } else {
+            citySelect.innerHTML = `<option value="other">Other City</option>`;
+        }
 
-                        // SET MOQ BASED ON CITY
-                        function updateMOQ() {
-                            const city = document.getElementById("citySelect").value;
-                            const moqValue = document.getElementById("moqValue");
+        updateMOQ();  // apply MOQ after selecting state
+    }
 
-                            // NCR cities (10 pcs)
-                            const ncrCities = cityData.delhi.map(c => c.toLowerCase());
+    /* ------------------------------
+       INCREASE QTY (NO LIMIT)
+    -------------------------------*/
+    function increaseSets() {
+        const qtyBox = document.getElementById("qty");
+        qtyBox.value = parseInt(qtyBox.value) + 1;
+    }
 
-                            if (ncrCities.includes(city)) {
-                                moqValue.textContent = "10";
-                            } else if (city === "other" || city !== "") {
-                                // Out of NCR (15 pcs)
-                                moqValue.textContent = "50";
-                            } else {
-                                moqValue.textContent = "10"; // Default
-                            }
-                        }
+    /* ------------------------------
+       DECREASE QTY (NEVER BELOW MOQ)
+    -------------------------------*/
+    function decreaseSets() {
+        const qtyBox = document.getElementById("qty");
+        const moq = getMOQ();
 
-                        /* QUANTITY BUTTONS WITH POPUP */
-                        function increaseSets() {
-                            let qtyBox = document.getElementById("qty");
-                            qtyBox.value = parseInt(qtyBox.value || 1) + 1;
+        let qty = parseInt(qtyBox.value);
 
-                            const moq = getMOQ();
-                            const qty = parseInt(qtyBox.value);
-
-                            showMoqPopup(moq, qty);
-                        }
-
-                        function decreaseSets() {
-                            let qtyBox = document.getElementById("qty");
-                            let qty = parseInt(qtyBox.value || 1);
-
-                            if (qty > 1) qty--;
-                            qtyBox.value = qty;
-
-                            const moq = getMOQ();
-                            showMoqPopup(moq, qty);
-                        }
-
+        if (qty > moq) {
+            qtyBox.value = qty - 1;
+        } else {
+            qtyBox.value = moq;  // lock to MOQ minimum
+        }
+    }
 
                         /* MANUAL CLOSE BUTTON */
                         function closeMoqPopup() {
@@ -1402,10 +1396,8 @@
                     <!-- controls -->
                     <div class="controls" role="group" aria-label="quantity and actions">
                         <div class="qty-wrap">
-                            <!-- SET SELECTION -->
-                    
                             <button onclick="decreaseSets()">-</button>
-                              <input id="qty" type="number" value="0" min="1">
+                            <input id="qty" type="number" value="10" min="10">
                             <button onclick="increaseSets()">+</button>
                         </div>
                     
@@ -1438,40 +1430,26 @@
                     </style>
                     
                     <script>
-                        function sendWhatsAppOrder() {
-                            if (!cart.length) {
-                                alert("Your cart is empty!");
-                                return;
+                           function sendWhatsAppOrder() {
+
+
+                                let phone = "919891040840";  // Your WhatsApp number
+
+                                let message = "*🛍️ New Order Summary*%0A%0A";
+
+                                const totalPrice = cart.reduce((sum, i) => sum + i.price, 0);
+
+                                // ADD YOUR WEBSITE URL HERE
+                                message += `🌐 : https://dynamiccorrugations.com/%0A%0A`;
+
+                                message += "Please help us in placing an order.";
+
+                                // WhatsApp URL
+                                let whatsappURL = `https://wa.me/${phone}?text=${message}`;
+
+                                window.open(whatsappURL, "_blank");
                             }
-
-                            let phone = "919891040840";  // <-- Replace with business WhatsApp number
-
-                            let message = "*🛍️ New Cart Order Summary*%0A%0A";
-
-                            cart.forEach((item, index) => {
-                                message += `*${index + 1}. ${item.title}*%0A`;
-                                  message += `Quality: ${item.quality}%0A`;
-                                message += `Sets: ${item.sets}%0A`;
-                                message += `MOQ: ${item.moq}%0A`;
-                                message += `Total Pcs: ${item.totalPcs}%0A`;
-                                message += `Price: ₹${item.price}%0A`;
-
-                                if (item.image) {
-                                    message += `Image: ${item.image}%0A`;
-                                }
-
-                                message += `%0A-------------------------%0A%0A`;
-                            });
-
-                            const totalPrice = cart.reduce((sum, i) => sum + i.price, 0);
-
-                            message += `*Grand Total: ₹${totalPrice}*%0A%0A`;
-                            message += "Please help us in placing an order..";
-
-                            let whatsappURL = `https://wa.me/${phone}?text=${message}`;
-
-                            window.open(whatsappURL, "_blank");
-                        }
+                        
                     </script><script>
                         function sendWhatsAppOrder() {
                            
@@ -2058,102 +2036,102 @@
                 <button class="primary-btn" onclick="checkout()">Checkout</button>
             </div>
         </div>
-        <!-- Footer -->
-        <footer id="footer">
-            <div class="footer-content">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-4  col-lg-2 col-md-4">
-                            <!-- Footer widget area 1 -->
-                            <div class="widget  widget-contact-us"
-                                style="background-image: url('images/world-map-dark.png'); background-position: 50% 20px; background-repeat: no-repeat">
-                                <h4>About Dynamic Corrugations</h4>
-                                <ul class="list-icon">
-                                    <li><i class="fa fa-map-marker-alt"></i>40 K.M. Stone,Vill. Narsinghpur,
-                                        Delhi-Jaipur Highway, Sector-35 Gurugram-122004 (Hr)</li>
-                                    <li><i class="fa fa-phone"></i><a href="tel:+919891040840">+91 9891040840</a></li>
-                                    <li><i class="far fa-envelope"></i><a
-                                            href="mailto:mail@dynamiccorrugations.com">mail@dynamiccorrugations.com </a>
-                                    </li>
-
-                                </ul>
-                            </div>
-                            <!-- end: Footer widget area 1 -->
-                        </div>
-
-                        <div class="col-xl-2 col-lg-2 col-md-4">
-                            <!-- Footer widget area 1 -->
-                            <div class="widget">
-                                <h4>Useful Links</h4>
-                                <ul class="list">
-                                    <li><a href="/contact.html">Connect us</a></li>
-                                    <li><a href="#">Privacy Policy</a></li>
-                                    <li><a href="#">Return & Refund Policy</a></li>
-                                    <li><a href="#">Cancellation Policy</a></li>
-                                    <li><a href="#">Terms & Condition</a></li>
-                                </ul>
-                            </div>
-                            <!-- end: Footer widget area 1 -->
-                        </div>
-                        <div class="col-xl-2 col-lg-2 col-md-4">
-                            <!-- Footer widget area 2 -->
-                            <div class="widget">
-                                <h4>Utility pages</h4>
-                                <ul class="list">
-                                    <li><a href="maintenance.html">Corrugated Roll</a></li>
-                                    <li><a href="maintenance.html">Triple Wall Box</a></li>
-                                    <li><a href="maintenance.html">Corrugated Box</a></li>
-                                    <li><a href="maintenance.html">Corrugated Boards</a></li>
-                                    <li><a href="maintenance.html">Pizza Box</a></li>
-                                </ul>
-                            </div>
-                            <!-- end: Footer widget area 2 -->
-                        </div>
-                        <div class="col-xl-4 col-lg-2 col-md-4 widget">
-                            <h4>Social links and timiings</h4>
-                            <div class="social-icons social-icons-colored float-left">
-                                <ul>
-                                    <li class="social-facebook"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li class="social-twitter"><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                    <li class="social-youtube"><a href="#"><i class="fab fa-youtube"></i></a></li>
-                                    <li class="social-gplus"><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
-                                </ul>
-                                <br>
-                                <ul class="list">
-                                    <li><i class="far fa-clock"></i> Monday - Saturday:- <strong>08:00 - 18:30</strong>
-                                        <br>
-                                        Sunday: <strong>Closed</strong>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- end: Footer widget area 2 -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="copyright-content cta-section">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <!-- Social icons -->
-
-                            <div class="copyright-text text-left">&copy; 2025 Dynamic Corrugations. All Rights
-                                Reserved.
-
-                            </div>
-                            <!-- end: Social icons -->
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="copyright-text text-right"><a href="https://dynamiccorrugations.com/">Desinged
-                                    by Dynamic Corrugations</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        <!-- Footer -->       
         <!-- end: Footer -->
     </div>
+    <footer id="footer">
+        <div class="footer-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4  col-lg-2 col-md-4">
+                        <!-- Footer widget area 1 -->
+                        <div class="widget  widget-contact-us"
+                            style="background-image: url('images/world-map-dark.png'); background-position: 50% 20px; background-repeat: no-repeat">
+                            <h4>About Dynamic Corrugations</h4>
+                            <ul class="list-icon">
+                                <li><i class="fa fa-map-marker-alt"></i>40 K.M. Stone,Vill. Narsinghpur,
+                                    Delhi-Jaipur Highway, Sector-35 Gurugram-122004 (Hr)</li>
+                                <li><i class="fa fa-phone"></i><a href="tel:+919891040840">+91 9891040840</a></li>
+                                <li><i class="far fa-envelope"></i><a
+                                        href="mailto:mail@dynamiccorrugations.com">mail@dynamiccorrugations.com </a>
+                                </li>
+    
+                            </ul>
+                        </div>
+                        <!-- end: Footer widget area 1 -->
+                    </div>
+    
+                    <div class="col-xl-2 col-lg-2 col-md-4">
+                        <!-- Footer widget area 1 -->
+                        <div class="widget">
+                            <h4>Useful Links</h4>
+                            <ul class="list">
+                                <li><a href="/contact.html">Connect us</a></li>
+                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="#">Return & Refund Policy</a></li>
+                                <li><a href="#">Cancellation Policy</a></li>
+                                <li><a href="#">Terms & Condition</a></li>
+                            </ul>
+                        </div>
+                        <!-- end: Footer widget area 1 -->
+                    </div>
+                    <div class="col-xl-2 col-lg-2 col-md-4">
+                        <!-- Footer widget area 2 -->
+                        <div class="widget">
+                            <h4>Utility pages</h4>
+                            <ul class="list">
+                                <li><a href="maintenance.html">Corrugated Roll</a></li>
+                                <li><a href="maintenance.html">Triple Wall Box</a></li>
+                                <li><a href="maintenance.html">Corrugated Box</a></li>
+                                <li><a href="maintenance.html">Corrugated Boards</a></li>
+                                <li><a href="maintenance.html">Pizza Box</a></li>
+                            </ul>
+                        </div>
+                        <!-- end: Footer widget area 2 -->
+                    </div>
+                    <div class="col-xl-4 col-lg-2 col-md-4 widget">
+                        <h4>Social links and timiings</h4>
+                        <div class="social-icons social-icons-colored float-left">
+                            <ul>
+                                <li class="social-facebook"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                <li class="social-twitter"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li class="social-youtube"><a href="#"><i class="fab fa-youtube"></i></a></li>
+                                <li class="social-gplus"><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                            </ul>
+                            <br>
+                            <ul class="list">
+                                <li><i class="far fa-clock"></i> Monday - Saturday:- <strong>08:00 - 18:30</strong>
+                                    <br>
+                                    Sunday: <strong>Closed</strong>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- end: Footer widget area 2 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-content cta-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <!-- Social icons -->
+    
+                        <div class="copyright-text text-left">&copy; 2025 Dynamic Corrugations. All Rights
+                            Reserved.
+    
+                        </div>
+                        <!-- end: Social icons -->
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="copyright-text text-right"><a href="https://dynamiccorrugations.com/">Desinged
+                                by Dynamic Corrugations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
     <!-- Scroll top -->
 
     <div class="fixed-icons">
