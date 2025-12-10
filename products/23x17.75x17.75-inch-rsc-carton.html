@@ -1223,7 +1223,7 @@
                         </div>
                         <div style="text-align:left" class="w-50">
                             <div class="price" id="productPrice">₹ 320 / pc</div>
-                            
+
                             <div class="rating" aria-hidden="true">⭐ ⭐ ⭐ ⭐ ☆ (4.3)</div>
                         </div>
                     </div>
@@ -1271,21 +1271,21 @@
                                 heavy-duty corrugated options are recommended for better load handling.
 
                             </div>
-                         
+
                             <div class="location-wrapper">
-                            
-                            
+
+
                                 <select id="stateSelect" onchange="loadCities()">
                                     <option value="">-- Select State --</option>
                                     <option value="delhi">IN NCR</option>
                                     <option value="other">Out of NCR</option>
                                 </select>
-                            
+
                                 <select id="citySelect" onchange="updateMOQ()">
                                     <option value="">-- Select City --</option>
                                 </select>
-                            
-                            
+
+
                             </div>
 
                             <div id="moqPopup" class="moq-inline-popup">
@@ -1296,9 +1296,10 @@
                                 </div>
                             </div>
                             <style>
-                                 .moq-inline-content{
-                                display: none;
-                            }
+                                .moq-inline-content {
+                                    display: none;
+                                }
+
                                 /* Container — Hidden by Default */
                                 .moq-inline-popup {
                                     display: none;
@@ -1377,72 +1378,6 @@
                         }
 
 
-                        // STATE → CITY DATA
-                        const cityData = {
-                            delhi: [
-                                "New Delhi", "Noida", "Greater Noida", "Ghaziabad",
-                                "South Delhi", "North Delhi", "West Delhi", "East Delhi",
-                                "Central Delhi", "Gurgaon", "Faridabad", "Meerut"
-                            ],
-                        };
-
-                    function loadCities() {
-                            const state = document.getElementById("stateSelect").value;
-                            const citySelect = document.getElementById("citySelect");
-
-                            citySelect.innerHTML = `<option value="">-- Select City --</option>`;
-
-                            if (cityData[state]) {
-                                cityData[state].forEach(city => {
-                                    citySelect.innerHTML += `<option value="${city.toLowerCase()}">${city}</option>`;
-                                });
-                            } else {
-                                citySelect.innerHTML = `<option value="other">Other City</option>`;
-                            }
-
-                            updateMOQ();  // apply MOQ after selecting state
-                        }
-
-                        // SET MOQ BASED ON CITY
-                        function updateMOQ() {
-                            const city = document.getElementById("citySelect").value;
-                            const moqValue = document.getElementById("moqValue");
-
-                            // NCR cities (10 pcs)
-                            const ncrCities = cityData.delhi.map(c => c.toLowerCase());
-
-                            if (ncrCities.includes(city)) {
-                                moqValue.textContent = "10";
-                            } else if (city === "other" || city !== "") {
-                                // Out of NCR (15 pcs)
-                                moqValue.textContent = "50";
-                            } else {
-                                moqValue.textContent = "10"; // Default
-                            }
-                        }
-
-                        /* QUANTITY BUTTONS WITH POPUP */
-                        function increaseSets() {
-                            let qtyBox = document.getElementById("qty");
-                            qtyBox.value = parseInt(qtyBox.value || 1) + 1;
-
-                            const moq = getMOQ();
-                            const qty = parseInt(qtyBox.value);
-
-                            showMoqPopup(moq, qty);
-                        }
-
-                        function decreaseSets() {
-                            let qtyBox = document.getElementById("qty");
-                            let qty = parseInt(qtyBox.value || 1);
-
-                            if (qty > 1) qty--;
-                            qtyBox.value = qty;
-
-                            const moq = getMOQ();
-                            showMoqPopup(moq, qty);
-                        }
-
 
                         /* MANUAL CLOSE BUTTON */
                         function closeMoqPopup() {
@@ -1450,6 +1385,128 @@
                         }
                     </script>
 
+                    <script>
+                        // ----------------------------------
+                        // CITY DATA → NCR
+                        // ----------------------------------
+                        const cityData = {
+                            delhi: [
+                                "New delhi", "Noida", "Greater noida", "Ghaziabad",
+                                "South delhi", "North delhi", "West delhi", "East delhi",
+                                "Central delhi", "Gurgaon", "Faridabad", "Meerut"
+                            ],
+                        };
+
+                        // ----------------------------------
+                        // GET MOQ BASED ON CITY
+                        // ----------------------------------
+                        function getMOQ() {
+                            const city = document.getElementById("citySelect").value; // e.g. "noida" or "other"
+
+                            if (!city) {
+                                // No city selected → no MOQ enforcement
+                                return 1;
+                            }
+
+                            const ncrCities = cityData.delhi.map(c => c.toLowerCase());
+
+                            // NCR city → 10, otherwise → 50
+                            return ncrCities.includes(city) ? 10 : 50;
+                        }
+
+                        // ----------------------------------
+                        // UPDATE MOQ TEXT + QTY FIELD
+                        // ----------------------------------
+                        function updateMOQ() {
+                            const moq = getMOQ();
+                            const moqLabel = document.getElementById("moqValue");
+                            const qtyBox = document.getElementById("qty");
+
+                            if (moq === 1) {
+                                // No city selected
+                                moqLabel.innerText = "Plz Select above";
+                                qtyBox.min = 1;
+                                return;
+                            }
+
+                            // Set MOQ number in text
+                            moqLabel.innerText = moq;
+
+                            // Enforce MOQ in qty input
+                            qtyBox.min = moq;
+                            if (parseInt(qtyBox.value) < moq || isNaN(parseInt(qtyBox.value))) {
+                                qtyBox.value = moq;
+                            }
+                        }
+
+                        // ----------------------------------
+                        // LOAD CITIES BASED ON AREA (STATE)
+                        // ----------------------------------
+                        function loadCities() {
+                            const state = document.getElementById("stateSelect").value;
+                            const citySelect = document.getElementById("citySelect");
+
+                            citySelect.innerHTML = `<option value="">-- Select City --</option>`;
+
+                            if (cityData[state]) {
+                                // NCR: load NCR cities
+                                cityData[state].forEach(city => {
+                                    citySelect.innerHTML += `<option value="${city.toLowerCase()}">${city}</option>`;
+                                });
+                            } else if (state === "other") {
+                                // Out of NCR → generic option
+                                citySelect.innerHTML = `<option value="other">Other City</option>`;
+                            }
+
+                            // Reset MOQ & qty when area changes
+                            updateMOQ();
+                        }
+
+                        // ----------------------------------
+                        // INCREASE QTY (NO LIMIT UPWARD)
+                        // ----------------------------------
+                        function increaseSets() {
+                            const qtyBox = document.getElementById("qty");
+                            let qty = parseInt(qtyBox.value) || 0;
+
+                            qty = qty + 1;
+                            qtyBox.value = qty;
+                        }
+
+                        // ----------------------------------
+                        // DECREASE QTY (NEVER BELOW MOQ)
+                        // ----------------------------------
+                        function decreaseSets() {
+                            const qtyBox = document.getElementById("qty");
+                            let qty = parseInt(qtyBox.value) || 0;
+
+                            const moq = getMOQ();
+
+                            if (qty > moq) {
+                                qty = qty - 1;
+                            } else {
+                                qty = moq; // lock at MOQ
+                            }
+
+                            qtyBox.value = qty;
+                        }
+
+                        // ----------------------------------
+                        // BLOCK TYPING BELOW MOQ
+                        // ----------------------------------
+                        window.addEventListener("DOMContentLoaded", function () {
+                            const qtyBox = document.getElementById("qty");
+
+                            qtyBox.addEventListener("input", function () {
+                                const moq = getMOQ();
+                                let val = parseInt(this.value);
+
+                                if (isNaN(val) || val < moq) {
+                                    this.value = moq;
+                                }
+                            });
+                        });
+                    </script>
                     <!-- controls -->
                     <div class="controls" role="group" aria-label="quantity and actions">
                         <div class="qty-wrap">
@@ -1488,22 +1545,21 @@
                         }
                     </style>
 
-                 <script>
-                    function shareOnWhatsApp() {
+                    <script>
+                        function shareOnWhatsApp() {
 
-                        let productURL = window.location.href;
+                            let productURL = window.location.href;
 
-                        let message =
-                            "*🛍️ Check this product!*%0A%0A" +
-                            productURL;
+                            let message =
+                                "*🛍️ Check this product!*%0A%0A" +
+                                productURL;
 
-                        // WhatsApp share intent (user chooses contacts)
-                        let url = `https://api.whatsapp.com/send?text=${message}`;
+                            // WhatsApp share intent (user chooses contacts)
+                            let url = `https://api.whatsapp.com/send?text=${message}`;
 
-                        window.open(url, "_blank");
-                    }
-                </script>
-
+                            window.open(url, "_blank");
+                        }
+                    </script>
 
                     <script>
                         /* -------------------------------------
@@ -1512,49 +1568,7 @@
                         let cart = [];
                         const BOX_RATE = 320;
                         /* Update MOQ + Show Inline Popup */
-                        function updateMOQ() {
-                            const city = document.getElementById("citySelect").value;
-                            const moqValue = document.getElementById("moqValue");
 
-                            const ncrCities = cityData.delhi.map(c => c.toLowerCase());
-                            let moq = ncrCities.includes(city) ? 10 : 50;
-
-                            moqValue.textContent = moq;
-
-                            // Quantity (default 1)
-                            let qty = 1;
-                            let price = moq * qty * BOX_RATE;
-
-                            // Update Popup Content
-                            document.getElementById("moqText").innerHTML = `MOQ Required: <b>${moq}</b> pcs`;
-                            document.getElementById("priceText").innerHTML = `Price (MOQ × ${qty} × ${BOX_RATE}): <b>₹${price}</b>`;
-
-                            // Show Popup
-                            const popup = document.getElementById("moqPopup");
-                            popup.style.display = "block";
-
-                            // Auto-close after 3 seconds
-                            setTimeout(() => popup.style.display = "none", 3000);
-                        }
-
-                        /* Close Popup */
-                        function closeMoqPopup() {
-                            document.getElementById("moqPopup").style.display = "none";
-                        }
-
-                        /* -------------------------------------
-                           SET BUTTONS
-                        --------------------------------------- */
-                        function increaseSets() {
-                            let qty = document.getElementById("qty");
-                            qty.value = parseInt(qty.value || 1) + 1;
-                        }
-
-                        function decreaseSets() {
-                            let qty = document.getElementById("qty");
-                            const val = parseInt(qty.value || 1);
-                            qty.value = val > 1 ? val - 1 : 1;
-                        }
 
 
                         /* -------------------------------------
@@ -1563,6 +1577,8 @@
                         function handleAddToCart() {
                             const city = document.getElementById("citySelect").value;
                             const productImage = document.getElementById("mainImage").src;
+
+
 
                             if (!city) {
                                 alert("Please select your city before adding to cart.");
@@ -1579,11 +1595,11 @@
                                 id: Date.now(),
                                 image: productImage,
                                 title: document.getElementById("productTitle").innerText,
-                              
                                 sets,
                                 moq,
                                 totalPcs,
-                                price: totalPrice
+                                price: totalPrice,
+
                             };
 
                             cart.push(item);
@@ -1619,17 +1635,17 @@
                                 total += item.price;
 
                                 list.innerHTML += `
-                                        <div class="cart-item">
-                                            <img src="${item.image}" class="cart-img" alt="Product">
-                                            <strong>${item.title}</strong><br>
-                                            
-                                            Sets: ${item.sets}<br>
-                                            MOQ: ${item.moq} pcs<br>
-                                            Total Pcs: ${item.totalPcs}<br>
-                                            Price: ₹${item.price}<br><br>
-                                            <button class="remove-btn" onclick="removeItem(${item.id})">Remove</button>
-                                        </div>
-                                    `;
+                                                                            <div class="cart-item">
+                                                                               <img src="${item.image}" class="cart-img" alt="Product">
+                                                                                <strong>${item.title}</strong><br>
+                                                                                
+                                                                                Sets: ${item.sets}<br>
+                                                                                MOQ: ${item.moq} pcs<br>
+                                                                                Total Pcs: ${item.totalPcs}<br>
+                                                                                Price: ₹${item.price}<br><br>
+                                                                                <button class="remove-btn" onclick="removeItem(${item.id})">Remove</button>
+                                                                            </div>
+                                                                        `;
                             });
 
                             totalEl.innerText = "₹" + total;
@@ -1645,7 +1661,18 @@
                         function toggleCart() {
                             document.getElementById("cartModal").classList.toggle("open");
                         }
+                        window.addEventListener("DOMContentLoaded", function () {
+                            const qtyBox = document.getElementById("qty");
 
+                            qtyBox.addEventListener("input", function () {
+                                const moq = getMOQ();
+                                let val = parseInt(this.value);
+
+                                if (isNaN(val) || val < moq) {
+                                    this.value = moq;
+                                }
+                            });
+                        });
 
                         /* -------------------------------------
                                      CHECKOUT — MUST SELECT CITY BEFORE PROCEED
