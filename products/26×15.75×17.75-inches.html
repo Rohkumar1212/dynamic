@@ -1285,19 +1285,19 @@
                             </div>
 
                             <div class="location-wrapper">
-
-
+                            
+                            
                                 <select id="stateSelect" onchange="loadCities()">
                                     <option value="">-- Select State --</option>
                                     <option value="delhi">IN NCR</option>
                                     <option value="other">Out of NCR</option>
                                 </select>
-
+                            
                                 <select id="citySelect" onchange="updateMOQ()">
                                     <option value="">-- Select City --</option>
                                 </select>
-
-
+                            
+                            
                             </div>
 
                             <div id="moqPopup" class="moq-inline-popup">
@@ -1372,7 +1372,7 @@
                             </style>
 
                             <div class="moq-wrapper">
-                                <p>MOQ: <b id="moqValue">10</b> pcs</p>
+                                <p>MOQ: <b id="moqValue">Plz Select above </b>piese </p>
                             </div>
                         </div>
                     </div>
@@ -1398,26 +1398,22 @@
                             ],
                         };
 
-                        // LOAD CITIES BASED ON STATE
                         function loadCities() {
-                            const state = document.getElementById("stateSelect").value;
-                            const citySelect = document.getElementById("citySelect");
+                                const state = document.getElementById("stateSelect").value;
+                                const citySelect = document.getElementById("citySelect");
 
-                            citySelect.innerHTML = `<option value="">-- Select City --</option>`;
+                                citySelect.innerHTML = `<option value="">-- Select City --</option>`;
 
-                            if (cityData[state]) {
-                                // Add NCR cities
-                                cityData[state].forEach(city => {
-                                    citySelect.innerHTML += `<option value="${city.toLowerCase()}">${city}</option>`;
-                                });
-                            } else {
-                                // OUT OF NCR
-                                citySelect.innerHTML += `<option value="other">Other City</option>`;
+                                if (cityData[state]) {
+                                    cityData[state].forEach(city => {
+                                        citySelect.innerHTML += `<option value="${city.toLowerCase()}">${city}</option>`;
+                                    });
+                                } else {
+                                    citySelect.innerHTML = `<option value="other">Other City</option>`;
+                                }
+
+                                updateMOQ();  // apply MOQ after selecting state
                             }
-
-                            // Reset MOQ when state changes
-                            updateMOQ();
-                        }
 
                         // SET MOQ BASED ON CITY
                         function updateMOQ() {
@@ -1613,7 +1609,7 @@
 
                         <button class="primary-btn" id="addToCartBtn" onclick="handleAddToCart()">Add to Cart</button>
                         <button class="outline-btn" onclick="addToCartView()">Add & View Cart</button>
-                        <button class="whatsapp-btn" onclick="sendWhatsAppOrder()">Share on WhatsApp</button>
+                        <button class="whatsapp-btn" onclick="shareOnWhatsApp()">Share on WhatsApp</button>
 
                         <button class="view-cart" onclick="toggleCart()">🛒 View Cart</button>
                     </div>
@@ -1656,29 +1652,21 @@
                             transform: scale(1.03);
                         }
                     </style>
+                <script>
+                    function shareOnWhatsApp() {
 
-                    <script>
-                        function sendWhatsAppOrder() {
+                        let productURL = window.location.href;
 
+                        let message =
+                            "*🛍️ Check this product!*%0A%0A" +
+                            productURL;
 
-                            let phone = "919891040840";  // Your WhatsApp number
+                        // WhatsApp share intent (user chooses contacts)
+                        let url = `https://api.whatsapp.com/send?text=${message}`;
 
-                            let message = "*🛍️ New Order Summary*%0A%0A";
-
-                            const totalPrice = cart.reduce((sum, i) => sum + i.price, 0);
-
-                            // ADD YOUR WEBSITE URL HERE
-                            message += `🌐 : https://dynamiccorrugations.com/products/18-x-15-x-16-inches.html/%0A%0A`;
-
-                            message += "Please help us in placing an order.";
-
-                            // WhatsApp URL
-                            let whatsappURL = `https://wa.me/${phone}?text=${message}`;
-
-                            window.open(whatsappURL, "_blank");
-                        }
-
-                    </script>
+                        window.open(url, "_blank");
+                    }
+                </script>
 
 
                     <script>

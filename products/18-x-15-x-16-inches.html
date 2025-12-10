@@ -1293,7 +1293,7 @@
                         </style>
                     
                         <div class="moq-wrapper">
-                            <p>MOQ: <b id="moqValue">10</b> pcs</p>
+                            <p>MOQ: <b id="moqValue">Plz Select above </b>piese </p>
                         </div>
                     </div>
                     <script>
@@ -1335,10 +1335,16 @@
         const moq = getMOQ();
         const qtyBox = document.getElementById("qty");
 
-        qtyBox.min = moq;       // set minimum allowed qty
-        qtyBox.value = moq;     // automatically update qty
+        qtyBox.min = moq;
+
+        // If current qty is lower than new MOQ → auto-increase to MOQ
+        if (parseInt(qtyBox.value) < moq) {
+            qtyBox.value = moq;
+        }
+
         document.getElementById("moqValue").innerText = moq;
     }
+
 
     /* ------------------------------
        LOAD CITIES BASED ON STATE
@@ -1363,15 +1369,16 @@
     /* ------------------------------
        INCREASE QTY (NO LIMIT)
     -------------------------------*/
-    function increaseSets() {
+   function increaseSets() {
         const qtyBox = document.getElementById("qty");
         qtyBox.value = parseInt(qtyBox.value) + 1;
     }
 
+
     /* ------------------------------
        DECREASE QTY (NEVER BELOW MOQ)
     -------------------------------*/
-    function decreaseSets() {
+  function decreaseSets() {
         const qtyBox = document.getElementById("qty");
         const moq = getMOQ();
 
@@ -1380,9 +1387,10 @@
         if (qty > moq) {
             qtyBox.value = qty - 1;
         } else {
-            qtyBox.value = moq;  // lock to MOQ minimum
+            qtyBox.value = moq;
         }
     }
+
 
                         /* MANUAL CLOSE BUTTON */
                         function closeMoqPopup() {
@@ -1403,7 +1411,7 @@
                     
                         <button class="primary-btn" id="addToCartBtn" onclick="handleAddToCart()">Add to Cart</button>
                         <button class="outline-btn" onclick="addToCartView()">Add & View Cart</button>
-                        <button class="whatsapp-btn" onclick="sendWhatsAppOrder()">Share on WhatsApp</button>
+                        <button class="whatsapp-btn" onclick="shareOnWhatsApp()">Share on WhatsApp</button>
                     
                         <button class="view-cart" onclick="toggleCart()">🛒 View Cart</button>
                     </div>
@@ -1428,50 +1436,22 @@
                             transform: scale(1.03);
                         }
                     </style>
-                    
-                    <script>
-                           function sendWhatsAppOrder() {
+                  
+                                <script>
+                                    function shareOnWhatsApp() {
 
+                                        let productURL = window.location.href;
 
-                                let phone = "919891040840";  // Your WhatsApp number
+                                        let message =
+                                            "*🛍️ Check this product!*%0A%0A" +
+                                            productURL;
 
-                                let message = "*🛍️ New Order Summary*%0A%0A";
+                                        // WhatsApp share intent (user chooses contacts)
+                                        let url = `https://api.whatsapp.com/send?text=${message}`;
 
-                                const totalPrice = cart.reduce((sum, i) => sum + i.price, 0);
-
-                                // ADD YOUR WEBSITE URL HERE
-                                message += `🌐 : https://dynamiccorrugations.com/products/18-x-15-x-16-inches.html/%0A%0A`;
-
-                                message += "Please help us in placing an order.";
-
-                                // WhatsApp URL
-                                let whatsappURL = `https://wa.me/${phone}?text=${message}`;
-
-                                window.open(whatsappURL, "_blank");
-                            }
-                        
-                    </script><script>
-                        function sendWhatsAppOrder() {
-                           
-
-                            let phone = "919891040840";  // Your WhatsApp number
-
-                            let message = "*🛍️ New Order Summary*%0A%0A";
-
-                            const totalPrice = cart.reduce((sum, i) => sum + i.price, 0);
-
-                            // ADD YOUR WEBSITE URL HERE
-                            message += `🌐 : https://dynamiccorrugations.com/products/18-x-15-x-16-inches.html/%0A%0A`;
-
-                            message += "Please help us in placing an order.";
-
-                            // WhatsApp URL
-                            let whatsappURL = `https://wa.me/${phone}?text=${message}`;
-
-                            window.open(whatsappURL, "_blank");
-                        }
-                    </script>
-
+                                        window.open(url, "_blank");
+                                    }
+                                </script>
                     
                     
                     <script>
@@ -1485,6 +1465,8 @@
                             const city = document.getElementById("citySelect").value;
                             const moqValue = document.getElementById("moqValue");
 
+
+                            
                             const ncrCities = cityData.delhi.map(c => c.toLowerCase());
                             let moq = ncrCities.includes(city) ? 10 : 50;
 
