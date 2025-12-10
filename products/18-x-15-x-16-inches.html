@@ -1293,7 +1293,7 @@
                         </style>
                     
                         <div class="moq-wrapper">
-                            <p>MOQ: <b id="moqValue">Plz Select above </b>piese </p>
+                            <p>MOQ: <b id="moqValue">Plz Select above </b> piese </p>
                         </div>
                     </div>
                     <script>
@@ -1308,77 +1308,75 @@
                                 // set new quality
                                 selectedQuality = el.innerText.trim();
                             }
-  /* ------------------------------
-     NCR CITIES
-  -------------------------------*/
+  /* ----------------------------------
+     CITY DATA → NCR = MOQ 10
+  -----------------------------------*/
     const cityData = {
         delhi: [
-            "New Delhi", "Noida", "Greater Noida", "Ghaziabad",
-            "South Delhi", "North Delhi", "West Delhi", "East Delhi",
-            "Central Delhi", "Gurgaon", "Faridabad", "Meerut"
+            "new delhi", "noida", "greater noida", "ghaziabad",
+            "south delhi", "north delhi", "west delhi", "east delhi",
+            "central delhi", "gurgaon", "faridabad", "meerut"
         ],
     };
 
-    /* ------------------------------
-       GET CURRENT MOQ (10 or 50)
-    -------------------------------*/
+    /* ----------------------------------
+       GET MOQ BASED ON CITY
+    -----------------------------------*/
     function getMOQ() {
         const city = document.getElementById("citySelect").value;
         const ncrCities = cityData.delhi.map(c => c.toLowerCase());
+
         return ncrCities.includes(city) ? 10 : 50;
     }
 
-    /* ------------------------------
-       UPDATE MOQ + UPDATE QTY FIELD
-    -------------------------------*/
+    /* ----------------------------------
+       UPDATE MOQ + SET QTY AUTOMATICALLY
+    -----------------------------------*/
     function updateMOQ() {
         const moq = getMOQ();
         const qtyBox = document.getElementById("qty");
 
-        qtyBox.min = moq;
+        qtyBox.min = moq;      // set new minimum
+        qtyBox.value = moq;    // auto update qty box
 
-        // If current qty is lower than new MOQ → auto-increase to MOQ
-        if (parseInt(qtyBox.value) < moq) {
-            qtyBox.value = moq;
-        }
-
-        document.getElementById("moqValue").innerText = moq;
+        document.getElementById("moqValue").innerText = "MOQ: " + moq;
     }
 
-
-    /* ------------------------------
-       LOAD CITIES BASED ON STATE
-    -------------------------------*/
+    /* ----------------------------------
+       LOAD CITIES BASED ON SELECTED AREA
+    -----------------------------------*/
     function loadCities() {
         const state = document.getElementById("stateSelect").value;
         const citySelect = document.getElementById("citySelect");
 
         citySelect.innerHTML = `<option value="">-- Select City --</option>`;
 
+        // Load NCR cities
         if (cityData[state]) {
             cityData[state].forEach(city => {
                 citySelect.innerHTML += `<option value="${city.toLowerCase()}">${city}</option>`;
             });
-        } else {
+        }
+        // Non-NCR option
+        else {
             citySelect.innerHTML = `<option value="other">Other City</option>`;
         }
 
-        updateMOQ();  // apply MOQ after selecting state
+        updateMOQ();  // Apply MOQ after selecting region
     }
 
-    /* ------------------------------
-       INCREASE QTY (NO LIMIT)
-    -------------------------------*/
-   function increaseSets() {
+    /* ----------------------------------
+       INCREASE QTY
+    -----------------------------------*/
+    function increaseSets() {
         const qtyBox = document.getElementById("qty");
         qtyBox.value = parseInt(qtyBox.value) + 1;
     }
 
-
-    /* ------------------------------
+    /* ----------------------------------
        DECREASE QTY (NEVER BELOW MOQ)
-    -------------------------------*/
-  function decreaseSets() {
+    -----------------------------------*/
+    function decreaseSets() {
         const qtyBox = document.getElementById("qty");
         const moq = getMOQ();
 
@@ -1390,6 +1388,16 @@
             qtyBox.value = moq;
         }
     }
+
+    /* ----------------------------------
+       BLOCK USER FROM TYPING BELOW MOQ
+    -----------------------------------*/
+    document.getElementById("qty").addEventListener("input", function () {
+        const moq = getMOQ();
+        if (parseInt(this.value) < moq || this.value === "") {
+            this.value = moq;
+        }
+    });
 
 
                         /* MANUAL CLOSE BUTTON */
@@ -1403,12 +1411,13 @@
 
                     <!-- controls -->
                     <div class="controls" role="group" aria-label="quantity and actions">
-                        <div class="qty-wrap">
-                            <button onclick="decreaseSets()">-</button>
-                            <input id="qty" type="number" value="10" min="10">
-                            <button onclick="increaseSets()">+</button>
-                        </div>
+                    <div class="qty-wrap">
+                        <button onclick="decreaseSets()">-</button>
+                        <input id="qty" type="number" value="10" min="10">
+                        <button onclick="increaseSets()">+</button>
+                    </div>
                     
+                    <div id="moqValue"></div>
                         <button class="primary-btn" id="addToCartBtn" onclick="handleAddToCart()">Add to Cart</button>
                         <button class="outline-btn" onclick="addToCartView()">Add & View Cart</button>
                         <button class="whatsapp-btn" onclick="shareOnWhatsApp()">Share on WhatsApp</button>
