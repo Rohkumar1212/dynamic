@@ -175,17 +175,13 @@
 
                     <!-- BILLING DETAILS -->
                     <h2 class="section-title">2. Billing details</h2>
-                    <div class="checkbox-row">
-                        <input type="checkbox" id="sameBilling" checked onchange="copyBilling()">
-                        <label for="sameBilling">Billing address same as delivery address</label>
-                    </div>
-
+                   
                     <div id="billingSection">
 
                         <div class="form-row">
 
                             <div class="form-group">
-                                <label class="form-label">Billing Name</label>
+                                <label class="form-label">Billing Comapny Name</label>
                                 <input id="billing_name" class="form-input">
                             </div>
 
@@ -200,7 +196,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="form-label">Billing Phone</label>
+                                <label class="form-label">Billing Mobile Number</label>
                                 <input id="billing_phone" class="form-input">
                             </div>
 
@@ -290,7 +286,6 @@
                 style="width:90px;height:90px;object-fit:cover;border-radius:6px">
             <div style="flex:1">
                 <b>${item.title}</b><br>
-                  Quality: ${item.quality}<br>
                 Sets: ${item.sets}<br>
                 MOQ: ${item.moq} pcs<br>
                 Total Pcs: ${item.totalPcs}
