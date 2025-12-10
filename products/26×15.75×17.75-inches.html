@@ -1138,8 +1138,9 @@
                                             onclick="changeImage(this)">
                                         <img src="/images/products/Corrugated Box/Corrugated Box  26×15.75×17.75-inches.jpeg"
                                             onclick="changeImage(this)">
-                                        <img src="/images/products/Corrugated Box/Corrugated Box -26.jpeg" onclick="changeImage(this)">
-                                       
+                                        <img src="/images/products/Corrugated Box/Corrugated Box -26.jpeg"
+                                            onclick="changeImage(this)">
+
                                         <img src="/images/products/Corrugated Box/Corrugated Box  26×15.75×17.75-inches.jpeg"
                                             onclick="changeImage(this)">
                                     </div>
@@ -1368,7 +1369,7 @@
                             </style>
 
                             <div class="moq-wrapper">
-                                <p>MOQ: <b id="moqValue">Plz Select above </b> Pieces </p>
+                                <p>MOQ: <b id="moqValue">Plz Select above fields</b> </p>
                             </div>
                         </div>
                     </div>
@@ -1421,36 +1422,39 @@
                         // ----------------------------------
                         // UPDATE MOQ TEXT + QTY FIELD
                         // ----------------------------------
-                          function updateMOQ() {
-                                const moq = getMOQ();
-                                const moqLabel = document.getElementById("moqValue");
-                                const qtyBox = document.getElementById("qty");
+                        function updateMOQ() {
+                            const moq = getMOQ();
+                            const moqLabel = document.getElementById("moqValue");
+                            const qtyBox = document.getElementById("qty");
 
-                                if (moq === 1) {
-                                    // No city selected
-                                    moqLabel.innerText = "PLZ SELECT ABOVE";
-                                    qtyBox.min = 1;
-                                    return;
-                                }
-
-                                // NCR = 10 MOQ → Text should show NCR content
-                                if (moq === 10) {
-                                    moqLabel.innerText = "1 PACK = 5PCS • MOQ = 2 PACK";
-                                }
-
-                                // OUT OF NCR = 50 MOQ → Text should show OUT NCR content
-                                else if (moq === 50) {
-                                    moqLabel.innerText = "1 PACK = 5PCS • MOQ = 10 PACK";
-                                }
-
-                                // Update qty input
-                                qtyBox.min = moq;
-                                if (parseInt(qtyBox.value) < moq || isNaN(parseInt(qtyBox.value))) {
-                                    qtyBox.value = moq;
-                                }
+                            if (moq === 1) {
+                                // No city selected
+                                moqLabel.innerText = "Plz Select above fields";
+                                qtyBox.min = 1;
+                                return;
                             }
 
-                        
+                            // NCR = 10 MOQ → Text should show NCR content
+                            if (moq === 10) {
+                                moqLabel.innerText = "1 PACK = 5PCS • MOQ is 2 PACK";
+                            }
+
+                            // OUT OF NCR = 50 MOQ → Text should show OUT NCR content
+                            else if (moq === 50) {
+                                moqLabel.innerText = "1 PACK = 5PCS • MOQ is 10 PACK";
+                            }
+
+                            // Update qty input
+                            qtyBox.min = moq;
+                            if (parseInt(qtyBox.value) < moq || isNaN(parseInt(qtyBox.value))) {
+                                qtyBox.value = moq;
+                            }
+                                // Enforce MOQ
+                            qtyBox.min = moq;
+                            qtyBox.value = moq;  
+                        }
+
+
 
                         // ----------------------------------
                         // LOAD CITIES BASED ON AREA (STATE)
@@ -1519,6 +1523,21 @@
                                 }
                             });
                         });
+
+                        function setMOQFromState(moq) {
+                            const moqLabel = document.getElementById("moqValue");
+                            const qtyBox = document.getElementById("qty");
+
+                            if (moq === 10) {
+                                moqLabel.innerText = "1 PACK = 5PCS • MOQ is 2 PACK";
+                            } else {
+                                moqLabel.innerText = "1 PACK = 5PCS • MOQ is 10 PACK";
+                            }
+
+                            qtyBox.min = moq;
+                            qtyBox.value = moq;
+                        }
+
                     </script>
                     <!-- controls -->
                     <style>
@@ -1660,7 +1679,7 @@
                     <div class="controls" role="group" aria-label="quantity and actions">
                         <div class="qty-wrap">
                             <!-- SET SELECTION -->
-                        
+
                             <button onclick="decreaseSets()">-</button>
                             <input id="qty" type="number" value="10" min="1">
                             <button onclick="increaseSets()">+</button>
