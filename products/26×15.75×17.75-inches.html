@@ -1372,7 +1372,7 @@
                             </style>
 
                             <div class="moq-wrapper">
-                                <p>MOQ: <b id="moqValue">Plz Select above </b> piese </p>
+                                <p>MOQ: <b id="moqValue">Plz Select above </b> Pieces </p>
                             </div>
                         </div>
                     </div>
@@ -1387,11 +1387,7 @@
 
                             // set new quality
                             selectedQuality = el.innerText.trim();
-                        }
-
-
-
-                        /* MANUAL CLOSE BUTTON */
+                        } /* MANUAL CLOSE BUTTON */
                         function closeMoqPopup() {
                             document.getElementById("moqPopup").style.display = "none";
                         }
@@ -1429,27 +1425,36 @@
                         // ----------------------------------
                         // UPDATE MOQ TEXT + QTY FIELD
                         // ----------------------------------
-                        function updateMOQ() {
-                            const moq = getMOQ();
-                            const moqLabel = document.getElementById("moqValue");
-                            const qtyBox = document.getElementById("qty");
+                          function updateMOQ() {
+                                const moq = getMOQ();
+                                const moqLabel = document.getElementById("moqValue");
+                                const qtyBox = document.getElementById("qty");
 
-                            if (moq === 1) {
-                                // No city selected
-                                moqLabel.innerText = "Plz Select above";
-                                qtyBox.min = 1;
-                                return;
+                                if (moq === 1) {
+                                    // No city selected
+                                    moqLabel.innerText = "PLZ SELECT ABOVE";
+                                    qtyBox.min = 1;
+                                    return;
+                                }
+
+                                // NCR = 10 MOQ → Text should show NCR content
+                                if (moq === 10) {
+                                    moqLabel.innerText = "1 PACK = 5PCS • MOQ = 2 PACK";
+                                }
+
+                                // OUT OF NCR = 50 MOQ → Text should show OUT NCR content
+                                else if (moq === 50) {
+                                    moqLabel.innerText = "1 PACK = 5PCS • MOQ = 10 PACK";
+                                }
+
+                                // Update qty input
+                                qtyBox.min = moq;
+                                if (parseInt(qtyBox.value) < moq || isNaN(parseInt(qtyBox.value))) {
+                                    qtyBox.value = moq;
+                                }
                             }
 
-                            // Set MOQ number in text
-                            moqLabel.innerText = moq;
-
-                            // Enforce MOQ in qty input
-                            qtyBox.min = moq;
-                            if (parseInt(qtyBox.value) < moq || isNaN(parseInt(qtyBox.value))) {
-                                qtyBox.value = moq;
-                            }
-                        }
+                        
 
                         // ----------------------------------
                         // LOAD CITIES BASED ON AREA (STATE)

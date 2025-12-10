@@ -1294,7 +1294,7 @@
                         </style>
                 
                         <div class="moq-wrapper">
-                            <p>MOQ: <b id="moqValue">Plz Select above </b> piese </p>
+                            <p>MOQ: <b id="moqValue">Plz Select above </b> Pieces </p>
                         </div>
                     </div>
                     <script>
@@ -1350,22 +1350,29 @@
                         // ----------------------------------
                         // UPDATE MOQ TEXT + QTY FIELD
                         // ----------------------------------
-                        function updateMOQ() {
+                     function updateMOQ() {
                             const moq = getMOQ();
                             const moqLabel = document.getElementById("moqValue");
                             const qtyBox = document.getElementById("qty");
 
                             if (moq === 1) {
                                 // No city selected
-                                moqLabel.innerText = "Plz Select above";
+                                moqLabel.innerText = "PLZ SELECT ABOVE";
                                 qtyBox.min = 1;
                                 return;
                             }
 
-                            // Set MOQ number in text
-                            moqLabel.innerText = moq;
+                            // NCR = 10 MOQ → Text should show NCR content
+                            if (moq === 10) {
+                                moqLabel.innerText = "1 PACK = 5PCS • MOQ = 2 PACK";
+                            }
 
-                            // Enforce MOQ in qty input
+                            // OUT OF NCR = 50 MOQ → Text should show OUT NCR content
+                            else if (moq === 50) {
+                                moqLabel.innerText = "1 PACK = 5PCS • MOQ = 10 PACK";
+                            }
+
+                            // Update qty input
                             qtyBox.min = moq;
                             if (parseInt(qtyBox.value) < moq || isNaN(parseInt(qtyBox.value))) {
                                 qtyBox.value = moq;
@@ -1439,8 +1446,7 @@
                                 }
                             });
                         });
-                    </script>
-                
+                    </script>              
                 
                     <!-- controls -->
                 
@@ -1506,10 +1512,7 @@
                         let cart = [];
                         const BOX_RATE = 320;
                         /* Update MOQ + Show Inline Popup */
-
-
-
-                        /* -------------------------------------
+                         /* -------------------------------------
                            ADD TO CART — WITH CITY CHECK
                         --------------------------------------- */
                         function handleAddToCart() {
@@ -2026,103 +2029,104 @@
                 <button class="primary-btn" onclick="checkout()">Checkout</button>
             </div>
         </div>
+        <footer id="footer">
+            <div class="footer-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4  col-lg-2 col-md-4">
+                            <!-- Footer widget area 1 -->
+                            <div class="widget  widget-contact-us"
+                                style="background-image: url('images/world-map-dark.png'); background-position: 50% 20px; background-repeat: no-repeat">
+                                <h4>About Dynamic Corrugations</h4>
+                                <ul class="list-icon">
+                                    <li><i class="fa fa-map-marker-alt"></i>40 K.M. Stone,Vill. Narsinghpur,
+                                        Delhi-Jaipur Highway, Sector-35 Gurugram-122004 (Hr)</li>
+                                    <li><i class="fa fa-phone"></i><a href="tel:+919891040840">+91 9891040840</a></li>
+                                    <li><i class="far fa-envelope"></i><a
+                                            href="mailto:mail@dynamiccorrugations.com">mail@dynamiccorrugations.com </a>
+                                    </li>
+        
+                                </ul>
+                            </div>
+                            <!-- end: Footer widget area 1 -->
+                        </div>
+        
+                        <div class="col-xl-2 col-lg-2 col-md-4">
+                            <!-- Footer widget area 1 -->
+                            <div class="widget">
+                                <h4>Useful Links</h4>
+                                <ul class="list">
+                                    <li><a href="/contact.html">Connect us</a></li>
+                                    <li><a href="#">Privacy Policy</a></li>
+                                    <li><a href="#">Return & Refund Policy</a></li>
+                                    <li><a href="#">Cancellation Policy</a></li>
+                                    <li><a href="#">Terms & Condition</a></li>
+                                </ul>
+                            </div>
+                            <!-- end: Footer widget area 1 -->
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-4">
+                            <!-- Footer widget area 2 -->
+                            <div class="widget">
+                                <h4>Utility pages</h4>
+                                <ul class="list">
+                                    <li><a href="maintenance.html">Corrugated Roll</a></li>
+                                    <li><a href="maintenance.html">Triple Wall Box</a></li>
+                                    <li><a href="maintenance.html">Corrugated Box</a></li>
+                                    <li><a href="maintenance.html">Corrugated Boards</a></li>
+                                    <li><a href="maintenance.html">Pizza Box</a></li>
+                                </ul>
+                            </div>
+                            <!-- end: Footer widget area 2 -->
+                        </div>
+                        <div class="col-xl-4 col-lg-2 col-md-4 widget">
+                            <h4>Social links and timiings</h4>
+                            <div class="social-icons social-icons-colored float-left">
+                                <ul>
+                                    <li class="social-facebook"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li class="social-twitter"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                    <li class="social-youtube"><a href="#"><i class="fab fa-youtube"></i></a></li>
+                                    <li class="social-gplus"><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                                </ul>
+                                <br>
+                                <ul class="list">
+                                    <li><i class="far fa-clock"></i> Monday - Saturday:- <strong>08:00 - 18:30</strong>
+                                        <br>
+                                        Sunday: <strong>Closed</strong>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- end: Footer widget area 2 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright-content cta-section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <!-- Social icons -->
+        
+                            <div class="copyright-text text-left">&copy; 2025 Dynamic Corrugations. All Rights
+                                Reserved.
+        
+                            </div>
+                            <!-- end: Social icons -->
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="copyright-text text-right"><a href="https://dynamiccorrugations.com/">Desinged
+                                    by Dynamic Corrugations</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Scroll top -->
         <!-- Footer -->       
         <!-- end: Footer -->
     </div>
-    <footer id="footer">
-        <div class="footer-content">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4  col-lg-2 col-md-4">
-                        <!-- Footer widget area 1 -->
-                        <div class="widget  widget-contact-us"
-                            style="background-image: url('images/world-map-dark.png'); background-position: 50% 20px; background-repeat: no-repeat">
-                            <h4>About Dynamic Corrugations</h4>
-                            <ul class="list-icon">
-                                <li><i class="fa fa-map-marker-alt"></i>40 K.M. Stone,Vill. Narsinghpur,
-                                    Delhi-Jaipur Highway, Sector-35 Gurugram-122004 (Hr)</li>
-                                <li><i class="fa fa-phone"></i><a href="tel:+919891040840">+91 9891040840</a></li>
-                                <li><i class="far fa-envelope"></i><a
-                                        href="mailto:mail@dynamiccorrugations.com">mail@dynamiccorrugations.com </a>
-                                </li>
-    
-                            </ul>
-                        </div>
-                        <!-- end: Footer widget area 1 -->
-                    </div>
-    
-                    <div class="col-xl-2 col-lg-2 col-md-4">
-                        <!-- Footer widget area 1 -->
-                        <div class="widget">
-                            <h4>Useful Links</h4>
-                            <ul class="list">
-                                <li><a href="/contact.html">Connect us</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Return & Refund Policy</a></li>
-                                <li><a href="#">Cancellation Policy</a></li>
-                                <li><a href="#">Terms & Condition</a></li>
-                            </ul>
-                        </div>
-                        <!-- end: Footer widget area 1 -->
-                    </div>
-                    <div class="col-xl-2 col-lg-2 col-md-4">
-                        <!-- Footer widget area 2 -->
-                        <div class="widget">
-                            <h4>Utility pages</h4>
-                            <ul class="list">
-                                <li><a href="maintenance.html">Corrugated Roll</a></li>
-                                <li><a href="maintenance.html">Triple Wall Box</a></li>
-                                <li><a href="maintenance.html">Corrugated Box</a></li>
-                                <li><a href="maintenance.html">Corrugated Boards</a></li>
-                                <li><a href="maintenance.html">Pizza Box</a></li>
-                            </ul>
-                        </div>
-                        <!-- end: Footer widget area 2 -->
-                    </div>
-                    <div class="col-xl-4 col-lg-2 col-md-4 widget">
-                        <h4>Social links and timiings</h4>
-                        <div class="social-icons social-icons-colored float-left">
-                            <ul>
-                                <li class="social-facebook"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                <li class="social-twitter"><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                <li class="social-youtube"><a href="#"><i class="fab fa-youtube"></i></a></li>
-                                <li class="social-gplus"><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
-                            </ul>
-                            <br>
-                            <ul class="list">
-                                <li><i class="far fa-clock"></i> Monday - Saturday:- <strong>08:00 - 18:30</strong>
-                                    <br>
-                                    Sunday: <strong>Closed</strong>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- end: Footer widget area 2 -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="copyright-content cta-section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <!-- Social icons -->
-    
-                        <div class="copyright-text text-left">&copy; 2025 Dynamic Corrugations. All Rights
-                            Reserved.
-    
-                        </div>
-                        <!-- end: Social icons -->
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="copyright-text text-right"><a href="https://dynamiccorrugations.com/">Desinged
-                                by Dynamic Corrugations</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- Scroll top -->
+   
 
     <div class="fixed-icons">
         <!-- WhatsApp Icon -->
