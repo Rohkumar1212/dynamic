@@ -991,62 +991,11 @@
                 <div class="image-section" aria-hidden="false">
                     <img id="mainImage" class="main-image" alt="Box product image"
                         src="/images/products/Corrugated Box/Corrugated Box  26×15.75×17.75-inches.jpeg" />
-                    <style>
-                        .product-gallery {
-                            display: flex;
-                            gap: 20px;
-                            flex-wrap: wrap;
-                        }
-
-                        .product-gallery .main-image-box {
-                            flex: 1 1 350px;
-                        }
-
-                        .product-gallery .main-image-box img {
-                            width: 100%;
-                            border-radius: 8px;
-                            object-fit: cover;
-                        }
-
-                        /* Slider (Right Side) */
-                        .slider-box {
-                            flex: 1 1 250px;
-                            max-width: 350px;
-                        }
-
-                        .thumb-slider {
-                            display: flex;
-                            overflow-x: auto;
-                            gap: 10px;
-                            scroll-behavior: smooth;
-                            padding-bottom: 10px;
-                        }
-
-                        .thumb-slider img {
-                            width: 80px;
-                            height: 80px;
-                            border-radius: 6px;
-                            object-fit: cover;
-                            cursor: pointer;
-                            border: 2px solid transparent;
-                            transition: 0.3s;
-                        }
-
-                        .thumb-slider img:hover {
-                            border-color: #333;
-                        }
-
-                        /* Hide scrollbar (nice clean UI) */
-                        .thumb-slider::-webkit-scrollbar {
-                            display: none;
-                        }
-                    </style>
-
                     <div class="product-gallery">
                         <!-- LEFT MAIN IMAGE -->
                         <div class="image-section" aria-hidden="false">
-
-
+                    
+                    
                             <style>
                                 .product-gallery {
                                     display: flex;
@@ -1054,23 +1003,23 @@
                                     flex-wrap: wrap;
                                     margin-top: 15px;
                                 }
-
+                    
                                 .main-image-box {
                                     flex: 1 1 350px;
                                 }
-
+                    
                                 .main-image-box img {
                                     width: 100%;
                                     border-radius: 8px;
                                     object-fit: cover;
                                 }
-
+                    
                                 .slider-box {
                                     flex: 1 1 250px;
                                     max-width: 350px;
                                     position: relative;
                                 }
-
+                    
                                 .thumb-slider {
                                     display: flex;
                                     overflow-x: auto;
@@ -1078,11 +1027,11 @@
                                     scroll-behavior: smooth;
                                     padding-bottom: 10px;
                                 }
-
+                    
                                 .thumb-slider::-webkit-scrollbar {
                                     display: none;
                                 }
-
+                    
                                 .thumb-slider img {
                                     width: 80px;
                                     height: 80px;
@@ -1092,13 +1041,14 @@
                                     border: 2px solid transparent;
                                     transition: 0.3s;
                                 }
-
+                    
                                 .thumb-slider img:hover {
                                     border-color: #333;
                                 }
-
+                    
                                 /* BUTTONS */
                                 .move-btn {
+                                    display: none !important;
                                     position: absolute;
                                     top: 40%;
                                     transform: translateY(-50%);
@@ -1115,39 +1065,41 @@
                                     font-size: 20px;
                                     z-index: 10;
                                 }
-
+                    
                                 .move-left {
                                     left: -15px;
                                 }
-
+                    
                                 .move-right {
                                     right: -15px;
                                 }
                             </style>
-
+                    
                             <div class="product-gallery">
-
+                    
+                    
                                 <!-- RIGHT SLIDER WITH BUTTONS -->
                                 <div class="slider-box">
-
+                    
                                     <div class="move-btn move-left" onclick="moveSlider(-120)">‹</div>
                                     <div class="move-btn move-right" onclick="moveSlider(120)">›</div>
-
+                    
                                     <div class="thumb-slider" id="thumbSlider">
-                                        <img src="/images/products/Corrugated Box/Corrugated Box -26.jpeg"
-                                            onclick="changeImage(this)">
                                         <img src="/images/products/Corrugated Box/Corrugated Box  26×15.75×17.75-inches.jpeg"
                                             onclick="changeImage(this)">
-                                        <img src="/images/products/Corrugated Box/Corrugated Box -26.jpeg"
-                                            onclick="changeImage(this)">
-
+                                        <img src="/images/products/Corrugated Box/Corrugated Box -26-2.png" onclick="changeImage(this)">
+                                        <img src="/images/products/Corrugated Box/Corrugated Box -26.jpeg" onclick="changeImage(this)">
                                         <img src="/images/products/Corrugated Box/Corrugated Box  26×15.75×17.75-inches.jpeg"
                                             onclick="changeImage(this)">
+                                        <img src="/images/products/Corrugated Box/Corrugated Box -26-2.png" onclick="changeImage(this)">
+                    
                                     </div>
-
+                    
                                 </div>
+                    
+                    
                             </div>
-
+                    
                             <script>
                                 function moveSlider(amount) {
                                     document.getElementById("thumbSlider").scrollLeft += amount;
@@ -1159,7 +1111,7 @@
                                 function startAutoSlide() {
                                     const slider = document.getElementById("thumbSlider");
                                     autoSlideInterval = setInterval(() => {
-                                        slider.scrollLeft += 120;
+                                        slider.scrollLeft += 320;
 
                                         // When reaching end → go back to start
                                         if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 5) {
@@ -1195,17 +1147,35 @@
                                     document.getElementById("thumbSlider").scrollLeft += amount;
                                 }
                             </script>
-
-
+                    
+                    
                         </div>
-
+                    
                     </div>
-
+                    
                     <script>
+
                         function changeImage(img) {
-                            document.getElementById("mainImage").src = img.src;
+                            const main = document.getElementById("mainImage");
+
+                            main.classList.add("fade-out");
+
+                            setTimeout(() => {
+                                main.src = img.src;
+                                main.classList.remove("fade-out");
+                            }, 150);
                         }
+
                     </script>
+                    <style>
+                        .main-img {
+                            transition: opacity .2s ease;
+                        }
+                    
+                        .fade-out {
+                            opacity: 0.3;
+                        }
+                    </style>
 
                     <div style="margin-top:12px; font-size:13px; color:#415; text-align:center">High-resolution
                         packaging
@@ -1369,7 +1339,7 @@
                             </style>
 
                             <div class="moq-wrapper">
-                                <p>MOQ: <b id="moqValue">Plz Select above fields</b> </p>
+                               <p>MOQ: <b id="moqValue">Please Select above fields</b> </p>
                             </div>
                         </div>
                     </div>
@@ -1390,155 +1360,152 @@
                         }
                     </script>
 
-                    <script>
-                        // ----------------------------------
-                        // CITY DATA → NCR
-                        // ----------------------------------
-                        const cityData = {
-                            delhi: [
-                                "New delhi", "Noida", "Greater noida", "Ghaziabad",
-                                "South delhi", "North delhi", "West delhi", "East delhi",
-                                "Central delhi", "Gurgaon", "Faridabad", "Meerut"
-                            ],
-                        };
+                 <script>
+                    // ----------------------------------
+                    // CITY DATA → NCR
+                    // ----------------------------------
+                    const cityData = {
+                        delhi: [
+                            "New delhi", "Noida", "Greater noida", "Ghaziabad",
+                            "South delhi", "North delhi", "West delhi", "East delhi",
+                            "Central delhi", "Gurgaon", "Faridabad", "Meerut"
+                        ],
+                    };
 
-                        // ----------------------------------
-                        // GET MOQ BASED ON CITY
-                        // ----------------------------------
-                        function getMOQ() {
-                            const city = document.getElementById("citySelect").value; // e.g. "noida" or "other"
+                    // ----------------------------------
+                    // GET MOQ BASED ON CITY
+                    // ----------------------------------
+                    function getMOQ() {
+                        const city = document.getElementById("citySelect").value; // e.g. "noida" or "other"
 
-                            if (!city) {
-                                // No city selected → no MOQ enforcement
-                                return 1;
-                            }
-
-                            const ncrCities = cityData.delhi.map(c => c.toLowerCase());
-
-                            // NCR city → 10, otherwise → 50
-                            return ncrCities.includes(city) ? 10 : 50;
+                        if (!city) {
+                            // No city selected → no MOQ enforcement
+                            return 1;
                         }
 
-                        // ----------------------------------
-                        // UPDATE MOQ TEXT + QTY FIELD
-                        // ----------------------------------
-                        function updateMOQ() {
-                            const moq = getMOQ();
-                            const moqLabel = document.getElementById("moqValue");
-                            const qtyBox = document.getElementById("qty");
+                        const ncrCities = cityData.delhi.map(c => c.toLowerCase());
 
-                            if (moq === 1) {
-                                // No city selected
-                                moqLabel.innerText = "Plz Select above fields";
-                                qtyBox.min = 1;
-                                return;
-                            }
+                        // NCR city → 10, otherwise → 50
+                        return ncrCities.includes(city) ? 10 : 50;
+                    }
 
-                            // NCR = 10 MOQ → Text should show NCR content
-                            if (moq === 10) {
-                                moqLabel.innerText = "1 PACK = 5PCS • MOQ is 2 PACKS";
-                            }
-
-                            // OUT OF NCR = 50 MOQ → Text should show OUT NCR content
-                            else if (moq === 50) {
-                                moqLabel.innerText = "1 PACK = 5PCS • MOQ is 10 PACKS";
-                            }
-
-                            // Update qty input
-                            qtyBox.min = moq;
-                            if (parseInt(qtyBox.value) < moq || isNaN(parseInt(qtyBox.value))) {
-                                qtyBox.value = moq;
-                            }
-                                // Enforce MOQ
-                            qtyBox.min = moq;
-                            qtyBox.value = moq;  
-                        }
-
-
-
-                        // ----------------------------------
-                        // LOAD CITIES BASED ON AREA (STATE)
-                        // ----------------------------------
-                        function loadCities() {
-                            const state = document.getElementById("stateSelect").value;
-                            const citySelect = document.getElementById("citySelect");
-
-                            citySelect.innerHTML = `<option value="">-- Select City --</option>`;
-
-                            if (cityData[state]) {
-                                // NCR: load NCR cities
-                                cityData[state].forEach(city => {
-                                    citySelect.innerHTML += `<option value="${city.toLowerCase()}">${city}</option>`;
-                                });
-                            } else if (state === "other") {
-                                // Out of NCR → generic option
-                                citySelect.innerHTML = `<option value="other">Other City</option>`;
-                            }
-
-                            // Reset MOQ & qty when area changes
-                            updateMOQ();
-                        }
-
-                        // ----------------------------------
-                        // INCREASE QTY (NO LIMIT UPWARD)
-                        // ----------------------------------
-                        function increaseSets() {
-                            const qtyBox = document.getElementById("qty");
-                            let qty = parseInt(qtyBox.value) || 0;
-
-                            qty = qty + 1;
-                            qtyBox.value = qty;
-                        }
-
-                        // ----------------------------------
-                        // DECREASE QTY (NEVER BELOW MOQ)
-                        // ----------------------------------
-                        function decreaseSets() {
-                            const qtyBox = document.getElementById("qty");
-                            let qty = parseInt(qtyBox.value) || 0;
-
-                            const moq = getMOQ();
-
-                            if (qty > moq) {
-                                qty = qty - 1;
-                            } else {
-                                qty = moq; // lock at MOQ
-                            }
-
-                            qtyBox.value = qty;
-                        }
-
-                        // ----------------------------------
-                        // BLOCK TYPING BELOW MOQ
-                        // ----------------------------------
-                        window.addEventListener("DOMContentLoaded", function () {
-                            const qtyBox = document.getElementById("qty");
-
-                            qtyBox.addEventListener("input", function () {
-                                const moq = getMOQ();
-                                let val = parseInt(this.value);
-
-                                if (isNaN(val) || val < moq) {
-                                    this.value = moq;
-                                }
-                            });
+                    function updateCartWithNewMOQ(moq) {
+                        cart = cart.map(item => {
+                            item.sets = moq;                 // update sets
+                            item.totalPcs = moq * 5;         // as 1 pack = 5 pcs
+                            item.price = item.sets * item.unitPrice; // recalc final price
+                            return item;
                         });
 
-                        function setMOQFromState(moq) {
-                            const moqLabel = document.getElementById("moqValue");
-                            const qtyBox = document.getElementById("qty");
+                        updateCartUI(); // refresh sidebar
+                    }
 
-                            if (moq === 10) {
-                                moqLabel.innerText = "1 PACK = 5PCS • MOQ is 2 PACK";
-                            } else {
-                                moqLabel.innerText = "1 PACK = 5PCS • MOQ is 10 PACK";
-                            }
+                    // ----------------------------------
+                    // UPDATE MOQ TEXT + QTY FIELD
+                    // ----------------------------------
+                    function updateMOQ() {
+                        const moq = getMOQ();
+                        const moqLabel = document.getElementById("moqValue");
+                        const qtyBox = document.getElementById("qty");
 
-                            qtyBox.min = moq;
+                        if (moq === 1) {
+                            // No city selected
+                            moqLabel.innerText = "Please Select above fields";
+                            qtyBox.min = 1;
+                            return;
+                        }
+
+
+                        // NCR = 10 MOQ → Text should show NCR content
+                        if (moq === 10) {
+                            moqLabel.innerText = "1 PACK = 5PCS • MOQ is 2 PACKS";
+                        }
+
+                        // OUT OF NCR = 50 MOQ → Text should show OUT NCR content
+                        else if (moq === 50) {
+                            moqLabel.innerText = "1 PACK = 5PCS • MOQ is 10 PACKS";
+                        }
+
+                        // Update qty input
+                        qtyBox.min = moq;
+                        if (parseInt(qtyBox.value) < moq || isNaN(parseInt(qtyBox.value))) {
                             qtyBox.value = moq;
                         }
 
-                    </script>
+                        // Enforce MOQ
+                        qtyBox.min = moq;
+                        qtyBox.value = moq;
+                        updateCartWithNewMOQ(moq);
+                    }
+
+                    // ----------------------------------
+                    // LOAD CITIES BASED ON AREA (STATE)
+                    // ----------------------------------
+                    function loadCities() {
+                        const state = document.getElementById("stateSelect").value;
+                        const citySelect = document.getElementById("citySelect");
+
+                        citySelect.innerHTML = `<option value="">-- Select City --</option>`;
+
+                        if (cityData[state]) {
+                            // NCR: load NCR cities
+                            cityData[state].forEach(city => {
+                                citySelect.innerHTML += `<option value="${city.toLowerCase()}">${city}</option>`;
+                            });
+                        } else if (state === "other") {
+                            // Out of NCR → generic option
+                            citySelect.innerHTML = `<option value="other">Other City</option>`;
+                        }
+
+                        // Reset MOQ & qty when area changes
+                        updateMOQ();
+                    }
+
+                    // ----------------------------------
+                    // INCREASE QTY (NO LIMIT UPWARD)
+                    // ----------------------------------
+                    function increaseSets() {
+                        const qtyBox = document.getElementById("qty");
+                        let qty = parseInt(qtyBox.value) || 0;
+
+                        qty = qty + 1;
+                        qtyBox.value = qty;
+                    }
+
+                    // ----------------------------------
+                    // DECREASE QTY (NEVER BELOW MOQ)
+                    // ----------------------------------
+                    function decreaseSets() {
+                        const qtyBox = document.getElementById("qty");
+                        let qty = parseInt(qtyBox.value) || 0;
+
+                        const moq = getMOQ();
+
+                        if (qty > moq) {
+                            qty = qty - 1;
+                        } else {
+                            qty = moq; // lock at MOQ
+                        }
+
+                        qtyBox.value = qty;
+                    }
+
+                    // ----------------------------------
+                    // BLOCK TYPING BELOW MOQ
+                    // ----------------------------------
+                    window.addEventListener("DOMContentLoaded", function () {
+                        const qtyBox = document.getElementById("qty");
+
+                        qtyBox.addEventListener("input", function () {
+                            const moq = getMOQ();
+                            let val = parseInt(this.value);
+
+                            if (isNaN(val) || val < moq) {
+                                this.value = moq;
+                            }
+                        });
+                    });
+                </script>
                     <!-- controls -->
                     <style>
                         /* Quantity UI */
@@ -1746,147 +1713,161 @@
                         }
                     </script>
 
+<script>
+    /* -------------------------------------
+       GLOBAL CART + MOQ SYSTEM
+    --------------------------------------- */
+    let cart = [];
+    const BOX_RATE = 320;
+    /* Update MOQ + Show Inline Popup */
+    /* -------------------------------------
+      ADD TO CART — WITH CITY CHECK
+   --------------------------------------- */
+    function handleAddToCart() {
+        const city = document.getElementById("citySelect").value;
+        const productImage = document.getElementById("mainImage").src;
 
-                    <script>
-                        /* -------------------------------------
-                           GLOBAL CART + MOQ SYSTEM
-                        --------------------------------------- */
-                        let cart = [];
-                        const BOX_RATE = 320;
-                        /* Update MOQ + Show Inline Popup */
+        if (!city) {
+            alert("Please select your city before adding to cart.");
+            return;
+        }
 
+        const sets = parseInt(document.getElementById("qty").value || 1);
+        const moq = getMOQ(); // Always correct MOQ (10 or 50)
+        const totalPcs = sets * moq;
+        const totalPrice = totalPcs * BOX_RATE;
 
+        const title = document.getElementById("productTitle").innerText;
 
-                        /* -------------------------------------
-                           ADD TO CART — WITH CITY CHECK
-                        --------------------------------------- */
-                        function handleAddToCart() {
-                            const city = document.getElementById("citySelect").value;
-                            const productImage = document.getElementById("mainImage").src;
+        // -----------------------------------------
+        // CHECK if this product already exists in cart
+        // -----------------------------------------
+        let existing = cart.find(item => item.title === title);
 
+        if (existing) {
+            // UPDATE existing cart item
+            existing.sets = sets;
+            existing.totalPcs = totalPcs;
+            existing.price = totalPrice;
+            existing.moq = moq; // track moq also
 
+            updateCartUI();
+            return;
+        }
 
-                            if (!city) {
-                                alert("Please select your city before adding to cart.");
-                                return;
-                            }
+        // -----------------------------------------
+        // Otherwise create new item
+        // -----------------------------------------
+        const item = {
+            id: Date.now(),
+            image: productImage,
+            title,
+            sets,
+            totalPcs,
+            price: totalPrice,
+            moq
+        };
 
-                            const sets = parseInt(document.getElementById("qty").value || 1);
-                            const moq = parseInt(document.getElementById("moqValue").innerText || 50);
-
-                            const totalPcs = sets * moq;
-                            const totalPrice = totalPcs * BOX_RATE;
-
-                            const item = {
-                                id: Date.now(),
-                                image: productImage,
-                                title: document.getElementById("productTitle").innerText,
-                                sets,
-                               
-                                totalPcs,
-                                price: totalPrice,
-
-                            };
-
-                            cart.push(item);
-                            updateCartUI();
-                        }
-
-                        /* ADD & OPEN */
-                        function addToCartView() {
-                            handleAddToCart();
-
-                            const city = document.getElementById("citySelect").value;
-                            if (city) toggleCart();
-                        }
-
-
-                        /* -------------------------------------
-                           UPDATE CART SIDEBAR
-                        --------------------------------------- */
-                        function updateCartUI() {
-                            const list = document.getElementById("cartList");
-                            const totalEl = document.getElementById("cartTotal");
-
-                            list.innerHTML = "";
-                            let total = 0;
-
-                            if (!cart.length) {
-                                list.innerHTML = "<p>Your cart is empty.</p>";
-                                totalEl.innerText = "₹0";
-                                return;
-                            }
-
-                            cart.forEach(item => {
-                                total += item.price;
-
-                                list.innerHTML += `
-                                                                            <div class="cart-item">
-                                                                               <img src="${item.image}" class="cart-img" alt="Product">
-                                                                                <strong>${item.title}</strong><br>
-                                                                                Sets: ${item.sets}<br>                                                                               
-                                                                                Total Pcs: ${item.totalPcs}<br>
-                                                                                Price: ₹${item.price}<br><br>
-                                                                                <button class="remove-btn" onclick="removeItem(${item.id})">Remove</button>
-                                                                            </div>
-                                                                        `;
-                            });
-
-                            totalEl.innerText = "₹" + total;
-                        }
-
-                        function removeItem(id) {
-                            cart = cart.filter(i => i.id !== id);
-                            updateCartUI();
-                        }
+        cart.push(item);
+        updateCartUI();
+    }
 
 
-                        /* OPEN/CLOSE CART */
-                        function toggleCart() {
-                            document.getElementById("cartModal").classList.toggle("open");
-                        }
-                        window.addEventListener("DOMContentLoaded", function () {
-                            const qtyBox = document.getElementById("qty");
+    /* ADD & OPEN */
+    function addToCartView() {
+        handleAddToCart();
 
-                            qtyBox.addEventListener("input", function () {
-                                const moq = getMOQ();
-                                let val = parseInt(this.value);
+        const city = document.getElementById("citySelect").value;
+        if (city) toggleCart();
+    }
 
-                                if (isNaN(val) || val < moq) {
-                                    this.value = moq;
-                                }
-                            });
-                        });
 
-                        /* -------------------------------------
-                                     CHECKOUT — MUST SELECT CITY BEFORE PROCEED
-                                  --------------------------------------- */
-                        function proceedToPayment() {
-                            const city = document.getElementById("citySelect").value;
+    /* -------------------------------------
+       UPDATE CART SIDEBAR
+    --------------------------------------- */
+    function updateCartUI() {
+        const list = document.getElementById("cartList");
+        const totalEl = document.getElementById("cartTotal");
 
-                            if (!cart.length) {
-                                alert("Your cart is empty!");
-                                return;
-                            }
+        list.innerHTML = "";
+        let total = 0;
 
-                            if (!city) {
-                                alert("Please select your city before proceeding to payment.");
-                                return;
-                            }
+        if (!cart.length) {
+            list.innerHTML = "<p>Your cart is empty.</p>";
+            totalEl.innerText = "₹0";
+            return;
+        }
 
-                            const totalPrice = cart.reduce((sum, i) => sum + i.price, 0);
+        cart.forEach(item => {
+            total += item.price;
 
-                            // Save for checkout.html
-                            localStorage.setItem("checkoutCart", JSON.stringify(cart));
-                            localStorage.setItem("totalAmount", totalPrice);
-                            localStorage.setItem("selectedCity", city);
+            list.innerHTML += `
+                                                                                <div class="cart-item">
+                                                                                   <img src="${item.image}" class="cart-img" alt="Product"><br/>
+                                                                                    <strong>${item.title}</strong><br>                                                                                
+                                                                                    Sets: ${item.sets}<br>                                                                               
+                                                                                    Total Pieces: ${item.totalPcs}<br>
+                                                                                    Price: ₹${item.price}<br><br>
+                                                                                    <button class="remove-btn" onclick="removeItem(${item.id})">Remove</button>
+                                                                                </div>
+                                                                            `;
+        });
 
-                            // Go to checkout page
-                            window.location.href =
-                                "checkout.html";
+        totalEl.innerText = "₹" + total;
+    }
 
-                        }
-                    </script>
+    function removeItem(id) {
+        cart = cart.filter(i => i.id !== id);
+        updateCartUI();
+    }
+
+
+    /* OPEN/CLOSE CART */
+    function toggleCart() {
+        document.getElementById("cartModal").classList.toggle("open");
+    }
+    window.addEventListener("DOMContentLoaded", function () {
+        const qtyBox = document.getElementById("qty");
+
+        qtyBox.addEventListener("input", function () {
+            const moq = getMOQ();
+            let val = parseInt(this.value);
+
+            if (isNaN(val) || val < moq) {
+                this.value = moq;
+            }
+        });
+    });
+
+    /* -------------------------------------
+                 CHECKOUT — MUST SELECT CITY BEFORE PROCEED
+              --------------------------------------- */
+    function proceedToPayment() {
+        const city = document.getElementById("citySelect").value;
+
+        if (!cart.length) {
+            alert("Your cart is empty!");
+            return;
+        }
+
+        if (!city) {
+            alert("Please select your city before proceeding to payment.");
+            return;
+        }
+
+        const totalPrice = cart.reduce((sum, i) => sum + i.price, 0);
+
+        // Save for checkout.html
+        localStorage.setItem("checkoutCart", JSON.stringify(cart));
+        localStorage.setItem("totalAmount", totalPrice);
+        localStorage.setItem("selectedCity", city);
+
+        // Go to checkout page
+        window.location.href =
+            "checkout.html";
+
+    }
+</script>
 
                     <!-- metadata / chips -->
                     <div class="meta-row" aria-hidden="true">

@@ -97,13 +97,9 @@
     }
 </style>
 </head>
-
-
 <body>
     <div class="container">
-
         <h1 class="text-center">Checkout Page</h1>
-
         <div class="grid">
             <!-- LEFT SIDE -->
             <div>
@@ -121,11 +117,21 @@
                         <input id="phone" class="form-input" required>
                         <label for="phone" class="form-label">Mobile Number</label>
                     </div>
+                    <div class="form-group">
+                        <input id="billing_email" class="form-input" required>
+                        <label class="form-label">Email</label>
+                    </div>
+
 
                     <div class="form-group">
                         <input id="billing_pincode" class="form-input" required>
                         <label class="form-label">PIN Code</label>
                     </div>
+                    <div class="form-group">
+                        <input id="billing_state" class="form-input" required>
+                        <label class="form-label">State</label>
+                    </div>
+
 
                     <div class="form-group">
                         <input id="billing_city" class="form-input" required>
@@ -147,18 +153,7 @@
                         <input id="landmark" class="form-input">
                     </div>
 
-                    <div class="form-group">
-                        <input id="billing_email" class="form-input" required>
-                        <label class="form-label">Email</label>
-                    </div>
-
-
-                    <div class="form-group">
-                        <input id="billing_state" class="form-input" required>
-                        <label class="form-label">State</label>
-                    </div>
-
-
+                   
 
                     <div class="form-group">
                         <input id="billing_country" class="form-input" value="India" required>
@@ -167,15 +162,9 @@
                 </div>
 
                 <div class="checkout-container">
-
                     <!-- DELIVERY ADDRESS -->
-
-
-
-
                     <!-- BILLING DETAILS -->
-                    <h2 class="section-title">2. Billing details</h2>
-                   
+                    <h2 class="section-title">2. Billing details</h2>                   
                     <div id="billingSection">
 
                         <div class="form-row">
@@ -207,18 +196,13 @@
 
                         </div>
                     </div>
-
                     <!-- PAY BUTTON -->
                     <button id="payBtn" class="pay-btn" onclick="processPayment()">Proceed to Payment</button>
 
                 </div>
-
-
             </div>
-
             <!-- RIGHT SIDE -->
             <aside class="side">
-
                 <label><strong>GST</strong></label>
                 <select id="gstSelect" class="form-control" onchange="updateTotals()">
                     <option value="18">IGST 18%</option>
@@ -241,8 +225,6 @@
             </aside>
         </div>
     </div>
-
-
     <script>
         /* ============================================================
            LOAD CART FROM LOCAL STORAGE
@@ -286,7 +268,7 @@
             <div style="flex:1">
                 <b>${item.title}</b><br>
                 Sets: ${item.sets}<br>                
-                Total Pcs: ${item.totalPcs}
+                Total Pieces: ${item.totalPcs}
             </div>
 
             <strong>₹${item.price}</strong>
@@ -415,7 +397,5 @@
             }
         }, 1000);
     </script>
-
 </body>
-
 </html>

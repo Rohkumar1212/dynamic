@@ -609,7 +609,7 @@
                 min-width: 100%
             }
         }
-  
+
         .cart-modal {
             position: fixed;
             top: 0;
@@ -622,11 +622,11 @@
             transition: 0.3s;
             z-index: 9999;
         }
-    
+
         .cart-modal.open {
             right: 0;
         }
-    
+
         .cart-header {
             display: flex;
             justify-content: space-between;
@@ -635,19 +635,19 @@
             font-size: 20px;
             margin-bottom: 12px;
         }
-    
+
         .close-cart {
             border: none;
             background: none;
             font-size: 22px;
             cursor: pointer;
         }
-    
+
         .cart-item {
             border-bottom: 1px solid #ddd;
             padding: 10px 0;
         }
-    
+
         .remove-btn {
             padding: 4px 5px;
             background: red;
@@ -657,161 +657,167 @@
             cursor: pointer;
             border-radius: 6px;
         }
-    
+
         .total-row {
             margin: 15px 0;
             display: flex;
             justify-content: space-between;
             font-size: 18px;
         }
-   
+
         .moq-wrapper {
-    display: inline-flex;
-    align-items: center;
-    gap: 18px;
-    padding: 5px 10px;
-    border-radius: 28px;
-    background: #ffffff;
-    border: 1.4px solid #d7d7d7;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    transition: border-color 0.4s ease;
-}
+            display: inline-flex;
+            align-items: center;
+            gap: 18px;
+            padding: 5px 10px;
+            border-radius: 28px;
+            background: #ffffff;
+            border: 1.4px solid #d7d7d7;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.4s ease;
+        }
 
-/* Multi-color animated gradient overlay */
-.moq-wrapper::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -150%;
-    width: 150%;
-    height: 100%;
-    background: linear-gradient(
-        120deg,
-        #ff0077,
-        #ff9800,
-        #ffe600,
-        #25d366,
-        #0099ff,
-        #8a2be2
-    );
-    background-size: 400%;
-    opacity: 0;
-    transition: 0.5s ease-in-out;
-    z-index: 1;
-}
+        /* Multi-color animated gradient overlay */
+        .moq-wrapper::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 150%;
+            height: 100%;
+            background: linear-gradient(120deg,
+                    #ff0077,
+                    #ff9800,
+                    #ffe600,
+                    #25d366,
+                    #0099ff,
+                    #8a2be2);
+            background-size: 400%;
+            opacity: 0;
+            transition: 0.5s ease-in-out;
+            z-index: 1;
+        }
 
-/* Hover: show animated gradient */
-.moq-wrapper:hover::before {
-    left: 0;
-    opacity: 0.25;
-    animation: animateGradient 3s linear infinite;
-}
+        /* Hover: show animated gradient */
+        .moq-wrapper:hover::before {
+            left: 0;
+            opacity: 0.25;
+            animation: animateGradient 3s linear infinite;
+        }
 
-@keyframes animateGradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
+        @keyframes animateGradient {
+            0% {
+                background-position: 0% 50%;
+            }
 
-/* Content stays above gradient */
-.moq-wrapper p,
-.moq-wrapper b {
-    position: relative;
-    z-index: 2;
-}
+            50% {
+                background-position: 100% 50%;
+            }
 
-/* Text styling */
-.moq-wrapper p {
-    margin: 0;
-    font-size: 15px;
-    font-weight: 600;
-    color: #333;
-}
+            100% {
+                background-position: 0% 50%;
+            }
+        }
 
-.moq-wrapper b {
-    color: #0064ff;
-}
+        /* Content stays above gradient */
+        .moq-wrapper p,
+        .moq-wrapper b {
+            position: relative;
+            z-index: 2;
+        }
 
-/* Responsive for mobile */
-@media (max-width: 480px) {
-    .moq-wrapper {
-        width: 100%;
-        border-radius: 22px;
-        padding: 10px 14px;
-        gap: 12px;
-    }
-}
+        /* Text styling */
+        .moq-wrapper p {
+            margin: 0;
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .moq-wrapper b {
+            color: #0064ff;
+        }
+
+        /* Responsive for mobile */
+        @media (max-width: 480px) {
+            .moq-wrapper {
+                width: 100%;
+                border-radius: 22px;
+                padding: 10px 14px;
+                gap: 12px;
+            }
+        }
 
 
         /* Wrapper Layout */
-.location-wrapper {
-    display: flex;
-    flex-wrap: inherit;
-    gap: 15px;
-    padding: 10px 0;
-    width: 100%;
-}
+        .location-wrapper {
+            display: flex;
+            flex-wrap: inherit;
+            gap: 15px;
+            padding: 10px 0;
+            width: 100%;
+        }
 
-/* Labels */
-.location-wrapper h6,
-.location-wrapper label {
-    width: 100%;
-    margin: 0;
-    font-size: 15px;
-    font-weight: 600;
-}
+        /* Labels */
+        .location-wrapper h6,
+        .location-wrapper label {
+            width: 100%;
+            margin: 0;
+            font-size: 15px;
+            font-weight: 600;
+        }
 
-/* Select Fields */
-.location-wrapper select {
-    width: 100%;
-    max-width: 320px;
-    padding: 10px 14px;
-    border: 1.6px solid #d8d8d8;
-    border-radius: 8px;
-    background: #fff;
-    font-size: 15px;
-    outline: none;
-    transition: 0.25s ease;
-}
+        /* Select Fields */
+        .location-wrapper select {
+            width: 100%;
+            max-width: 320px;
+            padding: 10px 14px;
+            border: 1.6px solid #d8d8d8;
+            border-radius: 8px;
+            background: #fff;
+            font-size: 15px;
+            outline: none;
+            transition: 0.25s ease;
+        }
 
-.location-wrapper select:focus {
-    border-color: #0066ff;
-    box-shadow: 0 0 6px rgba(0, 102, 255, 0.35);
-}
+        .location-wrapper select:focus {
+            border-color: #0066ff;
+            box-shadow: 0 0 6px rgba(0, 102, 255, 0.35);
+        }
 
-/* Quantity / MOQ Section */
-.moq-wrapper {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 15px;
-}
+        /* Quantity / MOQ Section */
+        .moq-wrapper {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 15px;
+        }
 
-.moq-wrapper p {
-    margin: 0;
-    font-size: 15px;
-    font-weight: 500;
-}
+        .moq-wrapper p {
+            margin: 0;
+            font-size: 15px;
+            font-weight: 500;
+        }
 
-/* Responsive Fix: Mobile */
-@media (max-width: 768px) {
-    .location-wrapper {
-        gap: 10px;
-        display: flex;
-    }
+        /* Responsive Fix: Mobile */
+        @media (max-width: 768px) {
+            .location-wrapper {
+                gap: 10px;
+                display: flex;
+            }
 
-    .location-wrapper select {
-        max-width: 50%;
-    }
+            .location-wrapper select {
+                max-width: 50%;
+            }
 
-    .moq-wrapper {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-}
+            .moq-wrapper {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
 
         .product-gallery {
             display: flex;
@@ -864,6 +870,7 @@
 
         /* BUTTONS */
         .move-btn {
+            display: none !important;
             position: absolute;
             top: 40%;
             transform: translateY(-50%);
@@ -1022,6 +1029,7 @@
 
                                 /* BUTTONS */
                                 .move-btn {
+                                    display: none !important;
                                     position: absolute;
                                     top: 40%;
                                     transform: translateY(-50%);
@@ -1062,9 +1070,14 @@
                                             onclick="changeImage(this)">
                                         <img src="/images/products/Corrugated Box/Corrugated Box-18.jpeg"
                                             onclick="changeImage(this)">
-                                            <img src="/images/products/Corrugated Box/Corrugated Box  18-x-15-x-16-inches.jpeg" onclick="changeImage(this)">
-                                        <img src="/images/products/Corrugated Box/Corrugated Box-18.jpeg" onclick="changeImage(this)">
-                                        <img src="/images/products/Corrugated Box/Corrugated Box  18-x-15-x-16-inches.jpeg" onclick="changeImage(this)">
+                                        <img src="/images/products/Corrugated Box/Corrugated Box-18-2.png"
+                                            onclick="changeImage(this)">
+                                        <img src="/images/products/Corrugated Box/Corrugated Box-18.jpeg"
+                                            onclick="changeImage(this)">
+                                        <img src="/images/products/Corrugated Box/Corrugated Box  18-x-15-x-16-inches.jpeg"
+                                            onclick="changeImage(this)">
+                                            <img src="/images/products/Corrugated Box/Corrugated Box-18-2.png" onclick="changeImage(this)">
+                                            
                                     </div>
 
                                 </div>
@@ -1126,8 +1139,8 @@
                     </div>
 
                     <script>
-                        
-                       function changeImage(img) {
+
+                        function changeImage(img) {
                             const main = document.getElementById("mainImage");
 
                             main.classList.add("fade-out");
@@ -1139,14 +1152,15 @@
                         }
 
                     </script>
-<style>.main-img {
-    transition: opacity .2s ease;
-}
+                    <style>
+                        .main-img {
+                            transition: opacity .2s ease;
+                        }
 
-.fade-out {
-    opacity: 0.3;
-}
-</style>
+                        .fade-out {
+                            opacity: 0.3;
+                        }
+                    </style>
                     <div style="margin-top:12px; font-size:13px; color:#415; text-align:center">High-resolution
                         packaging
                         photos — click thumbnails to change</div>
@@ -1160,63 +1174,63 @@
                             <div class="title-row">
                                 <h1 id="productTitle">Corrugated Box (18 × 15 × 16 inches) - For Heavy / Fragile Goods
                                 </h1>
-                
+
                             </div>
                         </div>
                         <div style="text-align:left" class="w-50">
                             <div class="price" id="productPrice">₹ 320 / pc</div>
-                
+
                             <div class="rating" aria-hidden="true">⭐ ⭐ ⭐ ⭐ ☆ (4.3)</div>
                         </div>
                     </div>
-                
+
                     <p class="short-desc" id="productDescription">
                         A strong RSC (Regular Slotted Container) corrugated carton designed especially for heavy and
                         fragile items. Available in
                         an eco-friendly kraft finish for added appeal.
-                
+
                     </p>
-                
+
                     <!-- selectors -->
                     <div class="quality-select" aria-labelledby="qualityLabel" style="margin-top:12px">
                         <label id="qualityLabel">Select Box Quality / Material</label>
-                
+
                         <div class="quality-list" id="qualityList" role="radiogroup">
                             <div class="quality-item" data-key="double-wall" onclick="selectQuality(this)">
                                 Double Wall — 5 ply
                             </div>
-                
+
                             <div class="quality-item" data-key="kraft" onclick="selectQuality(this)">
                                 Kraft – Premium Finish
                             </div>
-                
+
                             <div class="quality-item" data-key="corrugated" onclick="selectQuality(this)">
                                 Corrugated — Heavy Duty
                             </div>
-                
-                
+
+
                         </div>
                         <div class="size-help" style="margin-top:10px">Tip: For shifting purposes, 5-ply or
                             heavy-duty corrugated options are recommended for better load handling.
-                
+
                         </div>
-                
+
                         <div class="location-wrapper">
-                
-                
+
+
                             <select id="stateSelect" onchange="loadCities()">
                                 <option value="">-- Select State --</option>
                                 <option value="delhi">IN NCR</option>
                                 <option value="other">Out of NCR</option>
                             </select>
-                
+
                             <select id="citySelect" onchange="updateMOQ()">
                                 <option value="">-- Select City --</option>
                             </select>
-                
-                
+
+
                         </div>
-                
+
                         <div id="moqPopup" class="moq-inline-popup">
                             <div class="moq-inline-content">
                                 <span class="close-btn" onclick="closeMoqPopup()">×</span>
@@ -1228,14 +1242,14 @@
                             .moq-inline-content {
                                 display: none;
                             }
-                
+
                             /* Container — Hidden by Default */
                             .moq-inline-popup {
                                 display: none;
                                 position: relative;
                                 margin-top: 8px;
                             }
-                
+
                             /* Popup Box */
                             .moq-inline-content {
                                 background: #ffffffcc;
@@ -1247,20 +1261,20 @@
                                 box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
                                 animation: slideDown 0.25s ease-out;
                             }
-                
+
                             /* Slide-down animation */
                             @keyframes slideDown {
                                 from {
                                     opacity: 0;
                                     transform: translateY(-10px);
                                 }
-                
+
                                 to {
                                     opacity: 1;
                                     transform: translateY(0);
                                 }
                             }
-                
+
                             /* Close Button */
                             .close-btn {
                                 float: right;
@@ -1269,11 +1283,11 @@
                                 color: #555;
                                 margin-left: 8px;
                             }
-                
+
                             .close-btn:hover {
                                 color: #e74c3c;
                             }
-                
+
                             /* Text */
                             #moqText,
                             #priceText {
@@ -1281,15 +1295,15 @@
                                 font-size: 16px;
                                 color: #333;
                             }
-                
+
                             #moqText b,
                             #priceText b {
                                 color: #8e44ad;
                             }
                         </style>
-                
+
                         <div class="moq-wrapper">
-                            <p>MOQ: <b id="moqValue">Plz Select above fields</b> </p>
+                            <p>MOQ: <b id="moqValue">Please Select above fields</b> </p>
                         </div>
                     </div>
                     <script>
@@ -1312,7 +1326,7 @@
                             document.getElementById("moqPopup").style.display = "none";
                         }
                     </script>
-                
+
                     <script>
                         // ----------------------------------
                         // CITY DATA → NCR
@@ -1342,20 +1356,32 @@
                             return ncrCities.includes(city) ? 10 : 50;
                         }
 
+                        function updateCartWithNewMOQ(moq) {
+                                cart = cart.map(item => {
+                                    item.sets = moq;                 // update sets
+                                    item.totalPcs = moq * 5;         // as 1 pack = 5 pcs
+                                    item.price = item.sets * item.unitPrice; // recalc final price
+                                    return item;
+                                });
+
+                                updateCartUI(); // refresh sidebar
+                            }
+
                         // ----------------------------------
                         // UPDATE MOQ TEXT + QTY FIELD
                         // ----------------------------------
-                     function updateMOQ() {
+                        function updateMOQ() {
                             const moq = getMOQ();
                             const moqLabel = document.getElementById("moqValue");
                             const qtyBox = document.getElementById("qty");
 
                             if (moq === 1) {
                                 // No city selected
-                                moqLabel.innerText = "Plz Select above fields";
+                                moqLabel.innerText = "Please Select above fields";
                                 qtyBox.min = 1;
                                 return;
                             }
+
 
                             // NCR = 10 MOQ → Text should show NCR content
                             if (moq === 10) {
@@ -1373,9 +1399,10 @@
                                 qtyBox.value = moq;
                             }
 
-                                // Enforce MOQ
-                         qtyBox.min = moq;
-                         qtyBox.value = moq;  
+                            // Enforce MOQ
+                            qtyBox.min = moq;
+                            qtyBox.value = moq;
+                             updateCartWithNewMOQ(moq);
                         }
 
                         // ----------------------------------
@@ -1445,11 +1472,11 @@
                                 }
                             });
                         });
-                    </script>              
-                
+                    </script>
+
                     <!-- controls -->
-                
-                
+
+
                     <!-- controls -->
                     <div class="controls" role="group" aria-label="quantity and actions">
                         <div class="qty-wrap">
@@ -1457,12 +1484,12 @@
                             <input id="qty" type="number" value="10" min="10">
                             <button onclick="increaseSets()">+</button>
                         </div>
-                
+
                         <div id="moqValue"></div>
                         <button class="primary-btn" id="addToCartBtn" onclick="handleAddToCart()">Add to Cart</button>
                         <button class="outline-btn" onclick="addToCartView()">Add & View Cart</button>
                         <button class="whatsapp-btn" onclick="shareOnWhatsApp()">Share on WhatsApp</button>
-                
+
                         <button class="view-cart" onclick="toggleCart()">🛒 View Cart</button>
                     </div>
                     <style>
@@ -1480,13 +1507,13 @@
                             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
                             transition: 0.3s;
                         }
-                
+
                         .whatsapp-btn:hover {
                             background: #1ebe5d;
                             transform: scale(1.03);
                         }
                     </style>
-                
+
                     <script>
                         function shareOnWhatsApp() {
 
@@ -1502,8 +1529,8 @@
                             window.open(url, "_blank");
                         }
                     </script>
-                
-                
+
+
                     <script>
                         /* -------------------------------------
                            GLOBAL CART + MOQ SYSTEM
@@ -1511,14 +1538,12 @@
                         let cart = [];
                         const BOX_RATE = 320;
                         /* Update MOQ + Show Inline Popup */
-                         /* -------------------------------------
-                           ADD TO CART — WITH CITY CHECK
-                        --------------------------------------- */
-                        function handleAddToCart() {
+                        /* -------------------------------------
+                          ADD TO CART — WITH CITY CHECK
+                       --------------------------------------- */
+                     function handleAddToCart() {
                             const city = document.getElementById("citySelect").value;
                             const productImage = document.getElementById("mainImage").src;
-
-
 
                             if (!city) {
                                 alert("Please select your city before adding to cart.");
@@ -1526,24 +1551,45 @@
                             }
 
                             const sets = parseInt(document.getElementById("qty").value || 1);
-                            const moq = parseInt(document.getElementById("moqValue").innerText || 50);
-
+                            const moq = getMOQ(); // Always correct MOQ (10 or 50)
                             const totalPcs = sets * moq;
                             const totalPrice = totalPcs * BOX_RATE;
 
+                            const title = document.getElementById("productTitle").innerText;
+
+                            // -----------------------------------------
+                            // CHECK if this product already exists in cart
+                            // -----------------------------------------
+                            let existing = cart.find(item => item.title === title);
+
+                            if (existing) {
+                                // UPDATE existing cart item
+                                existing.sets = sets;
+                                existing.totalPcs = totalPcs;
+                                existing.price = totalPrice;
+                                existing.moq = moq; // track moq also
+
+                                updateCartUI();
+                                return;
+                            }
+
+                            // -----------------------------------------
+                            // Otherwise create new item
+                            // -----------------------------------------
                             const item = {
                                 id: Date.now(),
                                 image: productImage,
-                                title: document.getElementById("productTitle").innerText,
-                                sets,                               
+                                title,
+                                sets,
                                 totalPcs,
                                 price: totalPrice,
-
+                                moq
                             };
 
                             cart.push(item);
                             updateCartUI();
                         }
+
 
                         /* ADD & OPEN */
                         function addToCartView() {
@@ -1575,11 +1621,10 @@
 
                                 list.innerHTML += `
                                                                             <div class="cart-item">
-                                                                               <img src="${item.image}" class="cart-img" alt="Product">
-                                                                                <strong>${item.title}</strong><br>
-                                                                                
+                                                                               <img src="${item.image}" class="cart-img" alt="Product"><br/>
+                                                                                <strong>${item.title}</strong><br>                                                                                
                                                                                 Sets: ${item.sets}<br>                                                                               
-                                                                                Total Pcs: ${item.totalPcs}<br>
+                                                                                Total Pieces: ${item.totalPcs}<br>
                                                                                 Price: ₹${item.price}<br><br>
                                                                                 <button class="remove-btn" onclick="removeItem(${item.id})">Remove</button>
                                                                             </div>
@@ -1641,7 +1686,7 @@
 
                         }
                     </script>
-                
+
                     <!-- metadata / chips -->
                     <div class="meta-row" aria-hidden="true">
                         <div class="chip">Lead time: 4-5 days</div>
@@ -1923,9 +1968,6 @@
                         </button>
                     </div>
                 </div>
-
-             
-
             </div> <!-- product-row -->
 
             <!-- Tabs full width -->
@@ -2042,12 +2084,12 @@
                                     <li><i class="far fa-envelope"></i><a
                                             href="mailto:mail@dynamiccorrugations.com">mail@dynamiccorrugations.com </a>
                                     </li>
-        
+
                                 </ul>
                             </div>
                             <!-- end: Footer widget area 1 -->
                         </div>
-        
+
                         <div class="col-xl-2 col-lg-2 col-md-4">
                             <!-- Footer widget area 1 -->
                             <div class="widget">
@@ -2103,10 +2145,10 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <!-- Social icons -->
-        
+
                             <div class="copyright-text text-left">&copy; 2025 Dynamic Corrugations. All Rights
                                 Reserved.
-        
+
                             </div>
                             <!-- end: Social icons -->
                         </div>
@@ -2120,10 +2162,10 @@
             </div>
         </footer>
         <!-- Scroll top -->
-        <!-- Footer -->       
+        <!-- Footer -->
         <!-- end: Footer -->
     </div>
-   
+
 
     <div class="fixed-icons">
         <!-- WhatsApp Icon -->
