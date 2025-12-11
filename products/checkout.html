@@ -221,9 +221,8 @@
 
                 <label><strong>GST</strong></label>
                 <select id="gstSelect" class="form-control" onchange="updateTotals()">
-                    <option value="0">No GST</option>
                     <option value="18">IGST 18%</option>
-                    <option value="9_9">CGST 9% + SGST 9%</option>
+                    
                 </select>
 
                 <div class="total-row"><span>Subtotal</span><strong id="subtotal">₹0</strong></div>
@@ -286,8 +285,7 @@
                 style="width:90px;height:90px;object-fit:cover;border-radius:6px">
             <div style="flex:1">
                 <b>${item.title}</b><br>
-                Sets: ${item.sets}<br>
-                MOQ: ${item.moq} pcs<br>
+                Sets: ${item.sets}<br>                
                 Total Pcs: ${item.totalPcs}
             </div>
 
@@ -307,22 +305,19 @@
         /* ============================================================
            GST + TOTAL CALCULATION
         ============================================================ */
-        function updateTotals() {
-            subtotalEl.innerText = "₹" + subtotal;
+         function updateTotals() {
+                subtotalEl.innerText = "₹" + subtotal;
 
-            let gst = 0;
-            const gstOption = gstSelect.value;
+                // Auto-apply 18% GST
+                const gst = subtotal * 0.18;
+                gstAmountEl.innerText = "₹" + gst.toFixed(2);
 
-            if (gstOption === "18") gst = subtotal * 0.18;
-            if (gstOption === "9_9") gst = subtotal * 0.18;
+                const shipping = subtotal > 0 ? 0 : 0;
+                shippingEl.innerText = "₹" + shipping;
 
-            gstAmountEl.innerText = "₹" + gst.toFixed(2);
-
-            const shipping = subtotal > 0 ? 0 : 0;
-            shippingEl.innerText = "₹" + shipping;
-
-            grandTotalEl.innerText = "₹" + (subtotal + gst + shipping).toFixed(2);
-        }
+                const grandTotal = subtotal + gst + shipping;
+                grandTotalEl.innerText = "₹" + grandTotal.toFixed(2);
+            }
 
         renderCheckoutItems();
 

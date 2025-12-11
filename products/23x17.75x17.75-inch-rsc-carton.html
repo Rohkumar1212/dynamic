@@ -1600,8 +1600,7 @@
                                 id: Date.now(),
                                 image: productImage,
                                 title: document.getElementById("productTitle").innerText,
-                                sets,
-                                moq,
+                                sets,                               
                                 totalPcs,
                                 price: totalPrice,
 
@@ -1644,8 +1643,7 @@
                                                                                <img src="${item.image}" class="cart-img" alt="Product">
                                                                                 <strong>${item.title}</strong><br>
                                                                                 
-                                                                                Sets: ${item.sets}<br>
-                                                                                MOQ: ${item.moq} pcs<br>
+                                                                                Sets: ${item.sets}<br>                                                                                
                                                                                 Total Pcs: ${item.totalPcs}<br>
                                                                                 Price: ₹${item.price}<br><br>
                                                                                 <button class="remove-btn" onclick="removeItem(${item.id})">Remove</button>
