@@ -7,6 +7,8 @@
     <link href="/css/checkout.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="/images/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+
     <script>
         document.querySelectorAll("textarea").forEach(t => {
             t.addEventListener("input", function () {
@@ -122,7 +124,10 @@
                         <label class="form-label">Email</label>
                     </div>
 
-
+<div class="form-group">
+    <input id="billing_country" class="form-input" value="India" required>
+    <label class="form-label">Country</label>
+</div>
                     <div class="form-group">
                         <input id="billing_pincode" class="form-input" required>
                         <label class="form-label">PIN Code</label>
@@ -155,10 +160,6 @@
 
                    
 
-                    <div class="form-group">
-                        <input id="billing_country" class="form-input" value="India" required>
-                        <label class="form-label">Country</label>
-                    </div>
                 </div>
 
                 <div class="checkout-container">
@@ -398,5 +399,4 @@
         }, 1000);
     </script>
 </body>
-
 </html>
