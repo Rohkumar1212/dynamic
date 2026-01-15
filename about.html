@@ -230,12 +230,56 @@
                             <nav>
                                 <ul>
                                     <li><a href="index.html">Home</a></li>
-                                    <li><a href="about.html">About us</a></li>
+                                    <li class="active"><a href="about.html">About us</a></li>
                                     <li><a href="products.html">Product</a></li>
                                    
                                     <li><a href="gallery.html">Gallery</a></li>
                                     <li><a href="contact.html">Contact us</a></li>
-                                </ul>
+
+                                   <li class="nav-right">
+    <button id="login-btn" class="btn btn-primary" onclick="window.app.login()">Login</button>
+
+    <div id="user-widget" class="user-widget" style="display: none;">
+        
+        <div class="avatar-trigger" onclick="toggleProfile()">
+            <img id="user-photo-small" class="avatar-small" src="https://via.placeholder.com/40" alt="User" />
+        </div>
+
+        <div id="profile-card" class="profile-card">
+            
+            <div class="profile-header-bg"></div> <div class="profile-content">
+                <img id="profile-photo-large" class="profile-img-large" src="https://via.placeholder.com/80" alt="Profile" />
+                
+                <h4 id="display-name">Loading...</h4>
+                <p id="user-email">...</p>
+                
+                <div class="profile-actions">
+                    <div class="action-row" onclick="window.app.openDashboard()">
+                        <div class="icon-circle">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="action-text">
+                            <strong>My Profile</strong>
+                            <span>Account settings</span>
+                        </div>
+                        <i class="fas fa-chevron-right arrow-icon"></i>
+                    </div>
+
+                    <div class="action-row logout" onclick="window.app.logout()">
+                        <div class="icon-circle logout-icon">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </div>
+                        <div class="action-text">
+                            <strong>Log Out</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</li>
+                                </ul>                               
 
                             </nav>
                             <!-- Right Side: Login & Profile Section -->
@@ -809,6 +853,97 @@
     <script src="js/plugins.js"></script>
     <!--Template functions-->
     <script src="js/functions.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+
+        // 1. Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBfJTHAzQ6u27vGwdsC9HEEMYCdNnjYnJU",
+            authDomain: "dynamiccorrugations-ac4a8.firebaseapp.com",
+            projectId: "dynamiccorrugations-ac4a8",
+            storageBucket: "dynamiccorrugations-ac4a8.firebasestorage.app",
+            messagingSenderId: "481189371368",
+            appId: "1:481189371368:web:58cf359e533d8cadcdd85d",
+            measurementId: "G-6PL4T4METT"
+        };
+
+        // 2. Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+
+        // 3. Define Global App Actions (Login, Logout, Navigation)
+        window.app = {
+            // Redirect to Dashboard
+            openDashboard: function () {
+                console.log("Navigating to Dashboard...");
+                window.location.href = "dashboard.html"; // Change this if you use tab switching instead
+            },
+
+            // Trigger Google Login
+            login: function () {
+                signInWithPopup(auth, provider).catch((error) => {
+                    console.error("Login Failed:", error);
+                    alert("Login failed: " + error.message);
+                });
+            },
+
+            // Trigger Logout
+            logout: function () {
+                signOut(auth).then(() => {
+                    console.log("Logged out successfully");
+                    // Optional: Redirect to home or reload
+                    window.location.reload();
+                }).catch((error) => {
+                    console.error("Logout error", error);
+                });
+            }
+        };
+
+        // 4. Attach Login Button Event Listener
+        const loginBtn = document.getElementById('login-btn');
+        if (loginBtn) {
+            loginBtn.addEventListener('click', window.app.login);
+        }
+
+        // 5. Auth State Listener (Populates the HTML Data)
+        onAuthStateChanged(auth, (user) => {
+            const userWidget = document.getElementById('user-widget');
+
+            // HTML Elements to populate
+            const displayNameEl = document.getElementById('display-name');
+            const emailEl = document.getElementById('user-email');
+            const smallPhotoEl = document.getElementById('user-photo-small');
+            const largePhotoEl = document.getElementById('profile-photo-large');
+
+            if (user) {
+                // --- USER IS LOGGED IN ---
+                console.log("User detected:", user.email);
+
+                // 1. Swap Buttons (Hide Login, Show Widget)
+                if (loginBtn) loginBtn.style.display = 'none';
+                if (userWidget) userWidget.style.display = 'block'; // Or 'flex' depending on CSS
+
+                // 2. Inject Data
+                if (displayNameEl) displayNameEl.textContent = user.displayName;
+                if (emailEl) emailEl.textContent = user.email;
+
+                // 3. Update Images (Handle missing photos with a fallback)
+                const photoUrl = user.photoURL || "https://via.placeholder.com/80";
+                if (smallPhotoEl) smallPhotoEl.src = photoUrl;
+                if (largePhotoEl) largePhotoEl.src = photoUrl;
+
+            } else {
+                // --- USER IS LOGGED OUT ---
+                console.log("No user signed in.");
+
+                // 1. Swap Buttons (Show Login, Hide Widget)
+                if (loginBtn) loginBtn.style.display = 'block';
+                if (userWidget) userWidget.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 
 </html>

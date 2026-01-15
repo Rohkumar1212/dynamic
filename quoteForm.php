@@ -78,12 +78,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>";
 
     // Email headers
-    $to = 'mail@dynamiccorrugations.com ';
+    $to = 'dynamiccorrugations@gmail.com';
     $subject = "New Inquiry from " . $input['fullName'];
     $headers = "MIME-Version: 1.0\r\n";
     $headers .= "Content-type:text/html;charset=UTF-8\r\n";
     $headers .= "From: " . $input['fullName'] . " <" . $input['emailAddress'] . ">\r\n";
-    $headers .= "Cc: mail@dynamiccorrugations.com\r\n";
+    $headers .= "Cc: dynamiccorrugations@gmail.com\r\n";
 
     // Send email
     if (mail($to, $subject, $message, $headers)) {

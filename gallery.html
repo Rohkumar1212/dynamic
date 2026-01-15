@@ -74,7 +74,7 @@
             </div>
         </div>
         <!-- Header -->
-        <header id="header">
+        <header id="header" data-transparent="true">
             <div class="header-inner">
                 <div class="container">
                     <!--Logo-->
@@ -89,7 +89,7 @@
                             <span class="text-muted">Start typing & press "Enter" or "ESC" to close</span>
                         </form>
                     </div> <!-- end: search -->
-
+        
                     <!--Navigation Resposnive Trigger-->
                     <div id="mainMenu-trigger"> <a class="lines-button x"><span class="lines"></span></a> </div>
                     <!--end: Navigation Resposnive Trigger-->
@@ -99,20 +99,65 @@
                             <nav>
                                 <ul>
                                     <li><a href="index.html">Home</a></li>
-                                    <li><a href="about.html">About us</a></li>                                   
+                                    <li><a href="about.html">About us</a></li>
                                     <li><a href="products.html">Product</a></li>
-                                                                    
-                                    <li><a href="gallery.html">Gallery</a></li>
+        
+                                    <li class="active"><a href="gallery.html">Gallery</a></li>
                                     <li><a href="contact.html">Contact us</a></li>
-                                </ul>
-                                
-                            </nav>
-                            <!-- Right Side: Login & Profile Section -->
-                           
-                    <!--end: Navigation-->
+                                   <li class="nav-right">
+    <button id="login-btn" class="btn btn-primary" onclick="window.app.login()">Login</button>
+
+    <div id="user-widget" class="user-widget" style="display: none;">
+        
+        <div class="avatar-trigger" onclick="toggleProfile()">
+            <img id="user-photo-small" class="avatar-small" src="https://via.placeholder.com/40" alt="User" />
+        </div>
+
+        <div id="profile-card" class="profile-card">
+            
+            <div class="profile-header-bg"></div> <div class="profile-content">
+                <img id="profile-photo-large" class="profile-img-large" src="https://via.placeholder.com/80" alt="Profile" />
+                
+                <h4 id="display-name">Loading...</h4>
+                <p id="user-email">...</p>
+                
+                <div class="profile-actions">
+                    <div class="action-row" onclick="window.app.openDashboard()">
+                        <div class="icon-circle">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="action-text">
+                            <strong>My Profile</strong>
+                            <span>Account settings</span>
+                        </div>
+                        <i class="fas fa-chevron-right arrow-icon"></i>
+                    </div>
+
+                    <div class="action-row logout" onclick="window.app.logout()">
+                        <div class="icon-circle logout-icon">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </div>
+                        <div class="action-text">
+                            <strong>Log Out</strong>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </header>     
+        </div>
+
+    </div>
+</li>
+                                    <!-- Google Identity Script -->
+                                    <script src="https://accounts.google.com/gsi/client" async defer></script>
+        
+                                </ul>
+                            </nav>
+                            <!-- Right Side: Login & Profile Section -->
+        
+                            <!--end: Navigation-->
+                        </div>
+                    </div>
+        </header>
         <script src="script.js"></script> 
         <!-- end: Header -->
         <!-- Page title -->
@@ -584,16 +629,17 @@
     }
 </style>
 
-<div class="fixed-icons">      
-    <!-- WhatsApp Icon -->
-    <a href="https://wa.me/+919891040840" target="_blank">
-        <i class='fab fa-whatsapp' style='font-size:38px;color:rgb(7, 72, 236)'></i>
-    </a>
-    <!-- Call Icon -->
-    <a href="tel:+919891040840" style="color: rgb(0, 0, 255);">
-        <i class="fas fa-phone" style="font-size: 38px;"></i>
-    </a>
-</div>
+ <div class="fixed-icons">
+        <!-- WhatsApp Icon -->
+        <a href="https://wa.me/+919891040840" target="_blank" class="icon whatsapp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+
+        <!-- Call Icon -->
+        <a href="tel:+919891040840" class="icon call">
+            <i class="fas fa-phone"></i>
+        </a>
+    </div>
 <!-- FontAwesome for icons -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
 
@@ -603,6 +649,373 @@
 <script src="js/plugins.js"></script>
 <!--Template functions-->
 <script src="js/functions.js"></script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+
+<script src="js/userlogin.js"></script>
+<script src="js/dashboard.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const openPopupLink = document.getElementById("openPopupLink");
+        const popup = document.getElementById("popup");
+        const closePopupBtn = document.getElementById("closePopup");
+
+        // Open popup
+        openPopupLink.addEventListener("click", (event) => {
+            event.preventDefault();
+            popup.classList.remove("hidden");
+        });
+
+        // Close popup when clicking close button
+        closePopupBtn.addEventListener("click", () => {
+            popup.classList.add("hidden");
+        });
+
+        // Close popup when clicking outside popup content
+        popup.addEventListener("click", (event) => {
+            if (event.target === popup) {
+                popup.classList.add("hidden");
+            }
+        });
+    });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const openPopupLink = document.getElementById("openPopupLink");
+        const popup = document.getElementById("popup");
+        const closePopupBtn = document.getElementById("closePopup");
+
+        // Open popup
+        openPopupLink.addEventListener("click", (event) => {
+            event.preventDefault();
+            popup.classList.remove("hidden");
+        });
+
+        // Close popup when clicking close button
+        closePopupBtn.addEventListener("click", () => {
+            popup.classList.add("hidden");
+        });
+
+        // Close popup when clicking outside popup content
+        popup.addEventListener("click", (event) => {
+            if (event.target === popup) {
+                popup.classList.add("hidden");
+            }
+        });
+    });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const openPopupLink = document.getElementById("openPopupLink");
+        const popup = document.getElementById("popup");
+        const closePopupBtn = document.getElementById("closePopup");
+
+        // Open popup
+        openPopupLink.addEventListener("click", (event) => {
+            event.preventDefault();
+            popup.classList.remove("hidden");
+        });
+
+        // Close popup when clicking close button
+        closePopupBtn.addEventListener("click", () => {
+            popup.classList.add("hidden");
+        });
+
+        // Close popup when clicking outside popup content
+        popup.addEventListener("click", (event) => {
+            if (event.target === popup) {
+                popup.classList.add("hidden");
+            }
+        });
+    });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const openPopupLink = document.getElementById("openPopupLink");
+        const popup = document.getElementById("popup");
+        const closePopupBtn = document.getElementById("closePopup");
+
+        // Open popup
+        openPopupLink.addEventListener("click", (event) => {
+            event.preventDefault();
+            popup.classList.remove("hidden");
+        });
+
+        // Close popup when clicking close button
+        closePopupBtn.addEventListener("click", () => {
+            popup.classList.add("hidden");
+        });
+
+        // Close popup when clicking outside popup content
+        popup.addEventListener("click", (event) => {
+            if (event.target === popup) {
+                popup.classList.add("hidden");
+            }
+        });
+    });
+</script>
+<script type="module">
+    // 1. Import Firebase SDKs
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+    import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+
+    // 2. Configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyBfJTHAzQ6u27vGwdsC9HEEMYCdNnjYnJU",
+        authDomain: "dynamiccorrugations-ac4a8.firebaseapp.com",
+        projectId: "dynamiccorrugations-ac4a8",
+        storageBucket: "dynamiccorrugations-ac4a8.firebasestorage.app",
+        messagingSenderId: "481189371368",
+        appId: "1:481189371368:web:58cf359e533d8cadcdd85d",
+        measurementId: "G-6PL4T4METT"
+    };
+
+    // 3. Initialize
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+    let currentUser = null; // Store user data here
+
+    // 4. Global App Functions (Attached to window for HTML onclick events)
+    window.app = {
+
+        // --- VIEW NAVIGATION ---
+
+        // Called when clicking dropdown items (Profile, Orders, etc.)
+        openDashboard: function (tabName) {
+            // Hide Home, Show Dashboard
+            document.getElementById('home-view').style.display = 'none';
+            document.getElementById('dashboard-view').style.display = 'flex'; // Flex to keep sidebar layout
+
+            // Switch to the specific tab requested
+            this.switchTab(tabName);
+        },
+
+        // Called when clicking "Back to Home"
+        goHome: function () {
+            document.getElementById('dashboard-view').style.display = 'none';
+            document.getElementById('home-view').style.display = 'block';
+        },
+
+        // --- TAB SWITCHING LOGIC ---
+
+        switchTab: function (tabName) {
+            // 1. Hide all tab panes
+            const panes = document.querySelectorAll('.tab-pane');
+            panes.forEach(pane => pane.classList.remove('active'));
+
+            // 2. Deactivate all sidebar buttons
+            const btns = document.querySelectorAll('.sidebar-btn');
+            btns.forEach(btn => btn.classList.remove('active'));
+
+            // 3. Show the selected pane
+            const targetPane = document.getElementById('tab-' + tabName);
+            if (targetPane) targetPane.classList.add('active');
+
+            // 4. Highlight the sidebar button
+            const targetBtn = document.getElementById('btn-' + tabName);
+            if (targetBtn) targetBtn.classList.add('active');
+        },
+
+        // --- AUTH ACTIONS ---
+
+        logout: function () {
+            signOut(auth).then(() => {
+                alert("Logged out successfully");
+                this.goHome(); // Reset view
+            }).catch((error) => {
+                console.error("Logout error", error);
+            });
+        },
+
+        // --- PAYMENT LOGIC ---
+
+        payWithPayU: function () {
+            if (!currentUser) {
+                alert("Please login to proceed with payment.");
+                return;
+            }
+
+            // 1. Generate Transaction ID (Unique)
+            const txnid = "TXN" + new Date().getTime();
+
+            // 2. Populate Hidden Form Fields
+            document.getElementById('txnid').value = txnid;
+            document.getElementById('payu-name').value = currentUser.displayName || "Guest";
+            document.getElementById('payu-email').value = currentUser.email;
+
+            // 3. Warning about Hash (Server-side requirement)
+            alert("Redirecting to PayU...\n\nNOTE: Since this is a static HTML file, the 'hash' field is empty. You will see a hash error on PayU unless you generate the hash on your backend server.");
+
+            // 4. Submit the form
+            document.getElementById('payu-form').submit();
+        }
+    };
+
+    // 5. Auth State Listener (Runs automatically on load/login/logout)
+    const loginBtn = document.getElementById('login-btn');
+    const userWidget = document.getElementById('user-widget');
+
+    // Attach Login Click Event
+    if (loginBtn) {
+        loginBtn.addEventListener('click', () => {
+            signInWithPopup(auth, provider).catch(e => alert(e.message));
+        });
+    }
+
+    onAuthStateChanged(auth, (user) => {
+        currentUser = user;
+
+        if (user) {
+            // --- USER LOGGED IN ---
+            console.log("User Logged In:", user.email);
+
+            // 1. Toggle Header Elements
+            if (loginBtn) loginBtn.style.display = 'none';
+            if (userWidget) userWidget.style.display = 'flex';
+
+            // 2. Fill Header Data
+            const displayName = document.getElementById('display-name');
+            const userPhoto = document.getElementById('user-photo');
+            if (displayName) displayName.textContent = user.displayName;
+            if (userPhoto) userPhoto.src = user.photoURL;
+
+            // 3. Fill Profile Tab Data
+            const pName = document.getElementById('p-name');
+            const pEmail = document.getElementById('p-email');
+            const pUid = document.getElementById('p-uid');
+            if (pName) pName.textContent = user.displayName;
+            if (pEmail) pEmail.textContent = user.email;
+            if (pUid) pUid.textContent = user.uid;
+
+            // Note: We do NOT auto-show the dashboard here. 
+            // We stay on Home until the user clicks the Dropdown.
+
+        } else {
+            // --- USER LOGGED OUT ---
+            console.log("User Logged Out");
+
+            // 1. Toggle Header Elements
+            if (loginBtn) loginBtn.style.display = 'block';
+            if (userWidget) userWidget.style.display = 'none';
+
+            // 2. Force View to Home
+            window.app.goHome();
+        }
+    });
+
+    // Global App Logic attached to window
+    window.app = {
+        // Redirect to the external dashboard.html file
+        openDashboard: function () {
+            console.log("Redirecting to Dashboard...");
+            window.location.href = "dashboard.html";
+        },
+
+        // Handle Logout
+        logout: function () {
+            // (Assuming you have auth imported as shown in previous steps)
+            import("https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js")
+                .then(({ signOut, getAuth }) => {
+                    const auth = getAuth();
+                    signOut(auth).then(() => {
+                        window.location.reload();
+                    });
+                });
+        }
+    };
+
+</script>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+    import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+
+    // 1. Firebase Configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyBfJTHAzQ6u27vGwdsC9HEEMYCdNnjYnJU",
+        authDomain: "dynamiccorrugations-ac4a8.firebaseapp.com",
+        projectId: "dynamiccorrugations-ac4a8",
+        storageBucket: "dynamiccorrugations-ac4a8.firebasestorage.app",
+        messagingSenderId: "481189371368",
+        appId: "1:481189371368:web:58cf359e533d8cadcdd85d",
+        measurementId: "G-6PL4T4METT"
+    };
+
+    // 2. Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+
+    // 3. Define Global App Actions (Login, Logout, Navigation)
+    window.app = {
+        // Redirect to Dashboard
+        openDashboard: function () {
+            console.log("Navigating to Dashboard...");
+            window.location.href = "dashboard.html"; // Change this if you use tab switching instead
+        },
+
+        // Trigger Google Login
+        login: function () {
+            signInWithPopup(auth, provider).catch((error) => {
+                console.error("Login Failed:", error);
+                alert("Login failed: " + error.message);
+            });
+        },
+
+        // Trigger Logout
+        logout: function () {
+            signOut(auth).then(() => {
+                console.log("Logged out successfully");
+                // Optional: Redirect to home or reload
+                window.location.reload();
+            }).catch((error) => {
+                console.error("Logout error", error);
+            });
+        }
+    };
+
+    // 4. Attach Login Button Event Listener
+    const loginBtn = document.getElementById('login-btn');
+    if (loginBtn) {
+        loginBtn.addEventListener('click', window.app.login);
+    }
+
+    // 5. Auth State Listener (Populates the HTML Data)
+    onAuthStateChanged(auth, (user) => {
+        const userWidget = document.getElementById('user-widget');
+
+        // HTML Elements to populate
+        const displayNameEl = document.getElementById('display-name');
+        const emailEl = document.getElementById('user-email');
+        const smallPhotoEl = document.getElementById('user-photo-small');
+        const largePhotoEl = document.getElementById('profile-photo-large');
+
+        if (user) {
+            // --- USER IS LOGGED IN ---
+            console.log("User detected:", user.email);
+
+            // 1. Swap Buttons (Hide Login, Show Widget)
+            if (loginBtn) loginBtn.style.display = 'none';
+            if (userWidget) userWidget.style.display = 'block'; // Or 'flex' depending on CSS
+
+            // 2. Inject Data
+            if (displayNameEl) displayNameEl.textContent = user.displayName;
+            if (emailEl) emailEl.textContent = user.email;
+
+            // 3. Update Images (Handle missing photos with a fallback)
+            const photoUrl = user.photoURL || "https://via.placeholder.com/80";
+            if (smallPhotoEl) smallPhotoEl.src = photoUrl;
+            if (largePhotoEl) largePhotoEl.src = photoUrl;
+
+        } else {
+            // --- USER IS LOGGED OUT ---
+            console.log("No user signed in.");
+
+            // 1. Swap Buttons (Show Login, Hide Widget)
+            if (loginBtn) loginBtn.style.display = 'block';
+            if (userWidget) userWidget.style.display = 'none';
+        }
+    });
+</script>
 </body>
 
 </html>

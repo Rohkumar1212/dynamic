@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Email Details
-    $to = "mail@dynamiccorrugations.com"; // Change to your email
+    $to = "dynamiccorrugations@gmail.com"; // Change to your email
     $subject = "New Inquiry from $fullName";
     $emailContent = "
         <h2>New Inquiry Received</h2>

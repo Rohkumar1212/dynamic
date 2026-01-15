@@ -106,3 +106,17 @@ function logout() {
     updateUserUI();
     window.location.href = "index.html";
 }
+    function toggleProfile() {
+        const card = document.getElementById('profile-card');
+        card.classList.toggle('active');
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+        const widget = document.getElementById('user-widget');
+        const card = document.getElementById('profile-card');
+        if (widget && !widget.contains(e.target)) {
+            card.classList.remove('active');
+        }
+    });
+

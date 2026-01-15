@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>India Presence - Interactive Map</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+   
+   
+    .sidebar-header {
+        padding: 24px;
+        border-bottom: 1px solid #eee;
+        background: #fff;
+    }
+
+    .sidebar-header h2 {
+        margin: 0 0 16px 0;
+        font-size: 16px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #6b7280;
+        font-weight: 700;
+    }
+
+    /* --- FILTER TABS (Top Chips) --- */
+    .filter-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .tab {
+        display: flex;
+        align-items: center;
+        padding: 6px 12px;
+        border-radius: 50px;
+        background: #f3f4f6;
+        border: 1px solid transparent;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 600;
+        color: #4b5563;
+        transition: var(--transition);
+        user-select: none;
+    }
+
+    .tab:hover {
+        background: #e5e7eb;
+    }
+
+    .tab.active {
+        background: #111;
+        color: #fff;
+        border-color: #111;
+    }
+
+    .tab-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        margin-right: 8px;
+        background-color: #ccc;
+    }
+
+    /* --- LOCATION LIST (Area for Location Chips) --- */
+    .location-list {
+        flex: 1;
+        overflow-y: auto;
+        padding: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        /* Allows chips to flow */
+        align-content: flex-start;
+        /* Packs chips to top */
+        gap: 8px;
+        /* Space between chips */
+        background: #fafafa;
+    }
+
+    /* --- NEW CHIP UI DESIGN FOR LOCATIONS --- */
+    .location-card {
+        display: inline-flex;
+        align-items: center;
+        padding: 8px 14px;
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 50px;
+        /* Pill shape */
+        cursor: pointer;
+        transition: var(--transition);
+        font-size: 13px;
+        font-weight: 500;
+        color: #374151;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    .location-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        border-color: #d1d5db;
+    }
+
+    .location-card.active {
+        background: #111;
+        color: white;
+        border-color: #111;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .loc-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        margin-right: 8px;
+        flex-shrink: 0;
+    }
+
+    /* When active, make the dot white to contrast with black background */
+    .location-card.active .loc-dot {
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+    }
+
+    /* --- MAP SECTION --- */
+    .map-section {
+        flex: 1;
+        position: relative;
+    }
+
+    #map {
+        height: 100%;
+        width: 100%;
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 768px) {
+        .app-container {
+            flex-direction: column;
+        }
+
+        .sidebar {
+            width: 100%;
+            height: 45vh;
+            order: 2;
+        }
+
+        .map-section {
+            height: 55vh;
+            order: 1;
+        }
+
+        .filter-tabs {
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+    }
+</style>
+    <style>
+        
+        .container{
+            padding: 30px 30px 80px 30px;
+        }
+        :root {
+            /* Brand Colors based on your screenshot dots */
+            --color-all: #333;
+            --color-hq: #9e9e9e;
+            --color-sales: #00fb69;
+            --color-mfg: #e6151c;
+            --color-training: #f4c300;
+            --bg-light: #f3f4f6;
+            --surface: #ffffff;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-light);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            /* Prevent body scroll, handle inside containers */
+        }
+
+        /* --- LAYOUT CONTAINER --- */
+        .app-container {
+            display: flex;
+            height: 120vh;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        
+
+        /* --- LEFT SIDEBAR (Controls & List) --- */
+        .sidebar {
+            width: 450px;
+            background: var(--surface);
+            display: flex;
+            flex-direction: column;
+            z-index: 20;
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.05);
+            flex-shrink: 0;
+            /* Prevent shrinking */
+        }
+
+        .sidebar-header {
+            padding: 24px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .sidebar-header h2 {
+            margin: 0 0 16px 0;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #1f2937;
+            font-weight: 700;
+        }
+
+        /* --- TABS DESIGN (From your screenshot) --- */
+        .filter-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tab {
+            display: flex;
+            align-items: center;
+            padding: 8px 14px;
+            border-radius: 50px;
+            background: #f8f9fa;
+            border: 1px solid #e5e7eb;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            color: #4b5563;
+            transition: var(--transition);
+            user-select: none;
+        }
+
+        .tab:hover {
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transform: translateY(-1px);
+        }
+
+        .tab.active {
+            background: #000;
+            color: #fff;
+            border-color: #000;
+        }
+
+        .tab-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 8px;
+            background-color: #ccc;
+        }
+
+        /* --- LOCATION LIST --- */
+        .location-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .location-card {
+            background: #fff;
+            padding: 16px;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .location-card:hover {
+            background: #fafafa;
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .location-card.active {
+            border-color: var(--primary-color);
+            background: #f0f7ff;
+        }
+
+        .loc-name {
+            font-weight: 600;
+            font-size: 15px;
+            color: #111;
+            margin-bottom: 4px;
+        }
+
+        .loc-category {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            color: #6b7280;
+            display: flex;
+            align-items: center;
+        }
+
+        .loc-category::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            margin-right: 6px;
+            background: currentColor;
+        }
+
+        /* --- RIGHT SIDE (Map) --- */
+        .map-section {
+            flex: 1;
+            position: relative;
+        }
+
+        #map {
+            height: 100%;
+            width: 100%;
+            z-index: 1;
+        }
+
+        /* --- Floating Stats --- */
+        .floating-stat {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: var(--shadow);
+            font-weight: 600;
+            font-size: 14px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .stat-number {
+            color: #2563eb;
+            font-weight: 800;
+            font-size: 16px;
+        }
+
+        /* --- Tooltip Customization --- */
+        .custom-tooltip {
+            background: #1f2937;
+            border: none;
+            color: white;
+            font-weight: 600;
+            font-size: 12px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .leaflet-tooltip-left:before,
+        .leaflet-tooltip-right:before {
+            border: none !important;
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 768px) {
+            .app-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: 45vh;
+                /* Top half for list */
+                order: 2;
+                /* Move to bottom */
+                box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .map-section {
+                height: 55vh;
+                /* Bottom half for map */
+                order: 1;
+            }
+
+            .sidebar-header {
+                padding: 15px;
+            }
+
+            .filter-tabs {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding-bottom: 5px;
+                /* Hide scrollbar */
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+
+            .filter-tabs::-webkit-scrollbar {
+                display: none;
+            }
+
+            .tab {
+                white-space: nowrap;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Locations</h2>
+                <div class="filter-tabs" id="filter-container">
+                    <div class="tab active" onclick="filterMap('all')">
+                        <span class="tab-dot" style="background: var(--color-all)"></span>All Locations
+                    </div>
+                    <div class="tab" onclick="filterMap('Headquarters')">
+                        <span class="tab-dot" style="background: var(--color-hq)"></span>Headquarters
+                    </div>
+                    <div class="tab" onclick="filterMap('Sales')">
+                        <span class="tab-dot" style="background: var(--color-sales)"></span>Sales & Marketing
+                    </div>
+                    <div class="tab" onclick="filterMap('Manufacturing')">
+                        <span class="tab-dot" style="background: var(--color-mfg)"></span>Manufacturing
+                    </div>
+                    <div class="tab" onclick="filterMap('Training')">
+                        <span class="tab-dot" style="background: var(--color-training)"></span>Training Center
+                    </div>
+                </div>
+            </div>
+
+            <div class="location-list" id="location-list">
+            </div>
+        </aside>
+
+        <main class="map-section">
+            <div class="floating-stat">
+                <span class="stat-number" id="location-count">0</span> Active Locations
+            </div>
+            <div id="map"></div>
+        </main>
+    </div>
+</div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <script>
+        // --- RENDER LOGIC (UPDATED FOR CHIP UI) ---
+
+            function renderData(dataToRender) {
+                // 1. Clear Map Markers
+                markerGroup.clearLayers();
+
+                // 2. Clear List
+                const listContainer = document.getElementById('location-list');
+                listContainer.innerHTML = '';
+
+                // 3. Update Count
+                document.getElementById('location-count').innerText = dataToRender.length;
+
+                if (dataToRender.length === 0) {
+                    listContainer.innerHTML = '<div style="width:100%; text-align:center; color:#9ca3af; padding-top:20px;">No locations found.</div>';
+                    return;
+                }
+
+                // 4. Generate Chips
+                dataToRender.forEach(item => {
+                    // --- A. Map Marker ---
+                    const icon = icons[item.category] || icons['default'];
+                    const marker = L.marker([item.lat, item.lng], { icon: icon });
+
+                    marker.bindTooltip(`<b>${item.name}</b><br>${item.category}`, {
+                        direction: 'top',
+                        className: 'custom-tooltip',
+                        offset: [0, -35]
+                    });
+
+                    markerGroup.addLayer(marker);
+
+                    // --- B. List Chip UI ---
+                    const chip = document.createElement('div');
+                    chip.className = 'location-card'; // This now uses the chip style
+
+                    // Determine Color based on category
+                    let colorHex = '#333';
+                    if (item.category === 'Sales') colorHex = 'var(--color-sales)';
+                    if (item.category === 'Manufacturing') colorHex = 'var(--color-mfg)';
+                    if (item.category === 'Training') colorHex = 'var(--color-training)';
+                    if (item.category === 'Headquarters') colorHex = 'var(--color-hq)';
+
+                    // Inner HTML: Colored Dot + Name
+                    chip.innerHTML = `
+            <span class="loc-dot" style="background-color: ${colorHex}"></span>
+            ${item.name}
+        `;
+
+                    // Click Event
+                    chip.onclick = () => {
+                        // 1. Fly to location
+                        map.flyTo([item.lat, item.lng], 12);
+                        marker.openTooltip();
+
+                        // 2. Handle Active State (Visual)
+                        document.querySelectorAll('.location-card').forEach(c => c.classList.remove('active'));
+                        chip.classList.add('active');
+
+                        // 3. Mobile handling
+                        if (window.innerWidth < 768) {
+                            document.getElementById('map').scrollIntoView({ behavior: 'smooth' });
+                        }
+                    };
+
+                    // Link marker click to chip highlight
+                    marker.on('click', () => {
+                        map.flyTo([item.lat, item.lng], 10);
+                        document.querySelectorAll('.location-card').forEach(c => c.classList.remove('active'));
+                        chip.classList.add('active');
+                        chip.scrollIntoView({ behavior: "smooth", block: "center" });
+                    });
+
+                    listContainer.appendChild(chip);
+                });
+            }
+        // --- 1. DATA ENRICHMENT ---
+        // I've added a 'type' to your data to make the filters work. 
+        // In production, your real API/Data should provide this.
+
+        const categories = ['Headquarters', 'Sales', 'Manufacturing', 'Training'];
+
+        const rawData = [
+            { name: "Amalapuram", lat: 16.5787, lng: 82.0061 }, { name: "Amaravati", lat: 16.573, lng: 80.3575 },
+            { name: "Anakapalle", lat: 17.6896, lng: 83.0024 }, { name: "Anantapur", lat: 14.6819, lng: 77.6006 },
+            { name: "Eluru", lat: 16.7107, lng: 81.0952 }, { name: "Guntur", lat: 16.3067, lng: 80.4365 },
+            { name: "Kakinada", lat: 16.9891, lng: 82.2475 }, { name: "Kurnool", lat: 15.8281, lng: 78.0373 },
+            { name: "Nellore", lat: 14.4426, lng: 79.9865 }, { name: "Ongole", lat: 15.5057, lng: 80.0499 },
+            { name: "Rajahmundry", lat: 16.9891, lng: 81.7832 }, { name: "Srikakulam", lat: 18.3021, lng: 83.8970 },
+            { name: "Tirupati", lat: 13.6288, lng: 79.4192 }, { name: "Vijayawada", lat: 16.5062, lng: 80.6480 },
+            { name: "Visakhapatnam", lat: 17.6868, lng: 83.2185 },
+            { name: "Itanagar", lat: 27.0844, lng: 93.6053 }, { name: "Naharlagun", lat: 27.1084, lng: 93.6920 },
+            { name: "Guwahati", lat: 26.1445, lng: 91.7362 }, { name: "Dibrugarh", lat: 27.4725, lng: 94.9125 },
+            { name: "Jorhat", lat: 26.7509, lng: 94.2037 }, { name: "Silchar", lat: 24.8333, lng: 92.7790 },
+            { name: "Tezpur", lat: 26.6528, lng: 92.7926 }, { name: "Tinsukia", lat: 27.4886, lng: 95.3558 },
+            { name: "Chandigarh", lat: 30.7333, lng: 76.7794 }, { name: "Amritsar", lat: 31.6340, lng: 74.8723 },
+            { name: "Ludhiana", lat: 30.9010, lng: 75.8573 }, { name: "Jalandhar", lat: 31.3260, lng: 75.5762 },
+            { name: "Patiala", lat: 30.3398, lng: 76.3869 }, { name: "Bhatinda", lat: 30.2110, lng: 74.9455 },
+            { name: "Mohali", lat: 30.7046, lng: 76.7179 }, { name: "Pathankot", lat: 32.2643, lng: 75.6497 },
+            { name: "Jaipur", lat: 26.9124, lng: 75.7873 }, { name: "Jodhpur", lat: 26.2389, lng: 73.0243 },
+            { name: "Udaipur", lat: 24.5854, lng: 73.7125 }, { name: "Kota", lat: 25.2138, lng: 75.8648 },
+            { name: "Ajmer", lat: 26.4499, lng: 74.6399 }, { name: "Bikaner", lat: 28.0229, lng: 73.3119 },
+            { name: "Alwar", lat: 27.5530, lng: 76.6346 }, { name: "Bhilwara", lat: 25.3407, lng: 74.6313 },
+            { name: "Chennai", lat: 13.0827, lng: 80.2707 }, { name: "Coimbatore", lat: 11.0168, lng: 76.9558 },
+            { name: "Madurai", lat: 9.9252, lng: 78.1198 }, { name: "Trichy", lat: 10.7905, lng: 78.7047 },
+            { name: "Salem", lat: 11.6643, lng: 78.1460 }, { name: "Tirunelveli", lat: 8.7139, lng: 77.7567 },
+            { name: "Vellore", lat: 12.9165, lng: 79.1325 }, { name: "Erode", lat: 11.3410, lng: 77.7172 },
+            { name: "Hyderabad", lat: 17.3850, lng: 78.4867 }, { name: "Warangal", lat: 17.9689, lng: 79.5941 },
+            { name: "Nizamabad", lat: 18.6725, lng: 78.0940 }, { name: "Khammam", lat: 17.2473, lng: 80.1514 },
+            { name: "Karimnagar", lat: 18.4386, lng: 79.1288 }, { name: "Secunderabad", lat: 17.4399, lng: 78.4983 },
+            { name: "Lucknow", lat: 26.8467, lng: 80.9462 }, { name: "Kanpur", lat: 26.4499, lng: 80.3319 },
+            { name: "Agra", lat: 27.1767, lng: 78.0081 }, { name: "Varanasi", lat: 25.3176, lng: 82.9739 },
+            { name: "Allahabad", lat: 25.4358, lng: 81.8463 }, { name: "Noida", lat: 28.5355, lng: 77.3910 },
+            { name: "Greater Noida", lat: 28.4744, lng: 77.5040 }, { name: "Ghaziabad", lat: 28.6692, lng: 77.4538 },
+            { name: "Meerut", lat: 28.9845, lng: 77.7064 }, { name: "Aligarh", lat: 27.8974, lng: 78.0880 },
+            { name: "Bareilly", lat: 28.3670, lng: 79.4304 }, { name: "Moradabad", lat: 28.8386, lng: 78.7733 },
+            { name: "Gorakhpur", lat: 26.7606, lng: 83.3732 }, { name: "Jhansi", lat: 25.4484, lng: 78.5685 },
+            { name: "Mathura", lat: 27.4924, lng: 77.6737 }, { name: "Muzaffarnagar", lat: 29.4727, lng: 77.7085 },
+            { name: "Saharanpur", lat: 29.9640, lng: 77.5461 },
+            { name: "Dehradun", lat: 30.3165, lng: 78.0322 }, { name: "Haridwar", lat: 29.9457, lng: 78.1642 },
+            { name: "Haldwani", lat: 29.2183, lng: 79.5130 }, { name: "Roorkee", lat: 29.8543, lng: 77.8880 },
+            { name: "Rishikesh", lat: 30.0869, lng: 78.2676 }, { name: "Nainital", lat: 29.3919, lng: 79.4542 },
+            { name: "Kolkata", lat: 22.5726, lng: 88.3639 }, { name: "Siliguri", lat: 26.7271, lng: 88.3953 },
+            { name: "Durgapur", lat: 23.5204, lng: 87.3119 }, { name: "Asansol", lat: 23.6739, lng: 86.9524 },
+            { name: "Howrah", lat: 22.5958, lng: 88.2636 }, { name: "Darjeeling", lat: 27.0410, lng: 88.2663 },
+            { name: "Kharagpur", lat: 22.3465, lng: 87.2317 }
+        ];
+
+        // Randomly assign categories for demonstration
+        const locationData = rawData.map((loc, index) => ({
+            ...loc,
+            category: index === 0 ? 'Headquarters' : categories[Math.floor(Math.random() * (categories.length - 1)) + 1]
+        }));
+
+
+        // --- 2. CONFIG & ICONS ---
+
+        var indiaBounds = [[6.0, 68.0], [37.5, 97.5]];
+
+        // Define specific icons for categories if you want, or just colors
+        function getIconColor(category) {
+            switch (category) {
+                case 'Headquarters': return 'grey';
+                case 'Sales': return 'green';
+                case 'Manufacturing': return 'orange';
+                case 'Training': return 'yellow';
+                default: return 'blue';
+            }
+        }
+
+        // Helper to create colored markers
+        function createIcon(colorName) {
+            return new L.Icon({
+                iconUrl: `https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-${colorName}.png`,
+                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41]
+            });
+        }
+
+        const icons = {
+            'Headquarters': createIcon('grey'),
+            'Sales': createIcon('green'),
+            'Manufacturing': createIcon('orange'),
+            'Training': createIcon('yellow'),
+            'default': createIcon('blue')
+        };
+
+        // --- 3. MAP INITIALIZATION ---
+        var map = L.map('map', {
+            center: [22.0, 79.0],
+            zoom: 5,
+            minZoom: 4,
+            maxBounds: indiaBounds,
+            maxBoundsViscosity: 1.0,
+            zoomControl: false // Move zoom control if needed
+        });
+
+        L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+            attribution: '© OpenStreetMap contributors',
+            maxZoom: 19
+        }).addTo(map);
+
+
+        // --- 4. CORE LOGIC: RENDER & FILTER ---
+
+        let markerGroup = L.layerGroup().addTo(map);
+        let activeCategory = 'all';
+
+        function renderData(dataToRender) {
+            // 1. Clear Map
+            markerGroup.clearLayers();
+
+            // 2. Clear List
+            const listContainer = document.getElementById('location-list');
+            listContainer.innerHTML = '';
+
+            // 3. Update Count
+            document.getElementById('location-count').innerText = dataToRender.length;
+
+            if (dataToRender.length === 0) {
+                listContainer.innerHTML = '<div style="padding:20px; text-align:center; color:#888;">No locations found here.</div>';
+                return;
+            }
+
+            // 4. Loop through data
+            dataToRender.forEach(item => {
+                // A. Add Marker to Map
+                const icon = icons[item.category] || icons['default'];
+                const marker = L.marker([item.lat, item.lng], { icon: icon });
+
+                marker.bindTooltip(`<b>${item.name}</b><br>${item.category}`, {
+                    direction: 'top',
+                    className: 'custom-tooltip',
+                    offset: [0, -35]
+                });
+
+                // Click marker -> scroll list
+                marker.on('click', () => {
+                    map.flyTo([item.lat, item.lng], 10);
+                });
+
+                markerGroup.addLayer(marker);
+
+                // B. Add Item to List
+                const card = document.createElement('div');
+                card.className = 'location-card';
+
+                // Color mapping for list text
+                let colorHex = '#333';
+                if (item.category === 'Sales') colorHex = 'var(--color-sales)';
+                if (item.category === 'Manufacturing') colorHex = 'var(--color-mfg)';
+                if (item.category === 'Training') colorHex = 'var(--color-training)';
+                if (item.category === 'Headquarters') colorHex = 'var(--color-hq)';
+
+                card.innerHTML = `
+                    <div class="loc-name">${item.name}</div>
+                    <div class="loc-category" style="color: ${colorHex}">
+                        ${item.category}
+                    </div>
+                `;
+
+                // List click -> Fly to map
+                card.onclick = () => {
+                    map.flyTo([item.lat, item.lng], 12);
+                    marker.openTooltip();
+
+                    // Highlight active card
+                    document.querySelectorAll('.location-card').forEach(c => c.classList.remove('active'));
+                    card.classList.add('active');
+
+                    // On mobile, scroll map into view
+                    if (window.innerWidth < 768) {
+                        document.getElementById('map').scrollIntoView({ behavior: 'smooth' });
+                    }
+                };
+
+                listContainer.appendChild(card);
+            });
+        }
+
+        // --- 5. FILTER FUNCTION ---
+        function filterMap(category) {
+            activeCategory = category;
+
+            // UI Update
+            document.querySelectorAll('.tab').forEach(t => {
+                t.classList.remove('active');
+                // Check inner text or just use click binding
+            });
+
+            // Find the clicked element (handled via onclick in HTML, but we need to style "this")
+            const clickedTab = event.currentTarget;
+            clickedTab.classList.add('active');
+
+            // Data Filter
+            let filteredData = locationData;
+            if (category !== 'all') {
+                filteredData = locationData.filter(item => item.category === category || (category === 'Sales' && item.category === 'Sales & Marketing'));
+            }
+
+            renderData(filteredData);
+
+            // Fit bounds to show all markers (nice animation)
+            if (filteredData.length > 0) {
+                const bounds = L.latLngBounds(filteredData.map(i => [i.lat, i.lng]));
+                map.flyToBounds(bounds, { padding: [50, 50], maxZoom: 10 });
+            }
+        }
+
+        // --- 6. INITIAL RENDER ---
+        renderData(locationData);
+
+    </script>
+    
+</body>
+
+</html>

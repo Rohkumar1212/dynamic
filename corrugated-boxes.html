@@ -2,105 +2,6 @@
 <html lang="en">
 
 <head>
-    <style>
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .brand-logo {
-            background: #007bff;
-            color: #fff;
-            padding: 8px 12px;
-            font-weight: 600;
-            border-radius: 8px;
-            font-size: 20px;
-        }
-
-        .brand-info {
-            font-size: 14px;
-            color: #555;
-        }
-
-        .contact-info {
-            text-align: right;
-            font-size: 14px;
-            color: #444;
-        }
-
-        .contact-info a {
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        .product-section {
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        .product-section h2 {
-            font-size: 24px;
-            margin-bottom: 8px;
-        }
-
-        .product-section p {
-            color: #777;
-            margin-bottom: 25px;
-        }
-
-        .category-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .category-card {
-            background: #fff;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .category-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .category-card img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .category-card:hover img {
-            transform: scale(1.05);
-        }
-
-        .category-content {
-            padding: 18px;
-        }
-
-        .category-content h3 {
-            font-size: 16px;
-            margin-bottom: 8px;
-        }
-
-        .category-content p {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 12px;
-        }
-
-        .view-btn {
-            color: #007bff;
-            font-weight: 600;
-            font-size: 14px;
-        }
-    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Page</title>
@@ -108,53 +9,155 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="author" content="INSPIRO" />
     <meta name="description" content="Themeforest Template Polo, html template">
-    <link rel="icon" type="image/png" href="images/favicon.ico">
+    <link rel="icon" type="image/png" href="/images/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Document title -->
     <!-- Stylesheets & Fonts -->
-    <link href="css/plugins.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/index.css" rel="stylesheet">
-    <link href="css/product.css" rel="stylesheet">
-    <script src="script.js"></script>
-    <script src="product.js"></script>
+    <link href="/css/plugins.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/index.css" rel="stylesheet">
+    <link href="/css/product.css" rel="stylesheet">
+    <link href="/css/box.css" rel="stylesheet">
+    <script src="/script.js"></script>
+    <script src="/product.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <style>
-        .breadcrumb {
-            text-align: center !important;
+        .product-section {
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .kk {
-            display: none;
+        /* Grid Layout */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
         }
 
-        .product {
+        /* Card Styling */
+        .category-card {
+            background: #fff;
             border: 1px solid #ddd;
-            padding: 15px;
-            width: 250px;
-            text-align: center;
-        }
-
-        .product img {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-        }
-
-
-
-        .view-cart {
-            display: none;
-            background-color: green;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            margin-top: 10px;
+            border-radius: 8px;
+            overflow: hidden;
             cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+        }
+
+        .category-content {
+            padding: 15px;
+        }
+
+        .category-content h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .category-content p {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        /* Button Styling */
+        .view-btn {
+            color: #007bff;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .view-btn:hover {
+            text-decoration: underline;
+        }
+
+        /* Navigation Header */
+        .section-header {
+            margin-bottom: 20px;
+        }
+
+        .back-btn {
+            display: none;
+            /* Hidden by default */
+            background: #333;
+            color: #fff;
+            padding: 8px 16px;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+
+        .back-btn:hover {
+            background: #555;
         }
     </style>
+    <style>
+        /* --- DEFAULT GRID (Desktop & Large Screens) --- */
 
+        @media (min-width: 1200px) {
+
+            .h3,
+            h3 {
+                font-size: 1.25rem;
+            }
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
+            gap: 16px;
+            padding: 20px 0;
+        }
+
+        /* --- LARGE TABLETS / SMALL LAPTOPS (max-width: 1200px) --- */
+        @media (max-width: 1200px) {
+            .category-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 16px;
+            }
+        }
+
+        /* --- TABLETS (max-width: 992px) --- */
+        @media (max-width: 992px) {
+            .category-grid {
+                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+                gap: 18px;
+            }
+        }
+
+        /* --- MOBILES (max-width: 768px) --- */
+        @media (max-width: 768px) {
+            .category-grid {
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                gap: 16px;
+            }
+        }
+
+        /* --- SMALL MOBILES (max-width: 480px) --- */
+        @media (max-width: 480px) {
+            .category-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -164,8 +167,8 @@
                 <div class="row">
                     <div class="col-md-6">
                         <ul class="top-menu">
-                            <li><a href="about.html">About</a></li>
-                            <li><a href="products.html">Features</a></li>
+                            <li><a href="/about.html">About</a></li>
+                            <li><a href="/products.html">Features</a></li>
 
                         </ul>
                     </div>
@@ -189,8 +192,8 @@
             <div class="header-inner">
                 <div class="container">
                     <!--Logo-->
-                    <div id="logo"> <a href="index.html"><span class="logo-default"><img class="img-fluid logody"
-                                    src="images/logotran.png" alt=""></span></a> </div>
+                    <div id="logo"> <a href="/index.html"><span class="logo-default"><img class="img-fluid logody"
+                                    src="/images/logotran.png" alt=""></span></a> </div>
                     <!--End: Logo-->
                     <!-- Search -->
                     <div id="search"><a id="btn-search-close" class="btn-search-close" aria-label="Close search form"><i
@@ -222,7 +225,7 @@
                                         <div id="user-widget" class="user-widget" style="display: none;">
 
                                             <div class="avatar-trigger" onclick="toggleProfile()">
-                                                <img id="user-profile" class="avatar-small"
+                                                <img id="user-photo-small" class="avatar-small"
                                                     src="https://via.placeholder.com/40" alt="User" />
                                             </div>
 
@@ -263,16 +266,14 @@
                                         </div>
                                     </li>
                                 </ul>
-
                             </nav>
-
                         </div>
                     </div>
         </header>
-        <script src="script.js"></script>
+        <script src="/script.js"></script>
         <!-- end: Header -->
         <!-- Page title -->
-        <section id="page-title" class="text-light" data-bg-parallax="images/products/Packaging-Page-Banner.jpg">
+        <section id="page-title" class="text-light" data-bg-parallax="/images/products/Packaging-Page-Banner.jpg">
             <div class="container">
 
                 <div class="breadcrumb text-center">
@@ -283,103 +284,197 @@
             </div>
         </section>
         <!-- end: Page title -->
-        <section class="product-section">
-            <h2>Product Categories</h2>
-            <p>Choose a category to explore products, specs, and bulk pricing.</p>
 
-            <div class="category-grid" id="product-container">
+        <section class="product-section px-5">
+            <button id="backBtn" class="back-btn" onclick="goBack()">← Back to Categories</button>
+
+            <div class="section-header">
+                <h2 id="pageTitle">Product Categories</h2>
+                <p id="pageDesc">Choose a category to explore products, specs, and bulk pricing.</p>
+            </div>
+
+            <div id="dynamicGrid" class="category-grid">
             </div>
         </section>
+
         <script>
-            // --- 1. EMBEDDED DATA (Zero Latency) ---
-            const products = [
-                {
-                    id: 1,
-                    title: "Corrugated Boxes",
-                    description: "Custom 3/5-ply boxes with reinforced edges and full-color printing.",
-                    image: "/images/products/Corrugated Boxes-box-5.png",
-                    link: "../products/corrugated-boxes.html"
-                },
-                {
-                    id: 2,
-                    title: "Corrugated Rolls",
-                    description: "Available in B/C/E flute types for converters and packaging units.",
-                    image: "/images/products/Corrugated Roll-box-4.png",
-                    link: "../products/corrugated-rolls.html"
-                },
-                {
-                    id: 3,
-                    title: "Air Bubble Rolls",
-                    description: "Single/double-layer bubbles — protection for fragile goods.",
-                    image: "/images/products/Air Bubble Roll-box-3.png",
-                    link: "../products/bubble-rolls.html"
-                },
-                {
-                    id: 4,
-                    title: "Crockery Packaging",
-                    description: "Partitioned inserts and kraft dividers for safe transport.",
-                    image: "/images/products/Crockery-box-6.png",
-                    link: "../products/crockery.html"
-                },
-                {
-                    id: 5,
-                    title: "Adhesive Tapes",
-                    description: "Carton sealing, filament, and tamper-evident tapes available.",
-                    image: "/images/products/Adhesive Tape-box-2.png",
-                    link: "../products/tapes.html"
-                },
-                {
-                    id: 6,
-                    title: "L-board / Edge Protectors",
-                    description: "Durable L-shaped corners for pallet security and stacking.",
-                    image: "/images/products/L- Board-box-1.png",
-                    link: "../products/edge-protectors.html"
+            // --- 1. INITIALIZE GLOBAL DATA CONTAINER ---
+            let apiData = []; // This will hold the data once fetched
+
+            const gridContainer = document.getElementById('dynamicGrid');
+            const pageTitle = document.getElementById('pageTitle');
+            const pageDesc = document.getElementById('pageDesc');
+            const backBtn = document.getElementById('backBtn');
+
+            // --- 2. FETCH DATA FROM API ---
+            async function fetchData() {
+                try {
+                    // REPLACE 'products.json' WITH YOUR ACTUAL API URL
+                    const response = await fetch('./js/products.json');
+
+                    // Check if the request was successful
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    // Parse the JSON and save it to our global variable
+                    apiData = await response.json();
+
+                    // Once data is loaded, render the categories
+                    renderCategories();
+
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                    gridContainer.innerHTML = `<p style="color:red; text-align:center;">Failed to load products. Please try again later.</p>`;
                 }
-            ];
+            }
 
-            // --- 2. OPTIMIZED RENDER FUNCTION ---
+            // --- 3. RENDER FUNCTIONS (Same logic as before) ---
+
+            // Function to Render Main Categories
             function renderCategories() {
-                const container = document.getElementById('product-container');
+                gridContainer.innerHTML = '';
+                pageTitle.innerText = "Product Categories";
+                pageDesc.innerText = "Choose a category to explore products, specs, and bulk pricing.";
+                backBtn.style.display = 'none';
 
-                // Create a DocumentFragment (Performance Boost: prevents 6 separate redraws)
-                const fragment = document.createDocumentFragment();
-
-                products.forEach(product => {
+                apiData.forEach(category => {
                     const card = document.createElement('div');
                     card.className = 'category-card';
+                    card.onclick = () => loadSubCategory(category.id);
 
-                    // Add click event for instant navigation
-                    card.onclick = () => window.location.href = product.link;
-
-                    // Using a placeholder onerror to prevent broken images
                     card.innerHTML = `
-                    <div class="img-container">
-                        <img src="${product.image}" alt="${product.title}" loading="lazy" 
-                             onerror="this.src='https://placehold.co/600x400?text=No+Image'">
-                    </div>
-                    <div class="category-content">
-                        <h3>${product.title}</h3>
-                        <p>${product.description}</p>
-                        <span class="view-btn">View products →</span>
-                    </div>
-                `;
-                    fragment.appendChild(card);
+                        <img src="${category.image}" alt="${category.title}">
+                        <div class="category-content">
+                            <h3>${category.title}</h3>
+                            <p>${category.description}</p>
+                            <span class="view-btn">View Products →</span>
+                        </div>
+                    `;
+                    gridContainer.appendChild(card);
                 });
-
-                // Single DOM Update
-                container.appendChild(fragment);
-
-                // Reveal page immediately
-                document.body.classList.add('loaded');
             }
 
-            // --- 3. INIT (Use DOMContentLoaded for speed) ---
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', renderCategories);
-            } else {
-                renderCategories(); // Render immediately if DOM is already ready
+            // Function to Render Sub-Products
+            function loadSubCategory(categoryId) {
+                const category = apiData.find(cat => cat.id === categoryId);
+
+                if (!category) return;
+
+                gridContainer.innerHTML = '';
+                pageTitle.innerText = category.title;
+                pageDesc.innerText = "Browse all available sizes and specifications below.";
+                backBtn.style.display = 'inline-block';
+
+                category.subProducts.forEach(product => {
+                    const card = document.createElement('div');
+                    card.className = 'category-card';
+                    card.onclick = () => openProduct(product.link);
+
+                    const imgPath = product.image ? product.image : 'https://via.placeholder.com/400x300?text=No+Image';
+
+                    card.innerHTML = `
+                        <img src="${imgPath}" onerror="this.src='https://via.placeholder.com/400x300?text=Image+Not+Found'" alt="${product.title}">
+                        <div class="category-content">
+                            <h3>${product.title}</h3>
+                            <p>${product.description}</p>
+                            <a href="${product.link}" onclick="event.stopPropagation();"><span class="view-btn">Get more details →</span></a>
+                        </div>
+                    `;
+                    gridContainer.appendChild(card);
+                });
             }
 
+            // Function to simulate navigation
+            function openProduct(url) {
+                // window.location.href = url;
+                alert("Redirecting to: " + url);
+            }
+
+            // Function to go back
+            function goBack() {
+                renderCategories();
+            }
+
+            // --- 4. START THE PROCESS ---
+            // Instead of calling renderCategories directly, we call fetchData first
+            document.addEventListener('DOMContentLoaded', fetchData);
+
+        </script>
+
+        <section class="product-section px-5">
+            <h2>Corrugated Boxes Product Categories</h2>
+            <p>Choose a category to explore products, specs, and bulk pricing.</p>
+
+            <div class="category-grid">
+
+                <div class="category-card" onclick="openProduct('../products/18-x-15-x-16-inches.html')">
+                    <img src="/images/products/Corrugated Box/Corrugated Box  18-x-15-x-16-inches.jpeg"
+                        alt="Corrugated Box (18 x 15 x 16 inches).png">
+                    <div class="category-content">
+                        <h3>Corrugated Box (18 × 15 × 16 inches) - For Heavy / Fragile Goods</h3>
+                        <p>A strong RSC (Regular Slotted Container) corrugated carton designed especially for heavy and
+                            fragile items. Available in
+                            an eco-friendly kraft finish for added appeal.
+                        </p>
+                        <a href="../products/18-x-15-x-16-inches.html"><span class="view-btn">Get more details
+                                →</span></a>
+                    </div>
+                </div>
+
+                <div class="category-card" onclick="openProduct('../products/23x17.75x17.75-inch-rsc-carton.html')">
+                    <img src="/images/products/Corrugated Box/Corrugated Box 23x17.75x17.75-inch-rsc-carton.jpeg"
+                        alt="Corrugated Box (23 x 17.75 x 17.75).png">
+                    <div class="category-content">
+                        <h3>Corrugated Box (23 × 17.75 × 17.75 inches) For For General Shifting</h3>
+                        <p>A spacious and durable RSC corrugated carton ideal for <strong> household shifting, office
+                                relocation, storage, and multi-item
+                                packing.</strong> Designed to handle mixed-category goods safely and efficiently.
+                        </p>
+                        <a href="../products/23x17.75x17.75-inch-rsc-carton.html"><span class="view-btn">Get more
+                                details →</span></a>
+                    </div>
+                </div>
+
+                <div class="category-card" onclick="openProduct('../products/26×15.75×17.75-inches.html')">
+                    <img src="/images/products/Corrugated Box/Corrugated Box  26×15.75×17.75-inches.jpeg"
+                        alt="Corrugated Box (26 × 15.75 × 17.75 inches).png">
+                    <div class="category-content">
+                        <h3>Corrugated Box (26 × 15.75 × 17.75 inches) – For Lightweight Items (Clothes, Fabrics, Soft
+                            Goods)</h3>
+                        <p>A spacious and lightweight RSC corrugated carton ideal for packing <strong> clothes, linens,
+                                garments, soft goods, textiles,
+                                cushions, and general lightweight items. </strong>Designed for maximum volume with easy
+                            handling during shifting, storage, and
+                            e-commerce dispatch.
+                        </p>
+                        <a href="../products/26×15.75×17.75-inches.html"><span class="view-btn">Get more details
+                                →</span></a>
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+
+
+        <script>
+            function openProduct(page) {
+                // Smooth animation on click
+                document.body.style.opacity = "0";
+                setTimeout(() => {
+                    window.location.href = page;
+                }, 400);
+            }
+
+            // Simple fade-in animation
+            window.onload = () => {
+                document.body.style.opacity = "0";
+                setTimeout(() => {
+                    document.body.style.transition = "opacity 0.8s ease";
+                    document.body.style.opacity = "1";
+                }, 100);
+            };
         </script>
         <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
@@ -456,6 +551,7 @@
                 </div>
             </div>
         </div>
+
         <!-- Footer -->
         <footer id="footer">
             <div class="footer-content">
