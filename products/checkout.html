@@ -3,377 +3,677 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Checkout - Dynamic Corrugations</title>
-    <link href="/css/checkout.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Checkout</title>
+    <link href="/css/plugins.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/index.css" rel="stylesheet">
+    <link href="/css/product.css" rel="stylesheet">
+    <link href="/css/box.css" rel="stylesheet">
+    <script src="/script.js"></script>
+    <script src="/product.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/plugins.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/index.css" rel="stylesheet">
+    <link href="/popup.css" rel="stylesheet">
+    <link href="/css/product.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="/images/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
-
-    <script>
-        document.querySelectorAll("textarea").forEach(t => {
-            t.addEventListener("input", function () {
-                if (this.value.trim().length > 0) {
-                    this.classList.add("has-text");
-                } else {
-                    this.classList.remove("has-text");
-                }
-            });
-        });
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            // REPLACE THIS WITH YOUR EMAILJS PUBLIC KEY
+            emailjs.init("YOUR_PUBLIC_KEY");
+        })();
     </script>
-<style>
-    /* -------- Checkout Layout -------- */
-    .checkout-container {
-        max-width: 900px;
-        margin: 20px auto;
-        background: #fff;
-        padding: 25px;
-        border-radius: 10px;
-        border: 1px solid #ddd;
-    }
+<!-- Google Identity Script -->
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+    <style>
+        .breadcrumb h3 {
+            padding: 20px;
+            color: #000 !important;
+            text-align: center;
+        }
 
-    .section-title {
-        font-size: 20px;
-        font-weight: 700;
-        margin-bottom: 12px;
-    }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
 
-    .form-row {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 18px;
-        margin-bottom: 25px;
-    }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
 
-    .form-group {
-        position: relative;
-    }
+        /* GRID SYSTEM */
+        .grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 30px;
+        }
 
-    .form-input {
-        width: 90%;
-        padding: 12px;
-        border: 1px solid #bbb;
-        border-radius: 6px;
-        font-size: 15px;
-        outline: none;
-    }
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
 
-    .form-input:focus {
-        border-color: #4a6cf7;
-        box-shadow: 0 0 4px rgba(74, 108, 247, 0.3);
-    }
+        /* CARDS */
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
 
-    .form-label {
-        position: absolute;
-        left: 12px;
-        top: -8px;
-        background: #fff;
-        padding: 0 4px;
-        font-size: 13px;
-        color: #666;
-    }
+        .section-title {
+            margin-top: 0;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            color: #d35400;
+        }
 
-    /* Checkbox */
-    .checkbox-row {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        margin-bottom: 15px;
-    }
+        /* FORMS */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
 
-    /* Payment Button */
-    .pay-btn {
-        width: 100%;
-        background: #0073FF;
-        padding: 14px;
-        color: #fff;
-        font-size: 18px;
-        font-weight: 600;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-    }
+        .form-full {
+            grid-column: span 2;
+        }
 
-    .pay-btn:disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
-    }
-</style>
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            font-size: 13px;
+            color: #555;
+        }
+
+        .form-input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .form-input:focus {
+            border-color: #d35400;
+            outline: none;
+        }
+
+        /* CART LIST */
+        .cart-item {
+            display: flex;
+            gap: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            padding: 10px 0;
+            align-items: center;
+        }
+
+        .cart-item img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .cart-details {
+            flex: 1;
+            font-size: 14px;
+        }
+
+        .cart-price {
+            font-weight: bold;
+            color: #d35400;
+        }
+
+        /* CHECKBOX */
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+            background: #eef9fd;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        /* SUMMARY & BUTTONS */
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        .primary-btn {
+            width: 100%;
+            background: #d35400;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+
+        .primary-btn:hover {
+            background: #e67e22;
+        }
+
+        .primary-btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+    </style>
 </head>
+
 <body>
-    <div class="container">
-        <h1 class="text-center">Checkout Page</h1>
-        <div class="grid">
-            <!-- LEFT SIDE -->
-            <div>
-                <div class="cart-list" id="checkoutCartList"></div>
-                <h3 class="section-title">Delivery Address</h3>
-                <div class="checkout-section form-row px-10">
-
-
-                    <div class="form-group">
-                        <input id="name" class="form-input" required>
-                        <label for="name" class="form-label">Full Name</label>
+    <div class="body-inner">
+        <div id="topbar" class="d-none d-xl-block d-lg-block topbar-transparent topbar-fullwidth dark">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="top-menu">
+                            <li><a href="/about.html">About</a></li>
+                            <li><a href="/products.html">Features</a></li>
+                        </ul>
                     </div>
-
-                    <div class="form-group">
-                        <input id="phone" class="form-input" required>
-                        <label for="phone" class="form-label">Mobile Number</label>
-                    </div>
-                    <div class="form-group">
-                        <input id="billing_email" class="form-input" required>
-                        <label class="form-label">Email</label>
-                    </div>
-
-<div class="form-group">
-    <input id="billing_country" class="form-input" value="India" required>
-    <label class="form-label">Country</label>
-</div>
-                    <div class="form-group">
-                        <input id="billing_pincode" class="form-input" required>
-                        <label class="form-label">PIN Code</label>
-                    </div>
-                    <div class="form-group">
-                        <input id="billing_state" class="form-input" required>
-                        <label class="form-label">State</label>
-                    </div>
-
-
-                    <div class="form-group">
-                        <input id="billing_city" class="form-input" required>
-                        <label class="form-label">Town / City</label>
-                    </div>
-
-                    <div class="form-group">
-                        <textarea id="address" class="form-input" rows="3" required></textarea>
-                        <label for="address" class="form-label">Flat, House no., Building, Company</label>
-                    </div>
-
-                    <div class="form-group">
-                        <textarea id="address" class="form-input" rows="3" required></textarea>
-                        <label for="address" class="form-label">Area, Street, Sector, Village</label>
-                    </div>
-
-                    <div class="form-group" style="grid-column: span 2;">
-                        <label class="form-label">Landmark (Optional)</label>
-                        <input id="landmark" class="form-input">
-                    </div>
-
-                   
-
-                </div>
-
-                <div class="checkout-container">
-                    <!-- DELIVERY ADDRESS -->
-                    <!-- BILLING DETAILS -->
-                    <h2 class="section-title">2. Billing details</h2>                   
-                    <div id="billingSection">
-
-                        <div class="form-row">
-
-                            <div class="form-group">
-                                <label class="form-label">Billing Comapny Name</label>
-                                <input id="billing_name" class="form-input">
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">GST Number (Optional)</label>
-                                <input id="billing_gst" class="form-input">
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">Billing Email</label>
-                                <input id="billing_email" class="form-input">
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">Billing Mobile Number</label>
-                                <input id="billing_phone" class="form-input">
-                            </div>
-
-                            <div class="form-group" style="grid-column: span 2;">
-                                <label class="form-label">Billing Address</label>
-                                <input id="billing_address" class="form-input">
-                            </div>
-
+                    <div class="col-md-6 d-none d-sm-block">
+                        <div class="social-icons social-icons-colored-hover">
+                            <ul>
+                                <li class="social-facebook"><a href="https://www.facebook.com/DYNAMICCORRUGATIONS"><i
+                                            class="fab fa-facebook-f"></i></a></li>
+                                <li class="social-twitter"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li class="social-linkedin"><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                                <li class="social-youtube"><a href="#"><i class="fab fa-youtube"></i></a></li>
+                                <li class="social-rss"><a href="#"><i class="fa fa-rss"></i></a></li>
+                            </ul>
                         </div>
                     </div>
-                    <!-- PAY BUTTON -->
-                    <button id="payBtn" class="pay-btn" onclick="processPayment()">Proceed to Payment</button>
-
                 </div>
             </div>
-            <!-- RIGHT SIDE -->
-            <aside class="side">
-                <label><strong>GST</strong></label>
-                <select id="gstSelect" class="form-control" onchange="updateTotals()">
-                    <option value="18">GST 18%</option>
-                    
-                </select>
+        </div>
+        <!-- Header -->
+        <header id="header" data-transparent="true">
+            <div class="header-inner">
+                <div class="container">
+                    <!--Logo-->
+                    <div id="logo"> <a href="/index.html"><span class="logo-default"><img class="img-fluid logody"
+                                    src="/images/logotran.png" alt=""></span></a> </div>
+                    <!--End: Logo-->
+                    <!-- Search -->
+                    <div id="search"><a id="btn-search-close" class="btn-search-close" aria-label="Close search form"><i
+                                class="icon-x"></i></a>
+                        <form class="search-form" action="" method="get">
+                            <input class="form-control" name="q" type="text" placeholder="Type & Search..." />
+                            <span class="text-muted">Start typing & press "Enter" or "ESC" to close</span>
+                        </form>
+                    </div> <!-- end: search -->
+        
+                    <!--Navigation Resposnive Trigger-->
+                    <div id="mainMenu-trigger"> <a class="lines-button x"><span class="lines"></span></a> </div>
+                    <!--end: Navigation Resposnive Trigger-->
+                    <!--Navigation-->
+                    <div id="mainMenu">
+                        <div class="container">
+                            <nav>
+                                <ul>
+                                    <li><a href="/index.html">Home</a></li>
+                                    <li><a href="/about.html">About us</a></li>
+                                    <li><a href="/products.html">Product</a></li>
 
-                <div class="total-row"><span>Subtotal</span><strong id="subtotal">₹0</strong></div>
-                <div class="total-row"><span>GST</span><strong id="gstAmount">₹0</strong></div>
-                <div class="total-row"><span>Shipping</span><strong id="shipping">₹0</strong></div>
+                                    <li class="active"><a href="/gallery.html">Gallery</a></li>
+                                    <li><a href="/contact.html">Contact us</a></li>
+                                    <li class="nav-right">
+                                        <button id="login-btn" class="btn btn-primary"
+                                            onclick="window.app.login()">Login</button>
+        
+                                        <div id="user-widget" class="user-widget" style="display: none;">
+        
+                                            <div class="avatar-trigger" onclick="toggleProfile()">
+                                                <img id="user-photo-small" class="avatar-small"
+                                                    src="https://via.placeholder.com/40" alt="User" />
+                                            </div>
+        
+                                            <div id="profile-card" class="profile-card">
+        
+                                                <div class="profile-header-bg"></div>
+                                                <div class="profile-content">
+                                                    <img id="profile-photo-large" class="profile-img-large"
+                                                        src="https://via.placeholder.com/80" alt="Profile" />
+        
+                                                    <h4 id="display-name">Loading...</h4>
+                                                    <p id="user-email">...</p>
+        
+                                                    <div class="profile-actions">
+                                                        <div class="action-row" onclick="window.app.openDashboard()">
+                                                            <div class="icon-circle">
+                                                                <i class="fas fa-user"></i>
+                                                            </div>
+                                                            <div class="action-text">
+                                                                <strong>My Profile</strong>
+                                                                <span>Account settings</span>
+                                                            </div>
+                                                            <i class="fas fa-chevron-right arrow-icon"></i>
+                                                        </div>
+        
+                                                        <div class="action-row logout" onclick="window.app.logout()">
+                                                            <div class="icon-circle logout-icon">
+                                                                <i class="fas fa-sign-out-alt"></i>
+                                                            </div>
+                                                            <div class="action-text">
+                                                                <strong>Log Out</strong>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+        
+                                        </div>
+                                    </li>
+                                    <!-- Google Identity Script -->
+                                    <script src="https://accounts.google.com/gsi/client" async defer></script>
+        
+                                </ul>
+                            </nav>
+                            <!-- Right Side: Login & Profile Section -->
+        
+                            <!--end: Navigation-->
+                        </div>
+                    </div>
+        </header>
+        <script src="script.js"></script>
+        <section id="page-title" class="text-light" style="background-color: #dec38c;">
+            <div class="container">
+                <h2 class="text-black text-center mt-5" style="color: #333;">Checkout</h2>
+            </div>
+        </section>
+        <div class="container">
 
-                <div class="total-row" style="font-size:20px">
-                    <span><b>Total</b></span>
-                    <strong id="grandTotal">₹0</strong>
+            <div class="grid">
+
+                <div>
+                    <div class="card">
+                        <h3 class="section-title">1. Shipping Address</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Full Name</label>
+                                <input id="ship_name" class="form-input" placeholder="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Mobile Number</label>
+                                <input id="ship_phone" class="form-input" placeholder="9XXXXXXXX" required>
+                            </div>
+                            <div class="form-group form-full">
+                                <label class="form-label">Email Address</label>
+                                <input id="ship_email" type="email" class="form-input" placeholder="name@gmail.com"
+                                    required>
+                            </div>
+                            <div class="form-group form-full">
+                                <label class="form-label">Address (Area, Street)</label>
+                                <textarea id="ship_address" class="form-input" rows="2" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">City</label>
+                                <input id="ship_city" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">State</label>
+                                <input id="ship_state" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Pincode</label>
+                                <input id="ship_pincode" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Country</label>
+                                <input id="ship_country" class="form-input" value="India" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="section-title">2. Billing Details</h3>
+
+                        <div class="checkbox-wrapper">
+                            <input type="checkbox" id="sameAsShipping" onchange="toggleBilling()">
+                            <label for="sameAsShipping">Billing address is same as Shipping address</label>
+                        </div>
+
+                        <div id="billingForm" class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Billing Name / Company</label>
+                                <input id="bill_name" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">GST Number (Optional)</label>
+                                <input id="bill_gst" class="form-input">
+                            </div>
+                            <div class="form-group form-full">
+                                <label class="form-label">Billing Address</label>
+                                <textarea id="bill_address" class="form-input" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">City</label>
+                                <input id="bill_city" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Pincode</label>
+                                <input id="bill_pincode" class="form-input">
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <button class="primary-btn"id="payBtn" class="pay-btn" onclick="processPayment()" style="margin-top:15px">Pay Now</button>
-                <p style="font-size:13px;color:#777;margin-top:10px">
-                    Payments are securely processed using PayU India.
-                </p>
-            </aside>
+                <aside>
+                    <div class="card">
+                        <h3 class="section-title">Order Summary</h3>
+                        <div id="checkoutCartList" style="max-height: 300px; overflow-y: auto; margin-bottom: 20px;">
+                        </div>
+
+                        <div style="border-top: 1px solid #eee; padding-top: 15px;">
+                            <div class="total-row"><span>Subtotal</span> <strong id="subtotalDisplay">₹0</strong></div>
+                            <div class="total-row">
+                                <span>GST (18%)</span>
+                                <strong id="gstDisplay">₹0</strong>
+                            </div>
+                            <div class="total-row" style="font-size: 20px; color:#d35400; margin-top:10px;">
+                                <span>Total</span> <strong id="grandTotalDisplay">₹0</strong>
+                            </div>
+                        </div>
+
+                        <button id="payBtn" class="primary-btn" onclick="handleOrder()">Pay Now</button>
+
+                        <p style="text-align:center; font-size:12px; color:#999; margin-top:10px;">
+                            Secure Payment via PayU. <br>Order details will be emailed upon processing.
+                        </p>
+                    </div>
+                </aside>
+
+            </div>
         </div>
+        <!-- Footer -->
+        <footer id="footer">
+            <div class="footer-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4  col-lg-2 col-md-4">
+                            <!-- Footer widget area 1 -->
+                            <div class="widget  widget-contact-us"
+                                style="background-image: url('images/world-map-dark.png'); background-position: 50% 20px; background-repeat: no-repeat">
+                                <h4>About Dynamic Corrugations</h4>
+                                <ul class="list-icon">
+                                    <li><i class="fa fa-map-marker-alt"></i>40 K.M. Stone,Vill. Narsinghpur,
+                                        Delhi-Jaipur Highway, Sector-35 Gurugram-122004 (Hr)</li>
+                                    <li><i class="fa fa-phone"></i><a href="tel:+919891040840">+91 9891040840</a></li>
+                                    <li><i class="far fa-envelope"></i><a
+                                            href="mailto:mail@dynamiccorrugations.com">mail@dynamiccorrugations.com </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <!-- end: Footer widget area 1 -->
+                        </div>
+
+                        <div class="col-xl-2 col-lg-2 col-md-4">
+                            <!-- Footer widget area 1 -->
+                            <div class="widget">
+                                <h4>Useful Links</h4>
+                                <ul class="list">
+                                    <li><a href="/contact.html">Connect us</a></li>
+                                    <li><a href="#">Privacy Policy</a></li>
+                                    <li><a href="#">Return & Refund Policy</a></li>
+                                    <li><a href="#">Cancellation Policy</a></li>
+                                    <li><a href="#">Terms & Condition</a></li>
+                                </ul>
+                            </div>
+                            <!-- end: Footer widget area 1 -->
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-4">
+                            <!-- Footer widget area 2 -->
+                            <div class="widget">
+                                <h4>Utility pages</h4>
+                                <ul class="list">
+                                    <li><a href="maintenance.html">Corrugated Roll</a></li>
+                                    <li><a href="maintenance.html">Triple Wall Box</a></li>
+                                    <li><a href="maintenance.html">Corrugated Box</a></li>
+                                    <li><a href="maintenance.html">Corrugated Boards</a></li>
+                                    <li><a href="maintenance.html">Pizza Box</a></li>
+                                </ul>
+                            </div>
+                            <!-- end: Footer widget area 2 -->
+                        </div>
+                        <div class="col-xl-4 col-lg-2 col-md-4 widget">
+                            <h4>Social links and timiings</h4>
+                            <div class="social-icons social-icons-colored float-left">
+                                <ul>
+                                    <li class="social-facebook"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li class="social-twitter"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                    <li class="social-youtube"><a href="#"><i class="fab fa-youtube"></i></a></li>
+                                    <li class="social-gplus"><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                                </ul>
+                                <br>
+                                <ul class="list">
+                                    <li><i class="far fa-clock"></i> Monday - Saturday:- <strong>08:00 - 18:30</strong>
+                                        <br>
+                                        Sunday: <strong>Closed</strong>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- end: Footer widget area 2 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright-content cta-section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <!-- Social icons -->
+
+                            <div class="copyright-text text-left">&copy; 2025 Dynamic Corrugations. All Rights
+                                Reserved.
+
+                            </div>
+                            <!-- end: Social icons -->
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="copyright-text text-right"><a href="https://dynamiccorrugations.com/">Desinged
+                                    by Dynamic Corrugations</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- end: Footer -->
     </div>
+
     <script>
         /* ============================================================
-           LOAD CART FROM LOCAL STORAGE
+           1. DATA LOADING & RENDERING
         ============================================================ */
-        let stored = JSON.parse(localStorage.getItem("checkoutCart") || "[]");
-
-        const checkoutCartList = document.getElementById("checkoutCartList");
-        const subtotalEl = document.getElementById("subtotal");
-        const gstAmountEl = document.getElementById("gstAmount");
-        const shippingEl = document.getElementById("shipping");
-        const grandTotalEl = document.getElementById("grandTotal");
-        const gstSelect = document.getElementById("gstSelect");
-        const payBtn = document.getElementById("payBtn");
-
+        let cart = JSON.parse(localStorage.getItem("myCart") || "[]");
         let subtotal = 0;
+        let grandTotal = 0;
 
+        const cartListEl = document.getElementById("checkoutCartList");
 
-        /* ============================================================
-           RENDER ITEMS
-        ============================================================ */
-        function renderCheckoutItems() {
-            checkoutCartList.innerHTML = "";
+        function renderCart() {
+            cartListEl.innerHTML = "";
             subtotal = 0;
 
-            if (!stored.length) {
-                checkoutCartList.innerHTML = "<div>No items in cart.</div>";
-                updateTotals();
+            if (cart.length === 0) {
+                cartListEl.innerHTML = "<p>Your cart is empty.</p>";
+                document.getElementById("payBtn").disabled = true;
                 return;
             }
 
-            stored.forEach((item, index) => {
-
-                const imgSrc = item.image || item.img || "";
-
-                const row = document.createElement("div");
-                row.className = "cart-item";
-
-                row.innerHTML = `
-          <img src="${imgSrc}"
-                style="width:90px;height:90px;object-fit:cover;border-radius:6px">
-            <div style="flex:1">
-                <b>${item.title}</b><br>
-                Sets: ${item.sets}<br>                
-                Total Pieces: ${item.totalPcs}
-            </div>
-
-            <strong>₹${item.price}</strong>
-
-            <button class="removeBtn" data-index="${index}">✖</button>
-        `;
-
-                checkoutCartList.appendChild(row);
-                subtotal += Number(item.price);
+            cart.forEach((item) => {
+                subtotal += item.totalPrice;
+                cartListEl.innerHTML += `
+                <div class="cart-item">
+                    <img src="${item.image}" alt="box">
+                    <div class="cart-details">
+                        <b>${item.name}</b><br>
+                         Size: ${item.location} | Qty: ${item.qty}
+                    </div>
+                    <div class="cart-price">₹${item.totalPrice}</div>
+                </div>
+            `;
             });
 
-            updateTotals();
+            calculateTotals();
         }
 
+        function calculateTotals() {
+            // Flat 18% GST Logic
+            const gstAmount = subtotal * 0.18;
+            grandTotal = subtotal + gstAmount;
 
-        /* ============================================================
-           GST + TOTAL CALCULATION
-        ============================================================ */
-         function updateTotals() {
-                subtotalEl.innerText = "₹" + subtotal;
-
-                // Auto-apply 18% GST
-                const gst = subtotal * 0.18;
-                gstAmountEl.innerText = "₹" + gst.toFixed(2);
-
-                const shipping = subtotal > 0 ? 0 : 0;
-                shippingEl.innerText = "₹" + shipping;
-
-                const grandTotal = subtotal + gst + shipping;
-                grandTotalEl.innerText = "₹" + grandTotal.toFixed(2);
-            }
-
-        renderCheckoutItems();
-
-
-        /* ============================================================
-           REMOVE ITEM
-        ============================================================ */
-        checkoutCartList.addEventListener("click", (e) => {
-            if (!e.target.classList.contains("removeBtn")) return;
-
-            const index = Number(e.target.dataset.index);
-            stored.splice(index, 1);
-
-            localStorage.setItem("checkoutCart", JSON.stringify(stored));
-            renderCheckoutItems();
-        });
-
-
-        /* ============================================================
-           PAYU HASH GENERATOR (SHA512)
-        ============================================================ */
-        async function generatePayUHash(key, txnid, amount, productinfo, firstname, email, salt) {
-            const str = `${key}|${txnid}|${amount}|${productinfo}|${firstname}|${email}|||||||||||${salt}`;
-            const buffer = new TextEncoder().encode(str);
-            const hashBuffer = await crypto.subtle.digest("SHA-512", buffer);
-            return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, "0")).join("");
+            document.getElementById("subtotalDisplay").innerText = "₹" + subtotal.toFixed(2);
+            document.getElementById("gstDisplay").innerText = "₹" + gstAmount.toFixed(2);
+            document.getElementById("grandTotalDisplay").innerText = "₹" + grandTotal.toFixed(2);
         }
 
-        async function processPayment() {
+        /* ============================================================
+           2. UI INTERACTIONS
+        ============================================================ */
+        function toggleBilling() {
+            const isChecked = document.getElementById("sameAsShipping").checked;
+            const billingDiv = document.getElementById("billingForm");
 
-            if (!stored.length) {
-                alert("Your cart is empty");
-                return;
+            if (isChecked) {
+                billingDiv.style.display = "none";
+                document.getElementById("bill_name").value = document.getElementById("ship_name").value;
+                document.getElementById("bill_address").value = document.getElementById("ship_address").value;
+                document.getElementById("bill_city").value = document.getElementById("ship_city").value;
+                document.getElementById("bill_pincode").value = document.getElementById("ship_pincode").value;
+            } else {
+                billingDiv.style.display = "grid";
+                document.getElementById("bill_name").value = "";
+                document.getElementById("bill_address").value = "";
+                document.getElementById("bill_city").value = "";
+                document.getElementById("bill_pincode").value = "";
             }
+        }
 
-            let name = document.getElementById("name").value.trim();
-            let phone = document.getElementById("phone").value.trim();
-            let address = document.getElementById("address").value.trim();
-            let email = document.getElementById("billing_email").value.trim();
-            let city = document.getElementById("billing_city").value.trim();
-            let state = document.getElementById("billing_state").value.trim();
-            let pincode = document.getElementById("billing_pincode").value.trim();
+        /* ============================================================
+           3. ORDER HANDLER (FIXED)
+        ============================================================ */
+        async function handleOrder() {
+            const payBtn = document.getElementById("payBtn");
 
-            if (!name || !phone || !address || !email || !city || !state || !pincode) {
-                alert("Please fill all shipping & billing details");
-                return;
+            // A. VALIDATION
+            const requiredIds = ["ship_name", "ship_phone", "ship_email", "ship_address", "ship_city", "ship_pincode"];
+            for (let id of requiredIds) {
+                if (!document.getElementById(id).value.trim()) {
+                    alert("Please fill all required shipping details.");
+                    document.getElementById(id).focus();
+                    return;
+                }
             }
 
             payBtn.disabled = true;
             payBtn.innerText = "Processing...";
 
-            const totalAmount = Number(grandTotalEl.innerText.replace("₹", ""));
-            const key = "EjKBQq";       // ✅ Your PayU Key
-            const salt = "MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDY3Pv7uXln8Qc5QPirbdYXKk/AKeRfWUyU51ntrB9se8tEj+dhUWxjtqtQrQVw6lXZwypgGo+GDHJTrhlohcpLzs8ZRlXikh5HfBKfW1mDR1jKWjle2KYWj3wDAOkyCi0kdEci2tq4OQZS/oJrEXZ7NRe7WF/CiXmvm75oVBYeJxCd0kJjUB8zGt5USoMvbwkRMpku0ES5I+ZonxZRH5ufzOixjRXRtwrLd5EyVjEFDiqOajQ7k02vYybTlJzvnM6NSUVGfo5/pU/kRBrii+rUMwVGBkBPpv3mPYzJOGeAjniHIuTkjcjcC1FkOk+3lKcqIq0tl2wL2qaFxNOV/3e1AgMBAAECggEAdl+hmBT0xRzWwZTKZ+DLdNeespjrVHSNDdZ+yvIiMPgdyy31sbRdQsyKFL5s8uamt/gFIHI/F3+hxDWLHvewpdKcTwKKjOMPbhu2mo+le7gtKj83g6MkfboSih0sLSlK3NQvpEHsE5Tk89aC3+inULd5XcTueGTMLGQJ+i6z5/6POe2kyezGJxtHs3oWsIiL34J14Gdbd+hdtL7dV98z3j2Q1Jp/pgHBV7fOV13/3nJzdd1Olan/Bvx75y3om6nC/hZuoM5G0wOe/pC6T+SrUdmITP1VTKeLQRPGZmrdyA4dgmAhrgP5AcEoYtLKYDCNWa3EDvHLhC3qUmf0pA33PQKBgQD5YUAxES/ii30ptdIVPVrKhxSa1u/ARvdrLmKur/srmMNjY+OLGPQ7cPJVSa+oz7x+HllWAevbmW4Vl9emRZqJde5Khtj4W5ZuIDLqJ9WCa1/Cen3We4Aczb3Js5WBs7qRh9OU2iMLwHcwzyYP6dfRTZuOgtE3DWc84n7eFL+JqwKBgQDensFLLpsCPT/z/T3wvFWFQ6INSyp2smxyUTI8Mz1405SsVuQ2zAP43uU6MnxxzlpTfZtuWEdTRz7rowwBc5yW41kVylMZZf/pNtVsHyStP62Nuz2g8GCPJwEqMoRYpNi6j4vaoJX70dxu0H79fn9GCnonkk7hcfE1YXK/4hVkHwKBgBZ0UEBayNIAN1PjIDhzXtJvmUZb5hiNC0gmVBJgnCAP0EAJxXpH0+3qPJe7W8q6ccF1YBvjbmZGiWf+VReOmtyXts4VGEI8lO3zjkIRNiNZIbU0LFJ8qkttpxIbTnHwSfNCpKV5gsBTIyhM7qNuLdWVxFTvqIDpfws3Za7/dUOjAoGAfj9twuMlSPnPQOEGtXU40qBuUDemVzYMRjBB2t38KH9kuu9z8Jd2UTamrIBhDnFFzD9ZXBR4LoQi7KLEdjZIQVGg/biFs8uie3F7SxvGQvHvzIa5BoILYGNwR6vqXhLuTa6GU2/qXqq+5aEbw0pvhxr9918DmNpzPiCLYMIn+2UCgYAWYhoMlZYgGH8XFtiOKs+8LJ84NCMyNE81/8PVdmlHkPxePjr3pJqTyHipJ9F6tikuiAEyiAN8HMRNECKIfUDEIASaQEjeaJ6WiMCsc1j9yz1chUXIeprhqlopic+TqT/5Vd1ojipcOdrKY75vJS5Zmg/X4wgEpnrCbk9krYkeYw==";  // ✅ Your PayU Salt
+            // B. PREPARE DATA
+            const orderData = {
+                customer_name: document.getElementById("ship_name").value,
+                customer_email: document.getElementById("ship_email").value,
+                customer_phone: document.getElementById("ship_phone").value,
+                shipping_address: `${document.getElementById("ship_address").value}, ${document.getElementById("ship_city").value}, ${document.getElementById("ship_pincode").value}`,
+                billing_gst: document.getElementById("bill_gst").value || "N/A",
+                total_amount: grandTotal.toFixed(2),
+                order_items: formatCartForEmail()
+            };
+
+            // C. SEND EMAIL (SAFE MODE)
+            // We wrap this in a separate try-catch so payment proceeds even if email fails
+            try {
+                // Only send if keys are replaced
+                if (!emailjs.init || "YOUR_PUBLIC_KEY" === "YOUR_PUBLIC_KEY") {
+                    console.warn("EmailJS keys not set. Skipping email.");
+                } else {
+                    await emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", orderData);
+                    console.log("Email sent successfully");
+                }
+            } catch (emailError) {
+                console.error("Email failed (Proceeding to payment anyway):", emailError);
+            }
+
+            // D. TRIGGER PAYMENT (MAIN FLOW)
+            try {
+                await processPayU(orderData);
+            } catch (paymentError) {
+                console.error("Payment Error:", paymentError);
+                alert("Payment initialization failed. Check console for details.");
+                payBtn.disabled = false;
+                payBtn.innerText = "Pay Now";
+            }
+        }
+
+        function formatCartForEmail() {
+            return cart.map(i => `${i.name} (${i.material}) - Qty: ${i.qty} - Price: ${i.totalPrice}`).join("\n");
+        }
+
+        /* ============================================================
+           4. PAYU INTEGRATION
+        ============================================================ */
+        async function generatePayUHash(key, txnid, amount, productinfo, firstname, email, salt) {
+            // Cleaning salt to remove newlines just in case
+            const cleanSalt = salt.replace(/\s/g, '');
+            const str = `${key}|${txnid}|${amount}|${productinfo}|${firstname}|${email}|||||||||||${cleanSalt}`;
+
+            const buffer = new TextEncoder().encode(str);
+            const hashBuffer = await crypto.subtle.digest("SHA-512", buffer);
+            return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, "0")).join("");
+        }
+
+        async function processPayU(data) {
+            const key = "EjKBQq";
+            // NOTE: The salt below looks like a Private Key. Please ensure this is your actual PayU Salt.
+            // Usually, a salt is a short string like "eCwWELxi".
+            const salt = "MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDY3Pv7uXln8Qc5QPirbdYXKk/AKeRfWUyU51ntrB9se8tEj+dhUWxjtqtQrQVw6lXZwypgGo+GDHJTrhlohcpLzs8ZRlXikh5HfBKfW1mDR1jKWjle2KYWj3wDAOkyCi0kdEci2tq4OQZS/oJrEXZ7NRe7WF/CiXmvm75oVBYeJxCd0kJjUB8zGt5USoMvbwkRMpku0ES5I+ZonxZRH5ufzOixjRXRtwrLd5EyVjEFDiqOajQ7k02vYybTlJzvnM6NSUVGfo5/pU/kRBrii+rUMwVGBkBPpv3mPYzJOGeAjniHIuTkjcjcC1FkOk+3lKcqIq0tl2wL2qaFxNOV/3e1AgMBAAECggEAdl+hmBT0xRzWwZTKZ+DLdNeespjrVHSNDdZ+yvIiMPgdyy31sbRdQsyKFL5s8uamt/gFIHI/F3+hxDWLHvewpdKcTwKKjOMPbhu2mo+le7gtKj83g6MkfboSih0sLSlK3NQvpEHsE5Tk89aC3+inULd5XcTueGTMLGQJ+i6z5/6POe2kyezGJxtHs3oWsIiL34J14Gdbd+hdtL7dV98z3j2Q1Jp/pgHBV7fOV13/3nJzdd1Olan/Bvx75y3om6nC/hZuoM5G0wOe/pC6T+SrUdmITP1VTKeLQRPGZmrdyA4dgmAhrgP5AcEoYtLKYDCNWa3EDvHLhC3qUmf0pA33PQKBgQD5YUAxES/ii30ptdIVPVrKhxSa1u/ARvdrLmKur/srmMNjY+OLGPQ7cPJVSa+oz7x+HllWAevbmW4Vl9emRZqJde5Khtj4W5ZuIDLqJ9WCa1/Cen3We4Aczb3Js5WBs7qRh9OU2iMLwHcwzyYP6dfRTZuOgtE3DWc84n7eFL+JqwKBgQDensFLLpsCPT/z/T3wvFWFQ6INSyp2smxyUTI8Mz1405SsVuQ2zAP43uU6MnxxzlpTfZtuWEdTRz7rowwBc5yW41kVylMZZf/pNtVsHyStP62Nuz2g8GCPJwEqMoRYpNi6j4vaoJX70dxu0H79fn9GCnonkk7hcfE1YXK/4hVkHwKBgBZ0UEBayNIAN1PjIDhzXtJvmUZb5hiNC0gmVBJgnCAP0EAJxXpH0+3qPJe7W8q6ccF1YBvjbmZGiWf+VReOmtyXts4VGEI8lO3zjkIRNiNZIbU0LFJ8qkttpxIbTnHwSfNCpKV5gsBTIyhM7qNuLdWVxFTvqIDpfws3Za7/dUOjAoGAfj9twuMlSPnPQOEGtXU40qBuUDemVzYMRjBB2t38KH9kuu9z8Jd2UTamrIBhDnFFzD9ZXBR4LoQi7KLEdjZIQVGg/biFs8uie3F7SxvGQvHvzIa5BoILYGNwR6vqXhLuTa6GU2/qXqq+5aEbw0pvhxr9918DmNpzPiCLYMIn+2UCgYAWYhoMlZYgGH8XFtiOKs+8LJ84NCMyNE81/8PVdmlHkPxePjr3pJqTyHipJ9F6tikuiAEyiAN8HMRNECKIfUDEIASaQEjeaJ6WiMCsc1j9yz1chUXIeprhqlopic+TqT/5Vd1ojipcOdrKY75vJS5Zmg/X4wgEpnrCbk9krYkeYw==";
+
             const txnid = "TXN" + Date.now();
-            const productinfo = "Corrugated Box Order";
+            const productinfo = "Cart Order";
 
-            const hash = await generatePayUHash(key, txnid, totalAmount, productinfo, name, email, salt);
+            // Generate Secure Hash
+            const hash = await generatePayUHash(key, txnid, data.total_amount, productinfo, data.customer_name, data.customer_email, salt);
 
+            // Create Form
             const form = document.createElement("form");
             form.method = "POST";
-            form.action = "https://secure.payu.in/_payment";
+            form.action = "https://secure.payu.in/_payment"; // Use https://test.payu.in/_payment for Sandbox
 
             const fields = {
-                key, txnid,
-                amount: totalAmount,
+                key, txnid, hash,
+                amount: data.total_amount,
                 productinfo,
-                firstname: name,
-                email,
-                phone,
+                firstname: data.customer_name,
+                email: data.customer_email,
+                phone: data.customer_phone,
                 surl: "https://dynamiccorrugations.com/payment-success.html",
-                furl: "https://dynamiccorrugations.com/payment-failure.html",
-                hash
+                furl: "https://dynamiccorrugations.com/payment-failure.html"
             };
 
             Object.entries(fields).forEach(([k, v]) => {
@@ -386,17 +686,14 @@
             form.submit();
         }
 
-        payBtn.addEventListener("click", processPayment);
-
+        // Initialize
+        renderCart();
     </script>
-    <script>
-        setInterval(function () {
-            const threshold = 160;
-            if (window.outerWidth - window.innerWidth > threshold ||
-                window.outerHeight - window.innerHeight > threshold) {
-                window.location.href = "https://dynamiccorrugations.com";
-            }
-        }, 1000);
-    </script>
+    <script src="/script.js"></script>
+    <script src="/product.js"></script>   
+    <script src="/js/userlogin.js"></script>
+    <script src="/js/dashboard.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </body>
+
 </html>

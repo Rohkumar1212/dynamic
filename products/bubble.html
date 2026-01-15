@@ -593,14 +593,57 @@
                     <!--Navigation-->
                     <div id="mainMenu">
                         <div class="container">
-                            <nav>
+                             <nav>
                                 <ul>
-                                    <li><a href="/index.html">Home</a></li>
-                                    <li><a href="/about.html">About us</a></li>
-                                    <li><a href="/products.html">Product</a></li>
+                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="about.html">About us</a></li>
+                                    <li class="active"><a href="products.html">Product</a></li>
+                                 
+                                    <li><a href="gallery.html">Gallery</a></li>
+                                    <li><a href="contact.html">Contact us</a></li>
+                                   <li class="nav-right">
+    <button id="login-btn" class="btn btn-primary" onclick="window.app.login()">Login</button>
 
-                                    <li><a href="/gallery.html">Gallery</a></li>
-                                    <li><a href="/contact.html">Contact us</a></li>
+    <div id="user-widget" class="user-widget" style="display: none;">
+        
+        <div class="avatar-trigger" onclick="toggleProfile()">
+            <img id="user-photo-small" class="avatar-small" src="https://via.placeholder.com/40" alt="User" />
+        </div>
+
+        <div id="profile-card" class="profile-card">
+            
+            <div class="profile-header-bg"></div> <div class="profile-content">
+                <img id="profile-photo-large" class="profile-img-large" src="https://via.placeholder.com/80" alt="Profile" />
+                
+                <h4 id="display-name">Loading...</h4>
+                <p id="user-email">...</p>
+                
+                <div class="profile-actions">
+                    <div class="action-row" onclick="window.app.openDashboard()">
+                        <div class="icon-circle">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="action-text">
+                            <strong>My Profile</strong>
+                            <span>Account settings</span>
+                        </div>
+                        <i class="fas fa-chevron-right arrow-icon"></i>
+                    </div>
+
+                    <div class="action-row logout" onclick="window.app.logout()">
+                        <div class="icon-circle logout-icon">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </div>
+                        <div class="action-text">
+                            <strong>Log Out</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</li>
                                 </ul>
 
                             </nav>
