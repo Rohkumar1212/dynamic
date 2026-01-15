@@ -579,11 +579,11 @@ p {
  
 .fixed-icons {
     position: fixed;
-    bottom: 90px;
+    bottom: 60px;
     right: 20px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 1px;
 }
 
 .fixed-icons a {
