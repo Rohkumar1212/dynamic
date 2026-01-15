@@ -1,0 +1,57 @@
+{
+  "product": {
+    "id": "rsc-181516",
+    "name": "Regular Slotted Container (RSC) - 18x15x16",
+    "description": "Industrial-grade RSC carton produced using corrugation technology for maximum durability.",
+    "dimensions": {
+      "length": 18,
+      "width": 15,
+      "height": 16,
+      "unit": "inch"
+    },
+    "tabs": [
+      {
+        "id": "details",
+        "title": "Details",
+        "content": {
+          "design": "Regular Slotted Container (RSC)",
+          "seams": "Hot melt or cold glue",
+          "testing": ["ECT", "Burst test"],
+          "materials": "High-quality kraft paper facings, water-based adhesive"
+        }
+      },
+      {
+        "id": "specs",
+        "title": "Specs & Features",
+        "content": {
+          "fluting": "BC (double-wall)",
+          "paper_grades": "120–250 GSM kraft liners",
+          "finishing": "Plain",
+          "strength": "ECT 32–44 / Burst 300–600 kPa"
+        }
+      },
+      {
+        "id": "shipping",
+        "title": "Shipping & MOQ",
+        "content": "India-wide shipping available. MOQ starts from 50 units. Bulk orders are palletized."
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Can you print our logo?",
+        "a": "Yes, please upload artwork during checkout."
+      },
+      {
+        "q": "Do you provide dieline templates?",
+        "a": "Yes, provided after order confirmation."
+      }
+    ],
+    "reviews": [
+      { "user": "Rajesh", "comment": "Delivered well packed. Good quality." },
+      {
+        "user": "Sonia",
+        "comment": "Kraft finish as requested. Looks premium."
+      }
+    ]
+  }
+}

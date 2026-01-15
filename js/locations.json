@@ -1,0 +1,16 @@
+{
+  "regions": [
+    {
+      "id": "delhi_ncr",
+      "name": "Delhi NCR",
+      "default_moq": 10,
+      "cities": ["Noida", "New Delhi", "Gurgaon", "Ghaziabad", "Faridabad"]
+    },
+    {
+      "id": "rest_of_india",
+      "name": "Rest of India",
+      "default_moq": 50,
+      "cities": []
+    }
+  ]
+}

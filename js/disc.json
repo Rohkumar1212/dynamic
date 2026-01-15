@@ -1,0 +1,54 @@
+{
+  "productTabs": [
+    {
+      "id": "detailsTab",
+      "label": "Details",
+      "title": "Box Making – Details & Features",
+      "type": "rich-text",
+      "content": "<p>This RSC carton is produced using industrial corrugation technology and is available in both single-wall and double-wall grades. We use high-quality kraft paper facings and water-based adhesive.</p><ul><li><b>Design:</b> Regular Slotted Container (RSC)</li><li><b>Seams:</b> Hot melt or cold glue</li><li><b>Strength Testing:</b> ECT, Burst test</li></ul>"
+    },
+    {
+      "id": "specsTab",
+      "label": "Specs & Features",
+      "title": "Specifications & Key Features",
+      "type": "list",
+      "items": [
+        { "key": "Fluting", "value": "BC (double-wall)" },
+        { "key": "Paper Grades", "value": "120–250 GSM kraft liners" },
+        { "key": "Finishing", "value": "Plain" },
+        { "key": "Strength", "value": "ECT 32–44 / Burst 300–600 kPa" }
+      ]
+    },
+    {
+      "id": "shippingTab",
+      "label": "Shipping & MOQ",
+      "title": "Shipping & Minimum Order",
+      "type": "text",
+      "content": "India-wide shipping available. MOQ starts from 50 units for custom-size boxes. Bulk orders are palletized for safe handling."
+    },
+    {
+      "id": "faqsTab",
+      "label": "FAQs",
+      "title": "Frequently Asked Questions",
+      "type": "faq",
+      "questions": [
+        {
+          "q": "Can you print our logo on the box?",
+          "a": "Yes — please upload your artwork during checkout."
+        },
+        {
+          "q": "Do you provide the dieline template?",
+          "a": "Yes, we provide dieline templates after order confirmation."
+        }
+      ]
+    }
+  ],
+  "relatedTypes": ["Strengthened RSC", "Die-cut display", "Telescopic boxes"],
+  "reviews": [
+    {
+      "name": "Rajesh",
+      "comment": "Delivered well packed. Good quality corrugation."
+    },
+    { "name": "Sonia", "comment": "Kraft finish as requested. Looks premium." }
+  ]
+}

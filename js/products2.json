@@ -1,0 +1,36 @@
+{
+  "product": {
+    "id": 2301,
+    "category": "Box Making • RSC Carton",
+    "title": "Corrugated Box (23 × 17.75 × 17.75 inches) For General Shifting",
+    "short_description": "A spacious and durable RSC corrugated carton ideal for <strong>household shifting, office relocation, storage, and multi-item packing.</strong> Designed to handle mixed-category goods safely.",
+    "base_price": 320,
+    "rating": "4.3",
+    "review_count": 120,
+    "images": [
+      "/images/products/Corrugated Box/Corrugated Box 23x17.75x17.75-inch-rsc-carton.jpeg",
+      "/images/products/Corrugated Box/Corrugated Box -23-2.png",
+      "/images/products/Corrugated Box/Corrugated Box-23.jpeg"
+    ],
+    "materials": [
+      {
+        "id": "double-wall",
+        "name": "Double Wall — 5 ply",
+        "multiplier": 1.6,
+        "image": "/images/products/Corrugated Box/Corrugated Box 23x17.75x17.75-inch-rsc-carton.jpeg"
+      },
+      {
+        "id": "kraft",
+        "name": "Kraft – Premium Finish",
+        "multiplier": 1.25,
+        "image": "/images/products/Corrugated Box/Corrugated Box -23-2.png"
+      },
+      {
+        "id": "corrugated",
+        "name": "Corrugated — Heavy Duty",
+        "multiplier": 1.4,
+        "image": "/images/products/Corrugated Box/Corrugated Box-23.jpeg"
+      }
+    ]
+  }
+}

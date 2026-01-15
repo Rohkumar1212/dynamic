@@ -1,0 +1,36 @@
+{
+  "product": {
+    "id": 2601,
+    "category": "Box Making • RSC Carton",
+    "title": "Corrugated Box (26 × 15.75 × 17.75 inches) – For Lightweight Items",
+    "short_description": "A spacious and lightweight RSC corrugated carton ideal for packing clothes, linens, garments, soft goods, textiles, cushions, and general lightweight items. Designed for maximum volume with easy handling during shifting, storage, and e-commerce dispatch.",
+    "base_price": 320,
+    "rating": "4.3",
+    "review_count": 85,
+    "images": [
+      "/images/products/Corrugated Box/Corrugated Box 23x17.75x17.75-inch-rsc-carton.jpeg",
+      "/images/products/Corrugated Box/Corrugated Box -23-2.png",
+      "/images/products/Corrugated Box/Corrugated Box-23.jpeg"
+    ],
+    "materials": [
+      {
+        "id": "double-wall",
+        "name": "Double Wall — 5 ply",
+        "multiplier": 1.6,
+        "image": "/images/products/Corrugated Box/Corrugated Box 23x17.75x17.75-inch-rsc-carton.jpeg"
+      },
+      {
+        "id": "kraft",
+        "name": "Kraft – Premium Finish",
+        "multiplier": 1.25,
+        "image": "/images/products/Corrugated Box/Corrugated Box -23-2.png"
+      },
+      {
+        "id": "corrugated",
+        "name": "Corrugated — Heavy Duty",
+        "multiplier": 1.4,
+        "image": "/images/products/Corrugated Box/Corrugated Box-23.jpeg"
+      }
+    ]
+  }
+}

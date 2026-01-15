@@ -1,0 +1,46 @@
+{
+  "product": {
+    "id": "box-001",
+    "category": "Box Making • RSC Carton",
+    "title": "Corrugated Box (18 × 15 × 16 inches)",
+    "base_price": 320,
+    "rating": "4.3",
+    "review_count": 120,
+    "short_description": "Strong RSC corrugated carton for heavy/fragile items. Select material below to see different finishes.",
+    "images": [
+      "/images/products/Corrugated Box/Corrugated Box-18-2.png",
+      "/images/products/Corrugated Box/Corrugated Box-18.jpeg",
+      "/images/products/Corrugated Box/Corrugated Box-18-2.png"
+    ],
+    "materials": [
+      {
+        "id": "double-wall",
+        "name": "Double Wall — 5 ply",
+        "multiplier": 1.6,
+        "image": "/images/products/Corrugated Box/Corrugated Box-18-2.png"
+      },
+      {
+        "id": "kraft",
+        "name": "Kraft – Premium Finish",
+        "multiplier": 1.25,
+        "image": "/images/products/Corrugated Box/Kraft Box.jpg"
+      },
+      {
+        "id": "corrugated",
+        "name": "Corrugated — Heavy Duty",
+        "multiplier": 1.4,
+        "image": "/images/products/Corrugated Box/Heavy Duty Box.jpg"
+      }
+    ],
+    "details": {
+      "design": "Regular Slotted Container (RSC)",
+      "seams": "Hot melt or cold glue",
+      "testing": "ECT, Burst test available"
+    },
+    "specs": {
+      "fluting": "BC (double-wall)",
+      "paper_grades": "120–250 GSM kraft liners",
+      "strength": "ECT 32–44 / Burst 300–600 kPa"
+    }
+  }
+}
