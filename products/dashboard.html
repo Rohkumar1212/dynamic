@@ -52,6 +52,19 @@
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#ffffff" />
 <style>
+    .topbar{
+        margin-top: 80px;
+    }
+    #login-btn{
+        margin-top: -50px;
+    }
+    .logo-default{
+        margin-top: -20px;
+    }
+
+    #user-widget{
+         margin-top: -40px;
+    }
     :root {
         /* Color Palette */
         --primary: #4F46E5;
@@ -531,6 +544,9 @@
         .dashboard-grid {
             grid-template-columns: 1fr;
         }
+        .header-inner {
+    margin-top: 9px;
+}
 
         .sidebar-card {
             position: static;
@@ -543,12 +559,20 @@
 
         .topbar {
             padding: 1rem 0;
+            margin-top: 110px !important;
         }
 
         .user-info h3 {
             font-size: 1.2rem;
         }
     }
+
+     .topbar {
+            background: orange;
+            color: white;
+            padding: 20px;
+           
+        }
 </style>
     <style>
         /* --- VIEW MANAGEMENT --- */
@@ -588,10 +612,7 @@
             }
         }
 
-        .header-inner {
-
-            margin-top: 50px;
-        }
+       
 
         .order-card {
             padding: 8px 0;
@@ -645,11 +666,7 @@
             background: #f6f6f6;
         }
 
-        .topbar {
-            background: orange;
-            color: white;
-            padding: 20px;
-        }
+       
 
         .user-info {
             display: flex;
@@ -1573,11 +1590,27 @@
             }
         }
 
+         @media (min-width: 768px) {
+            .header-inner {
+            margin-top: 50px;
+        }
+         .topbar {
+            background: orange;
+            color: white;
+            padding: 20px;
+            margin-top: 70px !important;
+        }
+        }
+
+       
         /* Responsive */
         @media (max-width: 768px) {
             .dashboard-grid {
                 grid-template-columns: 1fr;
             }
+            .header-inner {
+    margin-top: 9px !important;
+}
 
             .summary-row {
                 flex-direction: column;
@@ -1591,6 +1624,9 @@
                 padding-bottom: 0px;
             }
         }
+        article, aside {
+    display: block !important;
+}
     </style>
     <!-- Structured Data (Organization + LocalBusiness) -->
     <script type="application/ld+json">
@@ -1693,87 +1729,83 @@
             </div>
         </div>
         <!-- Header -->
-        <header id="header" data-transparent="true">
-            <div class="header-inner">
-                <div class="container">
-                    <!--Logo-->
-                    <div id="logo"> <a href="/index.html"><span class="logo-default"><img class="img-fluid logody"
-                                    src="/images/logotran.png" alt=""></span></a> </div>
-                    <!--End: Logo-->
-                    <!-- Search -->
-                    <div id="search"><a id="btn-search-close" class="btn-search-close" aria-label="Close search form"><i
-                                class="icon-x"></i></a>
-                        <form class="search-form" action="" method="get">
-                            <input class="form-control" name="q" type="text" placeholder="Type & Search..." />
-                            <span class="text-muted">Start typing & press "Enter" or "ESC" to close</span>
-                        </form>
-                    </div> <!-- end: search -->
-
-                    <!--Navigation Resposnive Trigger-->
-                    <div id="mainMenu-trigger"> <a class="lines-button x"><span class="lines"></span></a> </div>
-                    <!--end: Navigation Resposnive Trigger-->
-                    <!--Navigation-->
-                    <div id="mainMenu">
-                        <div class="container">
-                            <nav>
-                                <ul>
-                                    <li><a href="/index.html">Home</a></li>
-                                    <li><a href="/about.html">About us</a></li>
-                                    <li><a href="/products.html">Product</a></li>
-
-                                    <li><a href="/footer.php">Gallery</a></li>
-                                    <li><a href="/contact.html">Contact us</a></li>
-                                    <li class="nav-right">
-                                        <button id="login-btn" class="btn btn-primary">Login</button>
-
-                                        <div id="user-widget" class="user-widget" style="display: none;">
-                                            <img id="user-photo" class="avatar" src="https://via.placeholder.com/40"
-                                                alt="User" />
-
-                                            <div class="profile-card">
-
-                                                <div class="profile-top">
-                                                    <img id="profile-photo-large" class="profile-img"
-                                                        src="https://via.placeholder.com/80" alt="Profile" />
-                                                    <h4 id="display-name">Loading...</h4>
-                                                    <p id="user-email">...</p>
-                                                </div>
-
-                                                <div class="divider"></div>
-
-                                                <div class="profile-row" onclick="window.app.openDashboard()">
-                                                    <div class="icon-box mt-5">
-                                                        <i class="fas fa-user-circle"></i>
-                                                    </div>
-                                                    <div>
-                                                        <strong>Personal Account</strong>
-                                                        <p>Manage your profile</p>
-                                                    </div>
-                                                </div>
-
-                                                <div class="divider"></div>
-
-                                               <div class="profile-row logout" onclick="window.app.logout()">
-                                                    <div class="icon-box logout-bg mt-2">
-                                                        <i class="fa fa-sign-out-alt" style="font-size:24px"></i>
-                                                    </div>
-                                                    <strong>Log out</strong>
-                                                </div>
-
-                                            </div>
+    <header id="header" data-transparent="true">
+        <div class="header-inner">
+            <div class="container">
+    
+                <div id="logo">
+                    <a href="/index.html">
+                        <span class="logo-default">
+                            <img class="img-fluid logody" src="/images/logotran.png" alt="Logo">
+                        </span>
+                    </a>
+                </div>
+                <div id="search">
+                    <a id="btn-search-close" class="btn-search-close" aria-label="Close search form">
+                        <i class="icon-x"></i>
+                    </a>
+                    <form class="search-form" action="" method="get">
+                        <input class="form-control" name="q" type="text" placeholder="Type & Search..." />
+                        <span class="text-muted">Start typing & press "Enter" or "ESC" to close</span>
+                    </form>
+                </div>
+    
+                <div id="mainMenu-trigger">
+                    <a class="lines-button x"><span class="lines"></span></a>
+                </div>
+                <div id="mainMenu">
+                    <div class="container">
+                        <nav>
+                            <ul>
+                                <li><a href="/index.html">Home</a></li>
+                                <li><a href="/about.html">About us</a></li>
+                                <li class="active"><a href="/products.html">Product</a></li>
+                                <li><a href="/gallery.html">Gallery</a></li>
+                                <li><a href="/contact.html">Contact us</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="header-extras">
+    
+                    <button id="login-btn" class="btn btn-primary" onclick="window.app.login()">Login</button>
+    
+                    <div id="user-widget" class="user-widget" style="display: none;">
+    
+                        <div class="avatar-trigger" onclick="toggleProfile()">
+                            <img id="user-photo-small" class="avatar-small" src="https://via.placeholder.com/40"
+                                alt="User" />
+                        </div>
+    
+                        <div id="profile-card" class="profile-card">
+                            <div class="profile-header-bg"></div>
+                            <div class="profile-content">
+                                <img id="profile-photo-large" class="profile-img-large" src="https://via.placeholder.com/80"
+                                    alt="Profile" />
+                                <h4 id="display-name">Loading...</h4>
+                                <p id="user-email">...</p>
+    
+                                <div class="profile-actions">
+                                    <div class="action-row" onclick="window.app.openDashboard()">
+                                        <div class="icon-circle"><i class="fas fa-user"></i></div>
+                                        <div class="action-text"><strong>My Profile</strong><span>Account
+                                                settings</span>
                                         </div>
-                                    </li>
-                                    <!-- Google Identity Script -->
-                                    <script src="https://accounts.google.com/gsi/client" async defer></script>
-
-                                </ul>
-                            </nav>
-                            <!-- Right Side: Login & Profile Section -->
-
-                            <!--end: Navigation-->
+                                        <i class="fas fa-chevron-right arrow-icon"></i>
+                                    </div>
+                                    <div class="action-row logout" onclick="window.app.logout()">
+                                        <div class="icon-circle logout-icon"><i class="fas fa-sign-out-alt"></i>
+                                        </div>
+                                        <div class="action-text"><strong>Log Out</strong></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-        </header>
+                </div>
+            </div>
+        </div>
+    </header>
         <!-- TOP BAR -->
     <div class="topbar">
         <div class="user-info">
@@ -1787,7 +1819,7 @@
         </div>
     </div>
     
-    <div class="container">
+<div class="container">
     
         <div class="summary-row">
             <div class="card summary-card">
