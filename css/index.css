@@ -269,3 +269,283 @@
     }
 }
 
+
+.header-sticky .sticky-active {
+    background: #ffffff00;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+}
+  /* --- 1. CORE HEADER STYLES --- */
+    #header {
+        position: fixed;
+        width: 100%;
+        top: 45px;
+        z-index: 1000;
+       
+    }
+
+    #header .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+        padding: 0 20px;
+        position: relative;
+    }
+
+    /* --- 2. LOGO --- */
+    #logo a {
+        display: flex;
+        align-items: center;
+    }
+
+    #logo img {
+        max-height: 50px;
+        width: auto;
+    }
+
+    /* --- 3. NAVIGATION (Desktop) --- */
+    #mainMenu {
+        margin-left: auto;
+        margin-right: 20px;
+    }
+
+    #mainMenu ul {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        gap: 10px;
+    }
+
+    #mainMenu a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: uppercase;
+        transition: color 0.3s;
+    }
+
+    #mainMenu a:hover {
+        color: #4a6bff;
+    }
+
+    /* --- 4. HEADER EXTRAS (Profile & Login) --- */
+    .header-extras {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    /* Login Button */
+    #login-btn {
+        background: #4a6bff;
+        color: white;
+        border: none;
+        padding: 8px 24px;
+        border-radius: 50px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    #login-btn:hover {
+        background: #324bca;
+    }
+
+    /* --- 5. MOBILE MENU TRIGGER --- */
+    #mainMenu-trigger {
+        display: none;
+        /* Hidden on desktop */
+        font-size: 24px;
+        cursor: pointer;
+        margin-left: 15px;
+    }
+
+    /* --- 6. USER PROFILE WIDGET (Matching your Image) --- */
+    .user-widget {
+        position: relative;
+    }
+
+    .avatar-trigger {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+    }
+
+    .avatar-small {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #fff;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        transition: transform 0.2s;
+    }
+
+    .avatar-trigger:hover .avatar-small {
+        transform: scale(1.05);
+    }
+
+    /* The Dropdown Card */
+    .profile-card {
+        position: absolute;
+        top: 60px;
+        right: -10px;
+        /* Aligns with right edge */
+        width: 280px;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        display: none;
+        /* Hidden by default */
+        z-index: 9999;
+        animation: slideDown 0.3s ease;
+    }
+
+    .profile-card.active {
+        display: block;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Purple Header Background */
+    .profile-header-bg {
+        height: 70px;
+        background: linear-gradient(135deg, #6200ea, #9d46ff);
+    }
+
+    /* Content Wrapper */
+    .profile-content {
+        text-align: center;
+        padding: 0 20px 20px;
+        margin-top: -35px;
+        /* Overlap effect */
+    }
+
+    /* Large Profile Image */
+    .profile-img-large {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        border: 4px solid white;
+        background: #fff;
+        object-fit: cover;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-content h4 {
+        margin: 10px 0 2px;
+        color: #333;
+        font-size: 18px;
+    }
+
+    .profile-content p {
+        margin: 0;
+        color: #888;
+        font-size: 13px;
+    }
+
+    /* Action Buttons */
+    .profile-actions {
+        margin-top: 20px;
+        text-align: left;
+    }
+
+    .action-row {
+        display: flex;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px solid #f5f5f5;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .action-row:hover {
+        background: #f9f9f9;
+    }
+
+    .action-row:last-child {
+        border-bottom: none;
+    }
+
+    .icon-circle {
+        width: 36px;
+        height: 36px;
+        background: #f0f2f5;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #555;
+        margin-right: 12px;
+    }
+
+    .logout-icon {
+        background: #ffebee;
+        color: #d32f2f;
+    }
+
+    .action-text strong {
+        display: block;
+        font-size: 14px;
+        color: #333;
+    }
+
+    .action-text span {
+        font-size: 11px;
+        color: #999;
+    }
+
+    .arrow-icon {
+        margin-left: auto;
+        color: #ccc;
+        font-size: 12px;
+    }
+
+    /* --- 7. RESPONSIVE DESIGN --- */
+    @media (max-width: 992px) {
+        #mainMenu {
+            display: none;
+            /* Hide standard menu on mobile */
+            position: absolute;
+            top: 100px;
+            left: 0;
+            width: 100%;
+            background: rgb(255, 255, 255);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+            
+        }
+
+        #mainMenu.active {
+            display: block;
+        }
+
+        #mainMenu ul {
+            flex-direction: column;
+            gap: 15px;
+            text-align: center;
+        }
+
+        #mainMenu-trigger {
+            display: block;
+        }
+
+        /* Show Hamburger */
+
+        /* Keep Profile Widget Visible Next to Hamburger */
+        .header-extras {
+            margin-left: auto;
+        }
+    }
