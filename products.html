@@ -121,6 +121,286 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <style>
+
+        
+
+  /* --- 1. CORE HEADER STYLES --- */
+    #header {
+        background: #ffffff00;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+        position: fixed;
+        width: 100%;
+        top: 40px;
+        z-index: 1000;
+        
+    }
+
+    #header .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+        padding: 0 20px;
+        position: relative;
+    }
+
+    /* --- 2. LOGO --- */
+    #logo a {
+        display: flex;
+        align-items: center;
+    }
+
+    #logo img {
+        max-height: 50px;
+        width: auto;
+    }
+
+    /* --- 3. NAVIGATION (Desktop) --- */
+    #mainMenu {
+        margin-left: auto;
+        margin-right: 20px;
+    }
+
+    #mainMenu ul {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        gap: 15px;
+    }
+
+    #mainMenu a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: uppercase;
+        transition: color 0.3s;
+    }
+
+    #mainMenu a:hover {
+        color: #4a6bff;
+    }
+
+    /* --- 4. HEADER EXTRAS (Profile & Login) --- */
+    .header-extras {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    /* Login Button */
+    #login-btn {
+        background: #4a6bff;
+        color: white;
+        border: none;
+        padding: 8px 24px;
+        border-radius: 50px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    #login-btn:hover {
+        background: #324bca;
+    }
+
+    /* --- 5. MOBILE MENU TRIGGER --- */
+    #mainMenu-trigger {
+        display: none;
+        /* Hidden on desktop */
+        font-size: 24px;
+        cursor: pointer;
+        margin-left: 15px;
+    }
+
+    /* --- 6. USER PROFILE WIDGET (Matching your Image) --- */
+    .user-widget {
+        position: relative;
+    }
+
+    .avatar-trigger {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+    }
+
+    .avatar-small {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #fff;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        transition: transform 0.2s;
+    }
+
+    .avatar-trigger:hover .avatar-small {
+        transform: scale(1.05);
+    }
+
+    /* The Dropdown Card */
+    .profile-card {
+        position: absolute;
+        top: 60px;
+        right: -10px;
+        /* Aligns with right edge */
+        width: 280px;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        display: none;
+        /* Hidden by default */
+        z-index: 9999;
+        animation: slideDown 0.3s ease;
+    }
+
+    .profile-card.active {
+        display: block;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Purple Header Background */
+    .profile-header-bg {
+        height: 70px;
+        background: linear-gradient(135deg, #6200ea, #9d46ff);
+    }
+
+    /* Content Wrapper */
+    .profile-content {
+        text-align: center;
+        padding: 0 20px 20px;
+        margin-top: -35px;
+        /* Overlap effect */
+    }
+
+    /* Large Profile Image */
+    .profile-img-large {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        border: 4px solid white;
+        background: #fff;
+        object-fit: cover;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-content h4 {
+        margin: 10px 0 2px;
+        color: #333;
+        font-size: 18px;
+    }
+
+    .profile-content p {
+        margin: 0;
+        color: #888;
+        font-size: 13px;
+    }
+
+    /* Action Buttons */
+    .profile-actions {
+        margin-top: 20px;
+        text-align: left;
+    }
+
+    .action-row {
+        display: flex;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px solid #f5f5f5;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .action-row:hover {
+        background: #f9f9f9;
+    }
+
+    .action-row:last-child {
+        border-bottom: none;
+    }
+
+    .icon-circle {
+        width: 36px;
+        height: 36px;
+        background: #f0f2f5;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #555;
+        margin-right: 12px;
+    }
+
+    .logout-icon {
+        background: #ffebee;
+        color: #d32f2f;
+    }
+
+    .action-text strong {
+        display: block;
+        font-size: 14px;
+        color: #333;
+    }
+
+    .action-text span {
+        font-size: 11px;
+        color: #999;
+    }
+
+    .arrow-icon {
+        margin-left: auto;
+        color: #ccc;
+        font-size: 12px;
+    }
+
+    /* --- 7. RESPONSIVE DESIGN --- */
+    @media (max-width: 992px) {
+        #mainMenu {
+            display: none;
+            /* Hide standard menu on mobile */
+            position: absolute;
+            top: 100px;
+            left: 0;
+            width: 100%;
+            background: rgb(255, 255, 255);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+            
+        }
+
+        #mainMenu.active {
+            display: block;
+        }
+
+        #mainMenu ul {
+            flex-direction: column;
+            gap: 15px;
+            text-align: center;
+        }
+
+        #mainMenu-trigger {
+            display: block;
+        }
+
+        /* Show Hamburger */
+
+        /* Keep Profile Widget Visible Next to Hamburger */
+        .header-extras {
+            margin-left: auto;
+        }
+    }
         .breadcrumb {
             text-align: center !important;
         }
@@ -185,91 +465,81 @@
             </div>
         </div>
         <!-- Header -->
-        <header id="header" data-transparent="true">
-            <div class="header-inner">
-                <div class="container">
-                    <!--Logo-->
-                    <div id="logo"> <a href="index.html"><span class="logo-default"><img class="img-fluid logody"
-                                    src="images/logotran.png" alt=""></span></a> </div>
-                    <!--End: Logo-->
-                    <!-- Search -->
-                    <div id="search"><a id="btn-search-close" class="btn-search-close" aria-label="Close search form"><i
-                                class="icon-x"></i></a>
-                        <form class="search-form" action="" method="get">
-                            <input class="form-control" name="q" type="text" placeholder="Type & Search..." />
-                            <span class="text-muted">Start typing & press "Enter" or "ESC" to close</span>
-                        </form>
-                    </div> <!-- end: search -->
-
-                    <!--Navigation Resposnive Trigger-->
-                    <div id="mainMenu-trigger"> <a class="lines-button x"><span class="lines"></span></a> </div>
-                    <!--end: Navigation Resposnive Trigger-->
-                    <!--Navigation-->
-                    <div id="mainMenu">
-                        <div class="container">
-                            <nav>
-                                <ul>
-                                    <li><a href="index.html">Home</a></li>
-                                    <li><a href="about.html">About us</a></li>
-                                    <li class="active"><a href="products.html">Product</a></li>
-
-                                    <li><a href="gallery.html">Gallery</a></li>
-                                    <li><a href="contact.html">Contact us</a></li>
-                                    <li class="nav-right">
-                                        <button id="login-btn" class="btn btn-primary"
-                                            onclick="window.app.login()">Login</button>
-
-                                        <div id="user-widget" class="user-widget" style="display: none;">
-
-                                            <div class="avatar-trigger" onclick="toggleProfile()">
-                                                <img id="user-profile" class="avatar-small"
-                                                    src="https://via.placeholder.com/40" alt="User" />
-                                            </div>
-
-                                            <div id="profile-card" class="profile-card">
-
-                                                <div class="profile-header-bg"></div>
-                                                <div class="profile-content">
-                                                    <img id="profile-photo-large" class="profile-img-large"
-                                                        src="https://via.placeholder.com/80" alt="Profile" />
-
-                                                    <h4 id="display-name">Loading...</h4>
-                                                    <p id="user-email">...</p>
-
-                                                    <div class="profile-actions">
-                                                        <div class="action-row" onclick="window.app.openDashboard()">
-                                                            <div class="icon-circle">
-                                                                <i class="fas fa-user"></i>
-                                                            </div>
-                                                            <div class="action-text">
-                                                                <strong>My Profile</strong>
-                                                                <span>Account settings</span>
-                                                            </div>
-                                                            <i class="fas fa-chevron-right arrow-icon"></i>
-                                                        </div>
-
-                                                        <div class="action-row logout" onclick="window.app.logout()">
-                                                            <div class="icon-circle logout-icon">
-                                                                <i class="fas fa-sign-out-alt"></i>
-                                                            </div>
-                                                            <div class="action-text">
-                                                                <strong>Log Out</strong>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
+     <header id="header" data-transparent="true">
+        <div class="header-inner">
+            <div class="container">
+    
+                <div id="logo">
+                    <a href="index.html">
+                        <span class="logo-default">
+                            <img class="img-fluid logody" src="images/logotran.png" alt="Logo">
+                        </span>
+                    </a>
+                </div>
+                <div id="search">
+                    <a id="btn-search-close" class="btn-search-close" aria-label="Close search form">
+                        <i class="icon-x"></i>
+                    </a>
+                    <form class="search-form" action="" method="get">
+                        <input class="form-control" name="q" type="text" placeholder="Type & Search..." />
+                        <span class="text-muted">Start typing & press "Enter" or "ESC" to close</span>
+                    </form>
+                </div>
+    
+                <div id="mainMenu-trigger">
+                    <a class="lines-button x"><span class="lines"></span></a>
+                </div>
+                <div id="mainMenu">
+                    <div class="container">
+                        <nav>
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="about.html">About us</a></li>
+                                <li class="active"><a href="products.html">Product</a></li>
+                                <li><a href="gallery.html">Gallery</a></li>
+                                <li><a href="contact.html">Contact us</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="header-extras">
+    
+                    <button id="login-btn" class="btn btn-primary" onclick="window.app.login()">Login</button>
+    
+                    <div id="user-widget" class="user-widget" style="display: none;">
+    
+                        <div class="avatar-trigger" onclick="toggleProfile()">
+                            <img id="user-photo-small" class="avatar-small" src="https://via.placeholder.com/40"
+                                alt="User" />
+                        </div>
+    
+                        <div id="profile-card" class="profile-card">
+                            <div class="profile-header-bg"></div>
+                            <div class="profile-content">
+                                <img id="profile-photo-large" class="profile-img-large" src="https://via.placeholder.com/80"
+                                    alt="Profile" />
+                                <h4 id="display-name">Loading...</h4>
+                                <p id="user-email">...</p>
+    
+                                <div class="profile-actions">
+                                    <div class="action-row" onclick="window.app.openDashboard()">
+                                        <div class="icon-circle"><i class="fas fa-user"></i></div>
+                                        <div class="action-text"><strong>My Profile</strong><span>Account settings</span>
                                         </div>
-                                    </li>
-                                </ul>
-
-                            </nav>
-
+                                        <i class="fas fa-chevron-right arrow-icon"></i>
+                                    </div>
+                                    <div class="action-row logout" onclick="window.app.logout()">
+                                        <div class="icon-circle logout-icon"><i class="fas fa-sign-out-alt"></i></div>
+                                        <div class="action-text"><strong>Log Out</strong></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-        </header>
-        <script src="script.js"></script>
+                </div>
+            </div>
+        </div>
+    </header> 
         <!-- end: Header -->
         <!-- Page title -->
         <section id="page-title" class="text-light" data-bg-parallax="images/products/Packaging-Page-Banner.jpg">
@@ -573,6 +843,7 @@
     <!--Plugins-->
     <script src="js/jquery.js"></script>
     <script src="js/plugins.js"></script>
+    <script src="js/menu.js"></script>
     <!--Template functions-->
     <script src="js/functions.js"></script>
     <script type="module">
@@ -665,7 +936,9 @@
                 if (userWidget) userWidget.style.display = 'none';
             }
         });
-    </script>
+    </script>   
+    <script src="script.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </body>
 
 </html>

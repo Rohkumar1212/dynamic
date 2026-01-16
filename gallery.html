@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -14,10 +15,18 @@
     <link href="css/style.css" rel="stylesheet">
     <link href="css/index.css" rel="stylesheet">
     <style>
-        #topbar.dark.topbar-transparent {
-    background-color: #dec38c;
-    border-bottom: 1px solid rgba(144, 144, 144, 0.25);
+        #page-title {
+    clear: both;
+    padding: 100px 0;
+    background-color: #f8f9fa;
+    position: relative;
+    margin-top: 105px;
 }
+        #topbar.dark.topbar-transparent {
+            background-color: #dec38c;
+            border-bottom: 1px solid rgba(144, 144, 144, 0.25);
+        }
+
         .fixed-icons {
             position: fixed;
             bottom: 20px;
@@ -45,6 +54,7 @@
     </style>
 
 </head>
+
 <body>
     <!-- Body Inner -->
     <div class="body-inner">
@@ -77,23 +87,27 @@
         <header id="header" data-transparent="true">
             <div class="header-inner">
                 <div class="container">
-                    <!--Logo-->
-                    <div id="logo"> <a href="index.html"><span class="logo-default"><img class="img-fluid logody"
-                                    src="images/logotran.png" alt=""></span></a> </div>
-                    <!--End: Logo-->
-                    <!-- Search -->
-                    <div id="search"><a id="btn-search-close" class="btn-search-close" aria-label="Close search form"><i
-                                class="icon-x"></i></a>
+
+                    <div id="logo">
+                        <a href="index.html">
+                            <span class="logo-default">
+                                <img class="img-fluid logody" src="images/logotran.png" alt="Logo">
+                            </span>
+                        </a>
+                    </div>
+                    <div id="search">
+                        <a id="btn-search-close" class="btn-search-close" aria-label="Close search form">
+                            <i class="icon-x"></i>
+                        </a>
                         <form class="search-form" action="" method="get">
                             <input class="form-control" name="q" type="text" placeholder="Type & Search..." />
                             <span class="text-muted">Start typing & press "Enter" or "ESC" to close</span>
                         </form>
-                    </div> <!-- end: search -->
-        
-                    <!--Navigation Resposnive Trigger-->
-                    <div id="mainMenu-trigger"> <a class="lines-button x"><span class="lines"></span></a> </div>
-                    <!--end: Navigation Resposnive Trigger-->
-                    <!--Navigation-->
+                    </div>
+
+                    <div id="mainMenu-trigger">
+                        <a class="lines-button x"><span class="lines"></span></a>
+                    </div>
                     <div id="mainMenu">
                         <div class="container">
                             <nav>
@@ -101,81 +115,61 @@
                                     <li><a href="index.html">Home</a></li>
                                     <li><a href="about.html">About us</a></li>
                                     <li><a href="products.html">Product</a></li>
-        
                                     <li class="active"><a href="gallery.html">Gallery</a></li>
                                     <li><a href="contact.html">Contact us</a></li>
-                                   <li class="nav-right">
-    <button id="login-btn" class="btn btn-primary" onclick="window.app.login()">Login</button>
-
-    <div id="user-widget" class="user-widget" style="display: none;">
-        
-        <div class="avatar-trigger" onclick="toggleProfile()">
-            <img id="user-photo-small" class="avatar-small" src="https://via.placeholder.com/40" alt="User" />
-        </div>
-
-        <div id="profile-card" class="profile-card">
-            
-            <div class="profile-header-bg"></div> <div class="profile-content">
-                <img id="profile-photo-large" class="profile-img-large" src="https://via.placeholder.com/80" alt="Profile" />
-                
-                <h4 id="display-name">Loading...</h4>
-                <p id="user-email">...</p>
-                
-                <div class="profile-actions">
-                    <div class="action-row" onclick="window.app.openDashboard()">
-                        <div class="icon-circle">
-                            <i class="fas fa-user"></i>
+                                </ul>
+                            </nav>
                         </div>
-                        <div class="action-text">
-                            <strong>My Profile</strong>
-                            <span>Account settings</span>
-                        </div>
-                        <i class="fas fa-chevron-right arrow-icon"></i>
                     </div>
+                    <div class="header-extras">
 
-                    <div class="action-row logout" onclick="window.app.logout()">
-                        <div class="icon-circle logout-icon">
-                            <i class="fas fa-sign-out-alt"></i>
-                        </div>
-                        <div class="action-text">
-                            <strong>Log Out</strong>
+                        <button id="login-btn" class="btn btn-primary" onclick="window.app.login()">Login</button>
+
+                        <div id="user-widget" class="user-widget" style="display: none;">
+
+                            <div class="avatar-trigger" onclick="toggleProfile()">
+                                <img id="user-photo-small" class="avatar-small" src="https://via.placeholder.com/40"
+                                    alt="User" />
+                            </div>
+
+                            <div id="profile-card" class="profile-card">
+                                <div class="profile-header-bg"></div>
+                                <div class="profile-content">
+                                    <img id="profile-photo-large" class="profile-img-large"
+                                        src="https://via.placeholder.com/80" alt="Profile" />
+                                    <h4 id="display-name">Loading...</h4>
+                                    <p id="user-email">...</p>
+
+                                    <div class="profile-actions">
+                                        <div class="action-row" onclick="window.app.openDashboard()">
+                                            <div class="icon-circle"><i class="fas fa-user"></i></div>
+                                            <div class="action-text"><strong>My Profile</strong><span>Account
+                                                    settings</span>
+                                            </div>
+                                            <i class="fas fa-chevron-right arrow-icon"></i>
+                                        </div>
+                                        <div class="action-row logout" onclick="window.app.logout()">
+                                            <div class="icon-circle logout-icon"><i class="fas fa-sign-out-alt"></i>
+                                            </div>
+                                            <div class="action-text"><strong>Log Out</strong></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-    </div>
-</li>
-                                    <!-- Google Identity Script -->
-                                    <script src="https://accounts.google.com/gsi/client" async defer></script>
-        
-                                </ul>
-                            </nav>
-                            <!-- Right Side: Login & Profile Section -->
-        
-                            <!--end: Navigation-->
-                        </div>
-                    </div>
         </header>
-        <script src="script.js"></script> 
+        <script src="script.js"></script>
         <!-- end: Header -->
         <!-- Page title -->
-        <section id="page-title" class="text-light" data-bg-parallax="images/products/gallery.jpg">
+        <section id="page-title" class="text-light" data-bg-parallax="images/products/Packaging-Page-Banner.jpg">
             <div class="container">
                 <div class="page-title">
                     <h1 style="color: #342302;">Gallery Modal</h1>
                 </div>
-                <div class="breadcrumb">
-                    <ul>
-                        <li><a href="#">Home</a>
-                        </li>
-                        <li><a href="#">Gallery</a>
-                        </li>
-                        <li class="active"><a href="#">Gallery</a>
-                        </li>
-                    </ul>
-                </div>
+                
             </div>
         </section>
         <!-- end: Page title -->
@@ -190,7 +184,7 @@
                         <li><a href="#" data-category=".ct-marketing">Branding</a></li>
                         <li><a href="#" data-category=".ct-photography">Packing material</a></li>
                         <li><a href="#" data-category=".ct-marketing">Marketing</a></li>
-                       
+
                     </ul>
                     <div class="grid-active-title">Show All</div>
                 </nav>
@@ -203,19 +197,22 @@
                             <div class="portfolio-slider">
                                 <div class="carousel" data-items="1" data-loop="true" data-autoplay="true"
                                     data-animate-in="fadeIn" data-animate-out="fadeOut" data-autoplay="1500">
-                                    <a href="#"><img src="images/products/18x14.75x10.75 inch RSC Carton.webp" alt=""></a>
-                                    <a href="#"><img src="images/products/21x12.75x16.75 inch RSC Carton.jpeg" alt=""></a>
+                                    <a href="#"><img src="images/products/18x14.75x10.75 inch RSC Carton.webp"
+                                            alt=""></a>
+                                    <a href="#"><img src="images/products/21x12.75x16.75 inch RSC Carton.jpeg"
+                                            alt=""></a>
                                 </div>
                             </div>
                             <div class="portfolio-description" data-lightbox="gallery">
                                 <a title="Photoshop Mock-up!" data-lightbox="gallery-image"
-                                    href="images/products/18x14.75x11.75 inch RSC Carton.webp"><i class="icon-copy"></i></a>
-                                <a title="Paper Pouch!" data-lightbox="gallery-image" href="images/products/18x14.75x10.75 inch RSC Carton.webp"
-                                    class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image" href="images/products/18x14.75x11.75 inch RSC Carton.webp"
-                                    class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image" href="images/products/18x14.75x10.75 inch RSC Carton.webp"
-                                    class="hidden"></a>
+                                    href="images/products/18x14.75x11.75 inch RSC Carton.webp"><i
+                                        class="icon-copy"></i></a>
+                                <a title="Paper Pouch!" data-lightbox="gallery-image"
+                                    href="images/products/18x14.75x10.75 inch RSC Carton.webp" class="hidden"></a>
+                                <a title="Mock-up" data-lightbox="gallery-image"
+                                    href="images/products/18x14.75x11.75 inch RSC Carton.webp" class="hidden"></a>
+                                <a title="Mock-up" data-lightbox="gallery-image"
+                                    href="images/products/18x14.75x10.75 inch RSC Carton.webp" class="hidden"></a>
                                 <a href="gallery.html"><i class="icon-link"></i></a>
                             </div>
                         </div>
@@ -227,72 +224,81 @@
                             <div class="portfolio-slider">
                                 <div class="carousel" data-items="1" data-loop="true" data-autoplay="true"
                                     data-animate-in="fadeIn" data-animate-out="fadeOut" data-autoplay="1500">
-                                    <a href="#"><img src="images/products/21x12.75x16.75 inch RSC Carton.jpeg" alt=""></a>
-                                    <a href="#"><img src="images/products/18x14.75x11.75 inch RSC Carton.webp" alt=""></a>
+                                    <a href="#"><img src="images/products/21x12.75x16.75 inch RSC Carton.jpeg"
+                                            alt=""></a>
+                                    <a href="#"><img src="images/products/18x14.75x11.75 inch RSC Carton.webp"
+                                            alt=""></a>
                                 </div>
                             </div>
                             <div class="portfolio-description" data-lightbox="gallery">
                                 <a title="Photoshop Mock-up!" data-lightbox="gallery-image"
-                                    href="images/products/18x14.75x11.75 inch RSC Carton.webp"><i class="icon-copy"></i></a>
-                                <a title="Paper Pouch!" data-lightbox="gallery-image" href="images/products/18x14.75x11.75 inch RSC Carton.webp"
-                                    class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image" href="images/products/18x14.75x11.75 inch RSC Carton.webp"
-                                    class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image" href="images/products/18x14.75x11.75 inch RSC Carton.webp"
-                                    class="hidden"></a>
+                                    href="images/products/18x14.75x11.75 inch RSC Carton.webp"><i
+                                        class="icon-copy"></i></a>
+                                <a title="Paper Pouch!" data-lightbox="gallery-image"
+                                    href="images/products/18x14.75x11.75 inch RSC Carton.webp" class="hidden"></a>
+                                <a title="Mock-up" data-lightbox="gallery-image"
+                                    href="images/products/18x14.75x11.75 inch RSC Carton.webp" class="hidden"></a>
+                                <a title="Mock-up" data-lightbox="gallery-image"
+                                    href="images/products/18x14.75x11.75 inch RSC Carton.webp" class="hidden"></a>
                                 <a href="gallery.html"><i class="icon-link"></i></a>
                             </div>
                         </div>
-                      
+
                     </div>
                     <!-- end: portfolio item -->
                     <!-- portfolio item -->
                     <div class="portfolio-item img-zoom ct-photography ct-media ct-branding ct-Media">
-                      
+
 
                         <div class="portfolio-item-wrap">
                             <div class="portfolio-slider">
                                 <div class="carousel" data-items="1" data-loop="true" data-autoplay="true"
                                     data-animate-in="fadeIn" data-animate-out="fadeOut" data-autoplay="1500">
-                                    <a href="#"><img src="images/products/18x14.75x18.75 inch RSC Carton.jpg" alt=""></a>
-                                    <a href="#"><img src="images/products/18x14.75x18.75 inch RSC Carton.jpg" alt=""></a>
+                                    <a href="#"><img src="images/products/18x14.75x18.75 inch RSC Carton.jpg"
+                                            alt=""></a>
+                                    <a href="#"><img src="images/products/18x14.75x18.75 inch RSC Carton.jpg"
+                                            alt=""></a>
                                 </div>
                             </div>
                             <div class="portfolio-description" data-lightbox="gallery">
                                 <a title="Photoshop Mock-up!" data-lightbox="gallery-image"
-                                    href="images/products/18x14.75x18.75 inch RSC Carton.jpg"><i class="icon-copy"></i></a>
-                                <a title="Paper Pouch!" data-lightbox="gallery-image" href="images/products/18x14.75x18.75 inch RSC Carton.jpg"
-                                    class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image" href="images/products/18x14.75x18.75 inch RSC Carton.jpg"
-                                    class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image" href="images/products/18x14.75x18.75 inch RSC Carton.jpg"
-                                    class="hidden"></a>
+                                    href="images/products/18x14.75x18.75 inch RSC Carton.jpg"><i
+                                        class="icon-copy"></i></a>
+                                <a title="Paper Pouch!" data-lightbox="gallery-image"
+                                    href="images/products/18x14.75x18.75 inch RSC Carton.jpg" class="hidden"></a>
+                                <a title="Mock-up" data-lightbox="gallery-image"
+                                    href="images/products/18x14.75x18.75 inch RSC Carton.jpg" class="hidden"></a>
+                                <a title="Mock-up" data-lightbox="gallery-image"
+                                    href="images/products/18x14.75x18.75 inch RSC Carton.jpg" class="hidden"></a>
                                 <a href="gallery.html"><i class="icon-link"></i></a>
                             </div>
                         </div>
-                      
+
                     </div>
                     <!-- end: portfolio item -->
                     <!-- portfolio item -->
                     <div class="portfolio-item img-zoom ct-photography ct-media ct-branding ct-marketing ct-webdesign">
-                      
+
                         <div class="portfolio-item-wrap">
                             <div class="portfolio-slider">
                                 <div class="carousel" data-items="1" data-loop="true" data-autoplay="true"
                                     data-animate-in="fadeIn" data-animate-out="fadeOut" data-autoplay="1500">
-                                    <a href="#"><img src="images/products/23x17.75x17.75 inch RSC Carton.webp" alt=""></a>
-                                    <a href="#"><img src="images/products/23x17.75x17.75 inch RSC Carton.webp" alt=""></a>
+                                    <a href="#"><img src="images/products/23x17.75x17.75 inch RSC Carton.webp"
+                                            alt=""></a>
+                                    <a href="#"><img src="images/products/23x17.75x17.75 inch RSC Carton.webp"
+                                            alt=""></a>
                                 </div>
                             </div>
                             <div class="portfolio-description" data-lightbox="gallery">
                                 <a title="Photoshop Mock-up!" data-lightbox="gallery-image"
-                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp"><i class="icon-copy"></i></a>
-                                <a title="Paper Pouch!" data-lightbox="gallery-image" href="images/products/23x17.75x17.75 inch RSC Carton.webp"
-                                    class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image" href="images/products/23x17.75x17.75 inch RSC Carton.webp"
-                                    class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image" href="images/products/23x17.75x17.75 inch RSC Carton.webp"
-                                    class="hidden"></a>
+                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp"><i
+                                        class="icon-copy"></i></a>
+                                <a title="Paper Pouch!" data-lightbox="gallery-image"
+                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp" class="hidden"></a>
+                                <a title="Mock-up" data-lightbox="gallery-image"
+                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp" class="hidden"></a>
+                                <a title="Mock-up" data-lightbox="gallery-image"
+                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp" class="hidden"></a>
                                 <a href="gallery.html"><i class="icon-link"></i></a>
                             </div>
                         </div>
@@ -300,24 +306,27 @@
                     <!-- end: portfolio item -->
                     <!-- portfolio item -->
                     <div class="portfolio-item img-zoom ct-photography ct-media ct-branding ct-marketing ct-webdesign">
-                      
+
                         <div class="portfolio-item-wrap">
                             <div class="portfolio-slider">
                                 <div class="carousel" data-items="1" data-loop="true" data-autoplay="true"
                                     data-animate-in="fadeIn" data-animate-out="fadeOut" data-autoplay="1500">
-                                    <a href="#"><img src="images/products/18.00x17.50x29.50 inch RSC Carton.jpg" alt=""></a>
-                                    <a href="#"><img src="images/products/23x17.75x17.75 inch RSC Carton.webp" alt=""></a>
+                                    <a href="#"><img src="images/products/18.00x17.50x29.50 inch RSC Carton.jpg"
+                                            alt=""></a>
+                                    <a href="#"><img src="images/products/23x17.75x17.75 inch RSC Carton.webp"
+                                            alt=""></a>
                                 </div>
                             </div>
                             <div class="portfolio-description" data-lightbox="gallery">
                                 <a title="Photoshop Mock-up!" data-lightbox="gallery-image"
-                                    href="images/products/18.00x17.50x29.50 inch RSC Carton.jpg"><i class="icon-copy"></i></a>
-                                <a title="Paper Pouch!" data-lightbox="gallery-image" href="images/products/23x17.75x17.75 inch RSC Carton.webp"
-                                    class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image" href="images/products/18.00x17.50x29.50 inch RSC Carton.jpg"
-                                    class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image" href="images/products/23x17.75x17.75 inch RSC Carton.webp"
-                                    class="hidden"></a>
+                                    href="images/products/18.00x17.50x29.50 inch RSC Carton.jpg"><i
+                                        class="icon-copy"></i></a>
+                                <a title="Paper Pouch!" data-lightbox="gallery-image"
+                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp" class="hidden"></a>
+                                <a title="Mock-up" data-lightbox="gallery-image"
+                                    href="images/products/18.00x17.50x29.50 inch RSC Carton.jpg" class="hidden"></a>
+                                <a title="Mock-up" data-lightbox="gallery-image"
+                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp" class="hidden"></a>
                                 <a href="gallery.html"><i class="icon-link"></i></a>
                             </div>
                         </div>
@@ -325,24 +334,27 @@
                     <!-- end: portfolio item -->
                     <!-- portfolio item -->
                     <div class="portfolio-item img-zoom ct-photography ct-media ct-branding ct-marketing ct-webdesign">
-                      
+
                         <div class="portfolio-item-wrap">
                             <div class="portfolio-slider">
                                 <div class="carousel" data-items="1" data-loop="true" data-autoplay="true"
                                     data-animate-in="fadeIn" data-animate-out="fadeOut" data-autoplay="1500">
-                                    <a href="#"><img src="images/products/18x14.75x11.75 inch RSC Carton.webp" alt=""></a>
-                                    <a href="#"><img src="images/products/23x17.75x17.75 inch RSC Carton.webp" alt=""></a>
+                                    <a href="#"><img src="images/products/18x14.75x11.75 inch RSC Carton.webp"
+                                            alt=""></a>
+                                    <a href="#"><img src="images/products/23x17.75x17.75 inch RSC Carton.webp"
+                                            alt=""></a>
                                 </div>
                             </div>
                             <div class="portfolio-description" data-lightbox="gallery">
                                 <a title="Photoshop Mock-up!" data-lightbox="gallery-image"
-                                    href="images/products/18x14.75x11.75 inch RSC Carton.webp"><i class="icon-copy"></i></a>
-                                <a title="Paper Pouch!" data-lightbox="gallery-image" href="images/products/23x17.75x17.75 inch RSC Carton.webp"
-                                    class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image" href="images/products/18x14.75x11.75 inch RSC Carton.webp"
-                                    class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image" href="images/products/23x17.75x17.75 inch RSC Carton.webp"
-                                    class="hidden"></a>
+                                    href="images/products/18x14.75x11.75 inch RSC Carton.webp"><i
+                                        class="icon-copy"></i></a>
+                                <a title="Paper Pouch!" data-lightbox="gallery-image"
+                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp" class="hidden"></a>
+                                <a title="Mock-up" data-lightbox="gallery-image"
+                                    href="images/products/18x14.75x11.75 inch RSC Carton.webp" class="hidden"></a>
+                                <a title="Mock-up" data-lightbox="gallery-image"
+                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp" class="hidden"></a>
                                 <a href="gallery.html"><i class="icon-link"></i></a>
                             </div>
                         </div>
@@ -350,24 +362,27 @@
                     <!-- end: portfolio item -->
                     <!-- portfolio item -->
                     <div class="portfolio-item img-zoom ct-photography ct-media ct-branding ct-marketing ct-webdesign">
-                      
+
                         <div class="portfolio-item-wrap">
                             <div class="portfolio-slider">
                                 <div class="carousel" data-items="1" data-loop="true" data-autoplay="true"
                                     data-animate-in="fadeIn" data-animate-out="fadeOut" data-autoplay="1500">
-                                    <a href="#"><img src="images/products/18x14.75x18.75 inch RSC Carton.jpg" alt=""></a>
-                                    <a href="#"><img src="images/products/23x17.75x17.75 inch RSC Carton.webp" alt=""></a>
+                                    <a href="#"><img src="images/products/18x14.75x18.75 inch RSC Carton.jpg"
+                                            alt=""></a>
+                                    <a href="#"><img src="images/products/23x17.75x17.75 inch RSC Carton.webp"
+                                            alt=""></a>
                                 </div>
                             </div>
                             <div class="portfolio-description" data-lightbox="gallery">
                                 <a title="Photoshop Mock-up!" data-lightbox="gallery-image"
-                                    href="images/products/18x14.75x18.75 inch RSC Carton.jpg"><i class="icon-copy"></i></a>
-                                <a title="Paper Pouch!" data-lightbox="gallery-image" href="images/products/23x17.75x17.75 inch RSC Carton.webp"
-                                    class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image" href="images/products/18x14.75x18.75 inch RSC Carton.jpg"
-                                    class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image" href="images/products/23x17.75x17.75 inch RSC Carton.webp"
-                                    class="hidden"></a>
+                                    href="images/products/18x14.75x18.75 inch RSC Carton.jpg"><i
+                                        class="icon-copy"></i></a>
+                                <a title="Paper Pouch!" data-lightbox="gallery-image"
+                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp" class="hidden"></a>
+                                <a title="Mock-up" data-lightbox="gallery-image"
+                                    href="images/products/18x14.75x18.75 inch RSC Carton.jpg" class="hidden"></a>
+                                <a title="Mock-up" data-lightbox="gallery-image"
+                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp" class="hidden"></a>
                                 <a href="gallery.html"><i class="icon-link"></i></a>
                             </div>
                         </div>
@@ -375,49 +390,25 @@
                     <!-- end: portfolio item -->
                     <!-- portfolio item -->
                     <div class="portfolio-item img-zoom ct-photography ct-media ct-branding ct-marketing ct-webdesign">
-                      
-                        <div class="portfolio-item-wrap">
-                            <div class="portfolio-slider">
-                                <div class="carousel" data-items="1" data-loop="true" data-autoplay="true"
-                                    data-animate-in="fadeIn" data-animate-out="fadeOut" data-autoplay="1500">
-                                    <a href="#"><img src="images/products/20x12x15 inch RSC Carton.webp" alt=""></a>
-                                    <a href="#"><img src="images/products/23x17.75x17.75 inch RSC Carton.webp" alt=""></a>
-                                </div>
-                            </div>
-                            <div class="portfolio-description" data-lightbox="gallery">
-                                <a title="Photoshop Mock-up!" data-lightbox="gallery-image"
-                                    href="images/products/20x12x15 inch RSC Carton.webp"><i class="icon-copy"></i></a>
-                                <a title="Paper Pouch!" data-lightbox="gallery-image" href="images/products/20x12x15 inch RSC Carton.webp"
-                                    class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image" href="images/products/18x14.75x18.75 inch RSC Carton.jpg"
-                                    class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image" href="images/products/23x17.75x17.75 inch RSC Carton.webp"
-                                    class="hidden"></a>
-                                <a href="gallery.html"><i class="icon-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end: portfolio item -->
-                    <!-- portfolio item -->
-                    <div class="portfolio-item img-zoom ct-photography ct-media ct-branding ct-marketing ct-webdesign">
-                      
+
                         <div class="portfolio-item-wrap">
                             <div class="portfolio-slider">
                                 <div class="carousel" data-items="1" data-loop="true" data-autoplay="true"
                                     data-animate-in="fadeIn" data-animate-out="fadeOut" data-autoplay="1500">
                                     <a href="#"><img src="images/products/20x12x15 inch RSC Carton.webp" alt=""></a>
-                                    <a href="#"><img src="images/products/23x17.75x17.75 inch RSC Carton.webp" alt=""></a>
+                                    <a href="#"><img src="images/products/23x17.75x17.75 inch RSC Carton.webp"
+                                            alt=""></a>
                                 </div>
                             </div>
                             <div class="portfolio-description" data-lightbox="gallery">
                                 <a title="Photoshop Mock-up!" data-lightbox="gallery-image"
                                     href="images/products/20x12x15 inch RSC Carton.webp"><i class="icon-copy"></i></a>
-                                <a title="Paper Pouch!" data-lightbox="gallery-image" href="images/products/23x17.75x17.75 inch RSC Carton.webp"
-                                    class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image" href="images/products/20x12x15 inch RSC Carton.webp"
-                                    class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image" href="images/products/18.00x17.50x19.50 inch RSC Carton.webp"
-                                    class="hidden"></a>
+                                <a title="Paper Pouch!" data-lightbox="gallery-image"
+                                    href="images/products/20x12x15 inch RSC Carton.webp" class="hidden"></a>
+                                <a title="Mock-up" data-lightbox="gallery-image"
+                                    href="images/products/18x14.75x18.75 inch RSC Carton.jpg" class="hidden"></a>
+                                <a title="Mock-up" data-lightbox="gallery-image"
+                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp" class="hidden"></a>
                                 <a href="gallery.html"><i class="icon-link"></i></a>
                             </div>
                         </div>
@@ -425,24 +416,25 @@
                     <!-- end: portfolio item -->
                     <!-- portfolio item -->
                     <div class="portfolio-item img-zoom ct-photography ct-media ct-branding ct-marketing ct-webdesign">
-                      
+
                         <div class="portfolio-item-wrap">
                             <div class="portfolio-slider">
                                 <div class="carousel" data-items="1" data-loop="true" data-autoplay="true"
                                     data-animate-in="fadeIn" data-animate-out="fadeOut" data-autoplay="1500">
-                                    <a href="#"><img src="images/products/30x17.75x11.75 inch RSC Carton.jpg" alt=""></a>
-                                    <a href="#"><img src="images/products/23x17.75x17.75 inch RSC Carton.webp" alt=""></a>
+                                    <a href="#"><img src="images/products/20x12x15 inch RSC Carton.webp" alt=""></a>
+                                    <a href="#"><img src="images/products/23x17.75x17.75 inch RSC Carton.webp"
+                                            alt=""></a>
                                 </div>
                             </div>
                             <div class="portfolio-description" data-lightbox="gallery">
                                 <a title="Photoshop Mock-up!" data-lightbox="gallery-image"
-                                    href="images/products/30x17.75x11.75 inch RSC Carton.jpg"><i class="icon-copy"></i></a>
-                                <a title="Paper Pouch!" data-lightbox="gallery-image" href="images/products/23x17.75x17.75 inch RSC Carton.webp"
-                                    class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image" href="images/products/23x17.75x17.75 inch RSC Carton.webp"
-                                    class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image" href="images/products/23x17.75x17.75 inch RSC Carton.webp"
-                                    class="hidden"></a>
+                                    href="images/products/20x12x15 inch RSC Carton.webp"><i class="icon-copy"></i></a>
+                                <a title="Paper Pouch!" data-lightbox="gallery-image"
+                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp" class="hidden"></a>
+                                <a title="Mock-up" data-lightbox="gallery-image"
+                                    href="images/products/20x12x15 inch RSC Carton.webp" class="hidden"></a>
+                                <a title="Mock-up" data-lightbox="gallery-image"
+                                    href="images/products/18.00x17.50x19.50 inch RSC Carton.webp" class="hidden"></a>
                                 <a href="gallery.html"><i class="icon-link"></i></a>
                             </div>
                         </div>
@@ -450,24 +442,27 @@
                     <!-- end: portfolio item -->
                     <!-- portfolio item -->
                     <div class="portfolio-item img-zoom ct-photography ct-media ct-branding ct-marketing ct-webdesign">
-                      
+
                         <div class="portfolio-item-wrap">
                             <div class="portfolio-slider">
                                 <div class="carousel" data-items="1" data-loop="true" data-autoplay="true"
                                     data-animate-in="fadeIn" data-animate-out="fadeOut" data-autoplay="1500">
-                                    <a href="#"><img src="images/products/16.00x12.75x9.75 inch TOP(LID) & BOTTOM.jpg" alt=""></a>
-                                    <a href="#"><img src="images/products/23x17.75x17.75 inch RSC Carton.webp" alt=""></a>
+                                    <a href="#"><img src="images/products/30x17.75x11.75 inch RSC Carton.jpg"
+                                            alt=""></a>
+                                    <a href="#"><img src="images/products/23x17.75x17.75 inch RSC Carton.webp"
+                                            alt=""></a>
                                 </div>
                             </div>
                             <div class="portfolio-description" data-lightbox="gallery">
                                 <a title="Photoshop Mock-up!" data-lightbox="gallery-image"
-                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp"><i class="icon-copy"></i></a>
-                                <a title="Paper Pouch!" data-lightbox="gallery-image" href="images/products/30x17.75x11.75 inch RSC Carton.jpg"
-                                    class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image" href="images/products/23x17.75x17.75 inch RSC Carton.webp"
-                                    class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image" href="images/products/30x17.75x11.75 inch RSC Carton.jpg"
-                                    class="hidden"></a>
+                                    href="images/products/30x17.75x11.75 inch RSC Carton.jpg"><i
+                                        class="icon-copy"></i></a>
+                                <a title="Paper Pouch!" data-lightbox="gallery-image"
+                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp" class="hidden"></a>
+                                <a title="Mock-up" data-lightbox="gallery-image"
+                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp" class="hidden"></a>
+                                <a title="Mock-up" data-lightbox="gallery-image"
+                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp" class="hidden"></a>
                                 <a href="gallery.html"><i class="icon-link"></i></a>
                             </div>
                         </div>
@@ -475,24 +470,55 @@
                     <!-- end: portfolio item -->
                     <!-- portfolio item -->
                     <div class="portfolio-item img-zoom ct-photography ct-media ct-branding ct-marketing ct-webdesign">
-                      
+
                         <div class="portfolio-item-wrap">
                             <div class="portfolio-slider">
                                 <div class="carousel" data-items="1" data-loop="true" data-autoplay="true"
                                     data-animate-in="fadeIn" data-animate-out="fadeOut" data-autoplay="1500">
-                                    <a href="#"><img src="images/products/36.00x17.75x9.75 inch RSC Carton.jpg" alt=""></a>
-                                    <a href="#"><img src="images/products/23x17.75x17.75 inch RSC Carton.webp" alt=""></a>
+                                    <a href="#"><img src="images/products/16.00x12.75x9.75 inch TOP(LID) & BOTTOM.jpg"
+                                            alt=""></a>
+                                    <a href="#"><img src="images/products/23x17.75x17.75 inch RSC Carton.webp"
+                                            alt=""></a>
                                 </div>
                             </div>
                             <div class="portfolio-description" data-lightbox="gallery">
                                 <a title="Photoshop Mock-up!" data-lightbox="gallery-image"
-                                    href="images/products/36.00x17.75x9.75 inch RSC Carton.jpg"><i class="icon-copy"></i></a>
-                                <a title="Paper Pouch!" data-lightbox="gallery-image" href="images/products/23x17.75x17.75 inch RSC Carton.webp"
-                                    class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image" href="images/products/36.00x17.75x9.75 inch RSC Carton.jpg"
-                                    class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image" href="images/products/23x17.75x17.75 inch RSC Carton.webp"
-                                    class="hidden"></a>
+                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp"><i
+                                        class="icon-copy"></i></a>
+                                <a title="Paper Pouch!" data-lightbox="gallery-image"
+                                    href="images/products/30x17.75x11.75 inch RSC Carton.jpg" class="hidden"></a>
+                                <a title="Mock-up" data-lightbox="gallery-image"
+                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp" class="hidden"></a>
+                                <a title="Mock-up" data-lightbox="gallery-image"
+                                    href="images/products/30x17.75x11.75 inch RSC Carton.jpg" class="hidden"></a>
+                                <a href="gallery.html"><i class="icon-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end: portfolio item -->
+                    <!-- portfolio item -->
+                    <div class="portfolio-item img-zoom ct-photography ct-media ct-branding ct-marketing ct-webdesign">
+
+                        <div class="portfolio-item-wrap">
+                            <div class="portfolio-slider">
+                                <div class="carousel" data-items="1" data-loop="true" data-autoplay="true"
+                                    data-animate-in="fadeIn" data-animate-out="fadeOut" data-autoplay="1500">
+                                    <a href="#"><img src="images/products/36.00x17.75x9.75 inch RSC Carton.jpg"
+                                            alt=""></a>
+                                    <a href="#"><img src="images/products/23x17.75x17.75 inch RSC Carton.webp"
+                                            alt=""></a>
+                                </div>
+                            </div>
+                            <div class="portfolio-description" data-lightbox="gallery">
+                                <a title="Photoshop Mock-up!" data-lightbox="gallery-image"
+                                    href="images/products/36.00x17.75x9.75 inch RSC Carton.jpg"><i
+                                        class="icon-copy"></i></a>
+                                <a title="Paper Pouch!" data-lightbox="gallery-image"
+                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp" class="hidden"></a>
+                                <a title="Mock-up" data-lightbox="gallery-image"
+                                    href="images/products/36.00x17.75x9.75 inch RSC Carton.jpg" class="hidden"></a>
+                                <a title="Mock-up" data-lightbox="gallery-image"
+                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp" class="hidden"></a>
                                 <a href="gallery.html"><i class="icon-link"></i></a>
                             </div>
                         </div>
@@ -504,132 +530,132 @@
         </section> <!-- end: Content -->
         <!-- Footer -->
         <!-- Content -->
-  <!-- Footer -->
-  <footer id="footer">
-    <div class="footer-content">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4  col-lg-2 col-md-4">
-                    <!-- Footer widget area 1 -->
-                    <div class="widget  widget-contact-us"
-                        style="background-image: url('images/world-map-dark.png'); background-position: 50% 20px; background-repeat: no-repeat">
-                        <h4>About Dynamic Corrugations</h4>
-                        <ul class="list-icon">
-                            <li><i class="fa fa-map-marker-alt"></i>40 K.M. Stone,Vill. Narsinghpur,
-                                Delhi-Jaipur Highway, Sector-35 Gurugram-122004 (Hr)</li>
-                            <li><i class="fa fa-phone"></i><a href="tel:+919891040840">+91 9891040840</a></li>
-                            <li><i class="far fa-envelope"></i><a
-                                    href="mailto:info@dynamiccorrugations.com">info@dynamiccorrugations.com </a>
-                            </li>
+        <!-- Footer -->
+        <footer id="footer">
+            <div class="footer-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4  col-lg-2 col-md-4">
+                            <!-- Footer widget area 1 -->
+                            <div class="widget  widget-contact-us"
+                                style="background-image: url('images/world-map-dark.png'); background-position: 50% 20px; background-repeat: no-repeat">
+                                <h4>About Dynamic Corrugations</h4>
+                                <ul class="list-icon">
+                                    <li><i class="fa fa-map-marker-alt"></i>40 K.M. Stone,Vill. Narsinghpur,
+                                        Delhi-Jaipur Highway, Sector-35 Gurugram-122004 (Hr)</li>
+                                    <li><i class="fa fa-phone"></i><a href="tel:+919891040840">+91 9891040840</a></li>
+                                    <li><i class="far fa-envelope"></i><a
+                                            href="mailto:info@dynamiccorrugations.com">info@dynamiccorrugations.com </a>
+                                    </li>
 
-                        </ul>
-                    </div>
-                    <!-- end: Footer widget area 1 -->
-                </div>
+                                </ul>
+                            </div>
+                            <!-- end: Footer widget area 1 -->
+                        </div>
 
-                <div class="col-xl-2 col-lg-2 col-md-4">
-                    <!-- Footer widget area 1 -->
-                    <div class="widget">
-                        <h4>Useful Links</h4>
-                        <ul class="list">
-                            <li><a href="contact.html">Connect us</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Return & Refund Policy</a></li>
-                            <li><a href="#">Cancellation Policy</a></li>
-                            <li><a href="#">Terms & Condition</a></li>
-                        </ul>
-                    </div>
-                    <!-- end: Footer widget area 1 -->
-                </div>
-                <div class="col-xl-2 col-lg-2 col-md-4">
-                    <!-- Footer widget area 2 -->
-                    <div class="widget">
-                        <h4>Utility pages</h4>
-                        <ul class="list">
-                            <li><a href="maintenance.html">Corrugated Roll</a></li>
-                            <li><a href="maintenance.html">Triple Wall Box</a></li>
-                            <li><a href="maintenance.html">Corrugated Box</a></li>
-                            <li><a href="maintenance.html">Corrugated Boards</a></li>
-                            <li><a href="maintenance.html">Pizza Box</a></li>
-                        </ul>
-                    </div>
-                    <!-- end: Footer widget area 2 -->
-                </div>
-                <div class="col-xl-4 col-lg-2 col-md-4 widget">
-                    <h4>Social links and timiings</h4>
-                    <div class="social-icons social-icons-colored float-left">
-                        <ul>
-                            <li class="social-facebook"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                            <li class="social-twitter"><a href="#"><i class="fab fa-twitter"></i></a></li>
-                            <li class="social-youtube"><a href="#"><i class="fab fa-youtube"></i></a></li>
-                            <li class="social-gplus"><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
-                        </ul>
-                        <br>
-                        <ul class="list">
-                            <li><i class="far fa-clock"></i> Monday - Saturday:- <strong>08:00 - 18:30</strong>
+                        <div class="col-xl-2 col-lg-2 col-md-4">
+                            <!-- Footer widget area 1 -->
+                            <div class="widget">
+                                <h4>Useful Links</h4>
+                                <ul class="list">
+                                    <li><a href="contact.html">Connect us</a></li>
+                                    <li><a href="#">Privacy Policy</a></li>
+                                    <li><a href="#">Return & Refund Policy</a></li>
+                                    <li><a href="#">Cancellation Policy</a></li>
+                                    <li><a href="#">Terms & Condition</a></li>
+                                </ul>
+                            </div>
+                            <!-- end: Footer widget area 1 -->
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-4">
+                            <!-- Footer widget area 2 -->
+                            <div class="widget">
+                                <h4>Utility pages</h4>
+                                <ul class="list">
+                                    <li><a href="maintenance.html">Corrugated Roll</a></li>
+                                    <li><a href="maintenance.html">Triple Wall Box</a></li>
+                                    <li><a href="maintenance.html">Corrugated Box</a></li>
+                                    <li><a href="maintenance.html">Corrugated Boards</a></li>
+                                    <li><a href="maintenance.html">Pizza Box</a></li>
+                                </ul>
+                            </div>
+                            <!-- end: Footer widget area 2 -->
+                        </div>
+                        <div class="col-xl-4 col-lg-2 col-md-4 widget">
+                            <h4>Social links and timiings</h4>
+                            <div class="social-icons social-icons-colored float-left">
+                                <ul>
+                                    <li class="social-facebook"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li class="social-twitter"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                    <li class="social-youtube"><a href="#"><i class="fab fa-youtube"></i></a></li>
+                                    <li class="social-gplus"><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                                </ul>
                                 <br>
-                                Sunday: <strong>Closed</strong>
-                            </li>
-                          </ul>
-                    </div>
-                    <!-- end: Footer widget area 2 -->
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="copyright-content cta-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <!-- Social icons -->
-
-                    <div class="copyright-text text-left">&copy; 2025 Dynamic Corrugations. All Rights
-                        Reserved.
-
-                    </div>
-                    <!-- end: Social icons -->
-                </div>
-                <div class="col-lg-6">
-                    <div class="copyright-text text-right"><a href="https://dynamiccorrugations.com/">Desinged
-                            by Dynamic Corrugations</a>
+                                <ul class="list">
+                                    <li><i class="far fa-clock"></i> Monday - Saturday:- <strong>08:00 - 18:30</strong>
+                                        <br>
+                                        Sunday: <strong>Closed</strong>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- end: Footer widget area 2 -->
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="copyright-content cta-section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <!-- Social icons -->
+
+                            <div class="copyright-text text-left">&copy; 2025 Dynamic Corrugations. All Rights
+                                Reserved.
+
+                            </div>
+                            <!-- end: Social icons -->
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="copyright-text text-right"><a href="https://dynamiccorrugations.com/">Desinged
+                                    by Dynamic Corrugations</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- end: Footer -->
     </div>
-</footer>
-<!-- end: Footer -->
-</div>
-<!-- end: Body Inner -->
-<!-- Scroll top -->
-<style>
-    .fixed-icons {
-        position: fixed;
-        bottom: 90px;
-        right: 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
+    <!-- end: Body Inner -->
+    <!-- Scroll top -->
+    <style>
+        .fixed-icons {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
 
-    .fixed-icons a {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        background-color: rgb(114, 236, 132);
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        text-decoration: none;
-    }
+        .fixed-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgb(114, 236, 132);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+        }
 
-    .fixed-icons i {
-        font-size: 34px;
-    }
-</style>
+        .fixed-icons i {
+            font-size: 34px;
+        }
+    </style>
 
- <div class="fixed-icons">
+    <div class="fixed-icons">
         <!-- WhatsApp Icon -->
         <a href="https://wa.me/+919891040840" target="_blank" class="icon whatsapp">
             <i class="fab fa-whatsapp"></i>
@@ -640,382 +666,382 @@
             <i class="fas fa-phone"></i>
         </a>
     </div>
-<!-- FontAwesome for icons -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+    <!-- FontAwesome for icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
 
-<a id="scrollTop"><i class="icon-chevron-up"></i><i class="icon-chevron-up"></i></a>
-<!--Plugins-->
-<script src="js/jquery.js"></script>
-<script src="js/plugins.js"></script>
-<!--Template functions-->
-<script src="js/functions.js"></script>
-<script src="https://accounts.google.com/gsi/client" async defer></script>
+    <a id="scrollTop"><i class="icon-chevron-up"></i><i class="icon-chevron-up"></i></a>
+    <!--Plugins-->
+    <script src="js/jquery.js"></script>
+    <script src="js/plugins.js"></script>
+    <!--Template functions-->
+    <script src="js/functions.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 
-<script src="js/userlogin.js"></script>
-<script src="js/dashboard.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const openPopupLink = document.getElementById("openPopupLink");
-        const popup = document.getElementById("popup");
-        const closePopupBtn = document.getElementById("closePopup");
+    <script src="js/userlogin.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const openPopupLink = document.getElementById("openPopupLink");
+            const popup = document.getElementById("popup");
+            const closePopupBtn = document.getElementById("closePopup");
 
-        // Open popup
-        openPopupLink.addEventListener("click", (event) => {
-            event.preventDefault();
-            popup.classList.remove("hidden");
-        });
-
-        // Close popup when clicking close button
-        closePopupBtn.addEventListener("click", () => {
-            popup.classList.add("hidden");
-        });
-
-        // Close popup when clicking outside popup content
-        popup.addEventListener("click", (event) => {
-            if (event.target === popup) {
-                popup.classList.add("hidden");
-            }
-        });
-    });
-</script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const openPopupLink = document.getElementById("openPopupLink");
-        const popup = document.getElementById("popup");
-        const closePopupBtn = document.getElementById("closePopup");
-
-        // Open popup
-        openPopupLink.addEventListener("click", (event) => {
-            event.preventDefault();
-            popup.classList.remove("hidden");
-        });
-
-        // Close popup when clicking close button
-        closePopupBtn.addEventListener("click", () => {
-            popup.classList.add("hidden");
-        });
-
-        // Close popup when clicking outside popup content
-        popup.addEventListener("click", (event) => {
-            if (event.target === popup) {
-                popup.classList.add("hidden");
-            }
-        });
-    });
-</script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const openPopupLink = document.getElementById("openPopupLink");
-        const popup = document.getElementById("popup");
-        const closePopupBtn = document.getElementById("closePopup");
-
-        // Open popup
-        openPopupLink.addEventListener("click", (event) => {
-            event.preventDefault();
-            popup.classList.remove("hidden");
-        });
-
-        // Close popup when clicking close button
-        closePopupBtn.addEventListener("click", () => {
-            popup.classList.add("hidden");
-        });
-
-        // Close popup when clicking outside popup content
-        popup.addEventListener("click", (event) => {
-            if (event.target === popup) {
-                popup.classList.add("hidden");
-            }
-        });
-    });
-</script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const openPopupLink = document.getElementById("openPopupLink");
-        const popup = document.getElementById("popup");
-        const closePopupBtn = document.getElementById("closePopup");
-
-        // Open popup
-        openPopupLink.addEventListener("click", (event) => {
-            event.preventDefault();
-            popup.classList.remove("hidden");
-        });
-
-        // Close popup when clicking close button
-        closePopupBtn.addEventListener("click", () => {
-            popup.classList.add("hidden");
-        });
-
-        // Close popup when clicking outside popup content
-        popup.addEventListener("click", (event) => {
-            if (event.target === popup) {
-                popup.classList.add("hidden");
-            }
-        });
-    });
-</script>
-<script type="module">
-    // 1. Import Firebase SDKs
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-    import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
-
-    // 2. Configuration
-    const firebaseConfig = {
-        apiKey: "AIzaSyBfJTHAzQ6u27vGwdsC9HEEMYCdNnjYnJU",
-        authDomain: "dynamiccorrugations-ac4a8.firebaseapp.com",
-        projectId: "dynamiccorrugations-ac4a8",
-        storageBucket: "dynamiccorrugations-ac4a8.firebasestorage.app",
-        messagingSenderId: "481189371368",
-        appId: "1:481189371368:web:58cf359e533d8cadcdd85d",
-        measurementId: "G-6PL4T4METT"
-    };
-
-    // 3. Initialize
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const provider = new GoogleAuthProvider();
-    let currentUser = null; // Store user data here
-
-    // 4. Global App Functions (Attached to window for HTML onclick events)
-    window.app = {
-
-        // --- VIEW NAVIGATION ---
-
-        // Called when clicking dropdown items (Profile, Orders, etc.)
-        openDashboard: function (tabName) {
-            // Hide Home, Show Dashboard
-            document.getElementById('home-view').style.display = 'none';
-            document.getElementById('dashboard-view').style.display = 'flex'; // Flex to keep sidebar layout
-
-            // Switch to the specific tab requested
-            this.switchTab(tabName);
-        },
-
-        // Called when clicking "Back to Home"
-        goHome: function () {
-            document.getElementById('dashboard-view').style.display = 'none';
-            document.getElementById('home-view').style.display = 'block';
-        },
-
-        // --- TAB SWITCHING LOGIC ---
-
-        switchTab: function (tabName) {
-            // 1. Hide all tab panes
-            const panes = document.querySelectorAll('.tab-pane');
-            panes.forEach(pane => pane.classList.remove('active'));
-
-            // 2. Deactivate all sidebar buttons
-            const btns = document.querySelectorAll('.sidebar-btn');
-            btns.forEach(btn => btn.classList.remove('active'));
-
-            // 3. Show the selected pane
-            const targetPane = document.getElementById('tab-' + tabName);
-            if (targetPane) targetPane.classList.add('active');
-
-            // 4. Highlight the sidebar button
-            const targetBtn = document.getElementById('btn-' + tabName);
-            if (targetBtn) targetBtn.classList.add('active');
-        },
-
-        // --- AUTH ACTIONS ---
-
-        logout: function () {
-            signOut(auth).then(() => {
-                alert("Logged out successfully");
-                this.goHome(); // Reset view
-            }).catch((error) => {
-                console.error("Logout error", error);
+            // Open popup
+            openPopupLink.addEventListener("click", (event) => {
+                event.preventDefault();
+                popup.classList.remove("hidden");
             });
-        },
 
-        // --- PAYMENT LOGIC ---
+            // Close popup when clicking close button
+            closePopupBtn.addEventListener("click", () => {
+                popup.classList.add("hidden");
+            });
 
-        payWithPayU: function () {
-            if (!currentUser) {
-                alert("Please login to proceed with payment.");
-                return;
-            }
-
-            // 1. Generate Transaction ID (Unique)
-            const txnid = "TXN" + new Date().getTime();
-
-            // 2. Populate Hidden Form Fields
-            document.getElementById('txnid').value = txnid;
-            document.getElementById('payu-name').value = currentUser.displayName || "Guest";
-            document.getElementById('payu-email').value = currentUser.email;
-
-            // 3. Warning about Hash (Server-side requirement)
-            alert("Redirecting to PayU...\n\nNOTE: Since this is a static HTML file, the 'hash' field is empty. You will see a hash error on PayU unless you generate the hash on your backend server.");
-
-            // 4. Submit the form
-            document.getElementById('payu-form').submit();
-        }
-    };
-
-    // 5. Auth State Listener (Runs automatically on load/login/logout)
-    const loginBtn = document.getElementById('login-btn');
-    const userWidget = document.getElementById('user-widget');
-
-    // Attach Login Click Event
-    if (loginBtn) {
-        loginBtn.addEventListener('click', () => {
-            signInWithPopup(auth, provider).catch(e => alert(e.message));
+            // Close popup when clicking outside popup content
+            popup.addEventListener("click", (event) => {
+                if (event.target === popup) {
+                    popup.classList.add("hidden");
+                }
+            });
         });
-    }
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const openPopupLink = document.getElementById("openPopupLink");
+            const popup = document.getElementById("popup");
+            const closePopupBtn = document.getElementById("closePopup");
 
-    onAuthStateChanged(auth, (user) => {
-        currentUser = user;
+            // Open popup
+            openPopupLink.addEventListener("click", (event) => {
+                event.preventDefault();
+                popup.classList.remove("hidden");
+            });
 
-        if (user) {
-            // --- USER LOGGED IN ---
-            console.log("User Logged In:", user.email);
+            // Close popup when clicking close button
+            closePopupBtn.addEventListener("click", () => {
+                popup.classList.add("hidden");
+            });
 
-            // 1. Toggle Header Elements
-            if (loginBtn) loginBtn.style.display = 'none';
-            if (userWidget) userWidget.style.display = 'flex';
+            // Close popup when clicking outside popup content
+            popup.addEventListener("click", (event) => {
+                if (event.target === popup) {
+                    popup.classList.add("hidden");
+                }
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const openPopupLink = document.getElementById("openPopupLink");
+            const popup = document.getElementById("popup");
+            const closePopupBtn = document.getElementById("closePopup");
 
-            // 2. Fill Header Data
-            const displayName = document.getElementById('display-name');
-            const userPhoto = document.getElementById('user-photo');
-            if (displayName) displayName.textContent = user.displayName;
-            if (userPhoto) userPhoto.src = user.photoURL;
+            // Open popup
+            openPopupLink.addEventListener("click", (event) => {
+                event.preventDefault();
+                popup.classList.remove("hidden");
+            });
 
-            // 3. Fill Profile Tab Data
-            const pName = document.getElementById('p-name');
-            const pEmail = document.getElementById('p-email');
-            const pUid = document.getElementById('p-uid');
-            if (pName) pName.textContent = user.displayName;
-            if (pEmail) pEmail.textContent = user.email;
-            if (pUid) pUid.textContent = user.uid;
+            // Close popup when clicking close button
+            closePopupBtn.addEventListener("click", () => {
+                popup.classList.add("hidden");
+            });
 
-            // Note: We do NOT auto-show the dashboard here. 
-            // We stay on Home until the user clicks the Dropdown.
+            // Close popup when clicking outside popup content
+            popup.addEventListener("click", (event) => {
+                if (event.target === popup) {
+                    popup.classList.add("hidden");
+                }
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const openPopupLink = document.getElementById("openPopupLink");
+            const popup = document.getElementById("popup");
+            const closePopupBtn = document.getElementById("closePopup");
 
-        } else {
-            // --- USER LOGGED OUT ---
-            console.log("User Logged Out");
+            // Open popup
+            openPopupLink.addEventListener("click", (event) => {
+                event.preventDefault();
+                popup.classList.remove("hidden");
+            });
 
-            // 1. Toggle Header Elements
-            if (loginBtn) loginBtn.style.display = 'block';
-            if (userWidget) userWidget.style.display = 'none';
+            // Close popup when clicking close button
+            closePopupBtn.addEventListener("click", () => {
+                popup.classList.add("hidden");
+            });
 
-            // 2. Force View to Home
-            window.app.goHome();
-        }
-    });
+            // Close popup when clicking outside popup content
+            popup.addEventListener("click", (event) => {
+                if (event.target === popup) {
+                    popup.classList.add("hidden");
+                }
+            });
+        });
+    </script>
+    <script type="module">
+        // 1. Import Firebase SDKs
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 
-    // Global App Logic attached to window
-    window.app = {
-        // Redirect to the external dashboard.html file
-        openDashboard: function () {
-            console.log("Redirecting to Dashboard...");
-            window.location.href = "dashboard.html";
-        },
+        // 2. Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBfJTHAzQ6u27vGwdsC9HEEMYCdNnjYnJU",
+            authDomain: "dynamiccorrugations-ac4a8.firebaseapp.com",
+            projectId: "dynamiccorrugations-ac4a8",
+            storageBucket: "dynamiccorrugations-ac4a8.firebasestorage.app",
+            messagingSenderId: "481189371368",
+            appId: "1:481189371368:web:58cf359e533d8cadcdd85d",
+            measurementId: "G-6PL4T4METT"
+        };
 
-        // Handle Logout
-        logout: function () {
-            // (Assuming you have auth imported as shown in previous steps)
-            import("https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js")
-                .then(({ signOut, getAuth }) => {
-                    const auth = getAuth();
-                    signOut(auth).then(() => {
-                        window.location.reload();
-                    });
+        // 3. Initialize
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+        let currentUser = null; // Store user data here
+
+        // 4. Global App Functions (Attached to window for HTML onclick events)
+        window.app = {
+
+            // --- VIEW NAVIGATION ---
+
+            // Called when clicking dropdown items (Profile, Orders, etc.)
+            openDashboard: function (tabName) {
+                // Hide Home, Show Dashboard
+                document.getElementById('home-view').style.display = 'none';
+                document.getElementById('dashboard-view').style.display = 'flex'; // Flex to keep sidebar layout
+
+                // Switch to the specific tab requested
+                this.switchTab(tabName);
+            },
+
+            // Called when clicking "Back to Home"
+            goHome: function () {
+                document.getElementById('dashboard-view').style.display = 'none';
+                document.getElementById('home-view').style.display = 'block';
+            },
+
+            // --- TAB SWITCHING LOGIC ---
+
+            switchTab: function (tabName) {
+                // 1. Hide all tab panes
+                const panes = document.querySelectorAll('.tab-pane');
+                panes.forEach(pane => pane.classList.remove('active'));
+
+                // 2. Deactivate all sidebar buttons
+                const btns = document.querySelectorAll('.sidebar-btn');
+                btns.forEach(btn => btn.classList.remove('active'));
+
+                // 3. Show the selected pane
+                const targetPane = document.getElementById('tab-' + tabName);
+                if (targetPane) targetPane.classList.add('active');
+
+                // 4. Highlight the sidebar button
+                const targetBtn = document.getElementById('btn-' + tabName);
+                if (targetBtn) targetBtn.classList.add('active');
+            },
+
+            // --- AUTH ACTIONS ---
+
+            logout: function () {
+                signOut(auth).then(() => {
+                    alert("Logged out successfully");
+                    this.goHome(); // Reset view
+                }).catch((error) => {
+                    console.error("Logout error", error);
                 });
-        }
-    };
+            },
 
-</script>
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-    import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+            // --- PAYMENT LOGIC ---
 
-    // 1. Firebase Configuration
-    const firebaseConfig = {
-        apiKey: "AIzaSyBfJTHAzQ6u27vGwdsC9HEEMYCdNnjYnJU",
-        authDomain: "dynamiccorrugations-ac4a8.firebaseapp.com",
-        projectId: "dynamiccorrugations-ac4a8",
-        storageBucket: "dynamiccorrugations-ac4a8.firebasestorage.app",
-        messagingSenderId: "481189371368",
-        appId: "1:481189371368:web:58cf359e533d8cadcdd85d",
-        measurementId: "G-6PL4T4METT"
-    };
+            payWithPayU: function () {
+                if (!currentUser) {
+                    alert("Please login to proceed with payment.");
+                    return;
+                }
 
-    // 2. Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const provider = new GoogleAuthProvider();
+                // 1. Generate Transaction ID (Unique)
+                const txnid = "TXN" + new Date().getTime();
 
-    // 3. Define Global App Actions (Login, Logout, Navigation)
-    window.app = {
-        // Redirect to Dashboard
-        openDashboard: function () {
-            console.log("Navigating to Dashboard...");
-            window.location.href = "dashboard.html"; // Change this if you use tab switching instead
-        },
+                // 2. Populate Hidden Form Fields
+                document.getElementById('txnid').value = txnid;
+                document.getElementById('payu-name').value = currentUser.displayName || "Guest";
+                document.getElementById('payu-email').value = currentUser.email;
 
-        // Trigger Google Login
-        login: function () {
-            signInWithPopup(auth, provider).catch((error) => {
-                console.error("Login Failed:", error);
-                alert("Login failed: " + error.message);
-            });
-        },
+                // 3. Warning about Hash (Server-side requirement)
+                alert("Redirecting to PayU...\n\nNOTE: Since this is a static HTML file, the 'hash' field is empty. You will see a hash error on PayU unless you generate the hash on your backend server.");
 
-        // Trigger Logout
-        logout: function () {
-            signOut(auth).then(() => {
-                console.log("Logged out successfully");
-                // Optional: Redirect to home or reload
-                window.location.reload();
-            }).catch((error) => {
-                console.error("Logout error", error);
-            });
-        }
-    };
+                // 4. Submit the form
+                document.getElementById('payu-form').submit();
+            }
+        };
 
-    // 4. Attach Login Button Event Listener
-    const loginBtn = document.getElementById('login-btn');
-    if (loginBtn) {
-        loginBtn.addEventListener('click', window.app.login);
-    }
-
-    // 5. Auth State Listener (Populates the HTML Data)
-    onAuthStateChanged(auth, (user) => {
+        // 5. Auth State Listener (Runs automatically on load/login/logout)
+        const loginBtn = document.getElementById('login-btn');
         const userWidget = document.getElementById('user-widget');
 
-        // HTML Elements to populate
-        const displayNameEl = document.getElementById('display-name');
-        const emailEl = document.getElementById('user-email');
-        const smallPhotoEl = document.getElementById('user-photo-small');
-        const largePhotoEl = document.getElementById('profile-photo-large');
-
-        if (user) {
-            // --- USER IS LOGGED IN ---
-            console.log("User detected:", user.email);
-
-            // 1. Swap Buttons (Hide Login, Show Widget)
-            if (loginBtn) loginBtn.style.display = 'none';
-            if (userWidget) userWidget.style.display = 'block'; // Or 'flex' depending on CSS
-
-            // 2. Inject Data
-            if (displayNameEl) displayNameEl.textContent = user.displayName;
-            if (emailEl) emailEl.textContent = user.email;
-
-            // 3. Update Images (Handle missing photos with a fallback)
-            const photoUrl = user.photoURL || "https://via.placeholder.com/80";
-            if (smallPhotoEl) smallPhotoEl.src = photoUrl;
-            if (largePhotoEl) largePhotoEl.src = photoUrl;
-
-        } else {
-            // --- USER IS LOGGED OUT ---
-            console.log("No user signed in.");
-
-            // 1. Swap Buttons (Show Login, Hide Widget)
-            if (loginBtn) loginBtn.style.display = 'block';
-            if (userWidget) userWidget.style.display = 'none';
+        // Attach Login Click Event
+        if (loginBtn) {
+            loginBtn.addEventListener('click', () => {
+                signInWithPopup(auth, provider).catch(e => alert(e.message));
+            });
         }
-    });
-</script>
+
+        onAuthStateChanged(auth, (user) => {
+            currentUser = user;
+
+            if (user) {
+                // --- USER LOGGED IN ---
+                console.log("User Logged In:", user.email);
+
+                // 1. Toggle Header Elements
+                if (loginBtn) loginBtn.style.display = 'none';
+                if (userWidget) userWidget.style.display = 'flex';
+
+                // 2. Fill Header Data
+                const displayName = document.getElementById('display-name');
+                const userPhoto = document.getElementById('user-photo');
+                if (displayName) displayName.textContent = user.displayName;
+                if (userPhoto) userPhoto.src = user.photoURL;
+
+                // 3. Fill Profile Tab Data
+                const pName = document.getElementById('p-name');
+                const pEmail = document.getElementById('p-email');
+                const pUid = document.getElementById('p-uid');
+                if (pName) pName.textContent = user.displayName;
+                if (pEmail) pEmail.textContent = user.email;
+                if (pUid) pUid.textContent = user.uid;
+
+                // Note: We do NOT auto-show the dashboard here. 
+                // We stay on Home until the user clicks the Dropdown.
+
+            } else {
+                // --- USER LOGGED OUT ---
+                console.log("User Logged Out");
+
+                // 1. Toggle Header Elements
+                if (loginBtn) loginBtn.style.display = 'block';
+                if (userWidget) userWidget.style.display = 'none';
+
+                // 2. Force View to Home
+                window.app.goHome();
+            }
+        });
+
+        // Global App Logic attached to window
+        window.app = {
+            // Redirect to the external dashboard.html file
+            openDashboard: function () {
+                console.log("Redirecting to Dashboard...");
+                window.location.href = "dashboard.html";
+            },
+
+            // Handle Logout
+            logout: function () {
+                // (Assuming you have auth imported as shown in previous steps)
+                import("https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js")
+                    .then(({ signOut, getAuth }) => {
+                        const auth = getAuth();
+                        signOut(auth).then(() => {
+                            window.location.reload();
+                        });
+                    });
+            }
+        };
+
+    </script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+
+        // 1. Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBfJTHAzQ6u27vGwdsC9HEEMYCdNnjYnJU",
+            authDomain: "dynamiccorrugations-ac4a8.firebaseapp.com",
+            projectId: "dynamiccorrugations-ac4a8",
+            storageBucket: "dynamiccorrugations-ac4a8.firebasestorage.app",
+            messagingSenderId: "481189371368",
+            appId: "1:481189371368:web:58cf359e533d8cadcdd85d",
+            measurementId: "G-6PL4T4METT"
+        };
+
+        // 2. Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+
+        // 3. Define Global App Actions (Login, Logout, Navigation)
+        window.app = {
+            // Redirect to Dashboard
+            openDashboard: function () {
+                console.log("Navigating to Dashboard...");
+                window.location.href = "dashboard.html"; // Change this if you use tab switching instead
+            },
+
+            // Trigger Google Login
+            login: function () {
+                signInWithPopup(auth, provider).catch((error) => {
+                    console.error("Login Failed:", error);
+                    alert("Login failed: " + error.message);
+                });
+            },
+
+            // Trigger Logout
+            logout: function () {
+                signOut(auth).then(() => {
+                    console.log("Logged out successfully");
+                    // Optional: Redirect to home or reload
+                    window.location.reload();
+                }).catch((error) => {
+                    console.error("Logout error", error);
+                });
+            }
+        };
+
+        // 4. Attach Login Button Event Listener
+        const loginBtn = document.getElementById('login-btn');
+        if (loginBtn) {
+            loginBtn.addEventListener('click', window.app.login);
+        }
+
+        // 5. Auth State Listener (Populates the HTML Data)
+        onAuthStateChanged(auth, (user) => {
+            const userWidget = document.getElementById('user-widget');
+
+            // HTML Elements to populate
+            const displayNameEl = document.getElementById('display-name');
+            const emailEl = document.getElementById('user-email');
+            const smallPhotoEl = document.getElementById('user-photo-small');
+            const largePhotoEl = document.getElementById('profile-photo-large');
+
+            if (user) {
+                // --- USER IS LOGGED IN ---
+                console.log("User detected:", user.email);
+
+                // 1. Swap Buttons (Hide Login, Show Widget)
+                if (loginBtn) loginBtn.style.display = 'none';
+                if (userWidget) userWidget.style.display = 'block'; // Or 'flex' depending on CSS
+
+                // 2. Inject Data
+                if (displayNameEl) displayNameEl.textContent = user.displayName;
+                if (emailEl) emailEl.textContent = user.email;
+
+                // 3. Update Images (Handle missing photos with a fallback)
+                const photoUrl = user.photoURL || "https://via.placeholder.com/80";
+                if (smallPhotoEl) smallPhotoEl.src = photoUrl;
+                if (largePhotoEl) largePhotoEl.src = photoUrl;
+
+            } else {
+                // --- USER IS LOGGED OUT ---
+                console.log("No user signed in.");
+
+                // 1. Swap Buttons (Show Login, Hide Widget)
+                if (loginBtn) loginBtn.style.display = 'block';
+                if (userWidget) userWidget.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 
 </html>
