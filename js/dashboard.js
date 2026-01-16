@@ -60,7 +60,7 @@ window.app = {
         if(confirm("Are you sure you want to logout?")) {
             console.log("Logging out...");
             // Add your firebase signOut logic here
-            window.location.href = "https://dynamiccorrugations.com/"; 
+            window.location.href = "/index.html"; // Redirect to homepage after logout
         }
     }
 };
