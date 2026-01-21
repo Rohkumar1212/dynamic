@@ -1496,7 +1496,7 @@ section.dark,
     display: inline-block;
   }
   #header #logo > a img {
-    max-height: 80px;
+    max-height: 60px;
     padding-bottom: 6px;
   }
   #header #logo .logo-responsive {
@@ -4511,6 +4511,15 @@ html {
   .m-b-80 {
     margin-bottom: 32px !important;
   }
+
+  .price-area {
+    display: block !important;
+    align-items: center;
+    gap: 12px;
+    margin-top: 10px;
+    padding: 17px !important;
+
+}
 }
 body {
   font-size: 1rem;
@@ -12058,7 +12067,7 @@ a.btn:not([href]):not([tabindex]).disabled {
   .btn:not(.close):not(.mfp-close):not(.btn-creative):not(.btn-slide),
   a.btn:not([href]):not([tabindex]):not(.btn-creative):not(.btn-slide) {
     font-size: 12px;
-    height: 32px;
+    height: 42px;
     line-height: 30px;
     padding: 0 14px;
   }
@@ -18894,4 +18903,58 @@ nav ul li.active a::after {
 @keyframes slideDown {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* Header Cart Button Styles */
+.header-cart-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+/* The Red Notification Badge */
+.cart-badge {
+    background-color: #ff4757; /* Red color */
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 50%;
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    min-width: 18px;
+    text-align: center;
+}
+
+
+/* Toast Notification */
+#toast-notification {
+    visibility: hidden;
+    min-width: 280px;
+    background-color: #27ae60; /* Success Green */
+    color: #fff;
+    text-align: center;
+    border-radius: 8px; /* Rounded corners */
+    padding: 16px;
+    position: fixed;
+    z-index: 10001;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    font-size: 15px;
+    font-weight: 500;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    opacity: 0;
+    transition: opacity 0.4s ease, bottom 0.4s ease;
+}
+
+/* Class to trigger animation */
+#toast-notification.show {
+    visibility: visible;
+    opacity: 1;
+    bottom: 50px; /* Slight slide-up effect */
 }
