@@ -1488,8 +1488,9 @@ section.dark,
     margin: 0 !important;
     float: none;
     height: 80px;
-    left: 0;
+    left: -30px;
     right: 0;
+    top: 10px;
     padding: 0 !important;
   }
   #header #logo > a {
@@ -18061,6 +18062,32 @@ a {
   .page-frame {
     padding: 8px !important;
   }
+  #login-btn {
+    background: #4a6bff;
+    color: white;
+    border: none;
+    padding: 6px 17px !important;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.svg-inline--fa {
+    display: var(--fa-display, inline-block);
+    height: 1.68em;
+    overflow: visible;
+    vertical-align: -.125em;
+}
+
+#login-btn {
+    width: 70px !important;
+}
+    button.btn:not(.btn-creative):not(.btn-slide), .btn:not(.close):not(.mfp-close):not(.btn-creative):not(.btn-slide), a.btn:not([href]):not([tabindex]):not(.btn-creative):not(.btn-slide) {
+        font-size: 9px;
+        height: 32px !important;
+        line-height: 23px !important;
+        padding: 0 14px;
+    }
 }
 
 #addToCartBtn {
