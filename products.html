@@ -393,6 +393,9 @@
         #mainMenu-trigger {
             display: block;
         }
+        .product-section{
+            padding: 20px;
+        }
 
         /* Show Hamburger */
 
@@ -465,7 +468,7 @@
             </div>
         </div>
         <!-- Header -->
-     <header id="header" data-transparent="true">
+    <header id="header" data-transparent="true">
         <div class="header-inner">
             <div class="container">
     
@@ -503,7 +506,13 @@
                     </div>
                 </div>
                 <div class="header-extras">
+    <div class="cart-menu-item">
+        <a href="javascript:void(0)" onclick="viewCart()" class="header-cart-btn">
     
+            <span id="headerCartCount" class="cart-badge" style="display:none;">0</span>
+            <i class="fas fa-shopping-cart"></i>
+        </a>
+    </div>
                     <button id="login-btn" class="btn btn-primary" onclick="window.app.login()">Login</button>
     
                     <div id="user-widget" class="user-widget" style="display: none;">
@@ -539,7 +548,7 @@
                 </div>
             </div>
         </div>
-    </header> 
+    </header>
         <!-- end: Header -->
         <!-- Page title -->
         <section id="page-title" class="text-light" data-bg-parallax="images/products/Packaging-Page-Banner.jpg">
