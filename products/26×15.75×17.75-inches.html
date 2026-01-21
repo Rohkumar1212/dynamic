@@ -2285,10 +2285,34 @@
                     
                     
                     
-                    <div id="toast-notification">Item added to cart!</div>   <button onclick="openShareModal()" style="border:none; background:none; cursor:pointer;">
-                        
-                            Share <i class="fa fa-share-alt"></i>
-                        </button>
+                    <div id="toast-notification">Item added to cart!</div> 
+                    <button id="shareBtn" onclick="openShareModal()" style="border:none; background:none; cursor:pointer;">
+                    
+                        Share <i class="fa fa-share-alt"></i>
+                    </button>
+                    
+                    <div id="shareOverlay" class="share-overlay">
+                        <div class="share-modal">
+                            <div class="share-header">
+                                <h3>Share Product</h3>
+                                <span onclick="closeShareModal()" style="cursor:pointer; font-size:24px;">&times;</span>
+                            </div>
+                            <div class="social-list">
+                                <a href="#" onclick="shareTo('whatsapp')" class="social-btn whatsapp h-10">
+                                    <i class="fa fa-whatsapp"></i> WhatsApp
+                                </a>
+                                <a href="#" onclick="shareTo('facebook')" class="social-btn facebook">
+                                    <i class="fa fa-facebook"></i> Facebook
+                                </a>
+                                <div onclick="shareTo('native')" class="social-btn">
+                                    <i class="fa fa-share-alt"></i> More...
+                                </div>
+                                <div onclick="copyLink()" class="social-btn copy">
+                                    <i class="fa fa-link"></i> Copy Link
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     </div>
                     <!-- metadata / chips -->
                     <div class="meta-row" aria-hidden="true">
@@ -3487,6 +3511,24 @@ Please contact me with more details.`
             document.getElementById("conflictOverlay").classList.remove("open");
             pendingUpdate = null; // Clear temp data
         }
+    </script>
+    <script>
+        // Function to Open the Overlay
+        function openShareModal() {
+            document.getElementById("shareOverlay").classList.add("open");
+        }
+
+        // Function to Close the Overlay
+        function closeShareModal() {
+            document.getElementById("shareOverlay").classList.remove("open");
+        }
+
+        // Optional: Close if user clicks outside the modal (on the dark background)
+        document.getElementById("shareOverlay").addEventListener("click", function (e) {
+            if (e.target === this) {
+                closeShareModal();
+            }
+        });
     </script>
     <script src="/js/jquery.js"></script>
     <script src="/js/plugins.js"></script>
