@@ -242,7 +242,13 @@
                         </div>
                     </div>
                     <div class="header-extras">
+<div class="cart-menu-item">
+    <a href="javascript:void(0)" onclick="viewCart()" class="header-cart-btn">
 
+        <span id="headerCartCount" class="cart-badge" style="display:none;">0</span>
+        <i class="fas fa-shopping-cart"></i>
+    </a>
+</div>
                         <button id="login-btn" class="btn btn-primary" onclick="window.app.login()">Login</button>
 
                         <div id="user-widget" class="user-widget" style="display: none;">
@@ -822,6 +828,11 @@
             }
         });
     </script>
+    <script src="/js/jquery.js"></script>
+    <script src="/js/plugins.js"></script>
+    <script src="/js/menu.js"></script>
+    <!--Template functions-->
+    <script src="/js/functions.js"></script>
 </body>
 
 </html>

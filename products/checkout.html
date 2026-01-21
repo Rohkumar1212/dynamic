@@ -269,7 +269,13 @@
                         </div>
                     </div>
                     <div class="header-extras">
+<div class="cart-menu-item">
+    <a href="javascript:void(0)" onclick="viewCart()" class="header-cart-btn">
 
+        <span id="headerCartCount" class="cart-badge" style="display:none;">0</span>
+        <i class="fas fa-shopping-cart"></i>
+    </a>
+</div>
                         <button id="login-btn" class="btn btn-primary" onclick="window.app.login()">Login</button>
 
                         <div id="user-widget" class="user-widget" style="display: none;">
@@ -541,7 +547,7 @@
                     <img src="${item.image}" alt="box">
                     <div class="cart-details">
                         <b>${item.name}</b><br>
-                         Size: ${item.location} | Qty: ${item.qty}
+                          Qty: ${item.qty} | Location: ${item.location}
                     </div>
                     <div class="cart-price">₹${item.totalPrice}</div>
                 </div>
@@ -793,6 +799,11 @@
     <script src="/js/userlogin.js"></script>
     <script src="/js/dashboard.js"></script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="/js/jquery.js"></script>
+    <script src="/js/plugins.js"></script>
+    <script src="/js/menu.js"></script>
+    <!--Template functions-->
+    <script src="/js/functions.js"></script>
 </body>
 
 </html>

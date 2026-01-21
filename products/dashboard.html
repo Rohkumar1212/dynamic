@@ -1479,17 +1479,7 @@
         }
 
         /* --- 3. CARD ROW LAYOUT --- */
-        .summary-row {
-            display: flex;
-            gap: 10px;
-
-            justify-content: start;
-            margin-bottom: 0px;
-            padding-left: 100px;
-            padding-right: 20px;
-            margin-top: 50px;
-        }
-
+       
         /* --- 4. INDIVIDUAL CARD STYLING --- */
         .summary-card {
 
@@ -1767,7 +1757,13 @@
                     </div>
                 </div>
                 <div class="header-extras">
+    <div class="cart-menu-item">
+        <a href="javascript:void(0)" onclick="viewCart()" class="header-cart-btn">
     
+            <span id="headerCartCount" class="cart-badge" style="display:none;">0</span>
+            <i class="fas fa-shopping-cart"></i>
+        </a>
+    </div>
                     <button id="login-btn" class="btn btn-primary" onclick="window.app.login()">Login</button>
     
                     <div id="user-widget" class="user-widget" style="display: none;">

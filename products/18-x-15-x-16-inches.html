@@ -35,6 +35,111 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <style>
+        .success-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+.success-overlay.open { display: flex; }
+
+.success-modal {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 380px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
+
+.success-icon { font-size: 40px; margin-bottom: 10px; }
+
+.success-btn {
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+}
+.success-btn:hover { opacity: 0.9; }
+        /* Share Modal Overlay */
+.share-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* This class will be added by JavaScript to show the overlay */
+.share-overlay.open {
+    display: flex !important;
+}
+
+/* Share Modal Box */
+.share-modal {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 350px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+.share-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+/* Social List Grid */
+.social-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #f9f9f9;
+    cursor: pointer;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.2s;
+}
+.social-btn.whatsapp {
+    color: #25D366;
+    border-color: #25D366;
+    height: 56px;
+    margin-top: auto;
+}
+
+.social-btn:hover { background: #eee; }
+.social-btn.whatsapp { color: #25D366; border-color: #25D366; }
+.social-btn.facebook { color: #1877F2; border-color: #1877F2; }
+.social-btn.copy { color: #555; }
         #header {
             position: relative;
             width: 100%;
@@ -137,7 +242,7 @@
             width: 100%;
             max-width: var(--max-width);
             border-radius: 22px;
-            padding: 28px;
+            padding: 8px;
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.95));
             box-shadow: 0 8px 40px rgba(20, 30, 60, 0.08);
             position: relative;
@@ -1127,11 +1232,19 @@
                                     <li class="active"><a href="/products.html">Product</a></li>
                                     <li><a href="/gallery.html">Gallery</a></li>
                                     <li><a href="/contact.html">Contact us</a></li>
+                                   
                                 </ul>
                             </nav>
                         </div>
                     </div>
                     <div class="header-extras">
+<div class="cart-menu-item">
+    <a href="javascript:void(0)" onclick="viewCart()" class="header-cart-btn">
+              
+        <span id="headerCartCount" class="cart-badge" style="display:none;">0</span>
+        <i class="fas fa-shopping-cart"></i>
+    </a>
+</div>
 
                         <button id="login-btn" class="btn btn-primary" onclick="window.app.login()">Login</button>
 
@@ -1171,7 +1284,7 @@
                 </div>
             </div>
         </header>
-        
+      
         <div class="page-frame">
             <div class="product-row">
                 <div class="image-section">
@@ -1215,10 +1328,68 @@
                             <input type="number" id="qtyInput" value="1" readonly>
                             <button onclick="updateQty(1)">+</button>
                         </div>
-                        <button class="primary-btn" onclick="addToCart()">Add to Cart</button>
-                        <button class="primary-btn" style="background: #27ae60;" onclick="shareOnWhatsApp()">
-                            <span>Share on WhatsApp</span>
+
+                    <div id="conflictOverlay" class="success-overlay">
+                        <div class="success-modal">
+                            <div class="success-icon" style="color:#f39c12;">⚠️</div>
+                            <h3 style="margin:0 0 10px 0;">Update Location?</h3>
+                            <p id="conflictMessage" class="success-message" style="font-size:14px; color:#555;"></p>
+                    
+                            <div style="display:flex; justify-content:center; gap:10px; margin-top:20px;">
+                                <button class="success-btn" onclick="closeConflictModal()"
+                                    style="background:#ccc; color:#333;">Cancel</button>
+                                <button id="confirmUpdateBtn" class="success-btn" style="background:#d35400;">Yes, Update It</button>
+                            </div>
+                        </div>
+                    </div>
+                        
+                        <div id="toast"
+                            style="visibility:hidden; min-width: 250px; background-color: #333; color: #fff; text-align: center; border-radius: 2px; padding: 16px; position: fixed; z-index: 3000; left: 50%; bottom: 30px; transform: translateX(-50%); border-radius:50px;">
+                            Item added to cart!
+                        </div>
+                    <div class="action-buttons">
+                        <button class="primary-btn buy-now-btn" onclick="buyNow()">
+                            Buy Now
                         </button>
+                    
+                        <button class="primary-btn add-to-cart-btn" onclick="addToCart(false)">
+                            Add to Cart
+                        </button>
+                        <div id="toast-notification">Success!</div>
+                    </div>
+                    
+                  
+                    
+                    <div id="toast-notification">Item added to cart!</div>
+                        
+                        <button id="shareBtn" onclick="openShareModal()" style="border:none; background:none; cursor:pointer;">
+                           
+                            Share <i class="fa fa-share-alt"></i>
+                        </button>
+                        
+                        <div id="shareOverlay" class="share-overlay">
+                            <div class="share-modal">
+                                <div class="share-header">
+                                    <h3>Share Product</h3>
+                                    <span onclick="closeShareModal()" style="cursor:pointer; font-size:24px;">&times;</span>
+                                </div>
+                                <div class="social-list">
+                                    <a href="#" onclick="shareTo('whatsapp')" class="social-btn whatsapp h-10">
+                                        <i class="fa fa-whatsapp"></i> WhatsApp
+                                    </a>
+                                    <a href="#" onclick="shareTo('facebook')" class="social-btn facebook">
+                                        <i class="fa fa-facebook"></i> Facebook
+                                    </a>
+                                    <div onclick="shareTo('native')" class="social-btn">
+                                        <i class="fa fa-share-alt"></i> More...
+                                    </div>
+                                    <div onclick="copyLink()" class="social-btn copy">
+                                        <i class="fa fa-link"></i> Copy Link
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      
                     </div>
                     <!-- metadata / chips -->
                     <div class="meta-row" aria-hidden="true">
@@ -1243,278 +1414,382 @@
                 <button class="primary-btn" style="width:100%" onclick="checkout()">Proceed to Checkout</button>
             </div>
         </div>
-        <script>
-            // --- STATE VARIABLES ---
-            let productData = {};
-            let locationData = [];
-            let currentMaterial = null;
-            let currentPrice = 0;
-            let currentMoq = 10;
-            let cart = JSON.parse(localStorage.getItem('myCart')) || [];
+<script>
+    // ============================================
+    // 1. GLOBAL STATE (Must be outside functions)
+    // ============================================
+    let productData = {};
+    let locationData = [];
+    let currentMaterial = null;
+    let currentPrice = 0;
+    let currentMoq = 10;
+    // Load cart immediately so it's ready
+    let cart = JSON.parse(localStorage.getItem('myCart')) || [];
+    let pendingUpdate = null;
 
-            // --- INITIALIZATION ---
-            document.addEventListener("DOMContentLoaded", async () => {
-                await fetchProductData();
-                await fetchLocationData();
-                updateCartUI();
+    // ============================================
+    // 2. INITIALIZATION (Run on Page Load)
+    // ============================================
+    document.addEventListener("DOMContentLoaded", async () => {
+        // Load Data
+        await fetchProductData();
+        await fetchLocationData();
+
+        // Render UI
+        updateCartUI();
+    });
+
+    // ============================================
+    // 3. DATA FETCHING & RENDERING
+    // ============================================
+    async function fetchProductData() {
+        try {
+            const response = await fetch('/js/data.json');
+            const data = await response.json();
+            productData = data.product;
+            renderProduct();
+        } catch (error) { console.error("Error loading product:", error); }
+    }
+
+    function renderProduct() {
+        if (!document.getElementById('prodTitle')) return;
+
+        // Populate Text
+        document.getElementById('prodCategory').innerText = productData.category;
+        document.getElementById('prodTitle').innerText = productData.title;
+        document.getElementById('prodDesc').innerText = productData.short_description;
+        document.getElementById('prodRating').innerText = `⭐ ${productData.rating} (${productData.review_count} Reviews)`;
+
+        // Setup Images
+        const mainImg = document.getElementById('mainImage');
+        const slider = document.getElementById('thumbSlider');
+        if (productData.images?.length > 0) {
+            mainImg.src = productData.images[0];
+            slider.innerHTML = '';
+            productData.images.forEach(imgSrc => {
+                const img = document.createElement('img');
+                img.src = imgSrc;
+                img.onclick = () => mainImg.src = imgSrc;
+                slider.appendChild(img);
             });
+        }
 
-            // --- 1. FETCH & RENDER ---
-            async function fetchProductData() {
-                try {
-                    const response = await fetch('/js/data.json');
-                    const data = await response.json();
-                    productData = data.product;
-                    renderProduct();
-                } catch (error) { console.error("Error:", error); }
+        // Setup Materials
+        const matList = document.getElementById('materialList');
+        matList.innerHTML = '';
+        productData.materials.forEach((mat, index) => {
+            const div = document.createElement('div');
+            div.className = `quality-item ${index === 0 ? 'active' : ''}`;
+            div.innerText = mat.name;
+            div.onclick = () => selectMaterial(mat, div);
+            matList.appendChild(div);
+            // Select first by default
+            if (index === 0) selectMaterial(mat, div);
+        });
+    }
+
+    // ============================================
+    // 4. INTERACTION LOGIC
+    // ============================================
+    function selectMaterial(material, element) {
+        currentMaterial = material;
+        // Highlight active material
+        document.querySelectorAll('.quality-item').forEach(el => el.classList.remove('active'));
+        if (element) element.classList.add('active');
+
+        // Update Price & Image
+        currentPrice = Math.round(productData.base_price * material.multiplier);
+        document.getElementById('prodPrice').innerText = `₹ ${currentPrice} / pc`;
+        if (material.image) document.getElementById('mainImage').src = material.image;
+
+        // If item exists in cart, sync the qty input
+        checkIfInCart();
+    }
+
+    // ============================================
+    // 5. CART ADD / UPDATE LOGIC
+    // ============================================
+
+    // Helper to generate unique ID for Product + Material combo
+    function getVariantKey() {
+        const matId = currentMaterial ? currentMaterial.id : "default";
+        return `${productData.id}-${matId}`;
+    }
+
+    // Button: "Buy Now" (Adds & Opens Cart)
+    function buyNow() {
+        addToCart(true);
+    }
+
+    // Button: "Add to Cart" (Adds & Shows Toast)
+    function addToCart(openDrawer = false) {
+        const selectedCity = document.getElementById("citySelect").value;
+        const qtyInput = document.getElementById("qtyInput");
+        const qty = parseInt(qtyInput.value);
+
+        // Validation
+        if (!selectedCity) {
+            alert("Please select a Delivery Location.");
+            return;
+        }
+
+        const key = getVariantKey();
+        const existingIndex = cart.findIndex(item => item.variantKey === key);
+
+        // Determine Image
+        let selectedImage = productData.images[0];
+        if (currentMaterial && currentMaterial.image) selectedImage = currentMaterial.image;
+
+        if (existingIndex > -1) {
+            // --- ITEM EXISTS: Check for conflict ---
+            const currentItem = cart[existingIndex];
+
+            if (currentItem.location !== selectedCity) {
+                // Store state for Modal
+                pendingUpdate = {
+                    index: existingIndex,
+                    newCity: selectedCity,
+                    newQty: qty,
+                    newImage: selectedImage,
+                    shouldOpenDrawer: openDrawer
+                };
+
+                showConflictModal(`Your cart has this item for '<b>${currentItem.location}</b>'.<br>Switch to '<b>${selectedCity}</b>'?`);
+                return;
             }
 
-            function renderProduct() {
-                document.getElementById('prodCategory').innerText = productData.category;
-                document.getElementById('prodTitle').innerText = productData.title;
-                document.getElementById('prodDesc').innerText = productData.short_description;
-                document.getElementById('prodRating').innerText = `⭐ ${productData.rating} (${productData.review_count} Reviews)`;
+            // No conflict: Update data
+            updateCartItem(existingIndex, qty, selectedCity, selectedImage);
+            finalizeAction(openDrawer, "Cart updated successfully!");
 
-                const mainImg = document.getElementById('mainImage');
-                const slider = document.getElementById('thumbSlider');
-                mainImg.src = productData.images[0];
+        } else {
+            // --- NEW ITEM ---
+            cart.push({
+                variantKey: key,
+                productId: productData.id,
+                name: productData.title,
+                material: currentMaterial.name,
+                image: selectedImage,
+                unitPrice: currentPrice,
+                qty: qty,
+                totalPrice: qty * currentPrice,
+                location: selectedCity
+            });
+            saveAndRenderCart();
+            finalizeAction(openDrawer, "Item added to cart!");
+        }
+    }
 
-                productData.images.forEach(imgSrc => {
-                    const img = document.createElement('img');
-                    img.src = imgSrc;
-                    img.onclick = () => mainImg.src = imgSrc;
-                    slider.appendChild(img);
-                });
+    // Decides whether to open sidebar or show toast
+    function finalizeAction(shouldOpenDrawer, msg) {
+        if (shouldOpenDrawer) {
+            viewCart();
+        } else {
+            showToast(msg);
+        }
+    }
 
-                const matList = document.getElementById('materialList');
-                productData.materials.forEach((mat, index) => {
-                    const div = document.createElement('div');
-                    div.className = `quality-item ${index === 0 ? 'active' : ''}`;
-                    div.innerText = mat.name;
-                    div.onclick = () => selectMaterial(mat, div);
-                    matList.appendChild(div);
-                    if (index === 0) selectMaterial(mat, div);
-                });
-            }
+    // Update specific item in array
+    function updateCartItem(index, qty, location, image) {
+        cart[index].qty = qty;
+        cart[index].location = location;
+        cart[index].image = image;
+        cart[index].totalPrice = qty * cart[index].unitPrice;
+        saveAndRenderCart();
+    }
 
-            // --- 2. LOGIC: SELECTION & KEYS ---
+    // ============================================
+    // 6. REMOVE ITEM (Fixed & With Confirmation)
+    // ============================================
+    function removeItem(i) {
+        // Prevent accidental deletion
+        if (confirm("Are you sure you want to remove this item?")) {
+            cart.splice(i, 1); // Remove item at index i
+            saveAndRenderCart(); // Save & Refresh UI
+            checkIfInCart(); // Reset input on product page if needed
+        }
+    }
 
-            // Generates a unique ID for the specific combo of Item + Material + City
-            function getVariantKey() {
-                const city = document.getElementById("citySelect").value || "none";
-                const matId = currentMaterial ? currentMaterial.id : "default";
-                return `${productData.id}-${matId}-${city}`;
-            }
+    // ============================================
+    // 7. UI & STORAGE HELPERS
+    // ============================================
+    function saveAndRenderCart() {
+        localStorage.setItem('myCart', JSON.stringify(cart));
+        updateCartUI();
+    }
 
-            function selectMaterial(material, element) {
-                currentMaterial = material;
-                document.querySelectorAll('.quality-item').forEach(el => el.classList.remove('active'));
-                if (element) element.classList.add('active');
+    function updateCartUI() {
+        // 1. Update Header Badge
+        const badge = document.getElementById("headerCartCount");
+        if (badge) {
+            const count = cart.length;
+            badge.innerText = count;
+            badge.style.display = count > 0 ? "inline-block" : "none";
+        }
 
-                currentPrice = Math.round(productData.base_price * material.multiplier);
-                document.getElementById('prodPrice').innerText = `₹ ${currentPrice} / pc`;
-                if (material.image) document.getElementById('mainImage').src = material.image;
+        // 2. Render Side Bar Items
+        const container = document.getElementById("cartItemsContainer");
+        const totalEl = document.getElementById("cartGrandTotal");
 
-                // Check if this combo is already in cart to sync quantity
-                checkIfInCart();
-            }
+        if (!container) return;
 
-            // --- 3. LOGIC: LOCATIONS ---
-            async function fetchLocationData() {
-                try {
-                    const response = await fetch('/js/locations.json');
-                    const data = await response.json();
-                    locationData = data.regions;
-                    const regionSelect = document.getElementById("regionSelect");
-                    regionSelect.innerHTML = '<option value="">-- Select Region --</option>';
-                    locationData.forEach(r => regionSelect.innerHTML += `<option value="${r.id}">${r.name}</option>`);
-                } catch (error) { console.error("Error:", error); }
-            }
+        container.innerHTML = ""; // Clear current list
+        let total = 0;
 
-            function handleRegionChange() {
-                const regionId = document.getElementById("regionSelect").value;
-                const citySelect = document.getElementById("citySelect");
-                citySelect.innerHTML = '<option value="">-- Select City --</option>';
-                citySelect.disabled = true;
-
-                const region = locationData.find(r => r.id === regionId);
-                if (region) {
-                    citySelect.disabled = false;
-                    currentMoq = region.default_moq;
-                    if (region.cities.length > 0) {
-                        region.cities.forEach(c => citySelect.innerHTML += `<option value="${c}">${c}</option>`);
-                    } else {
-                        citySelect.innerHTML += `<option value="Other">Other Location</option>`;
-                    }
-                }
-            }
-
-            function handleCityChange() {
-                const city = document.getElementById("citySelect").value;
-                const alertBox = document.getElementById("moqAlert");
-
-                if (city) {
-                    alertBox.style.display = "block";
-                    alertBox.innerHTML = `ℹ️ MOQ for <b>${city}</b> is <b>${currentMoq}</b>.`;
-
-                    // Check if this city+material combo is already in cart
-                    checkIfInCart();
-                } else {
-                    alertBox.style.display = "none";
-                }
-            }
-
-            // --- 4. REAL-TIME SYNC LOGIC (The Optimization) ---
-
-            // If the item exists in cart, update the input box to match the cart's quantity
-            function checkIfInCart() {
-                const key = getVariantKey();
-                const existingItem = cart.find(item => item.variantKey === key);
-                const input = document.getElementById("qtyInput");
-
-                if (existingItem) {
-                    // Sync Input with Cart
-                    input.value = existingItem.qty;
-                } else {
-                    // Reset to MOQ if not in cart
-                    if (parseInt(input.value) < currentMoq) input.value = currentMoq;
-                }
-            }
-
-            // Called when clicking + or -
-            function updateQty(change) {
-                const input = document.getElementById("qtyInput");
-                let newVal = parseInt(input.value) + change;
-
-                // Validation
-                if (newVal < currentMoq) {
-                    alert(`Minimum order is ${currentMoq}`);
-                    newVal = currentMoq;
-                }
-
-                input.value = newVal;
-
-                // ★★★ AUTO-UPDATE CART LOGIC ★★★
-                const key = getVariantKey();
-                const cartIndex = cart.findIndex(item => item.variantKey === key);
-
-                if (cartIndex > -1) {
-                    // Item is ALREADY in cart, update it live!
-                    cart[cartIndex].qty = newVal;
-                    cart[cartIndex].totalPrice = newVal * currentPrice;
-                    saveAndRenderCart(); // Refresh sidebar immediately
-                }
-            }
-
-            function addToCart() {
-                const city = document.getElementById("citySelect").value;
-
-                // 1. Validation
-                if (!city) {
-                    alert("Please select a Delivery Location.");
-                    return;
-                }
-
-                // 2. Get Values
-                const qty = parseInt(document.getElementById("qtyInput").value);
-                const key = getVariantKey();
-
-                // 3. IMAGE LOGIC (The Fix)
-                // Default to the first image in the main gallery
-                let selectedImage = productData.images[0];
-
-                // If the selected material has a specific image defined, use that instead
-                if (currentMaterial && currentMaterial.image) {
-                    selectedImage = currentMaterial.image;
-                }
-
-                // 4. Check if item exists in cart
-                const existingItemIndex = cart.findIndex(item => item.variantKey === key);
-
-                if (existingItemIndex > -1) {
-                    // Update existing item
-                    cart[existingItemIndex].qty = qty;
-                    cart[existingItemIndex].totalPrice = qty * currentPrice;
-                    cart[existingItemIndex].image = selectedImage; // Update image in case it changed
-                } else {
-                    // Add new item
-                    cart.push({
-                        variantKey: key,
-                        productId: productData.id,
-                        name: productData.title,
-                        material: currentMaterial.name,
-                        image: selectedImage, // <--- Correct Image Passed Here
-                        unitPrice: currentPrice,
-                        qty: qty,
-                        totalPrice: qty * currentPrice,
-                        location: city
-                    });
-                }
-
-                // 5. Save and Open Cart
-                saveAndRenderCart();
-                viewCart();
-            }
-            // --- 5. SHARED CART RENDERING ---
-            function saveAndRenderCart() {
-                localStorage.setItem('myCart', JSON.stringify(cart));
-                updateCartUI();
-            }
-
-            function updateCartUI() {
-                const container = document.getElementById("cartItemsContainer");
-                const totalEl = document.getElementById("cartGrandTotal");
-                container.innerHTML = "";
-                let grandTotal = 0;
-
-                cart.forEach((item, index) => {
-                    grandTotal += item.totalPrice;
-                    container.innerHTML += `
-                <div class="cart-item">
-                    <img src="${item.image}">
-                    <div style="flex:1">
-                        <div style="font-weight:bold; font-size:14px">${item.name}</div>
-                         <div style="font-size:12px">
-                            Qty: <b>${item.qty}</b> 
-                            <span style="color:#d35400; font-weight:bold; margin-left:10px">₹${item.totalPrice.toLocaleString()}</span>
-                        </div>
+        cart.forEach((item, index) => {
+            total += item.totalPrice;
+            // Note: onclick="removeItem(${index})" works because removeItem is global now
+            container.innerHTML += `
+            <div class="cart-item">
+                <img src="${item.image}" style="width:50px; height:50px; object-fit:cover; border-radius:4px;">
+                <div style="flex:1; padding-left:10px;">
+                    <div style="font-weight:bold; font-size:14px">${item.name}</div>
+                    <div style="font-size:12px; color:#666;">
+                        ${item.material} | <b style="color:#27ae60">${item.location}</b>
                     </div>
-                    <button class="btn btn-danger bg-dark-grey"  onclick="removeItem(${index})" style="color:red; background:none; border:none; cursor:pointer; font-size:16px">&times;</button>
+                    <div style="font-size:12px; margin-top:4px;">
+                        Qty: <b>${item.qty}</b> 
+                        <span style="color:#d35400; font-weight:bold; margin-left:5px;">₹${item.totalPrice.toLocaleString()}</span>
+                    </div>
                 </div>
-            `;
-                });
+                <button onclick="removeItem(${index})" title="Remove Item" 
+                        style="color:#e74c3c; background:none; border:none; cursor:pointer; font-size:18px; padding:5px;">
+                    <i class="fas fa-trash-alt"></i> &times;
+                </button>
+            </div>`;
+        });
 
-                totalEl.innerText = "₹" + grandTotal.toLocaleString();
+        if (totalEl) totalEl.innerText = "₹" + total.toLocaleString();
+    }
+
+    // Show/Hide Cart Sidebar
+    function viewCart() {
+        const modal = document.getElementById("cartModal");
+        const overlay = document.getElementById("cartOverlay");
+        if (modal && overlay) {
+            modal.classList.add("open");
+            overlay.classList.add("open");
+        }
+    }
+
+    function closeCart() {
+        const modal = document.getElementById("cartModal");
+        const overlay = document.getElementById("cartOverlay");
+        if (modal && overlay) {
+            modal.classList.remove("open");
+            overlay.classList.remove("open");
+        }
+    }
+
+    // Toast Notification
+    function showToast(message) {
+        const toast = document.getElementById("toast-notification");
+        if (toast) {
+            toast.innerText = message;
+            toast.classList.add("show");
+            setTimeout(() => toast.classList.remove("show"), 3000);
+        }
+    }
+
+    // Modal Confirmation for Conflict
+    if (document.getElementById("confirmUpdateBtn")) {
+        document.getElementById("confirmUpdateBtn").onclick = function () {
+            if (pendingUpdate) {
+                updateCartItem(
+                    pendingUpdate.index,
+                    pendingUpdate.newQty,
+                    pendingUpdate.newCity,
+                    pendingUpdate.newImage
+                );
+                closeConflictModal();
+                finalizeAction(pendingUpdate.shouldOpenDrawer, "Cart updated successfully!");
             }
+        };
+    }
 
-            function removeItem(index) {
-                cart.splice(index, 1);
-                saveAndRenderCart();
-                // If we removed the item currently selected on screen, reset input
-                checkIfInCart();
+    function showConflictModal(msg) {
+        const el = document.getElementById("conflictMessage");
+        const overlay = document.getElementById("conflictOverlay");
+        if (el && overlay) {
+            el.innerHTML = msg;
+            overlay.classList.add("open");
+        }
+    }
+
+    function closeConflictModal() {
+        const overlay = document.getElementById("conflictOverlay");
+        if (overlay) overlay.classList.remove("open");
+        pendingUpdate = null;
+    }
+
+    // Checkout
+    function checkout() {
+        if (cart.length === 0) {
+            alert("Your cart is empty!");
+            return;
+        }
+        const totalEl = document.getElementById("cartGrandTotal");
+        localStorage.setItem("checkoutTotal", totalEl ? totalEl.innerText : "0");
+        window.location.href = "checkout.html";
+    }
+
+    // ============================================
+    // 8. LOCATION DATA HELPERS
+    // ============================================
+    async function fetchLocationData() {
+        try {
+            const response = await fetch('/js/locations.json');
+            const data = await response.json();
+            locationData = data.regions;
+            const regionSelect = document.getElementById("regionSelect");
+            if (regionSelect) {
+                regionSelect.innerHTML = '<option value="">-- Select Region --</option>';
+                locationData.forEach(r => regionSelect.innerHTML += `<option value="${r.id}">${r.name}</option>`);
             }
+        } catch (e) { }
+    }
 
-            function viewCart() {
-                document.getElementById("cartModal").classList.add("open");
-                document.getElementById("cartOverlay").classList.add("open");
-            }
+    function handleRegionChange() {
+        const regionId = document.getElementById("regionSelect").value;
+        const citySelect = document.getElementById("citySelect");
+        citySelect.innerHTML = '<option value="">-- Select City --</option>';
+        citySelect.disabled = true;
+        const region = locationData.find(r => r.id === regionId);
+        if (region) {
+            citySelect.disabled = false;
+            currentMoq = region.default_moq;
+            if (region.cities.length > 0) region.cities.forEach(c => citySelect.innerHTML += `<option value="${c}">${c}</option>`);
+            else citySelect.innerHTML += `<option value="Other">Other Location</option>`;
+        }
+    }
 
-            function closeCart() {
-                document.getElementById("cartModal").classList.remove("open");
-                document.getElementById("cartOverlay").classList.remove("open");
-            }
+    function handleCityChange() {
+        const city = document.getElementById("citySelect").value;
+        const alertBox = document.getElementById("moqAlert");
+        if (city && alertBox) {
+            alertBox.style.display = "block";
+            alertBox.innerHTML = `ℹ️ MOQ for <b>${city}</b> is <b>${currentMoq}</b>.`;
+        } else if (alertBox) {
+            alertBox.style.display = "none";
+        }
+    }
 
-            // --- 6. CHECKOUT & SHARE ---
-            function checkout() {
-                if (cart.length === 0) { alert("Cart is empty"); return; }
+    // Helper: Syncs Qty input with cart data
+    function checkIfInCart() {
+        const key = getVariantKey();
+        const item = cart.find(i => i.variantKey === key);
+        const qtyInput = document.getElementById("qtyInput");
+        if (item && qtyInput) qtyInput.value = item.qty;
+    }
 
-                // Save total for display on next page
-                localStorage.setItem("checkoutTotal", document.getElementById("cartGrandTotal").innerText);
-
-                // Redirect to Checkout Page
-                window.location.href = "checkout.html";
-            }
-        </script>
+    // Helper: +/- buttons for Qty
+    function updateQty(change) {
+        const input = document.getElementById("qtyInput");
+        let val = parseInt(input.value) + change;
+        if (val < currentMoq) val = currentMoq;
+        input.value = val;
+    }
+</script>
         <div class="container">
             <div class="tabs-container">
                 <div id="tabButtons" class="tab-buttons"></div>
@@ -1709,9 +1984,7 @@
 
             /* Mobile Adjustments */
             @media (max-width: 600px) {
-                body {
-                    padding: 10px;
-                }
+              
 
                 .tab-buttons button {
                     padding: 12px 15px;
@@ -1769,7 +2042,7 @@
                             </div>
                             <!-- end: Footer widget area 2 -->
                         </div>
-                        <div class="col-xl-4 col-lg-2 col-md-4 widget">
+                        <div class="col-xl-4 col-lg-4 col-md-4 widget">
                             <h4>Social links and timiings</h4>
                             <div class="social-icons social-icons-colored float-left">
                                 <ul>
@@ -2178,6 +2451,131 @@
             }
         });
     </script>
+
+    <script>
+        // --- VARIABLES ---
+        let pendingUpdate = null; // Stores data temporarily while popup is open
+
+        // --- 1. CONFLICT CHECK LOGIC ---
+        function addToCart() {
+            const selectedCity = document.getElementById("citySelect").value;
+            const qty = parseInt(document.getElementById("qtyInput").value);
+
+            // 1. Validation
+            if (!selectedCity) {
+                alert("Please select a Delivery Location.");
+                return;
+            }
+
+            // 2. Identify Item (Key = ProductID + MaterialID) *Ignore City in Key*
+            const key = `${productData.id}-${currentMaterial ? currentMaterial.id : 'default'}`;
+
+            // 3. Check if Item exists
+            const existingIndex = cart.findIndex(item => item.variantKey === key);
+
+            if (existingIndex > -1) {
+                // Item is in cart. Check if LOCATION matches.
+                const currentItem = cart[existingIndex];
+
+                if (currentItem.location !== selectedCity) {
+                    // ★ CONFLICT FOUND: Trigger the specific Popup ★
+
+                    // Save details to verify later
+                    pendingUpdate = {
+                        index: existingIndex,
+                        newCity: selectedCity,
+                        newQty: qty,
+                        newImage: (currentMaterial && currentMaterial.image) ? currentMaterial.image : productData.images[0]
+                    };
+
+                    // Show the specific message
+                    const msg = `Your cart contains this item for '<b>${currentItem.location}</b>'.<br>Do you want to change location to '<b>${selectedCity}</b>' and update the quantity?`;
+
+                    showConflictModal(msg);
+                    return; // STOP HERE. Wait for user to click "Yes" or "Cancel".
+                }
+
+                // If Location matches, just update normally (No popup needed)
+                updateCartItem(existingIndex, qty, selectedCity, currentItem.image);
+
+            } else {
+                // New Item (Add normally)
+                let selectedImage = (currentMaterial && currentMaterial.image) ? currentMaterial.image : productData.images[0];
+
+                cart.push({
+                    variantKey: key,
+                    productId: productData.id,
+                    name: productData.title,
+                    material: currentMaterial.name,
+                    image: selectedImage,
+                    unitPrice: currentPrice,
+                    qty: qty,
+                    totalPrice: qty * currentPrice,
+                    location: selectedCity
+                });
+                saveAndRenderCart();
+                viewCart();
+            }
+        }
+
+        // --- 2. UPDATE FUNCTION (Runs when "Yes, Update It" is clicked) ---
+        function updateCartItem(index, qty, location, image) {
+            cart[index].qty = qty;
+            cart[index].location = location; // Replace old city with new city
+            cart[index].image = image;
+            cart[index].totalPrice = qty * cart[index].unitPrice;
+
+            saveAndRenderCart();
+        }
+
+        // Listener for the "Yes" button
+        document.getElementById("confirmUpdateBtn").onclick = function () {
+            if (pendingUpdate) {
+                updateCartItem(
+                    pendingUpdate.index,
+                    pendingUpdate.newQty,
+                    pendingUpdate.newCity,
+                    pendingUpdate.newImage
+                );
+                closeConflictModal();
+                viewCart(); // Open sidebar to show the updated city
+            }
+        };
+
+        // --- 3. MODAL UTILS ---
+        function showConflictModal(msg) {
+            document.getElementById("conflictMessage").innerHTML = msg;
+            document.getElementById("conflictOverlay").classList.add("open");
+        }
+
+        function closeConflictModal() {
+            document.getElementById("conflictOverlay").classList.remove("open");
+            pendingUpdate = null; // Clear temp data
+        }
+    </script>
+    <script>
+        // Function to Open the Overlay
+        function openShareModal() {
+            document.getElementById("shareOverlay").classList.add("open");
+        }
+
+        // Function to Close the Overlay
+        function closeShareModal() {
+            document.getElementById("shareOverlay").classList.remove("open");
+        }
+
+        // Optional: Close if user clicks outside the modal (on the dark background)
+        document.getElementById("shareOverlay").addEventListener("click", function (e) {
+            if (e.target === this) {
+                closeShareModal();
+            }
+        });
+    </script>
+    <script src="/js/jquery.js"></script>
+    <script src="/js/plugins.js"></script>
+    <script src="/js/menu.js"></script>
+    <!--Template functions-->
+    <script src="/js/functions.js"></script>
 </body>
 
 </html>
