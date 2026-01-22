@@ -18074,7 +18074,7 @@ a {
 }
 .svg-inline--fa {
     display: var(--fa-display, inline-block);
-    height: 1.68em;
+    height: 1.28em;
     overflow: visible;
     vertical-align: -.125em;
 }
