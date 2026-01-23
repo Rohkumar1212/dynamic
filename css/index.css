@@ -274,14 +274,7 @@
     background: #ffffff00;
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
 }
-  /* --- 1. CORE HEADER STYLES --- */
-    #header {
-        position: fixed;
-        width: 100%;
-        top: 45px;
-        z-index: 1000;
-       
-    }
+ 
 
     #header .container {
         display: flex;
