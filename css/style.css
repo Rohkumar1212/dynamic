@@ -19015,3 +19015,218 @@ nav ul li.active a::after {
   transform: translateY(-2px);
   cursor: default;
 }
+ /* --- Basic Reset --- */
+
+        /* --- Login Button --- */
+        .btn-primary {
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+
+        /* --- Modal (Pop-up) Styles --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            width: 300px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #aaa;
+        }
+
+        .provider-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-provider {
+            padding: 10px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .btn-provider:hover {
+            background: #f9f9f9;
+            transform: translateY(-2px);
+        }
+
+        .google {
+            color: #db4437;
+        }
+
+        .github {
+            color: #333;
+        }
+
+        .twitter {
+            color: #1da1f2;
+        }
+
+        /* --- User Widget & Profile Card --- */
+        .user-widget {
+            position: relative;
+        }
+
+        .avatar-trigger {
+            cursor: pointer;
+        }
+
+        .avatar-small {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* The Dropdown Card */
+        .profile-card {
+            position: absolute;
+            top: 60px;
+            right: 0;
+            width: 280px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            z-index: 100;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .profile-header-bg {
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .profile-content {
+            padding: 0 20px 20px;
+            text-align: center;
+            margin-top: -40px;
+        }
+
+        .profile-img-large {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 4px solid white;
+            background: white;
+            object-fit: cover;
+        }
+
+        h4 {
+            margin: 10px 0 5px;
+            color: #333;
+        }
+
+        p {
+            margin: 0;
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* Profile Actions */
+        .profile-actions {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .action-row {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .action-row:hover {
+            background: #f5f7fa;
+        }
+
+        .icon-circle {
+            width: 32px;
+            height: 32px;
+            background: #e0e7ff;
+            color: #4f46e5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+        }
+
+        .logout-icon {
+            background: #fee2e2;
+            color: #ef4444;
+        }
+
+        .action-text {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            font-size: 0.9rem;
+        }
+
+        .action-text span {
+            font-size: 0.75rem;
+            color: #999;
+            font-weight: normal;
+        }
+
+        .arrow-icon {
+            color: #ccc;
+            font-size: 0.8rem;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
