@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg: #f3f4f6;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: var(--bg);
+            margin: 0;
+        }
+
+        /* Main Card */
+        .login-card {
+            background: white;
+            width: 100%;
+            max-width: 700px;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+
+        /* The Grid Layout */
+        .btn-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        /* General Button Styling */
+        .auth-btn {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            font-weight: 500;
+            color: #374151;
+            transition: all 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .auth-btn:hover {
+            background: #f9fafb;
+            border-color: #d1d5db;
+            transform: translateY(-1px);
+        }
+
+        .auth-btn i {
+            width: 24px;
+            font-size: 1.2rem;
+            margin-right: 12px;
+        }
+
+        /* Specific Colors for Branding (Optional - adds polish) */
+        .btn-github i {
+            color: #333;
+        }
+
+        .btn-microsoft i {
+            color: #00a4ef;
+        }
+
+        .btn-twitter i {
+            color: #1da1f2;
+        }
+
+        .btn-yahoo i {
+            color: #410093;
+        }
+
+        .btn-google i {
+            color: #DB4437;
+        }
+
+        /* Phone Auth Section (Hidden by default) */
+        #phone-auth-section {
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+        }
+
+        input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .action-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* User Profile Widget */
+        #user-widget {
+            display: none;
+            text-align: center;
+            animation: fadeIn 0.5s;
+        }
+
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Utilities */
+        .error-msg {
+            color: #dc2626;
+            background: #fee2e2;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            display: none;
+            text-align: center;
+        }
+
+        .back-btn {
+            background: transparent;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            margin-bottom: 10px;
+            text-decoration: underline;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-card">
+
+        <div id="auth-view">
+            <h2>Sign In</h2>
+
+            <div class="btn-grid" id="provider-grid">
+                <button class="auth-btn" onclick="app.showPhoneInput()"><i class="fas fa-phone"></i> Phone</button>
+                <button class="auth-btn"
+                    onclick="alert('Game Center is for Native iOS Apps only. Use Apple Login for Web.')"><i
+                        class="fas fa-gamepad" style="color:#fc4f9e;"></i> Game Center</button>
+                <button class="auth-btn" onclick="app.login('apple')"><i class="fab fa-apple"></i> Apple</button>
+                <button class="auth-btn btn-github" onclick="app.login('github')"><i class="fab fa-github"></i>
+                    GitHub</button>
+                <button class="auth-btn" onclick="app.login('anonymous')"><i class="fas fa-user-secret"></i>
+                    Anonymous</button>
+                <button class="auth-btn btn-microsoft" onclick="app.login('microsoft')"><i class="fab fa-microsoft"></i>
+                    Microsoft</button>
+                <button class="auth-btn btn-twitter" onclick="app.login('twitter')"><i class="fab fa-twitter"></i>
+                    Twitter</button>
+                <button class="auth-btn btn-yahoo" onclick="app.login('yahoo')"><i class="fab fa-yahoo"></i>
+                    Yahoo</button>
+                <button class="auth-btn btn-google" onclick="app.login('google')"><i class="fab fa-google"></i>
+                    Google</button>
+            </div>
+
+            <div id="phone-auth-section">
+                <button class="back-btn" onclick="app.resetView()">← Back to options</button>
+                <h3>Enter Phone Number</h3>
+                <p style="font-size:0.8rem; color:#666;">Format: +1 555-555-5555</p>
+
+                <input type="tel" id="phone-number" placeholder="+1 555 555 5555">
+                <div id="recaptcha-container"></div>
+
+                <button class="action-btn" id="send-code-btn" onclick="app.sendPhoneCode()">Send SMS Code</button>
+
+                <div id="otp-container" style="display:none; margin-top:10px;">
+                    <input type="text" id="verification-code" placeholder="Enter 6-digit code">
+                    <button class="action-btn" style="margin-top:10px; background:#10b981;"
+                        onclick="app.verifyCode()">Verify & Login</button>
+                </div>
+            </div>
+
+            <div id="error-message" class="error-msg"></div>
+        </div>
+
+        <div id="user-widget">
+            <img id="user-photo" class="profile-pic" src="" alt="User">
+            <h2 id="user-name">Welcome</h2>
+            <p id="user-email" style="color: #666;"></p>
+        <div class="profile-actions">
+            <div class="action-row" onclick="window.app.openDashboard()">
+                <div class="icon-circle"><i class="fas fa-user"></i></div>
+                <div class="action-text"><strong>My Profile</strong><span>Account settings</span>
+                </div>
+                <i class="fas fa-chevron-right arrow-icon"></i>
+            </div>
+            <div class="action-row logout" onclick="window.app.logout()">
+                <div class="icon-circle logout-icon"><i class="fas fa-sign-out-alt"></i></div>
+                <div class="action-text"><strong>Log Out</strong></div>
+            </div>
+        </div>
+            <button class="action-btn" style="background:#ef4444; margin-top:20px; width:100%;"
+                onclick="app.logout()">Sign Out</button>
+        </div>
+
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+        import {
+            getAuth,
+            signOut,
+            onAuthStateChanged,
+            signInWithPopup,
+            signInAnonymously,
+            RecaptchaVerifier,
+            signInWithPhoneNumber,
+            GoogleAuthProvider,
+            GithubAuthProvider,
+            TwitterAuthProvider,
+            OAuthProvider
+        } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+
+        // ---------------------------------------------------------
+        // 1. CONFIGURATION (Replace with YOURS from Firebase Console)
+        // ---------------------------------------------------------
+        const firebaseConfig = {
+            apiKey: "AIzaSyBfJTHAzQ6u27vGwdsC9HEEMYCdNnjYnJU",
+            authDomain: "dynamiccorrugations-ac4a8.firebaseapp.com",
+            projectId: "dynamiccorrugations-ac4a8",
+            storageBucket: "dynamiccorrugations-ac4a8.firebasestorage.app",
+            messagingSenderId: "481189371368",
+            appId: "1:481189371368:web:58cf359e533d8cadcdd85d",
+            measurementId: "G-6PL4T4METT"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Global variables for Phone Auth
+        window.recaptchaVerifier = null;
+        window.confirmationResult = null;
+
+        // ---------------------------------------------------------
+        // 2. MAIN LOGIC
+        // ---------------------------------------------------------
+        window.app = {
+            // -- Generic Login Handler --
+            login: async function (providerType) {
+                const errorEl = document.getElementById('error-message');
+                errorEl.style.display = 'none';
+
+                let provider;
+                try {
+                    switch (providerType) {
+                        case 'google': provider = new GoogleAuthProvider(); break;
+                        case 'github': provider = new GithubAuthProvider(); break;
+                        case 'twitter': provider = new TwitterAuthProvider(); break;
+                        case 'microsoft': provider = new OAuthProvider('microsoft.com'); break;
+                        case 'yahoo': provider = new OAuthProvider('yahoo.com'); break;
+                        case 'apple': provider = new OAuthProvider('apple.com'); break;
+                        case 'anonymous':
+                            await signInAnonymously(auth);
+                            return; // Exit early for anonymous
+                        default: throw new Error("Provider not configured in JS");
+                    }
+
+                    // Trigger Popup
+                    await signInWithPopup(auth, provider);
+
+                } catch (error) {
+                    console.error("Login Failed:", error);
+                    errorEl.textContent = `Error: ${error.message}`;
+                    errorEl.style.display = 'block';
+                }
+            },
+
+            // -- Phone Auth: Step 1 (Show UI) --
+            showPhoneInput: function () {
+                document.getElementById('provider-grid').style.display = 'none';
+                document.getElementById('phone-auth-section').style.display = 'flex';
+
+                // Initialize ReCaptcha (Invisible or Visible)
+                if (!window.recaptchaVerifier) {
+                    window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+                        'size': 'normal',
+                        'callback': (response) => {
+                            // reCAPTCHA solved, allow signInWithPhoneNumber.
+                        }
+                    });
+                    window.recaptchaVerifier.render();
+                }
+            },
+
+            // -- Phone Auth: Step 2 (Send SMS) --
+            sendPhoneCode: async function () {
+                const phoneNumber = document.getElementById('phone-number').value;
+                const errorEl = document.getElementById('error-message');
+                errorEl.style.display = 'none';
+
+                if (!phoneNumber) { alert("Please enter a valid phone number (+1...)"); return; }
+
+                try {
+                    window.confirmationResult = await signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier);
+                    alert("SMS sent! Please check your phone.");
+                    document.getElementById('otp-container').style.display = 'block';
+                    document.getElementById('send-code-btn').style.display = 'none';
+                } catch (error) {
+                    console.error("SMS Error:", error);
+                    errorEl.textContent = error.message;
+                    errorEl.style.display = 'block';
+                    // Reset recaptcha if failed
+                    if (window.recaptchaVerifier) window.recaptchaVerifier.clear();
+                }
+            },
+
+            // -- Phone Auth: Step 3 (Verify OTP) --
+            verifyCode: async function () {
+                const code = document.getElementById('verification-code').value;
+                try {
+                    await window.confirmationResult.confirm(code);
+                    console.log("Phone Auth Success!");
+                } catch (error) {
+                    alert("Incorrect Code. Try again.");
+                }
+            },
+
+            // -- Reset to Main Grid --
+            resetView: function () {
+                document.getElementById('provider-grid').style.display = 'grid';
+                document.getElementById('phone-auth-section').style.display = 'none';
+                document.getElementById('error-message').style.display = 'none';
+            },
+
+            logout: function () {
+                signOut(auth).then(() => {
+                    window.location.reload();
+                });
+            }
+        };
+
+        // ---------------------------------------------------------
+        // 3. AUTH STATE OBSERVER
+        // ---------------------------------------------------------
+        onAuthStateChanged(auth, (user) => {
+            const authView = document.getElementById('auth-view');
+            const userWidget = document.getElementById('user-widget');
+
+            if (user) {
+                // User is Logged In
+                authView.style.display = 'none';
+                userWidget.style.display = 'block';
+
+                // Populate User Data
+                document.getElementById('user-name').textContent = user.displayName || user.phoneNumber || "Anonymous User";
+                document.getElementById('user-email').textContent = user.email || "No Email";
+                document.getElementById('user-uid').textContent = user.uid;
+
+                // Determine Provider Name
+                const providerId = user.providerData[0]?.providerId || 'anonymous';
+                document.getElementById('user-provider-id').textContent = providerId;
+
+                // Photo Handling
+                const photoUrl = user.photoURL || `https://ui-avatars.com/api/?name=${providerId}&background=random`;
+                document.getElementById('user-photo').src = photoUrl;
+
+            } else {
+                // User is Logged Out
+                authView.style.display = 'block';
+                userWidget.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>

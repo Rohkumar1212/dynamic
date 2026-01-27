@@ -905,97 +905,190 @@
     <script src="js/menu.js"></script>
     <!--Template functions-->
     <script src="js/functions.js"></script>
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-        import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+     <script type="module">
+    // 1. IMPORTS
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+    import {
+        getAuth, signOut, onAuthStateChanged, signInWithPopup, signInAnonymously,
+        GoogleAuthProvider, GithubAuthProvider, TwitterAuthProvider, getAdditionalUserInfo
+    } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 
-        // 1. Firebase Configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyBfJTHAzQ6u27vGwdsC9HEEMYCdNnjYnJU",
-            authDomain: "dynamiccorrugations-ac4a8.firebaseapp.com",
-            projectId: "dynamiccorrugations-ac4a8",
-            storageBucket: "dynamiccorrugations-ac4a8.firebasestorage.app",
-            messagingSenderId: "481189371368",
-            appId: "1:481189371368:web:58cf359e533d8cadcdd85d",
-            measurementId: "G-6PL4T4METT"
-        };
+    // Import Firestore to save user details
+    import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
 
-        // 2. Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const provider = new GoogleAuthProvider();
+    // 2. CONFIGURATION
+    const firebaseConfig = {
+        apiKey: "AIzaSyBfJTHAzQ6u27vGwdsC9HEEMYCdNnjYnJU",
+        authDomain: "dynamiccorrugations-ac4a8.firebaseapp.com",
+        projectId: "dynamiccorrugations-ac4a8",
+        storageBucket: "dynamiccorrugations-ac4a8.firebasestorage.app",
+        messagingSenderId: "481189371368",
+        appId: "1:481189371368:web:58cf359e533d8cadcdd85d",
+        measurementId: "G-6PL4T4METT"
+    };
 
-        // 3. Define Global App Actions (Login, Logout, Navigation)
-        window.app = {
-            // Redirect to Dashboard
-            openDashboard: function () {
-                console.log("Navigating to Dashboard...");
-                window.location.href = "dashboard.html"; // Change this if you use tab switching instead
-            },
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app); // Database reference
 
-            // Trigger Google Login
-            login: function () {
-                signInWithPopup(auth, provider).catch((error) => {
-                    console.error("Login Failed:", error);
-                    alert("Login failed: " + error.message);
-                });
-            },
+    // 3. APP LOGIC
+    window.app = {
 
-            // Trigger Logout
-            logout: function () {
-                signOut(auth).then(() => {
-                    console.log("Logged out successfully");
-                    // Optional: Redirect to home or reload
-                    window.location.reload();
-                }).catch((error) => {
-                    console.error("Logout error", error);
-                });
+        // --- UI HELPERS ---
+        openLoginModal: function () {
+            document.getElementById('login-modal').style.display = 'flex';
+        },
+
+        closeLoginModal: function () {
+            document.getElementById('login-modal').style.display = 'none';
+            document.getElementById('error-message').style.display = 'none';
+        },
+
+        // --- MAIN SIGN IN LOGIC ---
+        signInWith: async function (providerType) {
+            const errorEl = document.getElementById('error-message');
+            errorEl.style.display = 'none';
+
+            let provider;
+            try {
+                // Configure Providers
+                switch (providerType) {
+                    case 'google':
+                        provider = new GoogleAuthProvider();
+                        break;
+                    case 'github':
+                        provider = new GithubAuthProvider();
+                        // Scopes to access more user data if needed
+                        provider.addScope('read:user');
+                        break;
+                    case 'twitter':
+                        provider = new TwitterAuthProvider();
+                        break;
+                    case 'anonymous':
+                        // Guest Login
+                        const guestResult = await signInAnonymously(auth);
+                        await this.saveUserData(guestResult.user, null, 'guest');
+                        this.closeLoginModal();
+                        return;
+                    default:
+                        throw new Error("Provider not configured");
+                }
+
+                // Trigger Popup
+                const result = await signInWithPopup(auth, provider);
+
+                // Get Extra Data (Like GitHub Username)
+                const additionalInfo = getAdditionalUserInfo(result);
+
+                // Save/Update User in Database
+                await this.saveUserData(result.user, additionalInfo, providerType);
+
+                // Modal closes automatically via observer
+
+            } catch (error) {
+                console.error("Login Failed:", error);
+
+                // Handle specific error from your screenshot
+                if (error.code === 'auth/account-exists-with-different-credential') {
+                    errorEl.textContent = "Email already used. Please enable 'Multiple accounts' in Firebase Console settings.";
+                } else if (error.code === 'auth/invalid-credential') {
+                    errorEl.textContent = "Configuration Error: Check Client ID/Secret and Callback URL.";
+                } else {
+                    errorEl.textContent = error.message;
+                }
+                errorEl.style.display = 'block';
             }
-        };
+        },
 
-        // 4. Attach Login Button Event Listener
-        const loginBtn = document.getElementById('login-btn');
-        if (loginBtn) {
-            loginBtn.addEventListener('click', window.app.login);
+        // --- SAVE DATA TO FIRESTORE ---
+        saveUserData: async function (user, additionalInfo, providerName) {
+            try {
+                const userRef = doc(db, "users", user.uid);
+
+                // basic data
+                let userData = {
+                    uid: user.uid,
+                    email: user.email || "No Email",
+                    displayName: user.displayName || "User",
+                    photoURL: user.photoURL,
+                    provider: providerName,
+                    lastLogin: serverTimestamp()
+                };
+
+                // Add GitHub specific details if available
+                if (providerName === 'github' && additionalInfo && additionalInfo.profile) {
+                    userData.githubUsername = additionalInfo.profile.login; // GitHub handle
+                    userData.githubUrl = additionalInfo.profile.html_url;   // Link to GitHub profile
+                    userData.bio = additionalInfo.profile.bio || "";        // GitHub Bio
+                }
+
+                // Merge with existing data so we don't lose history
+                await setDoc(userRef, userData, { merge: true });
+                console.log("User details saved to database.");
+            } catch (e) {
+                console.error("Error saving user data:", e);
+            }
+        },
+
+        // Logout
+        logout: function () {
+            signOut(auth).then(() => {
+                console.log("User signed out");
+            });
         }
+    };
 
-        // 5. Auth State Listener (Populates the HTML Data)
-        onAuthStateChanged(auth, (user) => {
-            const userWidget = document.getElementById('user-widget');
+    // 4. UI OBSERVER
+    onAuthStateChanged(auth, (user) => {
+        const authView = document.getElementById('auth-view');
+        const userWidget = document.getElementById('user-widget');
+        const loginModal = document.getElementById('login-modal');
 
-            // HTML Elements to populate
-            const displayNameEl = document.getElementById('display-name');
+        if (user) {
+            // Logged In
+            if (authView) authView.style.display = 'none';
+            if (loginModal) loginModal.style.display = 'none';
+            if (userWidget) userWidget.style.display = 'block';
+
+            // Populate UI
+            const nameEl = document.getElementById('display-name');
             const emailEl = document.getElementById('user-email');
-            const smallPhotoEl = document.getElementById('user-photo-small');
-            const largePhotoEl = document.getElementById('profile-photo-large');
+            const uidEl = document.getElementById('user-uid');
+            const imgSmall = document.getElementById('user-photo-small');
+            const imgLarge = document.getElementById('profile-photo-large');
 
-            if (user) {
-                // --- USER IS LOGGED IN ---
-                console.log("User detected:", user.email);
+            if (nameEl) nameEl.textContent = user.displayName || "Anonymous";
+            if (emailEl) emailEl.textContent = user.email || "No Email";
+            if (uidEl) uidEl.textContent = user.uid;
 
-                // 1. Swap Buttons (Hide Login, Show Widget)
-                if (loginBtn) loginBtn.style.display = 'none';
-                if (userWidget) userWidget.style.display = 'block'; // Or 'flex' depending on CSS
+            const photo = user.photoURL || `https://ui-avatars.com/api/?name=${user.displayName || 'U'}&background=random`;
+            if (imgSmall) imgSmall.src = photo;
+            if (imgLarge) imgLarge.src = photo;
 
-                // 2. Inject Data
-                if (displayNameEl) displayNameEl.textContent = user.displayName;
-                if (emailEl) emailEl.textContent = user.email;
+        } else {
+            // Logged Out
+            if (authView) authView.style.display = 'block';
+            if (userWidget) userWidget.style.display = 'none';
+            if (document.getElementById('profile-card'))
+                document.getElementById('profile-card').style.display = 'none';
+        }
+    });
 
-                // 3. Update Images (Handle missing photos with a fallback)
-                const photoUrl = user.photoURL || "https://via.placeholder.com/80";
-                if (smallPhotoEl) smallPhotoEl.src = photoUrl;
-                if (largePhotoEl) largePhotoEl.src = photoUrl;
+    // Helper to toggle profile card
+    window.toggleProfile = function () {
+        const card = document.getElementById('profile-card');
+        if (card) {
+            card.style.display = (card.style.display === 'none' || card.style.display === '') ? 'block' : 'none';
+        }
+    }
 
-            } else {
-                // --- USER IS LOGGED OUT ---
-                console.log("No user signed in.");
-
-                // 1. Swap Buttons (Show Login, Hide Widget)
-                if (loginBtn) loginBtn.style.display = 'block';
-                if (userWidget) userWidget.style.display = 'none';
-            }
-        });
-    </script>
+    // Close on outside click
+    window.onclick = function (event) {
+        if (!event.target.closest('.user-widget') && document.getElementById('profile-card')) {
+            document.getElementById('profile-card').style.display = 'none';
+        }
+    }
+</script>
 </body>
 
 </html>
