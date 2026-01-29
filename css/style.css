@@ -133,7 +133,6 @@ section.dark,
   padding: 20px 0;
   background-color: #f8f9fa;
   position: relative;
- 
 }
 #page-title .page-title {
   text-align: center;
@@ -165,7 +164,7 @@ section.dark,
   text-align: left;
   display: block;
 }
-.breadcrumb  h3{
+.breadcrumb h3 {
   color: #000 !important;
 }
 #page-title.page-title-right .page-title {
@@ -194,7 +193,6 @@ section.dark,
   background-color: #1f1f1f;
 }
 #header[data-transparent="true"] + #page-title {
-
   position: relative;
   padding: 120px 0 60px 0;
 }
@@ -787,7 +785,9 @@ section.dark,
   position: absolute;
   top: 100%;
   transform: translateY(10px);
-  transition: opacity 0.3s ease 0s, transform 0.3s ease 0s;
+  transition:
+    opacity 0.3s ease 0s,
+    transform 0.3s ease 0s;
   width: 100%;
 }
 .grid-filter.gf-creative li:hover,
@@ -1155,7 +1155,6 @@ section.dark,
   border-bottom: 1px solid rgba(231, 231, 231, 0.05);
 }
 #topbar.dark.topbar-transparent {
- 
   border-bottom: 1px solid rgba(144, 144, 144, 0.25);
 }
 #topbar ~ #header[data-transparent="true"] + #slider,
@@ -1175,10 +1174,12 @@ section.dark,
   }
 }
 #header {
-  position: relative;
+  position: -webkit-sticky; /* For Safari compatibility */
+  position: sticky;
+  top: 0;
   width: 100%;
-  z-index: 199 !important;
- 
+  background: aliceblue;
+  z-index: 999;
 }
 #header .container {
   position: relative;
@@ -1394,7 +1395,7 @@ section.dark,
 #header.header-sticky.sticky-active .header-inner,
 #header.header-sticky.sticky-active #header-wrap {
   box-shadow: 0 12px 6px rgba(0, 0, 0, 0.06);
-  top: 0;  
+  top: 0;
   margin: 0 auto;
   width: 100%;
 }
@@ -1926,7 +1927,9 @@ section.dark,
   position: absolute;
   top: 100%;
   transform: translateY(10px);
-  transition: opacity 0.3s ease 0s, transform 0.3s ease 0s;
+  transition:
+    opacity 0.3s ease 0s,
+    transform 0.3s ease 0s;
   width: 100%;
   bottom: -2px;
 }
@@ -2057,7 +2060,8 @@ section.dark,
   height: 100%;
   border-radius: 20px;
   top: -24px;
-  box-shadow: 0 4px 9px 0 rgba(43, 43, 49, 0.1),
+  box-shadow:
+    0 4px 9px 0 rgba(43, 43, 49, 0.1),
     0 7px 14px 0 rgba(43, 43, 49, 0.13);
 }
 #dotsMenu ul {
@@ -2073,7 +2077,9 @@ section.dark,
   background-color: #eee;
   border-radius: 50%;
   transform: scale(0.6);
-  transition: transform 0.3s, background-color 0.5s;
+  transition:
+    transform 0.3s,
+    background-color 0.5s;
 }
 #dotsMenu ul li:hover {
   background-color: #2250fc;
@@ -2101,7 +2107,9 @@ section.dark,
   font-size: 12px;
   font-weight: 800;
   color: #fff;
-  transition: transform 0.2s, opacity 0.2s;
+  transition:
+    transform 0.2s,
+    opacity 0.2s;
   opacity: 0;
   transform-origin: 100% 50%;
   background-color: rgba(0, 0, 0, 0.6);
@@ -2622,7 +2630,8 @@ section.dark,
   width: 100%;
   opacity: 1;
   overflow: hidden;
-  transition: max-height 0.8s cubic-bezier(0.79, 0.14, 0.15, 0.86),
+  transition:
+    max-height 0.8s cubic-bezier(0.79, 0.14, 0.15, 0.86),
     opacity 0.8s cubic-bezier(0.79, 0.14, 0.15, 0.86);
 }
 #mainMenu.menu-vertical:not(.menu-overlay) > .container {
@@ -2672,7 +2681,8 @@ section.dark,
   max-height: 0;
   overflow: hidden;
   opacity: 0;
-  transition: max-height 0.5s cubic-bezier(0.77, 0, 0.175, 1),
+  transition:
+    max-height 0.5s cubic-bezier(0.77, 0, 0.175, 1),
     opacity 0.5s cubic-bezier(0.77, 0, 0.175, 1);
   position: static;
   clear: both;
@@ -2921,7 +2931,8 @@ section.dark,
     width: 100%;
     opacity: 1;
     overflow: hidden;
-    transition: max-height 0.8s cubic-bezier(0.79, 0.14, 0.15, 0.86),
+    transition:
+      max-height 0.8s cubic-bezier(0.79, 0.14, 0.15, 0.86),
       opacity 0.8s cubic-bezier(0.79, 0.14, 0.15, 0.86);
   }
   #mainMenu:not(.menu-overlay) > .container {
@@ -2975,7 +2986,8 @@ section.dark,
     max-height: 0;
     overflow: hidden;
     opacity: 0;
-    transition: max-height 0.5s cubic-bezier(0.77, 0, 0.175, 1),
+    transition:
+      max-height 0.5s cubic-bezier(0.77, 0, 0.175, 1),
       opacity 0.5s cubic-bezier(0.77, 0, 0.175, 1);
     position: static;
     clear: both;
@@ -3359,7 +3371,9 @@ section.dark,
 #search .search-form {
   opacity: 0;
   transform: scale3d(0.8, 0.8, 1);
-  transition: opacity 0.5s, transform 0.5s;
+  transition:
+    opacity 0.5s,
+    transform 0.5s;
   margin: 80px 0;
 }
 #search .search-form .text-muted {
@@ -3404,7 +3418,9 @@ section.dark,
   color: #fff;
   opacity: 0;
   transform: scale3d(0.8, 0.8, 1);
-  transition: opacity 0.5s, transform 0.5s;
+  transition:
+    opacity 0.5s,
+    transform 0.5s;
 }
 #search .search-suggestion-wrapper {
   display: none;
@@ -3470,7 +3486,9 @@ body.search-open #search .search-suggestion:nth-child(3) {
   position: fixed;
   left: -300px;
   height: 100%;
-  transition: left 0.4s, right 0.4s;
+  transition:
+    left 0.4s,
+    right 0.4s;
   overflow: hidden;
   z-index: 1;
 }
@@ -3517,7 +3535,9 @@ body.search-open #search .search-suggestion:nth-child(3) {
 .side-panel #wrapper {
   height: 100%;
   position: relative;
-  transition: left 0.4s, right 0.4s;
+  transition:
+    left 0.4s,
+    right 0.4s;
   left: 0;
 }
 .side-panel.side-panel-static #side-panel {
@@ -3531,7 +3551,9 @@ body.search-open #search .search-suggestion:nth-child(3) {
 .side-panel.side-panel-static .body-inner,
 .side-panel.side-panel-static #wrapper {
   padding-left: 300px;
-  transition: left 0.4s, right 0.4s;
+  transition:
+    left 0.4s,
+    right 0.4s;
 }
 .side-panel.side-panel-static .body-inner > section > .container,
 .side-panel.side-panel-static .body-inner > footer .footer-content > .container,
@@ -3612,7 +3634,9 @@ body.search-open #search .search-suggestion:nth-child(3) {
 .side-panel.side-panel-reval #wrapper {
   left: 0;
   right: auto;
-  transition: left 0.4s, right 0.4s;
+  transition:
+    left 0.4s,
+    right 0.4s;
 }
 .side-panel.side-panel-admin {
   transition: all 0.4s ease;
@@ -3774,7 +3798,9 @@ body.search-open #search .search-suggestion:nth-child(3) {
   #header.header-sticky
   #header-wrap
   > .container {
-  transition: left 0.4s, right 0.4s;
+  transition:
+    left 0.4s,
+    right 0.4s;
 }
 .side-panel.side-panel-right.side-panel-reval #side-panel {
   left: auto;
@@ -3784,7 +3810,9 @@ body.search-open #search .search-suggestion:nth-child(3) {
 .side-panel.side-panel-right.side-panel-reval #wrapper {
   left: auto;
   right: 0;
-  transition: left 0.4s, right 0.4s;
+  transition:
+    left 0.4s,
+    right 0.4s;
   box-shadow: 12px -2px 12px 0 rgba(0, 0, 0, 0.1);
 }
 .side-panel.side-panel-right.side-panel-active.side-panel-slide-in #side-panel {
@@ -3868,7 +3896,9 @@ body.search-open #search .search-suggestion:nth-child(3) {
   #header.header-sticky
   #header-wrap
   > .container {
-  transition: left 0.4s, right 0.4s;
+  transition:
+    left 0.4s,
+    right 0.4s;
   right: 300px;
   left: auto;
 }
@@ -4243,7 +4273,9 @@ body.side-panel-static #wrapper .container {
   position: absolute;
   top: 100%;
   transform: translateY(10px);
-  transition: opacity 0.3s ease 0s, transform 0.3s ease 0s;
+  transition:
+    opacity 0.3s ease 0s,
+    transform 0.3s ease 0s;
   width: 100%;
 }
 .page-menu.menu-creative nav > ul > li:hover > a,
@@ -4517,8 +4549,7 @@ html {
     gap: 12px;
     margin-top: 10px;
     padding: 17px !important;
-
-}
+  }
 }
 body {
   font-size: 1rem;
@@ -7876,8 +7907,11 @@ body.breakpoint-sm .col-3 .flickr-widget img .widget-instagram img {
   background-color: rgba(0, 0, 0, 0.25);
   background-repeat: no-repeat;
   background-position: center;
-  transition: opacity 0.3s, bottom 0.5s,
-    box-shadow 0.3s cubic-bezier(0.55, 0, 0.1, 1), background-color 0.1s linear;
+  transition:
+    opacity 0.3s,
+    bottom 0.5s,
+    box-shadow 0.3s cubic-bezier(0.55, 0, 0.1, 1),
+    background-color 0.1s linear;
   background-color: rgba(0, 0, 0, 0.25) !important;
   overflow: hidden;
 }
@@ -7897,8 +7931,11 @@ body.breakpoint-sm .col-3 .flickr-widget img .widget-instagram img {
   background-color: rgba(0, 0, 0, 0.25);
   background-repeat: no-repeat;
   background-position: center;
-  transition: opacity 0.3s, bottom 0.5s,
-    box-shadow 0.3s cubic-bezier(0.55, 0, 0.1, 1), background-color 0.1s linear;
+  transition:
+    opacity 0.3s,
+    bottom 0.5s,
+    box-shadow 0.3s cubic-bezier(0.55, 0, 0.1, 1),
+    background-color 0.1s linear;
   background-color: rgba(0, 0, 0, 0.25) !important;
   overflow: hidden;
 }
@@ -7917,7 +7954,8 @@ body.breakpoint-sm .col-3 .flickr-widget img .widget-instagram img {
   transition: transform 0.2s ease;
 }
 #scrollTop:hover {
-  transition: box-shadow 0.3s cubic-bezier(0.55, 0, 0.1, 1),
+  transition:
+    box-shadow 0.3s cubic-bezier(0.55, 0, 0.1, 1),
     background-color 0.05s linear 0.25s;
   background-color: transparent !important;
 }
@@ -11612,7 +11650,9 @@ a.btn:not([href]):not([tabindex]).btn-slide {
   overflow: hidden;
   padding: 22px;
   position: relative;
-  transition: width 0.4s ease 0s, background 0.4s ease 0s;
+  transition:
+    width 0.4s ease 0s,
+    background 0.4s ease 0s;
   width: 46px;
   line-height: 18px;
 }
@@ -11632,7 +11672,9 @@ a.btn:not([href]):not([tabindex]).btn-slide > span {
   position: absolute;
   text-align: left;
   top: 13px;
-  transition: left 0.5s ease 0s, opacity 0.5s ease 0s;
+  transition:
+    left 0.5s ease 0s,
+    opacity 0.5s ease 0s;
   white-space: nowrap;
   opacity: 0;
 }
@@ -11733,7 +11775,9 @@ button.btn.btn-reveal span,
 a.btn:not([href]):not([tabindex]).btn-reveal span {
   left: 0;
   position: relative;
-  transition: opacity 0.2s ease-out 0s, left 0.2s ease-out 0s;
+  transition:
+    opacity 0.2s ease-out 0s,
+    left 0.2s ease-out 0s;
 }
 button.btn.btn-reveal i,
 .btn:not(.close):not(.mfp-close).btn-reveal i,
@@ -11779,7 +11823,9 @@ button.btn.btn-reveal.btn-reveal-left span,
 a.btn:not([href]):not([tabindex]).btn-reveal.btn-reveal-left span {
   right: 0;
   left: auto;
-  transition: opacity 0.2s ease-out 0s, right 0.2s ease-out 0s;
+  transition:
+    opacity 0.2s ease-out 0s,
+    right 0.2s ease-out 0s;
 }
 button.btn.btn-reveal.btn-reveal-left i,
 .btn:not(.close):not(.mfp-close).btn-reveal.btn-reveal-left i,
@@ -12784,7 +12830,8 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
 }
 @font-face {
   font-family: "inspiro-icons";
-  src: url("../webfonts/inspiro-icons92ed.ttf?ijzgpf") format("truetype"),
+  src:
+    url("../webfonts/inspiro-icons92ed.ttf?ijzgpf") format("truetype"),
     url("../webfonts/inspiro-icons92ed.woff?ijzgpf") format("woff");
   font-weight: normal;
   font-style: normal;
@@ -13701,21 +13748,33 @@ div.icon-box:before {
   box-sizing: content-box;
 }
 .icon-box .icon i {
-  -webkit-transition: background-color 0.2s, color 0.2s;
-  transition: background-color 0.2s, color 0.2s;
+  -webkit-transition:
+    background-color 0.2s,
+    color 0.2s;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
 }
 .icon-box .icon i:after {
   top: -4px;
   left: -4px;
   padding: 4px;
   box-shadow: 0 0 0 3px #333;
-  -webkit-transition: -webkit-transform 0.2s, opacity 0.2s;
+  -webkit-transition:
+    -webkit-transform 0.2s,
+    opacity 0.2s;
   -webkit-transform: scale(0.8);
-  -moz-transition: -moz-transform 0.2s, opacity 0.2s;
+  -moz-transition:
+    -moz-transform 0.2s,
+    opacity 0.2s;
   -moz-transform: scale(0.8);
   -ms-transform: scale(0.8);
-  -webkit-transition: -webkit-transform 0.2s, opacity 0.2s;
-  transition: transform 0.2s, opacity 0.2s;
+  -webkit-transition:
+    -webkit-transform 0.2s,
+    opacity 0.2s;
+  transition:
+    transform 0.2s,
+    opacity 0.2s;
   -webkit-transform: scale(0.8);
   -ms-transform: scale(0.8);
   transform: scale(0.8);
@@ -17915,7 +17974,9 @@ body[data-bg-image] {
   padding: 1rem;
 }
 .p-hover-shadow {
-  transition: ease 0.3s box-shadow, ease 0.3s transform;
+  transition:
+    ease 0.3s box-shadow,
+    ease 0.3s transform;
   box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.1);
   transform: translateY(0);
 }
@@ -18016,7 +18077,9 @@ a {
   overflow: hidden;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
   padding-bottom: 15px;
 }
 
@@ -18069,23 +18132,25 @@ a {
     font-weight: 600;
     cursor: pointer;
     transition: background 0.3s;
-}
-.svg-inline--fa {
+  }
+  .svg-inline--fa {
     display: var(--fa-display, inline-block);
     height: 1.28em;
     overflow: visible;
-    vertical-align: -.125em;
-}
+    vertical-align: -0.125em;
+  }
 
-#login-btn {
+  #login-btn {
     width: 70px !important;
-}
-    button.btn:not(.btn-creative):not(.btn-slide), .btn:not(.close):not(.mfp-close):not(.btn-creative):not(.btn-slide), a.btn:not([href]):not([tabindex]):not(.btn-creative):not(.btn-slide) {
-        font-size: 9px;
-        height: 32px !important;
-        line-height: 23px !important;
-        padding: 0 14px;
-    }
+  }
+  button.btn:not(.btn-creative):not(.btn-slide),
+  .btn:not(.close):not(.mfp-close):not(.btn-creative):not(.btn-slide),
+  a.btn:not([href]):not([tabindex]):not(.btn-creative):not(.btn-slide) {
+    font-size: 9px;
+    height: 32px !important;
+    line-height: 23px !important;
+    padding: 0 14px;
+  }
 }
 
 #addToCartBtn {
@@ -18426,8 +18491,6 @@ a {
   background-color: #f5f6f8;
 }
 
-
-
 /* Text Styling */
 .text-content {
   display: flex;
@@ -18476,17 +18539,17 @@ a {
     display: flex;
     flex-direction: column;
     gap: 1px;
-}
+  }
 
-#topbar{
-display: block !important;
-}
+  #topbar {
+    display: block !important;
+  }
 
-.topbar-transparent {
+  .topbar-transparent {
     margin-top: -2px !important;
-}
+  }
 
-.summary-row {
+  .summary-row {
     display: flex;
     gap: 10px;
     justify-content: start;
@@ -18494,7 +18557,7 @@ display: block !important;
     padding-left: 30px;
     padding-right: 20px;
     margin-top: 50px;
-}
+  }
 }
 
 #login-btn {
@@ -18507,313 +18570,320 @@ display: block !important;
 
 /* --- CONTAINER POSITIONING --- */
 .nav-right {
-    position: relative;
-    display: flex;
-    align-items: center;
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .user-widget {
-    position: relative;
+  position: relative;
 }
 
 /* --- TRIGGER AVATAR --- */
 .avatar-small {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    cursor: pointer;
-    border: 2px solid #fff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    transition: transform 0.2s;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
 }
 .avatar-small:hover {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 /* --- THE DROPDOWN CARD --- */
 .profile-card {
-    display: none; /* Hidden by default */
-    position: absolute;
-    top: 60px; /* Space from top */
-    right: -10px; /* Align to right edge */
-    width: 300px;
-    background: #ffffff;
-    border-radius: 16px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    overflow: visible; /* Important for the arrow */
-    animation: fadeSlide 0.3s ease forwards;
+  display: none; /* Hidden by default */
+  position: absolute;
+  top: 60px; /* Space from top */
+  right: -10px; /* Align to right edge */
+  width: 300px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  overflow: visible; /* Important for the arrow */
+  animation: fadeSlide 0.3s ease forwards;
 }
 
 .profile-card.active {
-    display: block;
+  display: block;
 }
 
 /* --- THE ARROW (Right Side Induction) --- */
 .profile-card::before {
-    content: "";
-    position: absolute;
-    top: -10px; /* Moves arrow above card */
-    right: 20px; /* Positions arrow on the right side */
-    width: 0; 
-    height: 0; 
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid #8E2DE2; /* Matches the header color */
-    z-index: 1001;
+  content: "";
+  position: absolute;
+  top: -10px; /* Moves arrow above card */
+  right: 20px; /* Positions arrow on the right side */
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #8e2de2; /* Matches the header color */
+  z-index: 1001;
 }
 
 /* --- COLORED HEADER BACKGROUND --- */
 .profile-header-bg {
-    height: 90px;
-    background: linear-gradient(135deg, #8E2DE2, #4A00E0); /* Purple/Blue Gradient */
-    border-radius: 16px 16px 0 0; /* Round only top corners */
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 0;
+  height: 90px;
+  background: linear-gradient(
+    135deg,
+    #8e2de2,
+    #4a00e0
+  ); /* Purple/Blue Gradient */
+  border-radius: 16px 16px 0 0; /* Round only top corners */
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
 }
 
 /* --- CONTENT WRAPPER --- */
 .profile-content {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    padding-bottom: 20px;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding-bottom: 20px;
 }
 
 /* --- LARGE AVATAR (Overlapping) --- */
 .profile-img-large {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    border: 5px solid #ffffff; /* White border to separate from bg */
-    margin-top: 45px; /* Pushes half image out of the colored header */
-    object-fit: cover;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    background: #fff;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 5px solid #ffffff; /* White border to separate from bg */
+  margin-top: 45px; /* Pushes half image out of the colored header */
+  object-fit: cover;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background: #fff;
 }
 
 /* --- TEXT TYPOGRAPHY --- */
 #display-name {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #333;
-    margin: 10px 0 2px 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #333;
+  margin: 10px 0 2px 0;
 }
 
 #user-email {
-    font-size: 0.9rem;
-    color: #777;
-    margin-bottom: 20px;
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 20px;
 }
 
 /* --- ACTION ROWS --- */
 .profile-actions {
-    padding: 0 20px;
-    text-align: left;
+  padding: 0 20px;
+  text-align: left;
 }
 
 .action-row {
-    display: flex;
-    align-items: center;
-    
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background 0.2s;
-    
+  display: flex;
+  align-items: center;
+
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
 }
 
 .action-row:hover {
-    background-color: #f8f9fa;
+  background-color: #f8f9fa;
 }
 
 .icon-circle {
-    width: 36px;
-    height: 36px;
-    background: #e0e7ff;
-    color: #4f46e5;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 15px;
-    font-size: 14px;
+  width: 36px;
+  height: 36px;
+  background: #e0e7ff;
+  color: #4f46e5;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  font-size: 14px;
 }
 
 .action-text {
-    flex: 1;
+  flex: 1;
 }
 
 .action-text strong {
-    display: block;
-    font-size: 0.45rem;
-    color: #333;
-    height: 30px;
-    
+  display: block;
+  font-size: 0.45rem;
+  color: #333;
+  height: 30px;
 }
 .action-row .logout strong {
-    color: #b91c1c;
-    margin-top: -20px;
+  color: #b91c1c;
+  margin-top: -20px;
 }
 
 .action-text span {
-    font-size: 0.8rem;
-    color: #888;
+  font-size: 0.8rem;
+  color: #888;
 }
 
 .arrow-icon {
-    color: #ccc;
-    font-size: 12px;
+  color: #ccc;
+  font-size: 12px;
 }
 
 /* Logout Specific Styles */
 .action-row.logout:hover {
-    background-color: #fff1f2;
+  background-color: #fff1f2;
 }
 
 .logout-icon {
-    background: #fee2e2;
-    color: #e11d48;
-    margin-bottom: 0px;
+  background: #fee2e2;
+  color: #e11d48;
+  margin-bottom: 0px;
 }
 .logout-icon strong {
-    color: #e11d48;
-    margin-top: -20px !important;
+  color: #e11d48;
+  margin-top: -20px !important;
 }
 /* Animation */
 @keyframes fadeSlide {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ===============================
    1. MAIN NAVIGATION MENU
    =============================== */
 
-
 nav ul li a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 800;
-    font-size: 16px;
-    padding-bottom: 5px;
-    transition: color 0.3s ease;
-    position: relative;
+  text-decoration: none;
+  color: #333;
+  font-weight: 800;
+  font-size: 16px;
+  padding-bottom: 5px;
+  transition: color 0.3s ease;
+  position: relative;
 }
 
 /* HOVER EFFECT - Main Links */
 nav ul li a:hover {
-    color: #4A00E0; /* Purple accent */
+  color: #4a00e0; /* Purple accent */
 }
 
 /* ACTIVE CLASS - Highlights current page */
 nav ul li.active a {
-    color: #4A00E0;
-    font-weight: 700;
+  color: #4a00e0;
+  font-weight: 700;
 }
 
 /* Underline effect for active item */
 nav ul li.active a::after {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 3px;
-    background: #4A00E0;
-    border-radius: 2px;
-    position: absolute;
-    bottom: -8px;
-    left: 0;
+  content: "";
+  display: block;
+  width: 100%;
+  height: 3px;
+  background: #4a00e0;
+  border-radius: 2px;
+  position: absolute;
+  bottom: -8px;
+  left: 0;
 }
 
 /* Push the Right Side (Login/User) to the end */
 .nav-right {
-    margin-left: auto;
-    position: relative; /* Crucial for dropdown positioning */
-    display: flex;
-    align-items: center;
+  margin-left: auto;
+  position: relative; /* Crucial for dropdown positioning */
+  display: flex;
+  align-items: center;
 }
 
 /* ===============================
    2. LOGIN BUTTON
    =============================== */
 .btn-primary {
-    background-color: #4A00E0;
-    color: white;
-    border: none;
-    padding: 10px 24px;
-    border-radius: 30px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(74, 0, 224, 0.2);
+  background-color: #4a00e0;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(74, 0, 224, 0.2);
 }
 
 .btn-primary:hover {
-    background-color: #3700b3;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(74, 0, 224, 0.3);
+  background-color: #3700b3;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(74, 0, 224, 0.3);
 }
 
 /* ===============================
    3. USER WIDGET (AVATAR TRIGGER)
    =============================== */
 .user-widget {
-    position: relative;
+  position: relative;
 }
 
 .avatar-trigger {
-    cursor: pointer;
-    padding: 5px;
+  cursor: pointer;
+  padding: 5px;
 }
 
 .avatar-small {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #fff;
-    box-shadow: 0 0 0 2px #e0e0e0; /* Gray ring border */
-    transition: box-shadow 0.3s ease;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 2px #e0e0e0; /* Gray ring border */
+  transition: box-shadow 0.3s ease;
 }
 
 .avatar-trigger:hover .avatar-small {
-    box-shadow: 0 0 0 2px #4A00E0; /* Purple ring on hover */
+  box-shadow: 0 0 0 2px #4a00e0; /* Purple ring on hover */
 }
 
 /* ===============================
    4. DROPDOWN PROFILE CARD
    =============================== */
 .profile-card {
-    display: none; /* Hidden by default, JS toggles 'active' class */
-    position: absolute;
-    top: 65px;
-    right: 0;
-    width: 300px;
-    background-color: #fff;
-    border-radius: 16px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-    z-index: 1000;
-    border: 1px solid #f0f0f0;
-    overflow: visible;
-    animation: slideDown 0.3s ease forwards;
+  display: none; /* Hidden by default, JS toggles 'active' class */
+  position: absolute;
+  top: 65px;
+  right: 0;
+  width: 300px;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  border: 1px solid #f0f0f0;
+  overflow: visible;
+  animation: slideDown 0.3s ease forwards;
 }
 
 /* Show card when class 'active' is added via JS */
 .profile-card.active {
-    display: block;
+  display: block;
 }
 
 /* The Triangle Arrow pointing up */
 .profile-card::before {
-    content: "";
-    position: absolute;
-    top: -10px;
-    right: 15px;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid #8E2DE2; /* Matches header bg */
+  content: "";
+  position: absolute;
+  top: -10px;
+  right: 15px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #8e2de2; /* Matches header bg */
 }
 
 /* ===============================
@@ -18821,169 +18891,174 @@ nav ul li.active a::after {
    =============================== */
 /* Colorful Header Background */
 .profile-header-bg {
-    height: 80px;
-    background: linear-gradient(135deg, #8E2DE2, #4A00E0);
-    border-radius: 16px 16px 0 0;
+  height: 80px;
+  background: linear-gradient(135deg, #8e2de2, #4a00e0);
+  border-radius: 16px 16px 0 0;
 }
 
 .profile-content {
-    text-align: center;
-    padding-bottom: 20px;
-    position: relative;
-    margin-top: -45px; /* Pulls content up over header */
+  text-align: center;
+  padding-bottom: 20px;
+  position: relative;
+  margin-top: -45px; /* Pulls content up over header */
 }
 
 /* Large Profile Image */
 .profile-img-large {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    border: 5px solid #fff;
-    object-fit: cover;
-    background: #fff;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 5px solid #fff;
+  object-fit: cover;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* User Text */
 #display-name {
-    margin: 10px 0 5px;
-    font-size: 18px;
-    color: #333;
-    font-weight: 700;
+  margin: 10px 0 5px;
+  font-size: 18px;
+  color: #333;
+  font-weight: 700;
 }
 
 #user-email {
-    margin: 0 0 20px;
-    font-size: 14px;
-    color: #777;
+  margin: 0 0 20px;
+  font-size: 14px;
+  color: #777;
 }
 
 /* ===============================
    6. ACTION ROWS (HOVER & ICONS)
    =============================== */
 .profile-actions {
-    padding: 0 15px;
-    text-align: left;
+  padding: 0 15px;
+  text-align: left;
 }
 
 .action-row {
-    display: flex;
-    align-items: center;
-    padding: 12px;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-bottom: 5px;
 }
 
 /* Hover effect on dropdown items */
 .action-row:hover {
-    background-color: #f5f5f7;
+  background-color: #f5f5f7;
 }
 
 .icon-circle {
-    width: 36px;
-    height: 36px;
-    background-color: #e0e7ff; /* Light purple/blue */
-    color: #4A00E0;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 15px;
+  width: 36px;
+  height: 36px;
+  background-color: #e0e7ff; /* Light purple/blue */
+  color: #4a00e0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
 }
 
 .action-text {
-    flex: 1;
+  flex: 1;
 }
 
 .action-text strong {
-    display: block;
-    font-size: 14px;
-    color: #333;
+  display: block;
+  font-size: 14px;
+  color: #333;
 }
 
 .action-text span {
-    font-size: 12px;
-    color: #888;
-    margin-top: -20px;
+  font-size: 12px;
+  color: #888;
+  margin-top: -2px;
 }
 
 .arrow-icon {
-    color: #ccc;
-    font-size: 12px;
+  color: #ccc;
+  font-size: 12px;
 }
 
 /* Logout Specific Colors */
 .logout-icon {
-    background-color: #fee2e2;
-    color: #dc2626;
+  background-color: #fee2e2;
+  color: #dc2626;
 }
 
 .action-row.logout:hover {
-    background-color: #fff1f2;
+  background-color: #fff1f2;
 }
 
 /* Animation Keyframes */
 @keyframes slideDown {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-
 
 /* Header Cart Button Styles */
 .header-cart-btn {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
 }
 
 /* The Red Notification Badge */
 .cart-badge {
-    background-color: #ff4757; /* Red color */
-    color: white;
-    font-size: 10px;
-    font-weight: bold;
-    padding: 2px 6px;
-    border-radius: 50%;
-    position: absolute;
-    top: -5px;
-    right: -10px;
-    min-width: 18px;
-    text-align: center;
+  background-color: #ff4757; /* Red color */
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 50%;
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  min-width: 18px;
+  text-align: center;
 }
-
 
 /* Toast Notification */
 #toast-notification {
-    visibility: hidden;
-    min-width: 280px;
-    background-color: #27ae60; /* Success Green */
-    color: #fff;
-    text-align: center;
-    border-radius: 8px; /* Rounded corners */
-    padding: 16px;
-    position: fixed;
-    z-index: 10001;
-    left: 50%;
-    bottom: 30px;
-    transform: translateX(-50%);
-    font-size: 15px;
-    font-weight: 500;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    opacity: 0;
-    transition: opacity 0.4s ease, bottom 0.4s ease;
+  visibility: hidden;
+  min-width: 280px;
+  background-color: #27ae60; /* Success Green */
+  color: #fff;
+  text-align: center;
+  border-radius: 8px; /* Rounded corners */
+  padding: 16px;
+  position: fixed;
+  z-index: 10001;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+  font-size: 15px;
+  font-weight: 500;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition:
+    opacity 0.4s ease,
+    bottom 0.4s ease;
 }
 
 /* Class to trigger animation */
 #toast-notification.show {
-    visibility: visible;
-    opacity: 1;
-    bottom: 50px; /* Slight slide-up effect */
+  visibility: visible;
+  opacity: 1;
+  bottom: 50px; /* Slight slide-up effect */
 }
-
 
 .moq-ui-message {
   display: none;
@@ -19001,8 +19076,7 @@ nav ul li.active a::after {
 
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
 
-  transition: 
-    all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
 }
 
 /* Hover Effect */
@@ -19015,218 +19089,218 @@ nav ul li.active a::after {
   transform: translateY(-2px);
   cursor: default;
 }
- /* --- Basic Reset --- */
+/* --- Basic Reset --- */
 
-        /* --- Login Button --- */
-        .btn-primary {
-            padding: 10px 20px;
-            background: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
+/* --- Login Button --- */
+.btn-primary {
+  padding: 10px 20px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
 
-        .btn-primary:hover {
-            background: #0056b3;
-        }
+.btn-primary:hover {
+  background: #0056b3;
+}
 
-        /* --- Modal (Pop-up) Styles --- */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
+/* --- Modal (Pop-up) Styles --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
 
-        .modal-content {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            width: 300px;
-            text-align: center;
-            position: relative;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 300px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
 
-        .close-modal {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 24px;
-            cursor: pointer;
-            color: #aaa;
-        }
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #aaa;
+}
 
-        .provider-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 20px;
-        }
+.provider-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
 
-        .btn-provider {
-            padding: 10px;
-            border: 1px solid #ddd;
-            background: white;
-            border-radius: 5px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            font-weight: bold;
-            transition: 0.2s;
-        }
+.btn-provider {
+  padding: 10px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: bold;
+  transition: 0.2s;
+}
 
-        .btn-provider:hover {
-            background: #f9f9f9;
-            transform: translateY(-2px);
-        }
+.btn-provider:hover {
+  background: #f9f9f9;
+  transform: translateY(-2px);
+}
 
-        .google {
-            color: #db4437;
-        }
+.google {
+  color: #db4437;
+}
 
-        .github {
-            color: #333;
-        }
+.github {
+  color: #333;
+}
 
-        .twitter {
-            color: #1da1f2;
-        }
+.twitter {
+  color: #1da1f2;
+}
 
-        /* --- User Widget & Profile Card --- */
-        .user-widget {
-            position: relative;
-        }
+/* --- User Widget & Profile Card --- */
+.user-widget {
+  position: relative;
+}
 
-        .avatar-trigger {
-            cursor: pointer;
-        }
+.avatar-trigger {
+  cursor: pointer;
+}
 
-        .avatar-small {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            border: 2px solid white;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
+.avatar-small {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
 
-        /* The Dropdown Card */
-        .profile-card {
-            position: absolute;
-            top: 60px;
-            right: 0;
-            width: 280px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-            overflow: hidden;
-            z-index: 100;
-            animation: fadeIn 0.2s ease;
-        }
+/* The Dropdown Card */
+.profile-card {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  width: 280px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  z-index: 100;
+  animation: fadeIn 0.2s ease;
+}
 
-        .profile-header-bg {
-            height: 60px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-        }
+.profile-header-bg {
+  height: 60px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+}
 
-        .profile-content {
-            padding: 0 20px 20px;
-            text-align: center;
-            margin-top: -40px;
-        }
+.profile-content {
+  padding: 0 20px 20px;
+  text-align: center;
+  margin-top: -40px;
+}
 
-        .profile-img-large {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            border: 4px solid white;
-            background: white;
-            object-fit: cover;
-        }
+.profile-img-large {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 4px solid white;
+  background: white;
+  object-fit: cover;
+}
 
-        h4 {
-            margin: 10px 0 5px;
-            color: #333;
-        }
+h4 {
+  margin: 10px 0 5px;
+  color: #333;
+}
 
-        p {
-            margin: 0;
-            color: #777;
-            font-size: 0.9rem;
-        }
+p {
+  margin: 0;
+  color: #777;
+  font-size: 0.9rem;
+}
 
-        /* Profile Actions */
-        .profile-actions {
-            margin-top: 20px;
-            text-align: left;
-        }
+/* Profile Actions */
+.profile-actions {
+  margin-top: 20px;
+  text-align: left;
+}
 
-        .action-row {
-            display: flex;
-            align-items: center;
-            padding: 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
+.action-row {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
 
-        .action-row:hover {
-            background: #f5f7fa;
-        }
+.action-row:hover {
+  background: #f5f7fa;
+}
 
-        .icon-circle {
-            width: 32px;
-            height: 32px;
-            background: #e0e7ff;
-            color: #4f46e5;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-        }
+.icon-circle {
+  width: 32px;
+  height: 32px;
+  background: #e0e7ff;
+  color: #4f46e5;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+}
 
-        .logout-icon {
-            background: #fee2e2;
-            color: #ef4444;
-        }
+.logout-icon {
+  background: #fee2e2;
+  color: #ef4444;
+}
 
-        .action-text {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            font-size: 0.9rem;
-        }
+.action-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+}
 
-        .action-text span {
-            font-size: 0.75rem;
-            color: #999;
-            font-weight: normal;
-        }
+.action-text span {
+  font-size: 0.75rem;
+  color: #999;
+  font-weight: normal;
+}
 
-        .arrow-icon {
-            color: #ccc;
-            font-size: 0.8rem;
-        }
+.arrow-icon {
+  color: #ccc;
+  font-size: 0.8rem;
+}
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
