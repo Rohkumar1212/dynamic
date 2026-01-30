@@ -513,7 +513,7 @@
             display: none;
             /* Hide standard menu on mobile */
             position: absolute;
-            top: 100px;
+            top: 70px;
             left: 0;
             width: 100%;
             background: rgb(255, 255, 255);
