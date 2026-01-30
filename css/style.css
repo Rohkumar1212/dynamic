@@ -18118,7 +18118,7 @@ a {
 /* Mobile optimization */
 @media (max-width: 480px) {
   .category-card img {
-    height: 160px;
+    height: auto;
   }
   .page-frame {
     padding: 8px !important;
