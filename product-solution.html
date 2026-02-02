@@ -1089,6 +1089,136 @@
         }
     }
 </script>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+    import { getAuth, signOut, onAuthStateChanged, signInWithPopup, signInAnonymously, GoogleAuthProvider, GithubAuthProvider, TwitterAuthProvider, getAdditionalUserInfo } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+    import { getFirestore, doc, setDoc, getDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyBfJTHAzQ6u27vGwdsC9HEEMYCdNnjYnJU",
+        authDomain: "dynamiccorrugations-ac4a8.firebaseapp.com",
+        projectId: "dynamiccorrugations-ac4a8",
+        storageBucket: "dynamiccorrugations-ac4a8.firebasestorage.app",
+        messagingSenderId: "481189371368",
+        appId: "1:481189371368:web:58cf359e533d8cadcdd85d",
+        measurementId: "G-6PL4T4METT"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    window.app = {
+        openLoginModal: () => {
+            document.getElementById('login-modal').style.display = 'flex';
+            window.app.hideGuestForm();
+        },
+        closeLoginModal: () => {
+            document.getElementById('login-modal').style.display = 'none';
+        },
+        showGuestForm: () => {
+            document.getElementById('auth-options').style.display = 'none';
+            document.getElementById('guest-form-container').style.display = 'block';
+        },
+        hideGuestForm: () => {
+            document.getElementById('auth-options').style.display = 'block';
+            document.getElementById('guest-form-container').style.display = 'none';
+        },
+
+        // Save Social User Data
+        signInWith: async function (providerType) {
+            let provider;
+            if (providerType === 'google') provider = new GoogleAuthProvider();
+            // ... add other providers here
+            try {
+                const result = await signInWithPopup(auth, provider);
+                await this.saveToFirestore(result.user, { provider: providerType });
+                this.closeLoginModal();
+            } catch (err) { this.handleError(err); }
+        },
+
+        // GUEST LOGIN LOGIC
+        submitGuestLogin: async function () {
+            const name = document.getElementById('guest-name').value;
+            const email = document.getElementById('guest-email').value;
+            const address = document.getElementById('guest-address').value;
+
+            if (!name || !email) {
+                this.handleError({ message: "Name and Email are required!" });
+                return;
+            }
+
+            try {
+                // 1. Trigger Anonymous Login (Fixes admin-restricted error)
+                const result = await signInAnonymously(auth);
+
+                // 2. Save guest details to Firestore
+                const guestData = {
+                    uid: result.user.uid,
+                    displayName: name,
+                    email: email,
+                    address: address,
+                    provider: 'guest',
+                    lastLogin: serverTimestamp()
+                };
+
+                await setDoc(doc(db, "users", result.user.uid), guestData, { merge: true });
+
+                // 3. Immediately close modal
+                this.closeLoginModal();
+
+            } catch (err) { this.handleError(err); }
+        },
+
+        handleError: (err) => {
+            const errEl = document.getElementById('error-message');
+            errEl.textContent = err.message;
+            errEl.style.display = 'block';
+        },
+
+        logout: () => signOut(auth).then(() => location.reload())
+    };
+
+    // UI OBSERVER: This fills the profile section (image_203131.png fix)
+    onAuthStateChanged(auth, async (user) => {
+        const userWidget = document.getElementById('user-widget');
+        const authView = document.getElementById('auth-view');
+
+        if (user) {
+            authView.style.display = 'none';
+            userWidget.style.display = 'block';
+
+            let finalName = user.displayName;
+            let finalEmail = user.email;
+
+            // FETCH DATA FROM FIRESTORE (Ensures guest name and email show up)
+            const userDoc = await getDoc(doc(db, "users", user.uid));
+            if (userDoc.exists()) {
+                const data = userDoc.data();
+                finalName = data.displayName || finalName;
+                finalEmail = data.email || finalEmail;
+            }
+
+            // Update UI Elements
+            document.getElementById('display-name').textContent = finalName || "Guest User";
+            document.getElementById('user-email').textContent = finalEmail || "No Email";
+
+            const photo = user.photoURL || `https://ui-avatars.com/api/?name=${finalName || 'U'}&background=random`;
+            document.getElementById('user-photo-small').src = photo;
+            document.getElementById('profile-photo-large').src = photo;
+
+        } else {
+            authView.style.display = 'block';
+            userWidget.style.display = 'none';
+        }
+    });
+
+    window.toggleProfile = () => {
+        const card = document.getElementById('profile-card');
+        card.style.display = (card.style.display === 'none' || card.style.display === '') ? 'block' : 'none';
+    };
+</script>
 </body>
 
 </html>
