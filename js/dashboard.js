@@ -70,36 +70,58 @@ document.addEventListener('DOMContentLoaded', () => {
     // Set the default tab (Overview) on load
     app.switchTab('overview');
 });
-  /* --- AUTH LISTENER --- */
-  onAuthStateChanged(auth, (user) => {
-    const loginBtn = document.getElementById("login-btn");
-    const userWidget = document.getElementById("user-widget");
+ /* --- AUTH LISTENER --- */
+onAuthStateChanged(auth, async (user) => { // Added async to allow database fetching
+  const loginBtn = document.getElementById("login-btn");
+  const userWidget = document.getElementById("user-widget");
 
-    if (user) {
-      if(loginBtn) loginBtn.style.display = "none";
-      if(userWidget) userWidget.style.display = "block";
-      
-      // Update Images
-      const photo = user.photoURL || "https://via.placeholder.com/150";
-      const userPhoto = document.getElementById("user-photo");
-      const profilePhotoLarge = document.getElementById("profile-photo-large");
-      
-      if(userPhoto) userPhoto.src = photo;
-      if(profilePhotoLarge) profilePhotoLarge.src = photo;
-      
-      // Update Text
-      const displayName = document.getElementById("display-name");
-      const userEmail = document.getElementById("user-email");
-      
-      if(displayName) displayName.textContent = user.displayName;
-      if(userEmail) userEmail.textContent = user.email;
+  if (user) {
+    if (loginBtn) loginBtn.style.display = "none";
+    if (userWidget) userWidget.style.display = "block";
 
-    } else {
-      if(loginBtn) loginBtn.style.display = "block";
-      if(userWidget) userWidget.style.display = "none";
+    // 1. Set Default values from Auth
+    let displayNameValue = user.displayName || "Guest";
+    let emailValue = user.email || "No Email";
+    let photo = user.photoURL || "../images/team/user.jfif"; // Your specified local fallback
+
+    // 2. Fetch extra details from Firestore (important for Guest accounts)
+    try {
+      // Import getDoc if not already available in your scope
+      const { getDoc, doc } = await import("https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js");
+      const userDoc = await getDoc(doc(db, "users", user.uid));
+      
+      if (userDoc.exists()) {
+        const data = userDoc.data();
+        displayNameValue = data.displayName || displayNameValue;
+        emailValue = data.email || emailValue;
+        // Use database photo if it exists, otherwise stay with previous 'photo' value
+        photo = data.photoURL || photo;
+
+        // Optional: Update Noida address display if you have the element
+        const addrDisplay = document.getElementById("user-address-display");
+        if (addrDisplay) addrDisplay.textContent = data.address || "";
+      }
+    } catch (error) {
+      console.error("Error fetching user data from Firestore:", error);
     }
-  });
 
+    // 3. Update Images
+    const userPhoto = document.getElementById("user-photo");
+    const profilePhotoLarge = document.getElementById("profile-photo-large");
+    if (userPhoto) userPhoto.src = photo;
+    if (profilePhotoLarge) profilePhotoLarge.src = photo;
+
+    // 4. Update Text
+    const displayName = document.getElementById("display-name");
+    const userEmail = document.getElementById("user-email");
+    if (displayName) displayName.textContent = displayNameValue;
+    if (userEmail) userEmail.textContent = emailValue;
+
+  } else {
+    if (loginBtn) loginBtn.style.display = "block";
+    if (userWidget) userWidget.style.display = "none";
+  }
+});
   /* --- INITIALIZATION --- */
   document.addEventListener("DOMContentLoaded", () => {
       
@@ -117,30 +139,104 @@ document.addEventListener('DOMContentLoaded', () => {
       }
   });
 
-/* ================= USER INFO ================= */
-onAuthStateChanged(auth, (user) => {
-  if (!user) return; // dashboard auth guard should handle redirect
 
-  // PHOTO
-  const photo = document.getElementById("d-photo");
-  
-  photo.alt = user.displayName || "User";
+/* ================= USER INFO OBSERVER ================= */
+onAuthStateChanged(auth, async (user) => {
+  if (!user) return; 
 
-  // NAME & EMAIL
-  document.getElementById("d-name").textContent =
-    user.displayName || "User";
+  // Default values for standard social logins
+  let finalName = user.displayName || "User";
+  let finalEmail = user.email || "";
+  let finalPhoto = user.photoURL || "../images/team/user.jfif";
+  let joinDate = user.metadata.creationTime; 
 
-  document.getElementById("d-email").textContent =
-    user.email || "";
+  // CONDITION: If user is Guest (Anonymous), fetch custom data from Firestore
+  try {
+    const userDoc = await getDoc(doc(db, "users", user.uid));
+    if (userDoc.exists()) {
+      const data = userDoc.data();
+      
+      // Override with data from the Guest Form
+      finalName = data.displayName || finalName;
+      finalEmail = data.email || finalEmail;
+      finalPhoto = data.photoURL || finalPhoto;
+      
+      // Use the Firestore timestamp for accurate "Member since"
+      if (data.lastLogin) {
+        joinDate = data.lastLogin.toDate();
+      }
 
-  // MEMBER SINCE
-  const createdAt = user.metadata.creationTime;
-  const date = new Date(createdAt);
+      // If you have a phone display element, you can set it here:
+      const phoneEl = document.getElementById("d-phone");
+      if (phoneEl) phoneEl.textContent = data.phone || "No Phone";
+    }
+  } catch (error) {
+    console.error("Dashboard data error:", error);
+  }
+
+  // UPDATE DASHBOARD UI ELEMENTS
+  const photoEl = document.getElementById("d-photo");
+  const nameEl = document.getElementById("d-name");
+  const emailEl = document.getElementById("d-email");
+  const memberSinceEl = document.getElementById("d-member-since");
+
+  if (photoEl) {
+    photoEl.src = finalPhoto;
+    photoEl.alt = finalName;
+  }
+  if (nameEl) nameEl.textContent = finalName;
+  if (emailEl) emailEl.textContent = finalEmail;
+
+  // FORMAT AND DISPLAY DATE
+  const date = new Date(joinDate);
   const monthYear = date.toLocaleString("default", {
     month: "long",
     year: "numeric",
   });
 
-  document.getElementById("d-member-since").textContent =
-    `Member since ${monthYear}`;
+  if (memberSinceEl) {
+    memberSinceEl.textContent = `Member since ${monthYear}`;
+  }
 });
+
+/* --- GUEST SUBMISSION LOGIC --- */
+window.app.submitGuestLogin = async function () {
+    const name = document.getElementById('guest-name').value;
+    const email = document.getElementById('guest-email').value;
+    const phone = document.getElementById('phone').value; // Capturing Phone Number
+    const errorEl = document.getElementById('error-message');
+
+    if (!name || !email) {
+        errorEl.textContent = "Full Name and Email are required!";
+        errorEl.style.display = 'block';
+        return;
+    }
+
+    try {
+        // 1. Trigger Anonymous Login
+        const result = await signInAnonymously(auth);
+
+        // 2. Save Guest details to Firestore immediately
+        const userData = {
+            uid: result.user.uid,
+            displayName: name,
+            email: email,
+            phone: phone, // Saving Phone from form
+            provider: 'guest',
+            lastLogin: serverTimestamp() // Used for "Member since"
+        };
+
+        // Reference to the 'users' collection using the new UID
+        await setDoc(doc(db, "users", result.user.uid), userData, { merge: true });
+
+        // 3. Success: Close the login modal
+        this.closeLoginModal();
+
+    } catch (err) {
+        // Handle 'auth/admin-restricted-operation' if Anonymous Auth isn't enabled in Console
+        errorEl.textContent = err.message;
+        errorEl.style.display = 'block';
+    }
+};
+
+
