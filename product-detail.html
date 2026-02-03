@@ -842,7 +842,8 @@ function showPopup() {
         submitGuestLogin: async function () {
             const name = document.getElementById('guest-name').value;
             const email = document.getElementById('guest-email').value;
-            const address = document.getElementById('guest-address').value;
+              const address = document.getElementById('phone').value;
+
 
             if (!name || !email) {
                 this.handleError({ message: "Name and Email are required!" });

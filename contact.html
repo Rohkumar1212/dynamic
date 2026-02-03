@@ -209,7 +209,7 @@
                                             style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
                                         <input type="email" id="guest-email" placeholder="Email Address"
                                             style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
-                                        <input type="text" id="guest-address" placeholder="Shipping Address"
+                                        <input type="text" id="phone" placeholder="Phone Number"
                                             style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
                     
                                         <button class="btn btn-primary" onclick="window.app.submitGuestLogin()">Complete Login</button>
@@ -282,23 +282,42 @@
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <h3 class="text-uppercase">Address & Map</h3>
                         <div class="row">
                             <div class="col-lg-6">
+                                <h3 class="text-uppercase mb-4">Address & Map</h3>
                                 <address>
-                                    <strong>40 K.M. Stone,</strong><br>
-                                    Vill. Narsinghpur,<br>
-                                    Delhi-Jaipur Highway,<br>
-                                    Sector-35 Gurugram-122004 (Hr).<br>
-                                    <abbr title="Phone">P:</h4> +91 9891040840
+                                    <p>
+                                        <i class="fa fa-map-marker-alt" aria-hidden="true"></i>
+                                        <strong>40 K.M. Stone,</strong><br>
+                                        Vill. Narsinghpur, Delhi-Jaipur Highway,<br>
+                                        Sector-35, Gurugram - 122004 (HR)
+                                    </p>
+                                    <p>
+                                        <i class="fa fa-phone" aria-hidden="true"></i>
+                                        <strong>Phone:</strong>
+                                        <a href="tel:+919891040840" style="text-decoration: none; color: inherit;">+91 9891040840</a>
+                                    </p>
                                 </address>
                             </div>
+                        
                             <div class="col-lg-6">
-                                <p>dynamiccorrugations@gmail.com</p>
-                                <p>dynamiccorrugations@hotmail.com</p>
-                                <p>mail@dynamiccorrugations.com</p>
-                            </div>
-                        </div>
+                                <h3 class="text-uppercase mb-4">Inquiry</h3>
+                                <div class="email-links">
+                                    <p>
+                                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                                        <a href="mailto:dynamiccorrugations@gmail.com">dynamiccorrugations@gmail.com</a>
+                                    </p>
+                                    <p>
+                                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                                        <a href="mailto:dynamiccorrugations@hotmail.com">dynamiccorrugations@hotmail.com</a>
+                                    </p>
+                                    <p>
+                                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                                        <a href="mailto:mail@dynamiccorrugations.com">mail@dynamiccorrugations.com</a>
+                                    </p>
+                                </div>
+                            </div>                      
+                        
                         <!-- Google Map -->
                         <div class="map">
                             <iframe
@@ -700,7 +719,8 @@
         submitGuestLogin: async function () {
             const name = document.getElementById('guest-name').value;
             const email = document.getElementById('guest-email').value;
-            const address = document.getElementById('guest-address').value;
+              const address = document.getElementById('phone').value;
+
 
             if (!name || !email) {
                 this.handleError({ message: "Name and Email are required!" });
@@ -762,7 +782,7 @@
             document.getElementById('display-name').textContent = finalName || "Guest User";
             document.getElementById('user-email').textContent = finalEmail || "No Email";
 
-            const photo = user.photoURL || `https://ui-avatars.com/api/?name=${finalName || 'U'}&background=random`;
+            const photo = user.photoURL || `?name=${finalName || 'U'}&background=random`;
             document.getElementById('user-photo-small').src = photo;
             document.getElementById('profile-photo-large').src = photo;
 
