@@ -23,13 +23,13 @@
         "id": "kraft",
         "name": "Kraft – Premium Finish",
         "multiplier": 1.25,
-        "image": "/images/products/Corrugated Box/Kraft Box.jpg"
+        "image": "/images/products/Corrugated Box/Corrugated Box-18-2.png"
       },
       {
         "id": "corrugated",
         "name": "Corrugated — Heavy Duty",
         "multiplier": 1.4,
-        "image": "/images/products/Corrugated Box/Heavy Duty Box.jpg"
+        "image": "/images/products/Corrugated Box/Corrugated Box-18-2.png"
       }
     ],
     "details": {
