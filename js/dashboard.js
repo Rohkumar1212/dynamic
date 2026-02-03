@@ -123,7 +123,7 @@ onAuthStateChanged(auth, (user) => {
 
   // PHOTO
   const photo = document.getElementById("d-photo");
-  photo.src = user.photoURL || "https://i.pravatar.cc/100";
+  
   photo.alt = user.displayName || "User";
 
   // NAME & EMAIL
