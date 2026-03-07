@@ -112,7 +112,98 @@
             border-radius: 4px;
         }
     </style>
-  
+    <script>
+        // 1. THIS IS YOUR API JSON DATA
+        const apiData = {
+            tabs: [
+                {
+                    id: "details",
+                    title: "Details",
+                    content: `<h3>Box Making – Details</h3>
+                              <p>This RSC carton is produced using industrial corrugation technology. High-quality kraft paper facings and water-based adhesive ensure maximum durability.</p>
+                              <ul>
+                                <li><b>Design:</b> Regular Slotted Container (RSC)</li>
+                                <li><b>Seams:</b> Hot melt or cold glue options</li>
+                                <li><b>Quality:</b> ECT & Burst test certified</li>
+                              </ul>`
+                },
+                {
+                    id: "specs",
+                    title: "Specs & Features",
+                    content: `<h3>Specifications</h3>
+                              <div class="spec-item"><span>Fluting</span><b>BC (Double-wall)</b></div>
+                              <div class="spec-item"><span>Paper Grade</span><b>120–250 GSM</b></div>
+                              <div class="spec-item"><span>Strength</span><b>ECT 32–44</b></div>
+                              <div class="spec-item"><span>Finishing</span><b>Premium Plain Kraft</b></div>`
+                },
+                {
+                    id: "shipping",
+                    title: "Shipping",
+                    content: `<h3>Shipping & MOQ</h3>
+                              <p><b>India-wide shipping:</b> Reliable logistics for all states.</p>
+                              <p><b>MOQ:</b> 50 units for custom sizes.</p>
+                              <p>Bulk orders are fully palletized for safe handling during transit.</p>`
+                },
+                {
+                    id: "faqs",
+                    title: "FAQs",
+                    content: `<div class="faq-item"><span class="faq-q">Q: Can you print our logo?</span>
+                              <span>A: Yes — upload your artwork during checkout for custom printing.</span></div>
+                              <div class="faq-item"><span class="faq-q">Q: Do you provide dielines?</span>
+                              <span>A: Yes, templates are provided immediately after order confirmation.</span></div>`
+                }
+            ],
+            related: ["Strengthened RSC", "Die-cut Display", "Telescopic Boxes", "Heavy Duty"],
+            reviews: [
+                { name: "Rajesh", text: "Delivered well packed. Good quality corrugation." },
+                { name: "Sonia", text: "Kraft finish as requested. Looks premium." }
+            ]
+        };
+
+        // 2. RENDER LOGIC
+        const tabList = document.getElementById('tabList');
+        const contentHolder = document.getElementById('tabContentHolder');
+
+        apiData.tabs.forEach((tab, index) => {
+            // Create Buttons
+            const btn = document.createElement('button');
+            btn.className = `tab-btn ${index === 0 ? 'active' : ''}`;
+            btn.textContent = tab.title;
+            btn.onclick = () => switchTab(tab.id, btn);
+            tabList.appendChild(btn);
+
+            // Create Panels
+            const panel = document.createElement('div');
+            panel.id = tab.id;
+            panel.className = `tab-panel ${index === 0 ? 'active' : ''}`;
+            panel.innerHTML = tab.content;
+            contentHolder.appendChild(panel);
+        });
+
+        function switchTab(tabId, clickedBtn) {
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+
+            document.getElementById(tabId).classList.add('active');
+            clickedBtn.classList.add('active');
+        }
+
+        // Render Related Chips
+        apiData.related.forEach(item => {
+            const span = document.createElement('span');
+            span.className = 'chip';
+            span.textContent = item;
+            document.getElementById('chipsContainer').appendChild(span);
+        });
+
+        // Render Reviews
+        apiData.reviews.forEach(rev => {
+            const div = document.createElement('div');
+            div.style.marginBottom = "12px";
+            div.innerHTML = `<strong>${rev.name}</strong> <div style="font-size:14px; color:var(--text-light)">"${rev.text}"</div>`;
+            document.getElementById('reviewsContainer').appendChild(div);
+        });
+    </script>
 </head>
 
 <body>

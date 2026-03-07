@@ -1019,7 +1019,7 @@ async function loadProducts() {
             return;
         }
 
-        const baseURL = 'http://147.93.108.191:4001';
+        const baseURL = 'https://admin.dynamiccorrugations.com';
         const apiURL = `${baseURL}/api/products`;
 
         try {
@@ -1090,7 +1090,7 @@ async function loadProducts() {
 
     document.addEventListener('DOMContentLoaded', loadProducts);</script>
 <script>
-    const API_BASE = 'http://147.93.108.191:4001';
+    const API_BASE = 'https://admin.dynamiccorrugations.com';
         const mainContainer = document.getElementById('main-container');
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
