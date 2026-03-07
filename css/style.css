@@ -109,10 +109,43 @@ section {
   z-index: 1;
   background-color: #fff;
 }
+.chip {
+    display: inline-flex;
+    align-items: center;
+    background-color: #f1f3f5; /* Light grey background */
+    color: #212529;            /* Dark text */
+    padding: 4px 12px;         /* Vertical and Horizontal padding */
+    border-radius: 50px;       /* Makes it a pill shape */
+    font-size: 0.9rem;
+    border: 1px solid #dee2e6; /* Subtle border */
+    transition: all 0.2s ease;
+}
+
+/* Optional: Add a hover effect if the price is clickable */
+.chip:hover {
+    background-color: #e9ecef;
+    transform: translateY(-1px);
+}
+
+/* Optional: Primary version for a "featured" price */
+.chip-primary {
+    background-color: #e7f1ff;
+    color: #007bff;
+    border-color: #b8daff;
+}
 @media (max-width: 768px) {
   section {
     padding: 40px 0;
   }
+  .modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: auto;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
 }
 @media (max-width: 1024px) {
   .container {
@@ -19129,7 +19162,6 @@ nav ul li.active a::after {
   background: white;
   padding: 30px;
   border-radius: 12px;
-  width: 300px;
   text-align: center;
   position: relative;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);

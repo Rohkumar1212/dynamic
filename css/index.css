@@ -3,7 +3,263 @@
         text-align: center;
         padding: 20px;
     }
+/* Container Styling */
+.testimonial-wrapper {
+    padding: 8px 0;
+    background: #f8faff; /* Light, clean background */
+    font-family: 'Inter', sans-serif;
+}
 
+.mySwiper {
+    padding: 50px 20px !important;
+}
+
+/* 3D Glassmorphism Card Design */
+.testimonial-card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 40px 30px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05); /* Soft 3D Shadow */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 3D Hover Effect */
+.testimonial-card:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 30px 60px rgba(0, 102, 255, 0.1);
+    border-color: #0066ff33;
+}
+
+/* Avatar Styling */
+.testimonial-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 4px solid #fff;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Typography */
+.testimonial-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #444;
+    font-style: italic;
+    margin-bottom: 25px;
+    flex-grow: 1;
+}
+
+.testimonial-name {
+    display: block;
+    font-size: 1.2rem;
+    color: #1a1a1a;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.testimonial-role {
+    font-size: 0.9rem;
+    color: #0066ff; /* Professional blue Accent */
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Stars Styling */
+.testimonial-stars {
+    margin-top: 15px;
+    color: #ffcc00;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+}
+
+/* Ensure all cards in a row have the same height */
+.swiper-wrapper {
+    display: flex;
+    align-items: stretch;
+}
+
+.swiper-slide {
+    height: auto; /* Allows flex-stretch to work */
+    display: flex;
+}
+
+.testimonial-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 35px 25px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: space-between; /* Pushes footer to the bottom */
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f0f4f8;
+    transition: transform 0.3s ease;
+}
+
+/* Icon / Avatar Side & Size */
+.avatar-container {
+    margin-bottom: 20px;
+}
+
+.testimonial-avatar {
+    width: 80px; 
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #0066ff1a; /* Subtle brand color border */
+}
+
+/* Content Word Styling */
+.testimonial-content {
+    flex-grow: 1; /* Takes up available space to keep heights even */
+    display: flex;
+    align-items: center; /* Centers short text vertically */
+    margin-bottom: 20px;
+}
+
+.testimonial-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #4a5568;
+    font-weight: 400;
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* Limits text to 4 lines for neatness */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Footer & Stars */
+.testimonial-name {
+    font-size: 1.1rem;
+    color: #2d3748;
+    margin-bottom: 4px;
+}
+
+.testimonial-role {
+    font-size: 0.85rem;
+    color: #0066ff;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 12px;
+}
+
+
+/* Container for the icons and navigation */
+.swiper {
+    padding-bottom: 50px !important; /* Space for pagination dots */
+    position: relative;
+}
+
+/* Proper sizing for the Navigation Buttons */
+.swiper-button-next, 
+.swiper-button-prev {
+    background: #ffffff;
+    width: 45px !important;
+    height: 45px !important;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    color: #0066ff !important; /* Matches your brand blue */
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+/* Centering the icon inside the button */
+.swiper-button-next:after, 
+.swiper-button-prev:after {
+    font-size: 18px !important;
+    font-weight: bold;
+}
+
+.swiper-button-next:hover, 
+.swiper-button-prev:hover {
+    background: #0066ff;
+    color: #ffffff !important;
+    transform: scale(1.1);
+}
+
+/* Floating Action Icons (WhatsApp/Call) Position */
+.floating-icons {
+    position: fixed;
+    right: 20px;
+    bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 999;
+}
+
+.icon-circle {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    cursor: pointer;
+}
+
+
+.testimonial-card {
+    max-width: 400px; /* Limits width for readability */
+    margin: 0 auto;
+    min-height: 420px; /* Keeps all cards uniform height */
+    padding: 40px 25px;
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid #eef2f6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.testimonial-avatar {
+    width: 75px !important; /* Consistent icon side size */
+    height: 75px !important;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    object-fit: cover;
+}
+
+.testimonial-text {
+    font-size: 0.95rem; /* Clean content word size */
+    line-height: 1.7;
+    color: #555;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.testimonial-stars {
+    color: #f6ad55;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+}
+/* Swiper Navigation Customization */
+.swiper-button-next, .swiper-button-prev {
+    color: #0066ff !important;
+    background: #fff;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.swiper-button-next:after, .swiper-button-prev:after {
+    font-size: 20px;
+    font-weight: bold;
+}
     .testimonial-item img {
         width: 100px;
         height: 100px;
