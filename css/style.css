@@ -121,6 +121,13 @@ section {
     transition: all 0.2s ease;
 }
 
+
+#cartItemsContainer {
+    max-height: 238px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 5px;
+}
 /* Optional: Add a hover effect if the price is clickable */
 .chip:hover {
     background-color: #e9ecef;
