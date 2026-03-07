@@ -15,6 +15,36 @@
     <link href="css/style.css" rel="stylesheet">
     <link href="css/index.css" rel="stylesheet">
     <style>
+
+        /* Navigation Icon UI Fix */
+.swiper-button-next, .swiper-button-prev {
+    background-color: #ffffff;
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    color: #0066ff !important;
+    z-index: 10;
+}
+
+/* Fix for the 'prev'/'next' text appearing as labels instead of icons */
+.swiper-button-next:after, .swiper-button-prev:after {
+    font-family: swiper-icons;
+    font-size: 20px !important;
+    text-transform: none !important;
+    letter-spacing: 0;
+    font-variant: normal;
+    line-height: 1;
+}
+
+/* Card Image UI Fix for 'undefined' placeholders */
+.portfolio-image img {
+    width: 100%;
+    height: 250px;
+    object-fit: contain;
+    background: #fdfdfd;
+    border-bottom: 1px solid #eee;
+}
         #page-title {
     clear: both;
     padding: 110px 0;
@@ -225,360 +255,145 @@
         </section>
         <!-- end: Page title -->
 
-        <!-- Content -->
-        <section id="page-content" class="mt-5">
-            <div class="container">
-                <!-- Portfolio Filter -->
-                <nav class="grid-filter gf-outline" data-layout="#portfolio">
-                    <ul>
-                        <li class="active"><a href="#" data-category="*">Show All</a></li>
-                        <li><a href="#" data-category=".ct-marketing">Branding</a></li>
-                        <li><a href="#" data-category=".ct-photography">Packing material</a></li>
-                        <li><a href="#" data-category=".ct-marketing">Marketing</a></li>
+<div class="container py-4">
+    <h2 class="text-center mb-4 fw-bold">Product Gallery</h2>
 
-                    </ul>
-                    <div class="grid-active-title">Show All</div>
-                </nav>
-                <!-- end: Portfolio Filter -->
-                <!-- Portfolio -->
-                <div id="portfolio" class="grid-layout portfolio-4-columns" data-margin="0">
-                    <!-- portfolio item -->
-                    <div class="portfolio-item ct-photography ct-media ct-branding ct-Media ct-webdesign">
-                        <div class="portfolio-item-wrap">
-                            <div class="portfolio-slider">
-                                <div class="carousel" data-items="1" data-loop="true" data-autoplay="true"
-                                    data-animate-in="fadeIn" data-animate-out="fadeOut" data-autoplay="1500">
-                                    <a href="#"><img src="images/products/18x14.75x10.75 inch RSC Carton.webp"
-                                            alt=""></a>
-                                    <a href="#"><img src="images/products/21x12.75x16.75 inch RSC Carton.jpeg"
-                                            alt=""></a>
-                                </div>
-                            </div>
-                            <div class="portfolio-description" data-lightbox="gallery">
-                                <a title="Photoshop Mock-up!" data-lightbox="gallery-image"
-                                    href="images/products/18x14.75x11.75 inch RSC Carton.webp"><i
-                                        class="icon-copy"></i></a>
-                                <a title="Paper Pouch!" data-lightbox="gallery-image"
-                                    href="images/products/18x14.75x10.75 inch RSC Carton.webp" class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image"
-                                    href="images/products/18x14.75x11.75 inch RSC Carton.webp" class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image"
-                                    href="images/products/18x14.75x10.75 inch RSC Carton.webp" class="hidden"></a>
-                                <a href="gallery.html"><i class="icon-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end: portfolio item -->
-                    <!-- portfolio item -->
-                    <div class="portfolio-item ct-photography ct-media ct-branding ct-Media ct-webdesign">
-                        <div class="portfolio-item-wrap">
-                            <div class="portfolio-slider">
-                                <div class="carousel" data-items="1" data-loop="true" data-autoplay="true"
-                                    data-animate-in="fadeIn" data-animate-out="fadeOut" data-autoplay="1500">
-                                    <a href="#"><img src="images/products/21x12.75x16.75 inch RSC Carton.jpeg"
-                                            alt=""></a>
-                                    <a href="#"><img src="images/products/18x14.75x11.75 inch RSC Carton.webp"
-                                            alt=""></a>
-                                </div>
-                            </div>
-                            <div class="portfolio-description" data-lightbox="gallery">
-                                <a title="Photoshop Mock-up!" data-lightbox="gallery-image"
-                                    href="images/products/18x14.75x11.75 inch RSC Carton.webp"><i
-                                        class="icon-copy"></i></a>
-                                <a title="Paper Pouch!" data-lightbox="gallery-image"
-                                    href="images/products/18x14.75x11.75 inch RSC Carton.webp" class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image"
-                                    href="images/products/18x14.75x11.75 inch RSC Carton.webp" class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image"
-                                    href="images/products/18x14.75x11.75 inch RSC Carton.webp" class="hidden"></a>
-                                <a href="gallery.html"><i class="icon-link"></i></a>
-                            </div>
-                        </div>
+    <div id="category-tabs" class="d-flex justify-content-center flex-wrap gap-2 mb-4">
+    </div>
 
-                    </div>
-                    <!-- end: portfolio item -->
-                    <!-- portfolio item -->
-                    <div class="portfolio-item img-zoom ct-photography ct-media ct-branding ct-Media">
+    <div class="row g-3" id="gallery-container" style="min-height: 300px;">
+        <div class="text-center py-5">
+            <div class="spinner-border text-primary" role="status"></div>
+            <p>Loading gallery...</p>
+        </div>
+    </div>
+</div>
 
-
-                        <div class="portfolio-item-wrap">
-                            <div class="portfolio-slider">
-                                <div class="carousel" data-items="1" data-loop="true" data-autoplay="true"
-                                    data-animate-in="fadeIn" data-animate-out="fadeOut" data-autoplay="1500">
-                                    <a href="#"><img src="images/products/18x14.75x18.75 inch RSC Carton.jpg"
-                                            alt=""></a>
-                                    <a href="#"><img src="images/products/18x14.75x18.75 inch RSC Carton.jpg"
-                                            alt=""></a>
-                                </div>
-                            </div>
-                            <div class="portfolio-description" data-lightbox="gallery">
-                                <a title="Photoshop Mock-up!" data-lightbox="gallery-image"
-                                    href="images/products/18x14.75x18.75 inch RSC Carton.jpg"><i
-                                        class="icon-copy"></i></a>
-                                <a title="Paper Pouch!" data-lightbox="gallery-image"
-                                    href="images/products/18x14.75x18.75 inch RSC Carton.jpg" class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image"
-                                    href="images/products/18x14.75x18.75 inch RSC Carton.jpg" class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image"
-                                    href="images/products/18x14.75x18.75 inch RSC Carton.jpg" class="hidden"></a>
-                                <a href="gallery.html"><i class="icon-link"></i></a>
-                            </div>
-                        </div>
-
-                    </div>
-                    <!-- end: portfolio item -->
-                    <!-- portfolio item -->
-                    <div class="portfolio-item img-zoom ct-photography ct-media ct-branding ct-marketing ct-webdesign">
-
-                        <div class="portfolio-item-wrap">
-                            <div class="portfolio-slider">
-                                <div class="carousel" data-items="1" data-loop="true" data-autoplay="true"
-                                    data-animate-in="fadeIn" data-animate-out="fadeOut" data-autoplay="1500">
-                                    <a href="#"><img src="images/products/23x17.75x17.75 inch RSC Carton.webp"
-                                            alt=""></a>
-                                    <a href="#"><img src="images/products/23x17.75x17.75 inch RSC Carton.webp"
-                                            alt=""></a>
-                                </div>
-                            </div>
-                            <div class="portfolio-description" data-lightbox="gallery">
-                                <a title="Photoshop Mock-up!" data-lightbox="gallery-image"
-                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp"><i
-                                        class="icon-copy"></i></a>
-                                <a title="Paper Pouch!" data-lightbox="gallery-image"
-                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp" class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image"
-                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp" class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image"
-                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp" class="hidden"></a>
-                                <a href="gallery.html"><i class="icon-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end: portfolio item -->
-                    <!-- portfolio item -->
-                    <div class="portfolio-item img-zoom ct-photography ct-media ct-branding ct-marketing ct-webdesign">
-
-                        <div class="portfolio-item-wrap">
-                            <div class="portfolio-slider">
-                                <div class="carousel" data-items="1" data-loop="true" data-autoplay="true"
-                                    data-animate-in="fadeIn" data-animate-out="fadeOut" data-autoplay="1500">
-                                    <a href="#"><img src="images/products/18.00x17.50x29.50 inch RSC Carton.jpg"
-                                            alt=""></a>
-                                    <a href="#"><img src="images/products/23x17.75x17.75 inch RSC Carton.webp"
-                                            alt=""></a>
-                                </div>
-                            </div>
-                            <div class="portfolio-description" data-lightbox="gallery">
-                                <a title="Photoshop Mock-up!" data-lightbox="gallery-image"
-                                    href="images/products/18.00x17.50x29.50 inch RSC Carton.jpg"><i
-                                        class="icon-copy"></i></a>
-                                <a title="Paper Pouch!" data-lightbox="gallery-image"
-                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp" class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image"
-                                    href="images/products/18.00x17.50x29.50 inch RSC Carton.jpg" class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image"
-                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp" class="hidden"></a>
-                                <a href="gallery.html"><i class="icon-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end: portfolio item -->
-                    <!-- portfolio item -->
-                    <div class="portfolio-item img-zoom ct-photography ct-media ct-branding ct-marketing ct-webdesign">
-
-                        <div class="portfolio-item-wrap">
-                            <div class="portfolio-slider">
-                                <div class="carousel" data-items="1" data-loop="true" data-autoplay="true"
-                                    data-animate-in="fadeIn" data-animate-out="fadeOut" data-autoplay="1500">
-                                    <a href="#"><img src="images/products/18x14.75x11.75 inch RSC Carton.webp"
-                                            alt=""></a>
-                                    <a href="#"><img src="images/products/23x17.75x17.75 inch RSC Carton.webp"
-                                            alt=""></a>
-                                </div>
-                            </div>
-                            <div class="portfolio-description" data-lightbox="gallery">
-                                <a title="Photoshop Mock-up!" data-lightbox="gallery-image"
-                                    href="images/products/18x14.75x11.75 inch RSC Carton.webp"><i
-                                        class="icon-copy"></i></a>
-                                <a title="Paper Pouch!" data-lightbox="gallery-image"
-                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp" class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image"
-                                    href="images/products/18x14.75x11.75 inch RSC Carton.webp" class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image"
-                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp" class="hidden"></a>
-                                <a href="gallery.html"><i class="icon-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end: portfolio item -->
-                    <!-- portfolio item -->
-                    <div class="portfolio-item img-zoom ct-photography ct-media ct-branding ct-marketing ct-webdesign">
-
-                        <div class="portfolio-item-wrap">
-                            <div class="portfolio-slider">
-                                <div class="carousel" data-items="1" data-loop="true" data-autoplay="true"
-                                    data-animate-in="fadeIn" data-animate-out="fadeOut" data-autoplay="1500">
-                                    <a href="#"><img src="images/products/18x14.75x18.75 inch RSC Carton.jpg"
-                                            alt=""></a>
-                                    <a href="#"><img src="images/products/23x17.75x17.75 inch RSC Carton.webp"
-                                            alt=""></a>
-                                </div>
-                            </div>
-                            <div class="portfolio-description" data-lightbox="gallery">
-                                <a title="Photoshop Mock-up!" data-lightbox="gallery-image"
-                                    href="images/products/18x14.75x18.75 inch RSC Carton.jpg"><i
-                                        class="icon-copy"></i></a>
-                                <a title="Paper Pouch!" data-lightbox="gallery-image"
-                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp" class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image"
-                                    href="images/products/18x14.75x18.75 inch RSC Carton.jpg" class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image"
-                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp" class="hidden"></a>
-                                <a href="gallery.html"><i class="icon-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end: portfolio item -->
-                    <!-- portfolio item -->
-                    <div class="portfolio-item img-zoom ct-photography ct-media ct-branding ct-marketing ct-webdesign">
-
-                        <div class="portfolio-item-wrap">
-                            <div class="portfolio-slider">
-                                <div class="carousel" data-items="1" data-loop="true" data-autoplay="true"
-                                    data-animate-in="fadeIn" data-animate-out="fadeOut" data-autoplay="1500">
-                                    <a href="#"><img src="images/products/20x12x15 inch RSC Carton.webp" alt=""></a>
-                                    <a href="#"><img src="images/products/23x17.75x17.75 inch RSC Carton.webp"
-                                            alt=""></a>
-                                </div>
-                            </div>
-                            <div class="portfolio-description" data-lightbox="gallery">
-                                <a title="Photoshop Mock-up!" data-lightbox="gallery-image"
-                                    href="images/products/20x12x15 inch RSC Carton.webp"><i class="icon-copy"></i></a>
-                                <a title="Paper Pouch!" data-lightbox="gallery-image"
-                                    href="images/products/20x12x15 inch RSC Carton.webp" class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image"
-                                    href="images/products/18x14.75x18.75 inch RSC Carton.jpg" class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image"
-                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp" class="hidden"></a>
-                                <a href="gallery.html"><i class="icon-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end: portfolio item -->
-                    <!-- portfolio item -->
-                    <div class="portfolio-item img-zoom ct-photography ct-media ct-branding ct-marketing ct-webdesign">
-
-                        <div class="portfolio-item-wrap">
-                            <div class="portfolio-slider">
-                                <div class="carousel" data-items="1" data-loop="true" data-autoplay="true"
-                                    data-animate-in="fadeIn" data-animate-out="fadeOut" data-autoplay="1500">
-                                    <a href="#"><img src="images/products/20x12x15 inch RSC Carton.webp" alt=""></a>
-                                    <a href="#"><img src="images/products/23x17.75x17.75 inch RSC Carton.webp"
-                                            alt=""></a>
-                                </div>
-                            </div>
-                            <div class="portfolio-description" data-lightbox="gallery">
-                                <a title="Photoshop Mock-up!" data-lightbox="gallery-image"
-                                    href="images/products/20x12x15 inch RSC Carton.webp"><i class="icon-copy"></i></a>
-                                <a title="Paper Pouch!" data-lightbox="gallery-image"
-                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp" class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image"
-                                    href="images/products/20x12x15 inch RSC Carton.webp" class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image"
-                                    href="images/products/18.00x17.50x19.50 inch RSC Carton.webp" class="hidden"></a>
-                                <a href="gallery.html"><i class="icon-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end: portfolio item -->
-                    <!-- portfolio item -->
-                    <div class="portfolio-item img-zoom ct-photography ct-media ct-branding ct-marketing ct-webdesign">
-
-                        <div class="portfolio-item-wrap">
-                            <div class="portfolio-slider">
-                                <div class="carousel" data-items="1" data-loop="true" data-autoplay="true"
-                                    data-animate-in="fadeIn" data-animate-out="fadeOut" data-autoplay="1500">
-                                    <a href="#"><img src="images/products/30x17.75x11.75 inch RSC Carton.jpg"
-                                            alt=""></a>
-                                    <a href="#"><img src="images/products/23x17.75x17.75 inch RSC Carton.webp"
-                                            alt=""></a>
-                                </div>
-                            </div>
-                            <div class="portfolio-description" data-lightbox="gallery">
-                                <a title="Photoshop Mock-up!" data-lightbox="gallery-image"
-                                    href="images/products/30x17.75x11.75 inch RSC Carton.jpg"><i
-                                        class="icon-copy"></i></a>
-                                <a title="Paper Pouch!" data-lightbox="gallery-image"
-                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp" class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image"
-                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp" class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image"
-                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp" class="hidden"></a>
-                                <a href="gallery.html"><i class="icon-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end: portfolio item -->
-                    <!-- portfolio item -->
-                    <div class="portfolio-item img-zoom ct-photography ct-media ct-branding ct-marketing ct-webdesign">
-
-                        <div class="portfolio-item-wrap">
-                            <div class="portfolio-slider">
-                                <div class="carousel" data-items="1" data-loop="true" data-autoplay="true"
-                                    data-animate-in="fadeIn" data-animate-out="fadeOut" data-autoplay="1500">
-                                    <a href="#"><img src="images/products/16.00x12.75x9.75 inch TOP(LID) & BOTTOM.jpg"
-                                            alt=""></a>
-                                    <a href="#"><img src="images/products/23x17.75x17.75 inch RSC Carton.webp"
-                                            alt=""></a>
-                                </div>
-                            </div>
-                            <div class="portfolio-description" data-lightbox="gallery">
-                                <a title="Photoshop Mock-up!" data-lightbox="gallery-image"
-                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp"><i
-                                        class="icon-copy"></i></a>
-                                <a title="Paper Pouch!" data-lightbox="gallery-image"
-                                    href="images/products/30x17.75x11.75 inch RSC Carton.jpg" class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image"
-                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp" class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image"
-                                    href="images/products/30x17.75x11.75 inch RSC Carton.jpg" class="hidden"></a>
-                                <a href="gallery.html"><i class="icon-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end: portfolio item -->
-                    <!-- portfolio item -->
-                    <div class="portfolio-item img-zoom ct-photography ct-media ct-branding ct-marketing ct-webdesign">
-
-                        <div class="portfolio-item-wrap">
-                            <div class="portfolio-slider">
-                                <div class="carousel" data-items="1" data-loop="true" data-autoplay="true"
-                                    data-animate-in="fadeIn" data-animate-out="fadeOut" data-autoplay="1500">
-                                    <a href="#"><img src="images/products/36.00x17.75x9.75 inch RSC Carton.jpg"
-                                            alt=""></a>
-                                    <a href="#"><img src="images/products/23x17.75x17.75 inch RSC Carton.webp"
-                                            alt=""></a>
-                                </div>
-                            </div>
-                            <div class="portfolio-description" data-lightbox="gallery">
-                                <a title="Photoshop Mock-up!" data-lightbox="gallery-image"
-                                    href="images/products/36.00x17.75x9.75 inch RSC Carton.jpg"><i
-                                        class="icon-copy"></i></a>
-                                <a title="Paper Pouch!" data-lightbox="gallery-image"
-                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp" class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image"
-                                    href="images/products/36.00x17.75x9.75 inch RSC Carton.jpg" class="hidden"></a>
-                                <a title="Mock-up" data-lightbox="gallery-image"
-                                    href="images/products/23x17.75x17.75 inch RSC Carton.webp" class="hidden"></a>
-                                <a href="gallery.html"><i class="icon-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end: portfolio item -->
+<div class="modal fade" id="imageZoomModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content bg-dark border-0">
+            <div class="modal-body p-0 position-relative">
+                <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3 z-3"
+                    data-bs-dismiss="modal"></button>
+                <div class="text-center">
+                    <img src="" id="zoomedImage" class="img-fluid" style="max-height: 85vh; width: auto;">
                 </div>
-                <!-- end: Portfolio -->
+                <button class="btn btn-link text-white position-absolute top-50 start-0 translate-middle-y fs-1"
+                    onclick="changeImage(-1)">&#10094;</button>
+                <button class="btn btn-link text-white position-absolute top-50 end-0 translate-middle-y fs-1"
+                    onclick="changeImage(1)">&#10095;</button>
             </div>
-        </section> <!-- end: Content -->
+        </div>
+    </div>
+</div>
+
+<script>
+  const API_URL = 'http://147.93.108.191:4001/api/gallery';
+    const BASE_IMAGE_URL = 'http://147.93.108.191:4001';
+
+    let allImages = [];
+    let filteredImages = [];
+    let currentIndex = 0;
+
+    async function fetchGallery() {
+        // 1. Check if elements exist to prevent "null" error
+        const container = document.getElementById('gallery-container');
+        const tabs = document.getElementById('category-tabs');
+        if (!container || !tabs) return;
+
+        try {
+            const response = await fetch(API_URL);
+            const result = await response.json();
+
+            if (result.success) {
+                allImages = result.data;
+                generateCategoryTabs(allImages);
+                displayImages(allImages);
+            } else {
+                container.innerHTML = '<p class="text-center text-danger">Failed to load gallery data.</p>';
+            }
+        } catch (error) {
+            console.error('Connection Error:', error);
+            container.innerHTML = '<p class="text-center">Unable to connect to image server.</p>';
+        }
+    }
+
+    function generateCategoryTabs(items) {
+        const tabContainer = document.getElementById('category-tabs');
+        // Get unique categories and sort them
+        const categories = ['All', ...new Set(items.map(item => item.category))];
+
+        tabContainer.innerHTML = categories.map(cat => `
+        <button class="btn btn-sm btn-outline-primary category-btn ${cat === 'All' ? 'active' : ''}" 
+                onclick="filterGallery('${cat}', this)">
+            ${cat}
+        </button>
+    `).join('');
+    }
+
+    function filterGallery(category, btnElement) {
+        document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+        if (btnElement) btnElement.classList.add('active');
+
+        filteredImages = (category === 'All') ? allImages : allImages.filter(img => img.category === category);
+        displayImages(filteredImages);
+    }
+
+    function displayImages(items) {
+        const container = document.getElementById('gallery-container');
+        filteredImages = items; // Update the list for the zoomer
+
+        if (items.length === 0) {
+            container.innerHTML = '<p class="text-center w-100">No images found in this category.</p>';
+            return;
+        }
+
+        container.innerHTML = items.map((item, index) => {
+            // Handle image URL and potential double-slash issues
+            const imgPath = item.image.url.startsWith('/') ? item.image.url : `/${item.image.url}`;
+            const fullUrl = `${BASE_IMAGE_URL}${imgPath}`;
+
+            return `
+        <div class="col-6 col-md-4 col-lg-3">
+            <div class="card h-100 shadow-sm border-0 gallery-card" onclick="openZoom(${index})" style="cursor:pointer">
+                <div class="img-container" style="height: 180px; background: #eee; overflow: hidden;">
+                    <img src="${fullUrl}" 
+                         class="w-100 h-100" 
+                         style="object-fit: cover;" 
+                         loading="lazy"
+                         onerror="this.src='https://via.placeholder.com/300?text=Error'">
+                </div>
+                <div class="card-body p-2">
+                    <h6 class="text-truncate small mb-0 fw-bold">${item.title}</h6>
+                    <span class="badge bg-light text-dark extra-small" style="font-size: 10px;">${item.category}</span>
+                </div>
+            </div>
+        </div>`;
+        }).join('');
+    }
+
+    function openZoom(index) {
+        currentIndex = index;
+        const item = filteredImages[currentIndex];
+        const imgPath = item.image.url.startsWith('/') ? item.image.url : `/${item.image.url}`;
+
+        document.getElementById('zoomedImage').src = `${BASE_IMAGE_URL}${imgPath}`;
+        new bootstrap.Modal(document.getElementById('imageZoomModal')).show();
+    }
+
+    function changeImage(step) {
+        currentIndex += step;
+        if (currentIndex >= filteredImages.length) currentIndex = 0;
+        if (currentIndex < 0) currentIndex = filteredImages.length - 1;
+
+        const item = filteredImages[currentIndex];
+        const imgPath = item.image.url.startsWith('/') ? item.image.url : `/${item.image.url}`;
+        document.getElementById('zoomedImage').src = `${BASE_IMAGE_URL}${imgPath}`;
+    }
+
+    // Start the gallery on load
+    document.addEventListener('DOMContentLoaded', fetchGallery);
+</script>
         <!-- Footer -->
         <!-- Content -->
         <!-- Footer -->
