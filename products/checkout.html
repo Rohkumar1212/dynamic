@@ -451,14 +451,13 @@
                         </div>
 
                         <div style="border-top: 1px solid #eee; padding-top: 15px;">
-                            <div class="total-row"><span>Subtotal</span> <strong id="subtotalDisplay">₹0</strong></div>
-                            <div class="total-row">
-                                <span>GST (18%)</span>
-                                <strong id="gstDisplay">₹0</strong>
-                            </div>
-                            <div class="total-row" style="font-size: 20px; color:#d35400; margin-top:10px;">
-                                <span>Total</span> <strong id="grandTotalDisplay">₹0</strong>
-                            </div>
+                        <div class="total-row"><span>Subtotal</span> <strong id="subtotalDisplay">₹0</strong></div>
+                        <div class="total-row"><span>Delivery Charges</span> <strong id="deliverycharges">₹70</strong></div>
+                        <div class="total-row"><span>GST (18%)</span> <strong id="gstDisplay">₹0</strong></div>
+                        <hr>
+                        <div class="total-row" style="font-size: 20px; color:#d35400;">
+                            <span>Total</span> <strong id="grandTotalDisplay">₹0</strong>
+                        </div>
                         </div>
 
                         <button id="payBtn" class="primary-btn" onclick="handleOrder()">Pay Now</button>
@@ -607,10 +606,11 @@
         function calculateTotals() {
             // Flat 18% GST Logic
             const gstAmount = subtotal * 0.18;
-            grandTotal = subtotal + gstAmount;
+            grandTotal = subtotal + gstAmount + 70; // Adding fixed delivery charge of ₹70
 
             document.getElementById("subtotalDisplay").innerText = "₹" + subtotal.toFixed(2);
-            document.getElementById("gstDisplay").innerText = "₹" + gstAmount.toFixed(2);
+            document.getElementById("gstDisplay").innerText = "₹" + gstAmount.toFixed(2); 
+            document.getElementById("deliverycharges").innerText = "₹" + "70";
             document.getElementById("grandTotalDisplay").innerText = "₹" + grandTotal.toFixed(2);
         }
 
