@@ -284,9 +284,69 @@
             </div>
         </section>
         <!-- end: Page title -->
+<div id="portfolio" class="row">
+</div>
+<script>
+    async function loadGallery() {
+        const portfolioContainer = document.getElementById('portfolio');
+        // The base domain where your images live
+        const baseURL = 'https://admin.dynamiccorrugations.com';
+        const apiURL = `${baseURL}/api/products`;
 
+        try {
+            const response = await fetch(apiURL);
+            const result = await response.json();
+
+            if (result.success && result.data) {
+                portfolioContainer.innerHTML = result.data.map(item => {
+                    // FIX 1: Access category title from the nested object
+                    const categoryName = item.category ? item.category.title : 'Uncategorized';
+
+                    // FIX 2: Use mainImage key from the payload
+                    const imgUrl = item.mainImage
+                        ? `${baseURL}${item.mainImage}`
+                        : 'https://via.placeholder.com/400?text=No+Image';
+
+                    return `
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="position-relative">
+                                <img src="${imgUrl}" class="card-img-top" alt="${item.title}" 
+                                     style="height: 250px; object-fit: cover;"
+                                     onerror="this.src='https://via.placeholder.com/400?text=Error+Loading'">
+                                <span class="badge bg-info position-absolute top-0 start-0 m-2">
+                                    ${categoryName}
+                                </span>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title fs-6 fw-bold">${item.title}</h5>
+                                <p class="card-text text-primary fw-bold mt-auto">
+                                    ${item.currency} ${item.basePricePerPiece}
+                                </p>
+                                <a href="details.html?id=${item.id}" class="btn btn-primary w-100 mt-2">
+                                    View Details
+                                </a>
+                            </div>
+                        </div>
+                    </div>`;
+                }).join('');
+            }
+        } catch (error) {
+            console.error("Gallery failed to load:", error);
+            if (portfolioContainer) {
+                portfolioContainer.innerHTML = `<p class="text-center text-danger">Failed to load items: ${error.message}</p>`;
+            }
+        }
+    }
+
+    window.addEventListener('DOMContentLoaded', loadGallery);
+</script>
         <section class="product-section px-5">
             <button id="backBtn" class="back-btn" onclick="goBack()">← Back to Categories</button>
+
+
+            <div id="product-grid" class="product-container">
+            </div>
 
             <div class="section-header">
                 <h2 id="pageTitle">Product Categories</h2>

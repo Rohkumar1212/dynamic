@@ -1,0 +1,21 @@
+GET: https://admin.dynamiccorrugations.com/api/categories
+GET: https://147.93.108.191:4001/api/gallery
+GET: https://147.93.108.191:4001/api/products
+GET: https://admin.dynamiccorrugations.com/api/testimonials
+     https://admin.dynamiccorrugations.com/api/auth/google-login  
+     
+     post: body {idToken:""}
+
+after 
+
+{
+        success: true,
+        token,
+        user: {
+          id: user.id,
+          fullName: user.fullName,
+          email: user.email,
+          avatarUrl: user.avatarUrl,
+          status: user.status,
+        },
+      },

@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Function to generate product HTML
   function generateProductHTML(product, index) {
-    let imageUrl = product.images ? `https://api.dynamiccorrugations.com/${product.images}` : "placeholder.jpg";
+    let imageUrl = product.images ? `https://147.93.108.191:4001/${product.images}` : "placeholder.jpg";
     const productCard = `
       <div class="${index < 6 ? 'swiper-slide' : 'col-md-4 grid-item'}">
         <img src="${imageUrl}" alt="${product.name}">
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Fetch products from API and render them
-  fetch("https://api.dynamiccorrugations.com/items")
+  fetch("https://147.93.108.191:4001/items")
     .then((response) => response.json())
     .then((data) => {
       if (!data || !data.data || data.data.length === 0) {
