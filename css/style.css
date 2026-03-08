@@ -1149,6 +1149,16 @@ section.dark,
 .topbar-dropdown.float-right .title {
   padding: 0 0px 0 20px !important;
 }
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    width: 300px;
+}
 .topbar-dropdown .dropdown-invert.topbar-form {
   left: auto;
   right: -20px;
