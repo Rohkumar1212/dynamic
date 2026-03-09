@@ -334,9 +334,7 @@
                                                         <button class="btn-provider google" onclick="window.app.signInWith('google')">
                                                             <i class="fab fa-google"></i> Google
                                                         </button>
-                                                        <button class="btn-provider anonymous text-dark" onclick="window.app.showGuestForm()">
-                                                            <i class="fas fa-user-secret"></i> Guest
-                                                        </button>
+                                                        
                                     
                                                     </div>
                                                 </div>
@@ -2858,73 +2856,6 @@
         document.addEventListener("DOMContentLoaded", checkGuestLogin);
     </script>
 
-    <script>
-        async function loadProductDetails() {
-            const renderArea = document.getElementById('details-render-area');
-            const baseURL = 'https://admin.dynamiccorrugations.com';
-            const apiURL = `${baseURL}/api/products`;
-
-            // 1. Get ID from URL
-            const params = new URLSearchParams(window.location.search);
-            const productId = params.get('id');
-
-            if (!productId) {
-                renderArea.innerHTML = `<div class="alert alert-danger">Error: No Product ID found.</div>`;
-                return;
-            }
-
-            try {
-                const response = await fetch(apiURL);
-                const result = await response.json();
-
-                if (result.success) {
-                    // 2. Find matching product
-                    const product = result.data.find(item => item.id === productId);
-
-                    if (product) {
-                        // 3. Render Content (Fixed to use product.mainImage)
-                        renderArea.innerHTML = `
-                        <div class="col-md-6 mb-4">
-                            <img src="${baseURL}${product.mainImage}" class="product-img" alt="${product.title}">
-                        </div>
-                        <div class="col-md-6 ps-md-5">
-                            <span class="badge badge-category mb-3">${product.category.title}</span>
-                            <h1 class="fw-bold mb-2">${product.title}</h1>
-                            <p class="text-muted small">ID: ${product.id} | Slug: ${product.slug}</p>
-                           
-                            <div class="my-4">
-                                <span class="text-muted d-block">Price per piece</span>
-                                <span class="price-text">${product.currency} ${product.basePricePerPiece}</span>
-                            </div>
-
-                            <div class="alert alert-secondary border-0 bg-light p-4 rounded-3 mb-4">
-                                <h6 class="fw-bold"><i class="fas fa-info-circle me-2"></i>Product Information</h6>
-                                <p class="mb-1"><strong>Status:</strong> <span class="text-success">${product.status}</span></p>
-                                <p class="mb-0"><strong>Category:</strong> ${product.category.title}</p>
-                            </div>
-
-                            <div class="d-flex gap-3 align-items-center mt-5">
-                                <a href="tel:+911234567890" class="btn-call shadow-sm">
-                                    <i class="fas fa-phone-alt me-2"></i> CALL TO ORDER
-                                </a>
-                                <a href="javascript:history.back()" class="text-decoration-none text-muted">
-                                    <i class="fas fa-arrow-left me-1"></i> Back
-                                </a>
-                            </div>
-                        </div>
-                    `;
-                    } else {
-                        renderArea.innerHTML = `<div class="alert alert-warning text-center">Product not found.</div>`;
-                    }
-                }
-            } catch (error) {
-                console.error("Fetch Error:", error);
-                renderArea.innerHTML = `<div class="alert alert-danger text-center">Connection Error: Could not load data.</div>`;
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', loadProductDetails);
-    </script>
 
 </body>
 
