@@ -171,16 +171,17 @@
                         <div id="profile-card" class="profile-card" style="display: none;">
                             <div class="profile-header-bg"></div>
                             <div class="profile-content">
-                                <img id="profile-photo-large" class="profile-img-large" src="https://via.placeholder.com/80"
-                                    alt="Profile" />
+                                <img id="profile-photo-large" class="profile-img-large"
+                                    src="https://via.placeholder.com/80" alt="Profile" />
                                 <h4 id="display-name">Loading...</h4>
                                 <p id="user-email">...</p>
                                 <p id="user-uid" style="display:none;"></p>
-                
+
                                 <div class="profile-actions">
-                                    <div class="action-row" onclick="window.location.href='products/dashboard.html'">
+                                    <div class="action-row" id="my-profile"
+                                        onclick="window.location.href='products/dashboard.html'">
                                         <div class="icon-circle"><i class="fas fa-user"></i></div>
-                                        <div class="action-text"><strong>My Profile</strong><span>Account
+                                        <div class="action-text" ><strong>My Profile</strong><span>Account
                                                 settings</span></div>
                                         <i class="fas fa-chevron-right arrow-icon"></i>
                                     </div>
@@ -537,112 +538,57 @@
 
     <script src="js/userlogin.js"></script>
     <script src="js/dashboard.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const openPopupLink = document.getElementById("openPopupLink");
-            const popup = document.getElementById("popup");
-            const closePopupBtn = document.getElementById("closePopup");
 
-            // Open popup
-            openPopupLink.addEventListener("click", (event) => {
-                event.preventDefault();
-                popup.classList.remove("hidden");
-            });
-
-            // Close popup when clicking close button
-            closePopupBtn.addEventListener("click", () => {
-                popup.classList.add("hidden");
-            });
-
-            // Close popup when clicking outside popup content
-            popup.addEventListener("click", (event) => {
-                if (event.target === popup) {
-                    popup.classList.add("hidden");
-                }
-            });
-        });
-    </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const openPopupLink = document.getElementById("openPopupLink");
-            const popup = document.getElementById("popup");
-            const closePopupBtn = document.getElementById("closePopup");
-
-            // Open popup
-            openPopupLink.addEventListener("click", (event) => {
-                event.preventDefault();
-                popup.classList.remove("hidden");
-            });
-
-            // Close popup when clicking close button
-            closePopupBtn.addEventListener("click", () => {
-                popup.classList.add("hidden");
-            });
-
-            // Close popup when clicking outside popup content
-            popup.addEventListener("click", (event) => {
-                if (event.target === popup) {
-                    popup.classList.add("hidden");
-                }
-            });
-        });
-    </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const openPopupLink = document.getElementById("openPopupLink");
-            const popup = document.getElementById("popup");
-            const closePopupBtn = document.getElementById("closePopup");
-
-            // Open popup
-            openPopupLink.addEventListener("click", (event) => {
-                event.preventDefault();
-                popup.classList.remove("hidden");
-            });
-
-            // Close popup when clicking close button
-            closePopupBtn.addEventListener("click", () => {
-                popup.classList.add("hidden");
-            });
-
-            // Close popup when clicking outside popup content
-            popup.addEventListener("click", (event) => {
-                if (event.target === popup) {
-                    popup.classList.add("hidden");
-                }
-            });
-        });
-    </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const openPopupLink = document.getElementById("openPopupLink");
-            const popup = document.getElementById("popup");
-            const closePopupBtn = document.getElementById("closePopup");
-
-            // Open popup
-            openPopupLink.addEventListener("click", (event) => {
-                event.preventDefault();
-                popup.classList.remove("hidden");
-            });
-
-            // Close popup when clicking close button
-            closePopupBtn.addEventListener("click", () => {
-                popup.classList.add("hidden");
-            });
-
-            // Close popup when clicking outside popup content
-            popup.addEventListener("click", (event) => {
-                if (event.target === popup) {
-                    popup.classList.add("hidden");
-                }
-            });
-        });
-    </script>
     <script type="module">
-        // 1. Import Firebase SDKs
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-        import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 
-        // 2. Configuration
+        function getAuthToken() {
+            return localStorage.getItem("token") || localStorage.getItem("userguest");
+        }
+
+        async function googleLogin(idToken) {
+
+            const response = await fetch(
+                "https://admin.dynamiccorrugations.com/api/auth/google-login",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        idToken: idToken
+                    })
+                }
+            );
+
+            const data = await response.json();
+
+            if (data.success) {
+
+                //  SAVE TOKEN
+                localStorage.setItem("token", data.token);
+
+                //  SAVE USER
+                localStorage.setItem("user", JSON.stringify(data.user));
+
+                console.log("Backend Login Success", data);
+
+            } else {
+                console.error("Backend Login Failed");
+            }
+        }
+
+
+        // 1. IMPORTS 001
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+        import {
+            getAuth, signOut, onAuthStateChanged, signInWithPopup, signInAnonymously,
+            GoogleAuthProvider, GithubAuthProvider, TwitterAuthProvider, getAdditionalUserInfo
+        } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+
+        // Import Firestore to save user details
+        import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+
+        // 2. CONFIGURATION
         const firebaseConfig = {
             apiKey: "AIzaSyBfJTHAzQ6u27vGwdsC9HEEMYCdNnjYnJU",
             authDomain: "dynamiccorrugations-ac4a8.firebaseapp.com",
@@ -653,566 +599,421 @@
             measurementId: "G-6PL4T4METT"
         };
 
-        // 3. Initialize
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
-        const provider = new GoogleAuthProvider();
-        let currentUser = null; // Store user data here
+        const db = getFirestore(app); // Database reference
 
-        // 4. Global App Functions (Attached to window for HTML onclick events)
+        // 3. APP LOGIC
         window.app = {
 
-            // --- VIEW NAVIGATION ---
 
-            // Called when clicking dropdown items (Profile, Orders, etc.)
-            openDashboard: function (tabName) {
-                // Hide Home, Show Dashboard
-                document.getElementById('home-view').style.display = 'none';
-                document.getElementById('dashboard-view').style.display = 'flex'; // Flex to keep sidebar layout
-
-                // Switch to the specific tab requested
-                this.switchTab(tabName);
+            // --- GUEST UI TOGGLES ---
+            showGuestForm: function () {
+                document.getElementById('auth-options').style.display = 'none';
+                document.getElementById('guest-form-container').style.display = 'block';
             },
 
-            // Called when clicking "Back to Home"
-            goHome: function () {
-                document.getElementById('dashboard-view').style.display = 'none';
-                document.getElementById('home-view').style.display = 'block';
+            hideGuestForm: function () {
+                document.getElementById('auth-options').style.display = 'block';
+                document.getElementById('guest-form-container').style.display = 'none';
             },
 
-            // --- TAB SWITCHING LOGIC ---
+            // --- GUEST SUBMISSION ---
+            submitGuestLogin: async function () {
 
-            switchTab: function (tabName) {
-                // 1. Hide all tab panes
-                const panes = document.querySelectorAll('.tab-pane');
-                panes.forEach(pane => pane.classList.remove('active'));
+                const name = document.getElementById('guest-name').value;
+                const email = document.getElementById('guest-email').value;
+                const phone = document.getElementById('phone').value;
 
-                // 2. Deactivate all sidebar buttons
-                const btns = document.querySelectorAll('.sidebar-btn');
-                btns.forEach(btn => btn.classList.remove('active'));
+                const errorEl = document.getElementById('error-message');
 
-                // 3. Show the selected pane
-                const targetPane = document.getElementById('tab-' + tabName);
-                if (targetPane) targetPane.classList.add('active');
-
-                // 4. Highlight the sidebar button
-                const targetBtn = document.getElementById('btn-' + tabName);
-                if (targetBtn) targetBtn.classList.add('active');
-            },
-
-            // --- AUTH ACTIONS ---
-
-            logout: function () {
-                signOut(auth).then(() => {
-                    alert("Logged out successfully");
-                    this.goHome(); // Reset view
-                }).catch((error) => {
-                    console.error("Logout error", error);
-                });
-            },
-
-            // --- PAYMENT LOGIC ---
-
-            payWithPayU: function () {
-                if (!currentUser) {
-                    alert("Please login to proceed with payment.");
+                if (!name || !email || !phone) {
+                    errorEl.textContent = "Name, Email and Phone are required!";
+                    errorEl.style.display = 'block';
                     return;
                 }
 
-                // 1. Generate Transaction ID (Unique)
-                const txnid = "TXN" + new Date().getTime();
+                try {
 
-                // 2. Populate Hidden Form Fields
-                document.getElementById('txnid').value = txnid;
-                document.getElementById('payu-name').value = currentUser.displayName || "Guest";
-                document.getElementById('payu-email').value = currentUser.email;
+                    const res = await fetch("https://admin.dynamiccorrugations.com/api/auth/guest-login", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            name: name,
+                            email: email,
+                            phone: phone
+                        })
+                    });
 
-                // 3. Warning about Hash (Server-side requirement)
-                alert("Redirecting to PayU...\n\nNOTE: Since this is a static HTML file, the 'hash' field is empty. You will see a hash error on PayU unless you generate the hash on your backend server.");
+                    const data = await res.json();
+                    window.location.reload();
+                    if (data.success) {
 
-                // 4. Submit the form
-                document.getElementById('payu-form').submit();
-            }
-        };
+                        // token save in localStorage
+                        localStorage.setItem("userguest", data.data.token);
 
-        // 5. Auth State Listener (Runs automatically on load/login/logout)
-        const loginBtn = document.getElementById('login-btn');
-        const userWidget = document.getElementById('user-widget');
+                        // user info bhi save kar lo (optional)
+                        localStorage.setItem("guestUser", JSON.stringify({
+                            name,
+                            email,
+                            phone
+                        }));
 
-        // Attach Login Click Event
-        if (loginBtn) {
-            loginBtn.addEventListener('click', () => {
-                signInWithPopup(auth, provider).catch(e => alert(e.message));
-            });
-        }
+                        alert("Guest Login Successful");
 
-        onAuthStateChanged(auth, (user) => {
-            currentUser = user;
+                        this.closeLoginModal();
+                    } else {
+                        errorEl.textContent = data.message || "Login failed";
+                        errorEl.style.display = 'block';
+                    }
 
-            if (user) {
-                // --- USER LOGGED IN ---
-                console.log("User Logged In:", user.email);
+                } catch (error) {
 
-                // 1. Toggle Header Elements
-                if (loginBtn) loginBtn.style.display = 'none';
-                if (userWidget) userWidget.style.display = 'flex';
+                    console.error("Guest Login Error:", error);
+                    errorEl.textContent = "Server error. Try again.";
+                    errorEl.style.display = 'block';
 
-                // 2. Fill Header Data
-                const displayName = document.getElementById('display-name');
-                const userPhoto = document.getElementById('user-photo');
-                if (displayName) displayName.textContent = user.displayName;
-                if (userPhoto) userPhoto.src = user.photoURL;
-
-                // 3. Fill Profile Tab Data
-                const pName = document.getElementById('p-name');
-                const pEmail = document.getElementById('p-email');
-                const pUid = document.getElementById('p-uid');
-                if (pName) pName.textContent = user.displayName;
-                if (pEmail) pEmail.textContent = user.email;
-                if (pUid) pUid.textContent = user.uid;
-
-                // Note: We do NOT auto-show the dashboard here. 
-                // We stay on Home until the user clicks the Dropdown.
-
-            } else {
-                // --- USER LOGGED OUT ---
-                console.log("User Logged Out");
-
-                // 1. Toggle Header Elements
-                if (loginBtn) loginBtn.style.display = 'block';
-                if (userWidget) userWidget.style.display = 'none';
-
-                // 2. Force View to Home
-                window.app.goHome();
-            }
-        });
-
-        // Global App Logic attached to window
-        window.app = {
-            // Redirect to the external dashboard.html file
-            openDashboard: function () {
-                console.log("Redirecting to Dashboard...");
-                window.location.href = "dashboard.html";
+                }
             },
 
-            // Handle Logout
+            // --- UI HELPERS ---
+            openLoginModal: function () {
+                document.getElementById('login-modal').style.display = 'flex';
+            },
+
+            closeLoginModal: function () {
+                document.getElementById('login-modal').style.display = 'none';
+                document.getElementById('error-message').style.display = 'none';
+            },
+
+            // --- MAIN SIGN IN LOGIC ---
+            signInWith: async function (providerType) {
+                const errorEl = document.getElementById('error-message');
+                errorEl.style.display = 'none';
+
+                let provider;
+                try {
+                    // Configure Providers
+                    switch (providerType) {
+                        case 'google':
+                            provider = new GoogleAuthProvider();
+                            break;
+                        case 'github':
+                            provider = new GithubAuthProvider();
+                            // Scopes to access more user data if needed
+                            provider.addScope('read:user');
+                            break;
+                        case 'twitter':
+                            provider = new TwitterAuthProvider();
+                            break;
+                        case 'anonymous':
+                            // Guest Login
+                            const guestResult = await signInAnonymously(auth);
+                            await this.saveUserData(guestResult.user, null, 'guest');
+                            this.closeLoginModal();
+                            return;
+                        default:
+                            throw new Error("Provider not configured");
+                    }
+
+                    const result = await signInWithPopup(auth, provider);
+
+                    //  GET FIREBASE TOKEN
+                    const idToken = await result.user.getIdToken();
+
+                    //  SEND TO BACKEND
+                    await googleLogin(idToken);
+
+                    const additionalInfo = getAdditionalUserInfo(result);
+
+                    // save firestore data
+                    await this.saveUserData(result.user, additionalInfo, providerType);
+
+                    // Modal closes automatically via observer
+
+                } catch (error) {
+                    console.error("Login Failed:", error);
+
+                    // Handle specific error from your screenshot
+                    if (error.code === 'auth/account-exists-with-different-credential') {
+                        errorEl.textContent = "Email already used. Please enable 'Multiple accounts' in Firebase Console settings.";
+                    } else if (error.code === 'auth/invalid-credential') {
+                        errorEl.textContent = "Configuration Error: Check Client ID/Secret and Callback URL.";
+                    } else {
+                        errorEl.textContent = error.message;
+                    }
+                    errorEl.style.display = 'block';
+                }
+            },
+
+            // --- SAVE DATA TO FIRESTORE ---
+            saveUserData: async function (user, additionalInfo, providerName) {
+                try {
+                    const userRef = doc(db, "users", user.uid);
+
+                    // basic data
+                    let userData = {
+                        uid: user.uid,
+                        email: user.email || "No Email",
+                        displayName: user.displayName || "User",
+                        photoURL: user.photoURL,
+                        provider: providerName,
+                        lastLogin: serverTimestamp()
+                    };
+
+                    // Add GitHub specific details if available
+                    if (providerName === 'github' && additionalInfo && additionalInfo.profile) {
+                        userData.githubUsername = additionalInfo.profile.login; // GitHub handle
+                        userData.githubUrl = additionalInfo.profile.html_url;   // Link to GitHub profile
+                        userData.bio = additionalInfo.profile.bio || "";        // GitHub Bio
+                    }
+
+                    // Merge with existing data so we don't lose history
+                    await setDoc(userRef, userData, { merge: true });
+                    console.log("User details saved to database.");
+                } catch (e) {
+                    console.error("Error saving user data:", e);
+                }
+            },
+
             logout: function () {
-                // (Assuming you have auth imported as shown in previous steps)
-                import("https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js")
-                    .then(({ signOut, getAuth }) => {
-                        const auth = getAuth();
-                        signOut(auth).then(() => {
-                            window.location.reload();
-                        });
+
+                const userToken = localStorage.getItem("token");
+                const guestToken = localStorage.getItem("userguest");
+
+
+                if (userToken) {
+
+                    signOut(auth).then(() => {
+
+                        localStorage.removeItem("token");
+                        localStorage.removeItem("user");
+                        localStorage.removeItem("myCart");
+
+                        alert("User logout successful");
+
+                        console.log("Firebase user signed out");
+
+                        window.location.href = "/index.html";
+
+                    }).catch((error) => {
+                        console.error("Logout error:", error);
                     });
+
+                }
+
+                else if (guestToken) {
+
+                    localStorage.removeItem("userguest");
+                    localStorage.removeItem("guestUser");
+                    localStorage.removeItem("myCart");
+
+                    alert("Guest logout successful");
+
+                    console.log("Guest user logged out");
+
+                    window.location.href = "/index.html";
+
+                }
+
+
+                else {
+
+                    alert("No user logged in");
+
+                    window.location.href = "/index.html";
+
+                }
             }
+
+
         };
 
-    </script>
-     <script type="module">
-    // 1. IMPORTS
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-    import {
-        getAuth, signOut, onAuthStateChanged, signInWithPopup, signInAnonymously,
-        GoogleAuthProvider, GithubAuthProvider, TwitterAuthProvider, getAdditionalUserInfo
-    } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 
-    // Import Firestore to save user details
-    import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+        // 4. UI OBSERVER
+        onAuthStateChanged(auth, async (user) => {
 
-    // 2. CONFIGURATION
-    const firebaseConfig = {
-        apiKey: "AIzaSyBfJTHAzQ6u27vGwdsC9HEEMYCdNnjYnJU",
-        authDomain: "dynamiccorrugations-ac4a8.firebaseapp.com",
-        projectId: "dynamiccorrugations-ac4a8",
-        storageBucket: "dynamiccorrugations-ac4a8.firebasestorage.app",
-        messagingSenderId: "481189371368",
-        appId: "1:481189371368:web:58cf359e533d8cadcdd85d",
-        measurementId: "G-6PL4T4METT"
-    };
+            const authView = document.getElementById('auth-view');
+            const userWidget = document.getElementById('user-widget');
+            const loginModal = document.getElementById('login-modal');
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app); // Database reference
+            if (user) {
 
-    // 3. APP LOGIC
-    window.app = {
+                authView.style.display = 'none';
+                userWidget.style.display = 'block';
+                if (loginModal) loginModal.style.display = 'none';
 
-        // --- UI HELPERS ---
-        openLoginModal: function () {
-            document.getElementById('login-modal').style.display = 'flex';
-        },
+                let displayName = user.displayName;
+                let email = user.email;
 
-        closeLoginModal: function () {
-            document.getElementById('login-modal').style.display = 'none';
-            document.getElementById('error-message').style.display = 'none';
-        },
+                const nameEl = document.getElementById('display-name');
+                const emailEl = document.getElementById('user-email');
 
-        // --- MAIN SIGN IN LOGIC ---
-        signInWith: async function (providerType) {
-            const errorEl = document.getElementById('error-message');
-            errorEl.style.display = 'none';
+                nameEl.textContent = displayName || "User";
+                emailEl.textContent = email || "No Email";
 
-            let provider;
-            try {
-                // Configure Providers
-                switch (providerType) {
-                    case 'google':
-                        provider = new GoogleAuthProvider();
-                        break;
-                    case 'github':
-                        provider = new GithubAuthProvider();
-                        // Scopes to access more user data if needed
-                        provider.addScope('read:user');
-                        break;
-                    case 'twitter':
-                        provider = new TwitterAuthProvider();
-                        break;
-                    case 'anonymous':
-                        // Guest Login
-                        const guestResult = await signInAnonymously(auth);
-                        await this.saveUserData(guestResult.user, null, 'guest');
-                        this.closeLoginModal();
-                        return;
-                    default:
-                        throw new Error("Provider not configured");
-                }
+                const photo = user.photoURL ||
+                    `https://ui-avatars.com/api/?name=${displayName || 'U'}&background=random`;
 
-                // Trigger Popup
-                const result = await signInWithPopup(auth, provider);
+                document.getElementById('user-photo-small').src = photo;
+                document.getElementById('profile-photo-large').src = photo;
 
-                // Get Extra Data (Like GitHub Username)
-                const additionalInfo = getAdditionalUserInfo(result);
+            } else {
 
-                // Save/Update User in Database
-                await this.saveUserData(result.user, additionalInfo, providerType);
+                checkGuestLogin();
 
-                // Modal closes automatically via observer
-
-            } catch (error) {
-                console.error("Login Failed:", error);
-
-                // Handle specific error from your screenshot
-                if (error.code === 'auth/account-exists-with-different-credential') {
-                    errorEl.textContent = "Email already used. Please enable 'Multiple accounts' in Firebase Console settings.";
-                } else if (error.code === 'auth/invalid-credential') {
-                    errorEl.textContent = "Configuration Error: Check Client ID/Secret and Callback URL.";
-                } else {
-                    errorEl.textContent = error.message;
-                }
-                errorEl.style.display = 'block';
-            }
-        },
-
-        // --- SAVE DATA TO FIRESTORE ---
-        saveUserData: async function (user, additionalInfo, providerName) {
-            try {
-                const userRef = doc(db, "users", user.uid);
-
-                // basic data
-                let userData = {
-                    uid: user.uid,
-                    email: user.email || "No Email",
-                    displayName: user.displayName || "User",
-                    photoURL: user.photoURL,
-                    provider: providerName,
-                    lastLogin: serverTimestamp()
-                };
-
-                // Add GitHub specific details if available
-                if (providerName === 'github' && additionalInfo && additionalInfo.profile) {
-                    userData.githubUsername = additionalInfo.profile.login; // GitHub handle
-                    userData.githubUrl = additionalInfo.profile.html_url;   // Link to GitHub profile
-                    userData.bio = additionalInfo.profile.bio || "";        // GitHub Bio
-                }
-
-                // Merge with existing data so we don't lose history
-                await setDoc(userRef, userData, { merge: true });
-                console.log("User details saved to database.");
-            } catch (e) {
-                console.error("Error saving user data:", e);
-            }
-        },
-
-        // Logout
-        logout: function () {
-            signOut(auth).then(() => {
-                console.log("User signed out");
-            });
-        }
-    };
-
-    // 4. UI OBSERVER
-    onAuthStateChanged(auth, (user) => {
-        const authView = document.getElementById('auth-view');
-        const userWidget = document.getElementById('user-widget');
-        const loginModal = document.getElementById('login-modal');
-
-        if (user) {
-            // Logged In
-            if (authView) authView.style.display = 'none';
-            if (loginModal) loginModal.style.display = 'none';
-            if (userWidget) userWidget.style.display = 'block';
-
-            // Populate UI
-            const nameEl = document.getElementById('display-name');
-            const emailEl = document.getElementById('user-email');
-            const uidEl = document.getElementById('user-uid');
-            const imgSmall = document.getElementById('user-photo-small');
-            const imgLarge = document.getElementById('profile-photo-large');
-
-            if (nameEl) nameEl.textContent = user.displayName || "Anonymous";
-            if (emailEl) emailEl.textContent = user.email || "No Email";
-            if (uidEl) uidEl.textContent = user.uid;
-
-            const photo = user.photoURL || `https://ui-avatars.com/api/?name=${user.displayName || 'U'}&background=random`;
-            if (imgSmall) imgSmall.src = photo;
-            if (imgLarge) imgLarge.src = photo;
-
-        } else {
-            // Logged Out
-            if (authView) authView.style.display = 'block';
-            if (userWidget) userWidget.style.display = 'none';
-            if (document.getElementById('profile-card'))
-                document.getElementById('profile-card').style.display = 'none';
-        }
-    });
-
-    // Helper to toggle profile card
-    window.toggleProfile = function () {
-        const card = document.getElementById('profile-card');
-        if (card) {
-            card.style.display = (card.style.display === 'none' || card.style.display === '') ? 'block' : 'none';
-        }
-    }
-
-    // Close on outside click
-    window.onclick = function (event) {
-        if (!event.target.closest('.user-widget') && document.getElementById('profile-card')) {
-            document.getElementById('profile-card').style.display = 'none';
-        }
-    }
-</script>
-
-<script type="module">
-    // 1. IMPORTS
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-    import {
-        getAuth, signOut, onAuthStateChanged, signInWithPopup, signInAnonymously,
-        GoogleAuthProvider, GithubAuthProvider, TwitterAuthProvider, getAdditionalUserInfo
-    } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
-
-    import { getFirestore, doc, setDoc, getDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
-
-    // 2. CONFIGURATION
-    const firebaseConfig = {
-        apiKey: "AIzaSyBfJTHAzQ6u27vGwdsC9HEEMYCdNnjYnJU",
-        authDomain: "dynamiccorrugations-ac4a8.firebaseapp.com",
-        projectId: "dynamiccorrugations-ac4a8",
-        storageBucket: "dynamiccorrugations-ac4a8.firebasestorage.app",
-        messagingSenderId: "481189371368",
-        appId: "1:481189371368:web:58cf359e533d8cadcdd85d",
-        measurementId: "G-6PL4T4METT"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-
-    // 3. APP LOGIC
-    window.app = {
-        openLoginModal: function () {
-            document.getElementById('login-modal').style.display = 'flex';
-            this.hideGuestForm(); // Reset view to provider selection
-        },
-
-        closeLoginModal: function () {
-            document.getElementById('login-modal').style.display = 'none';
-            document.getElementById('error-message').style.display = 'none';
-        },
-
-        showGuestForm: function () {
-            document.getElementById('auth-options').style.display = 'none';
-            document.getElementById('guest-form-container').style.display = 'block';
-        },
-
-        hideGuestForm: function () {
-            document.getElementById('auth-options').style.display = 'block';
-            document.getElementById('guest-form-container').style.display = 'none';
-        },
-
-        // --- GUEST SUBMISSION ---
-        submitGuestLogin: async function () {
-            const name = document.getElementById('guest-name').value;
-            const email = document.getElementById('guest-email').value;
-            const address = document.getElementById('phone').value;
-
-            const errorEl = document.getElementById('error-message');
-
-            if (!name || !email) {
-                errorEl.textContent = "Name and Email are required!";
-                errorEl.style.display = 'block';
-                return;
             }
 
-            try {
-                const result = await signInAnonymously(auth);
-                const userData = {
-                    uid: result.user.uid,
-                    displayName: name,
-                    email: email,
-                    address: address,
-                    provider: 'guest',
-                    lastLogin: serverTimestamp()
-                };
-
-                await setDoc(doc(db, "users", result.user.uid), userData, { merge: true });
-                this.closeLoginModal();
-            } catch (error) {
-                errorEl.textContent = error.message;
-                errorEl.style.display = 'block';
-            }
-        },
-
-        // --- MAIN SIGN IN LOGIC ---
-        signInWith: async function (providerType) {
-            const errorEl = document.getElementById('error-message');
-            errorEl.style.display = 'none';
-
-            try {
-                let provider;
-                switch (providerType) {
-                    case 'google': provider = new GoogleAuthProvider(); break;
-                    case 'github':
-                        provider = new GithubAuthProvider();
-                        provider.addScope('read:user');
-                        break;
-                    case 'twitter': provider = new TwitterAuthProvider(); break;
-                    default: throw new Error("Provider not configured");
-                }
-
-                const result = await signInWithPopup(auth, provider);
-
-                // 🔴 Google ID TOKEN
-                const idToken = await result.user.getIdToken();
-
-                // 🔴 CALL YOUR BACKEND LOGIN API
-                await googleLogin(idToken);
-
-                const additionalInfo = getAdditionalUserInfo(result);
-                await this.saveUserData(result.user, additionalInfo, providerType);
-                this.closeLoginModal();
-            } catch (error) {
-                errorEl.textContent = error.message;
-                errorEl.style.display = 'block';
-            }
-        },
-
-        saveUserData: async function (user, additionalInfo, providerName) {
-            try {
-                const userRef = doc(db, "users", user.uid);
-                let userData = {
-                    uid: user.uid,
-                    email: user.email || "No Email",
-                    displayName: user.displayName || "User",
-                    photoURL: user.photoURL,
-                    provider: providerName,
-                    lastLogin: serverTimestamp()
-                };
-
-                if (providerName === 'github' && additionalInfo?.profile) {
-                    userData.githubUsername = additionalInfo.profile.login;
-                }
-
-                await setDoc(userRef, userData, { merge: true });
-            } catch (e) {
-                console.error("Error saving user data:", e);
-            }
-        },
-
-        logout: function () {
-
-            //  Firebase logout
-            signOut(auth).then(() => {
-
-                //  Remove backend token
-                localStorage.removeItem("token");
-                localStorage.removeItem("user");
-                localStorage.removeItem("myCart");
-                showToast("logout succeess ")
-                console.log("User signed out");
-                window.location.href = "/index.html";
-
-            }).catch((error) => {
-                console.error("Logout error:", error);
-            });
-
-        }
-    };
-
-    // 4. UI OBSERVER
-    onAuthStateChanged(auth, async (user) => {
-        const authView = document.getElementById('auth-view');
-        const userWidget = document.getElementById('user-widget');
-        const loginModal = document.getElementById('login-modal');
-        const nameEl = document.getElementById('display-name');
-        const emailEl = document.getElementById('user-email');
-        const uidEl = document.getElementById('user-uid');
-        const imgSmall = document.getElementById('user-photo-small');
-        const imgLarge = document.getElementById('profile-photo-large');
-
-        if (user) {
-            if (authView) authView.style.display = 'none';
-            if (loginModal) loginModal.style.display = 'none';
-            if (userWidget) userWidget.style.display = 'block';
-
-            let displayName = user.displayName;
-            let email = user.email;
-
-            // Fetch stored Guest details from Firestore if Auth is anonymous
-            if (user.isAnonymous) {
-                const userDoc = await getDoc(doc(db, "users", user.uid));
-                if (userDoc.exists()) {
-                    const data = userDoc.data();
-                    displayName = data.displayName;
-                    email = data.email;
-                    // Optionally set address in profile if field exists
-                    const addrDisplay = document.getElementById('user-address-display');
-                    if (addrDisplay) addrDisplay.textContent = data.address || "";
-                }
-            }
-
-            if (nameEl) nameEl.textContent = displayName || "Guest";
-            if (emailEl) emailEl.textContent = email || "No Email";
-            if (uidEl) uidEl.textContent = user.uid;
-
-            const photo = user.photoURL || `https://ui-avatars.com/api/?name=${displayName || 'U'}&background=random`;
-            if (imgSmall) imgSmall.src = photo;
-            if (imgLarge) imgLarge.src = photo;
-
-        } else {
-            if (authView) authView.style.display = 'block';
-            if (userWidget) userWidget.style.display = 'none';
+        });
+        // Helper to toggle profile card
+        window.toggleProfile = function () {
             const card = document.getElementById('profile-card');
-            if (card) card.style.display = 'none';
+            if (card) {
+                card.style.display = (card.style.display === 'none' || card.style.display === '') ? 'block' : 'none';
+            }
         }
-    });
 
-    // Helper to toggle profile card
-    window.toggleProfile = function () {
-        const card = document.getElementById('profile-card');
-        if (card) {
-            card.style.display = (card.style.display === 'none' || card.style.display === '') ? 'block' : 'none';
+        // Close on outside click
+        window.onclick = function (event) {
+            if (!event.target.closest('.user-widget') && document.getElementById('profile-card')) {
+                document.getElementById('profile-card').style.display = 'none';
+            }
         }
-    }
 
-    // Close profile card on outside click
-    window.onclick = function (event) {
-        if (!event.target.closest('.user-widget') && document.getElementById('profile-card')) {
-            document.getElementById('profile-card').style.display = 'none';
+        function checkGuestLogin() {
+
+            const guest = JSON.parse(localStorage.getItem("guestUser"));
+            const token = localStorage.getItem("token");
+
+            const authView = document.getElementById("auth-view");
+            const userWidget = document.getElementById("user-widget");
+            
+            // Google login
+            if (token) return;
+            
+            // Guest login
+            if (guest) {
+                
+                authView.style.display = "none";
+                userWidget.style.display = "block";
+                
+                document.getElementById("display-name").textContent = guest.name;
+                document.getElementById("user-email").textContent = guest.email;
+                document.getElementById("my-profile").style.display = "none";
+
+                const avatar =
+                    `https://ui-avatars.com/api/?name=${encodeURIComponent(guest.name)}&background=random&color=fff`;
+
+                document.getElementById("user-photo-small").src = avatar;
+                document.getElementById("profile-photo-large").src = avatar;
+            }
         }
-    }
-</script>
+
+        document.addEventListener("DOMContentLoaded", checkGuestLogin);
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const openPopupLink = document.getElementById("openPopupLink");
+            const popup = document.getElementById("popup");
+            const closePopupBtn = document.getElementById("closePopup");
+
+            // Open popup
+            openPopupLink.addEventListener("click", (event) => {
+                event.preventDefault();
+                popup.classList.remove("hidden");
+            });
+
+            // Close popup when clicking close button
+            closePopupBtn.addEventListener("click", () => {
+                popup.classList.add("hidden");
+            });
+
+            // Close popup when clicking outside popup content
+            popup.addEventListener("click", (event) => {
+                if (event.target === popup) {
+                    popup.classList.add("hidden");
+                }
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const openPopupLink = document.getElementById("openPopupLink");
+            const popup = document.getElementById("popup");
+            const closePopupBtn = document.getElementById("closePopup");
+
+            // Open popup
+            openPopupLink.addEventListener("click", (event) => {
+                event.preventDefault();
+                popup.classList.remove("hidden");
+            });
+
+            // Close popup when clicking close button
+            closePopupBtn.addEventListener("click", () => {
+                popup.classList.add("hidden");
+            });
+
+            // Close popup when clicking outside popup content
+            popup.addEventListener("click", (event) => {
+                if (event.target === popup) {
+                    popup.classList.add("hidden");
+                }
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const openPopupLink = document.getElementById("openPopupLink");
+            const popup = document.getElementById("popup");
+            const closePopupBtn = document.getElementById("closePopup");
+
+            // Open popup
+            openPopupLink.addEventListener("click", (event) => {
+                event.preventDefault();
+                popup.classList.remove("hidden");
+            });
+
+            // Close popup when clicking close button
+            closePopupBtn.addEventListener("click", () => {
+                popup.classList.add("hidden");
+            });
+
+            // Close popup when clicking outside popup content
+            popup.addEventListener("click", (event) => {
+                if (event.target === popup) {
+                    popup.classList.add("hidden");
+                }
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const openPopupLink = document.getElementById("openPopupLink");
+            const popup = document.getElementById("popup");
+            const closePopupBtn = document.getElementById("closePopup");
+
+            // Open popup
+            openPopupLink.addEventListener("click", (event) => {
+                event.preventDefault();
+                popup.classList.remove("hidden");
+            });
+
+            // Close popup when clicking close button
+            closePopupBtn.addEventListener("click", () => {
+                popup.classList.add("hidden");
+            });
+
+            // Close popup when clicking outside popup content
+            popup.addEventListener("click", (event) => {
+                if (event.target === popup) {
+                    popup.classList.add("hidden");
+                }
+            });
+        });
+    </script>
+   
 </body>
 
 </html>
