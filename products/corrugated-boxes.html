@@ -13,6 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Document title -->
     <!-- Stylesheets & Fonts -->
+    <link href="/css/18-x-15-x-16-inches.css" rel="stylesheet">
     <link href="/css/plugins.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/index.css" rel="stylesheet">
@@ -952,7 +953,12 @@
                                         <button class="btn-provider google" onclick="window.app.signInWith('google')">
                                             <i class="fab fa-google"></i> Google
                                         </button>
-                                        
+                                        <button class="btn-provider github" onclick="window.app.signInWith('github')">
+                                            <i class="fab fa-github"></i> GitHub
+                                        </button>
+                                        <button class="btn-provider twitter" onclick="window.app.signInWith('twitter')">
+                                            <i class="fab fa-twitter"></i> Twitter
+                                        </button>
 
                                     </div>
                                 </div>
@@ -984,6 +990,9 @@
                     </div>
                 </div>
             </div>
+            <!-- cart sidebar -->
+            <div id="cart-container"></div>
+
         </header>
         <script src="/script.js"></script>
         <!-- end: Header -->
@@ -1793,6 +1802,18 @@
 
         document.addEventListener("DOMContentLoaded", checkGuestLogin);
     </script>
+
+
+
+    <script>
+        fetch("/cart-sidebar.html")
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById("cart-container").innerHTML = data;
+            });
+    </script>
+
+    <script src="/js/cart.js"></script>
 
 </body>
 

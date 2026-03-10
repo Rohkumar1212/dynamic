@@ -29,9 +29,9 @@
     <meta name="twitter:description"
         content="Premium double-wall corrugated box designed for fragile and heavy goods. Perfect for glassware, electronics, and high-value products.">
     <meta name="twitter:image" content="https://dynamiccorrugations.com//images/products/18-15-16-corrugated-box.jpg">
-
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link href="/css/plugins.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/index.css" rel="stylesheet">
@@ -39,182 +39,25 @@
     <link href="/css/product.css" rel="stylesheet">
     <link href="/css/18-x-15-x-16-inches.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="/images/favicon.ico">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-    <style>
-        .cart-sidebar {
-            width: 350px;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            background: #fff;
-            border-left: 1px solid #ddd;
-        }
 
-        #cartItemsContainer {
-            flex: 1;
-            /* This takes up all available space */
-            overflow-y: auto;
-            /* This enables the scrollbar */
-            padding: 15px;
-        }
-
-        .qty-btn {
-            border: 1px solid #ddd;
-            background: #f8f9fa;
-            cursor: pointer;
-            padding: 2px 8px;
-            border-radius: 4px;
-        }
-
-        #cartItemsContainer {
-            max-height: 400px;
-            /* Adjust this based on your design */
-            overflow-y: auto;
-            overflow-x: hidden;
-            padding-right: 5px;
-            /* Space for the scrollbar */
-        }
-
-        /* Optional: Make the scrollbar look cleaner */
-        #cartItemsContainer::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        #cartItemsContainer::-webkit-scrollbar-thumb {
-            background-color: #ccc;
-            border-radius: 10px;
-        }
-
-        :root {
-            --primary-blue: #0047FF;
-        }
-
-        .product-container {
-            background: white;
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            margin-top: 50px;
-        }
-
-        .product-img {
-            width: 100%;
-            max-height: 500px;
-            object-fit: contain;
-            border-radius: 10px;
-            border: 1px solid #eee;
-        }
-
-        .badge-category {
-            background: transparent;
-            color: var(--primary-blue);
-            border: 2px solid var(--primary-blue);
-            border-radius: 20px;
-            padding: 5px 15px;
-            font-weight: bold;
-        }
-
-        .btn-call {
-            background: var(--primary-blue);
-            color: white;
-            border-radius: 50px;
-            padding: 12px 30px;
-            font-weight: bold;
-            text-decoration: none;
-            display: inline-block;
-            transition: 0.3s;
-        }
-
-        .btn-call:hover {
-            background: #0036c4;
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .price-text {
-            font-size: 2rem;
-            color: #333;
-            font-weight: 700;
-        }
-
-        /* Add Microsoft Color */
-        .microsoft i {
-            color: #00a4ef;
-        }
-
-        /* Shared Styles */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            width: 320px;
-            text-align: center;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            position: relative;
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            cursor: pointer;
-            font-size: 24px;
-            color: #aaa;
-        }
-
-        .provider-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 20px;
-        }
-
-        .btn-provider {
-            padding: 12px;
-            border: 1px solid #e0e0e0;
-            background: white;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 15px;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: all 0.2s;
-        }
-
-        .btn-provider:hover {
-            background-color: #f8f9fa;
-            border-color: #ccc;
-            transform: translateY(-1px);
-        }
-
-        .error-text {
-            color: #d32f2f;
-            display: none;
-            margin-top: 15px;
-            font-size: 0.9rem;
-            background: #ffebee;
-            padding: 8px;
-            border-radius: 4px;
-        }
-    </style>
 </head>
+
+<style>
+    #relatedList{
+        display:flex;
+        flex-direction:column;
+        gap:8px;
+        }
+        
+        .related-item .chip{
+        padding:6px 12px;
+        background:#f2f2f2;
+        border-radius:20px;
+        font-size:13px;
+        display:inline-block;
+        }
+</style>
 
 <body>
     <div class="body-inner">
@@ -280,90 +123,96 @@
                             </nav>
                         </div>
                     </div>
-                                    <div class="header-extras">
-                                        <div class="cart-menu-item">
-                                            <a href="javascript:void(0)" onclick="viewCart()" class="header-cart-btn">
-                                    
-                                                <span id="headerCartCount" class="cart-badge" style="display:none;">0</span>
-                                                <i class="fas fa-shopping-cart"></i>
-                                            </a>
+                    <div class="header-extras">
+                        <div class="cart-menu-item">
+                            <a href="javascript:void(0)" onclick="viewCart()" class="header-cart-btn">
+
+                                <span id="headerCartCount" class="cart-badge" style="display:none;">0</span>
+                                <i class="fas fa-shopping-cart"></i>
+                            </a>
+                        </div>
+                        <div id="auth-view">
+                            <button id="login-btn" class="btn btn-primary"
+                                onclick="window.app.openLoginModal()">Login</button>
+                        </div>
+                        <div id="user-widget" class="user-widget" style="display: none;">
+
+                            <div class="avatar-trigger" onclick="toggleProfile()">
+                                <img id="user-photo-small" class="avatar-small" src="https://via.placeholder.com/40"
+                                    alt="User" />
+                            </div>
+
+                            <div id="profile-card" class="profile-card" style="display: none;">
+                                <div class="profile-header-bg"></div>
+                                <div class="profile-content">
+                                    <img id="profile-photo-large" class="profile-img-large"
+                                        src="https://via.placeholder.com/80" alt="Profile" />
+                                    <h4 id="display-name">Loading...</h4>
+                                    <p id="user-email">...</p>
+                                    <p id="user-uid" style="display:none;"></p>
+
+                                    <div class="profile-actions">
+                                        <div class="action-row" id="my-profile"
+                                            onclick="window.location.href='products/dashboard.html'">
+                                            <div class="icon-circle"><i class="fas fa-user"></i></div>
+                                            <div class="action-text"><strong>My Profile</strong><span>Account
+                                                    settings</span></div>
+                                            <i class="fas fa-chevron-right arrow-icon"></i>
                                         </div>
-                                        <div id="auth-view">
-                                            <button id="login-btn" class="btn btn-primary" onclick="window.app.openLoginModal()">Login</button>
-                                        </div>
-                                        <div id="user-widget" class="user-widget" style="display: none;">
-                                    
-                                            <div class="avatar-trigger" onclick="toggleProfile()">
-                                                <img id="user-photo-small" class="avatar-small" src="https://via.placeholder.com/40" alt="User" />
+                                        <div class="action-row logout" onclick="window.app.logout()">
+                                            <div class="icon-circle logout-icon"><i class="fas fa-sign-out-alt"></i>
                                             </div>
-                                    
-                                            <div id="profile-card" class="profile-card" style="display: none;">
-                                                <div class="profile-header-bg"></div>
-                                                <div class="profile-content">
-                                                    <img id="profile-photo-large" class="profile-img-large" src="https://via.placeholder.com/80"
-                                                        alt="Profile" />
-                                                    <h4 id="display-name">Loading...</h4>
-                                                    <p id="user-email">...</p>
-                                                    <p id="user-uid" style="display:none;"></p>
-                                    
-                                                    <div class="profile-actions">
-                                                        <div class="action-row" id="my-profile" onclick="window.location.href='products/dashboard.html'">
-                                                            <div class="icon-circle"><i class="fas fa-user"></i></div>
-                                                            <div class="action-text"><strong>My Profile</strong><span>Account
-                                                                    settings</span></div>
-                                                            <i class="fas fa-chevron-right arrow-icon"></i>
-                                                        </div>
-                                                        <div class="action-row logout" onclick="window.app.logout()">
-                                                            <div class="icon-circle logout-icon"><i class="fas fa-sign-out-alt"></i>
-                                                            </div>
-                                                            <div class="action-text"><strong>Log Out</strong></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    
-                                        <div id="login-modal" class="modal-overlay" style="display: none;">
-                                            <div class="modal-content">
-                                                <span class="close-modal" onclick="window.app.closeLoginModal()">&times;</span>
-                                    
-                                                <div id="auth-options">
-                                                    <h3>Sign In</h3>
-                                                    <p>Select a provider to continue</p>
-                                                    <div class="provider-buttons">
-                                                        <button class="btn-provider google" onclick="window.app.signInWith('google')">
-                                                            <i class="fab fa-google"></i> Google
-                                                        </button>
-                                                        
-                                    
-                                                    </div>
-                                                </div>
-                                    
-                                                <div id="guest-form-container" style="display: none; padding: 10px;">
-                                                    <h3>Guest Details</h3>
-                                                    <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 15px;">
-                                                        <input type="text" id="guest-name" placeholder="Full Name"
-                                                            style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
-                                                        <input type="email" id="guest-email" placeholder="Email Address"
-                                                            style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
-                                                        <input type="text" id="phone" placeholder="Phone Number"
-                                                            style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
-                                    
-                                                        <button class="btn btn-primary" onclick="window.app.submitGuestLogin()">Complete
-                                                            Login</button>
-                                                        <button class="btn btn-secondary" onclick="window.app.hideGuestForm()"
-                                                            style="background: #da9618; border: none; padding: 5px;">close</button>
-                                                    </div>
-                                    
-                                                    <p id="user-address-display"
-                                                        style="font-size: 0.9em; color: #555; margin-top: 5px; font-style: italic;">
-                                                    </p>
-                                                </div>
-                                    
-                                                <p id="error-message" style="color:red; display:none; margin-top:10px;"></p>
-                                            </div>
+                                            <div class="action-text"><strong>Log Out</strong></div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="login-modal" class="modal-overlay" style="display: none;">
+                            <div class="modal-content">
+                                <span class="close-modal" onclick="window.app.closeLoginModal()">&times;</span>
+
+                                <div id="auth-options">
+                                    <h3>Sign In</h3>
+                                    <p>Select a provider to continue</p>
+                                    <div class="provider-buttons">
+                                        <button class="btn-provider google" onclick="window.app.signInWith('google')">
+                                            <i class="fab fa-google"></i> Google
+                                        </button>
+                                        <button class="btn-provider anonymous text-dark"
+                                            onclick="window.app.showGuestForm()">
+                                            <i class="fas fa-user-secret"></i> Guest
+                                        </button>
+
+                                    </div>
+                                </div>
+
+                                <div id="guest-form-container" style="display: none; padding: 10px;">
+                                    <h3>Guest Details</h3>
+                                    <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 15px;">
+                                        <input type="text" id="guest-name" placeholder="Full Name"
+                                            style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+                                        <input type="email" id="guest-email" placeholder="Email Address"
+                                            style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+                                        <input type="text" id="phone" placeholder="Phone Number"
+                                            style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+
+                                        <button class="btn btn-primary" onclick="window.app.submitGuestLogin()">Complete
+                                            Login</button>
+                                        <button class="btn btn-secondary" onclick="window.app.hideGuestForm()"
+                                            style="background: #da9618; border: none; padding: 5px;">close</button>
+                                    </div>
+
+                                    <p id="user-address-display"
+                                        style="font-size: 0.9em; color: #555; margin-top: 5px; font-style: italic;">
+                                    </p>
+                                </div>
+
+                                <p id="error-message" style="color:red; display:none; margin-top:10px;"></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
     </div>
@@ -505,32 +354,8 @@
         <div class="toast-icon">⚠️</div>
         <div class="toast-message" id="toast-text">Minimum order for Outside Delhi is 50 pieces.</div>
     </div>
-    <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
-    <div class="cart-modal" id="cartModal">
+    <div id="cart-container"></div>
 
-
-        <div class="cart-sidebar">
-            <div style="padding: 15px; border-bottom: 1px solid #ddd; display: flex; justify-content: space-between;">
-                <h3 style="margin:0;">Your Cart</h3>
-                <button onclick="closeCart()"
-                    style="background:none; border:none; font-size:20px; cursor:pointer;">&times;</button>
-            </div>
-
-            <div id="cartItemsContainer" style="flex:1; overflow-y:auto; padding:15px;">
-            </div>
-
-            <div class="cart-footer" style="padding: 15px; border-top: 1px solid #ddd;">
-                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                    <strong>Total:</strong>
-                    <span id="cartGrandTotal" style="font-weight: bold; color: #27ae60;">₹0</span>
-                </div>
-                <button id="checkoutButton" onclick="proceedToCheckout()"
-                    style="width: 100%; padding: 12px; background: #27ae60; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">
-                    Proceed to Checkout
-                </button>
-            </div>
-        </div>
-    </div>
     <div class="container">
         <div class="tabs-container">
             <div id="tabButtons" class="tab-buttons"></div>
@@ -548,6 +373,7 @@
             </div>
         </div>
     </div>
+
     <script>
         async function loadProductData() {
             const pid = window.location.params('id')
@@ -635,106 +461,7 @@
         // Start
         loadProductData();
     </script>
-    <style>
-        /* TAB UI/UX */
-        .tabs-container {
-            background: var(--card);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-        }
 
-        .tab-buttons {
-            display: flex;
-            background: #eee;
-            border-bottom: 1px solid #ddd;
-            overflow-x: auto;
-        }
-
-        .tab-buttons button {
-            padding: 15px 25px;
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-            background: none;
-            color: #666;
-            transition: 0.3s;
-            white-space: nowrap;
-        }
-
-        .tab-buttons button.active {
-            background: var(--card);
-            color: var(--primary);
-            border-top: 3px solid var(--primary);
-        }
-
-        .tab-content {
-            display: none;
-            padding: 30px;
-            animation: slideUp 0.4s ease;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        /* GRID FOR REVIEWS/RELATED */
-        .bottom-sections {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-top: 25px;
-        }
-
-        .info-card {
-            background: var(--card);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-
-        .chip {
-            display: inline-block;
-            background: #e0f2f1;
-            color: var(--primary);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 13px;
-            margin: 4px;
-            font-weight: 500;
-        }
-
-        .review-item {
-            border-bottom: 1px solid #eee;
-            padding: 10px 0;
-        }
-
-        .review-item:last-child {
-            border: none;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Mobile Adjustments */
-        @media (max-width: 600px) {
-
-
-            .tab-buttons button {
-                padding: 12px 15px;
-                font-size: 14px;
-            }
-        }
-    </style>
     <footer id="footer">
         <div class="footer-content">
             <div class="container">
@@ -853,1633 +580,14 @@
         }
         const token = getAuthToken();
     </script>
-    <!--Plugins-->
-    <script>
 
-        // ============================================
-        // 1. GLOBAL STATE
-        // ============================================
-        let productData = {};
-        let currentMaterial = null;
-        let currentPrice = 0;
 
-        // Default State
-        let currentMoq = 10;
-        let selectedLocationName = null;
-
-        // Cart Load
-        let cart = JSON.parse(localStorage.getItem('myCart')) || [];
-        let pendingUpdate = null;
-
-        // ============================================
-        // 2. INITIALIZATION
-        // ============================================
-        document.addEventListener("DOMContentLoaded", async () => {
-            await fetchProductData();
-            updateCartUI();
-        });
-
-
-        // Function to Trigger the Green Toast
-        function showToast(message) {
-            const toast = document.getElementById("custom-toast");
-            const textEl = document.getElementById("toast-text");
-
-            // Set the text
-            if (textEl) textEl.innerText = message;
-
-            // Show it
-            toast.classList.add("show");
-
-            // Hide after 3 seconds
-            setTimeout(() => {
-                toast.classList.remove("show");
-            }, 3000);
-        }
-
-        // UPDATE your updateQty function to use this:
-        function updateQty(change) {
-            if (!selectedLocationName) {
-                alert("⚠️ Please select 'Delhi NCR' or 'Outside Delhi' first.");
-                return;
-            }
-
-            const input = document.getElementById("qtyInput");
-            let val = parseInt(input.value) + change;
-
-            // Check if user is trying to go below limit
-            if (val < currentMoq) {
-                // TRIGGER THE GREEN TOAST HERE
-                showToast(`Minimum order for ${selectedLocationName} is ${currentMoq} Pieces.`);
-                val = currentMoq;
-            }
-
-            input.value = val;
-        }
-        // ============================================
-        // 3. LOCATION & RADIO BUTTON LOGIC (FIXED)
-        // ============================================
-        function handleLocationChange(moq, locationName) {
-            currentMoq = moq;
-            selectedLocationName = locationName;
-
-            // 1. Update UI Message
-            const msgEl = document.getElementById("moqMessage");
-            msgEl.style.display = "block";
-            msgEl.innerHTML = `✅ Location: <b>${locationName}</b> selected. Minimum order is <b>${moq} Pieces</b>.`;
-            msgEl.style.color = "#27ae60";
-
-            // 2. FORCE UPDATE the input value immediately
-            const qtyInput = document.getElementById("qtyInput");
-            if (qtyInput) {
-                // Always set it to the new MOQ immediately so the user sees the change
-                qtyInput.value = currentMoq;
-            }
-        }
-
-        // Helper: +/- buttons for Qty
-        function updateQty(change) {
-            // 1. Check if location is selected first
-            if (!selectedLocationName) {
-                alert("⚠️ Please select 'Delhi NCR' or 'Outside Delhi' first.");
-                return;
-            }
-
-            const input = document.getElementById("qtyInput");
-            let val = parseInt(input.value) + change;
-
-            // 2. Check if user is trying to go below the Limit
-            if (val < currentMoq) {
-                // Show Toast Warning
-                showToast(`⚠️ Minimum order for ${selectedLocationName} is ${currentMoq} Pieces.`);
-                val = currentMoq; // Keep value at minimum
-            }
-
-            input.value = val;
-        }
-        // ============================================
-        // 4. DATA FETCHING
-        // ============================================
-        async function fetchProductData() {
-            try {
-                // 1. Get the ID from the URL parameters
-                const urlParams = new URLSearchParams(window.location.search);
-                const productId = urlParams.get('id');
-
-                if (!productId) {
-                    console.error("No product ID found in URL");
-                    return;
-                }
-
-                // 2. Fetch all products (or a specific one if your API supports it)
-                const response = await fetch(`https://admin.dynamiccorrugations.com/api/products`);
-                const result = await response.json();
-
-                // 3. Find the specific product that matches the ID from the URL
-                // Your API returns products inside a 'data' array
-                const allProducts = result.data || [];
-                productData = allProducts.find(p => p.id === productId);
-
-                if (productData) {
-                    console.log("Product Loaded:", productData);
-                    renderProduct();
-                    // alert(productData.id); // For debugging
-                } else {
-                    console.error("Product not found in the list");
-                }
-
-            } catch (error) {
-                console.error("Data Load Error:", error);
-            }
-        }
-
-        // function selectMaterial(material, element) {
-        //     currentMaterial = material;
-        //     document.querySelectorAll('.quality-item').forEach(el => el.classList.remove('active'));
-        //     if (element) element.classList.add('active');
-
-        //     currentPrice = Math.round(productData.prodPrice * material.multiplier);
-        //     document.getElementById('prodPrice').innerText = `₹ ${currentPrice} /  Pieces`;
-        //     if (material.image) document.getElementById('mainImage').src = material.image;
-        // }
-        function selectMaterial(material, element) {
-            // 1. Update Global State
-            currentMaterial = material;
-
-            // 2. UI: Toggle active class on the buttons/chips
-            document.querySelectorAll('.quality-item').forEach(el => el.classList.remove('active'));
-            if (element) element.classList.add('active');
-
-            // 3. Calculation: Use basePricePerPiece from API * material.multiplier
-            // productData is the object fetched from https://admin.dynamiccorrugations.com/api/products
-            unitPrice = Math.round(productData.prodPrice * material.multiplier);
-
-            // 4. Update the Price Display in your <div id="prodPrice">
-            const priceElement = document.getElementById('prodPrice');
-            if (priceElement) {
-                priceElement.innerText = `₹ ${unitPrice.toLocaleString()} / Piece`;
-            }
-
-            // 5. Image Update: Change main image if variant has a specific one
-            if (material.image) {
-                document.getElementById('mainImage').src = material.image;
-            }
-
-            // 6. Refresh Total: If quantity is already selected, update the total amount
-            updatePriceDisplay();
-        }
-
-        // ============================================
-        // 5. CART LOGIC
-        // ============================================
-
-        // Unique ID for Product Variant
-        function getVariantKey() {
-            const matId = currentMaterial ? currentMaterial.id : "default";
-            return `${productData.id}-${matId}`;
-        }
-        function buyNow() { addToCart(true); }
-
-        async function addToCart(openDrawer = false) {
-
-            const userToken = getAuthToken();
-
-            if (!userToken) {
-                showToast("Please login first");
-                return;
-            }
-            // --- LOCATION VALIDATION ---
-            if (!selectedLocationName) {
-                alert("⚠️ Please select your Delivery Location before adding to cart.");
-                document.querySelector('.location-wrapper').style.border = "2px solid red";
-                return;
-            } else {
-                document.querySelector('.location-wrapper').style.border = "1px solid #ddd";
-            }
-
-            const qtyInput = document.getElementById("qtyInput");
-            const qty = parseInt(qtyInput.value);
-
-            // --- MOQ CHECK ---
-            if (qty < currentMoq) {
-                alert(`Minimum order quantity for ${selectedLocationName} is ${currentMoq} pieces.`);
-                qtyInput.value = currentMoq;
-                return;
-            }
-            function getToken() {
-                return localStorage.getItem("token");
-            }
-            // --- IMAGE ---
-
-
-            // --- 1. IMAGE SELECTION FIX ---
-            // Replace the crashing line with this safe check:
-            let rawImage = "";
-
-            if (currentMaterial && currentMaterial.image) {
-                rawImage = currentMaterial.image;
-            } else if (productData && productData.mainImage) {
-                // USE mainImage instead of images[0]
-                rawImage = productData.mainImage;
-            } else {
-                rawImage = "/images/placeholder.png";
-            }
-
-            // Prepend domain for relative paths
-            let selectedImage = rawImage.startsWith('http')
-                ? rawImage
-                : `https://admin.dynamiccorrugations.com${rawImage}`;
-
-            // --- SAFE DIMENSIONS ---
-            let dimensions = null;
-
-            if (productData.length && productData.width && productData.height) {
-                dimensions = {
-                    length: productData.length,
-                    width: productData.width,
-                    height: productData.height,
-                    unit: "cm"
-                };
-            }
-
-            // --- API PAYLOAD ---
-            const payload = {
-
-
-                pricePerPiece: productData.prodPrice,
-                quantity: productData.quantity, // This should be the base price, server will calculate final price based on material multiplier
-                // --- API PAYLOAD ---
-
-                title: productData.title,
-                // FIX: Ensure this is a number and not 0
-                pricePerPiece: Number(currentPrice) > 0 ? Number(currentPrice) : Number(productData.basePricePerPiece),
-                quantity: parseInt(qty),
-                productId: productData.id,
-                productSlug: productData.slug || "",
-                image: selectedImage, // Ensure image is passed
-                variant: {
-                    material: currentMaterial ? currentMaterial.name : "Standard"
-                },
-                deliveryLocation: selectedLocationName
-
-
-
-            };
-
-            try {
-
-                const response = await fetch("https://admin.dynamiccorrugations.com/api/cart/items", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${userToken}`
-                    },
-                    body: JSON.stringify(payload)
-                });
-
-                const data = await response.json();
-
-                if (!response.ok) {
-                    throw new Error(data.message || "Failed to add item to cart");
-                }
-
-                console.log("Cart Response:", data);
-
-                finalizeAction(openDrawer, "Item added to cart successfully!");
-
-            } catch (error) {
-
-                console.error("Cart Error:", error);
-                alert("❌ Something went wrong while adding item to cart.");
-
-            }
-        }
-
-        function updateCartItem(index, qty, location, image) {
-            cart[index].qty = qty;
-            cart[index].location = location;
-            cart[index].image = image;
-            cart[index].totalPrice = qty * cart[index].unitPrice;
-            saveAndRenderCart();
-        }
-
-        function removeItem(i) {
-            if (confirm("Remove this item?")) {
-                cart.splice(i, 1);
-                saveAndRenderCart();
-            }
-        }
-
-        // ============================================
-        // 6. UI HELPERS & STORAGE
-        // ============================================
-        function finalizeAction(shouldOpenDrawer, msg) {
-            if (shouldOpenDrawer) viewCart();
-            else showToast(msg);
-        }
-
-        function saveAndRenderCart() {
-            localStorage.setItem('myCart', JSON.stringify(cart));
-            updateCartUI();
-        }
-
-        function updateCartUI() {
-            const badge = document.getElementById("headerCartCount");
-            if (badge) {
-                badge.innerText = cart.length;
-                badge.style.display = cart.length > 0 ? "inline-block" : "none";
-            }
-
-            const container = document.getElementById("cartItemsContainer");
-            const totalEl = document.getElementById("cartGrandTotal");
-            if (!container) return;
-
-            container.innerHTML = "";
-            let total = 0;
-
-            cart.forEach((item, index) => {
-                total += item.totalPrice;
-                container.innerHTML += `
-            <div class="cart-item">
-                <img src="${item.image}" style="width:50px; height:50px; object-fit:cover; border-radius:4px;">
-                <div style="flex:1; padding-left:10px;">
-                    <div style="font-weight:bold; font-size:14px">${item.name}</div>                    
-                    <div style="font-size:12px; margin-top:4px;">
-                        Qty: <b>${item.qty}</b>
-                        <span style="color:#d35400; font-weight:bold; margin-left:5px;">₹${item.totalPrice.toLocaleString()}</span>
-                    </div>
-                </div>
-                <button onclick="removeItem(${index})" style="color:#e74c3c; background:none; border:none; cursor:pointer; font-size:18px;">
-                    &times;
-                </button>
-            </div>`;
-            });
-
-            if (totalEl) totalEl.innerText = "₹" + total.toLocaleString();
-        }
-
-
-
-        function openCart() {
-            document.getElementById("cartPopup").style.display = "flex";
-            renderCartUI(); // Fetch fresh data when opening
-        }
-
-        function closeCart() {
-            document.getElementById("cartPopup").style.display = "none";
-        }
-
-        /**
-         * 2. RENDER UI FROM API
-         */
-        async function renderCartUI() {
-            try {
-                const userToken = getAuthToken();
-                const res = await fetch("https://admin.dynamiccorrugations.com/api/cart", {
-                    method: "GET",
-                    headers: {
-                        "Authorization": `Bearer ${userToken}`
-                    }
-                });
-
-                const data = await res.json();
-                // Based on your screenshot, the items are in data.data.items
-                const items = data.data?.items || [];
-
-                const container = document.getElementById("cartItemsContainer");
-                const totalEl = document.getElementById("cartGrandTotal");
-
-                if (!container) return;
-
-                let grandTotal = 0;
-                let html = "";
-
-                if (items.length === 0) {
-                    html = `<div style="text-align:center; padding:40px 10px; color:#888;">Your cart is empty</div>`;
-                } else {
-                    items.forEach(item => {
-                        const price = Number(item.pricePerPiece) || 0;
-                        const qty = Number(item.quantity) || 0;
-                        const itemTotal = price * qty;
-                        grandTotal += itemTotal;
-
-                        html += `
-                <div class="cart-item" style="display:flex; align-items:center; margin-bottom:20px; position:relative; padding-bottom:15px; border-bottom:1px solid #f1f1f1;">
-                    <img src="https://admin.dynamiccorrugations.com${item.image || '/images/placeholder.png'}"
-                        style="width:60px; height:60px; object-fit:cover; border-radius:4px; border:1px solid #eee;">
-
-                    <div style="flex:1; padding-left:15px;">
-                        <div style="font-weight:bold; font-size:14px; color:#333; padding-right:20px;">
-                            ${item.title || "Product"}
-                        </div>
-                        <div style="font-size:12px; color:#777; margin:4px 0;">
-                            Variant: ${item.variant?.material || 'Standard'}
-                        </div>
-                        <div style="font-size:13px; font-weight:600;">
-                            ${qty} x ₹${price.toLocaleString()}
-                            <span style="color:#27ae60; float:right;">₹${itemTotal.toLocaleString()}</span>
-                        </div>
-                    </div>
-
-                    <button onclick="deleteCartItem('${item.id}')"
-                        style="position:absolute; top:0; right:0; background:none; border:none; color:#ff4d4d; font-size:20px; cursor:pointer; padding:0; line-height:1;">
-                        &times;
-                    </button>
-                </div>`;
-                    });
-                }
-
-                container.innerHTML = html;
-                if (totalEl) totalEl.innerText = "₹" + grandTotal.toLocaleString();
-
-            } catch (error) {
-                console.error("Cart fetch error:", error);
-            }
-        }
-
-        async function deleteCartItem(itemId) {
-            if (!itemId || itemId === 'undefined') {
-                console.error("Invalid Item ID provided for deletion");
-                return;
-            }
-
-            try {
-                const userToken = getAuthToken();
-                const res = await fetch(`https://admin.dynamiccorrugations.com/api/cart/items/${itemId}`, {
-                    method: "DELETE",
-                    headers: {
-                        "Authorization": `Bearer ${userToken}`,
-                        "Content-Type": "application/json"
-                    }
-                });
-
-                if (res.ok) {
-                    renderCartUI(); // Refresh UI
-                } else {
-                    const errorData = await res.json();
-                    alert("Error: " + (errorData.message || "Could not remove item."));
-                }
-            } catch (error) {
-                console.error("Delete Error:", error);
-            }
-        }
-        /**
-         * 3. DELETE ITEM API CALL
-         */
-        async function deleteCartItem(itemId) {
-            // Optional: Add a subtle loading state here
-            try {
-                const userToken = getAuthToken();
-                const res = await fetch(`https://admin.dynamiccorrugations.com/api/cart/items/${itemId}`, {
-                    method: "DELETE",
-                    headers: {
-                        "Authorization": `Bearer ${userToken}`
-                    }
-                });
-
-                if (res.ok) {
-                    // Successfully deleted, refresh the list
-                    renderCartUI();
-                } else {
-                    alert("Could not remove item. Please try again.");
-                }
-            } catch (error) {
-                console.error("Delete Error:", error);
-            }
-        }
-
-        function proceedToCheckout() {
-            // Optional: Check if cart is empty before redirecting
-            const totalText = document.getElementById("cartGrandTotal").innerText;
-            if (totalText === "₹0" || totalText === "₹0.00") {
-                alert("Your cart is empty!");
-                return;
-            }
-
-            // Redirect to the checkout page
-            window.location.href = "checkout.html";
-        }
-        // Initial Call
-        renderCartUI();
-
-        function viewCart() {
-            renderCartUI();
-            document.getElementById("cartModal").classList.add("open");
-            document.getElementById("cartOverlay").classList.add("open");
-        }
-        function closeCart() {
-            document.getElementById("cartModal").classList.remove("open");
-            document.getElementById("cartOverlay").classList.remove("open");
-        }
-        function showToast(msg) {
-            const toast = document.getElementById("toast-notification");
-            if (toast) {
-                toast.innerText = msg;
-                toast.classList.add("show");
-                setTimeout(() => toast.classList.remove("show"), 3000);
-            }
-        }
-
-
-
-        // --- 1. MODAL VISIBILITY ---
-        function openShareModal() {
-            const overlay = document.getElementById('shareOverlay');
-            overlay.classList.add('open');
-
-            // Check if "Native Share" (Mobile) is supported. If not, hide that button.
-            if (!navigator.share) {
-                const nativeBtn = document.getElementById('nativeShareBtn');
-                if (nativeBtn) nativeBtn.style.display = 'none';
-            }
-        }
-
-        function closeShareModal() {
-            document.getElementById('shareOverlay').classList.remove('open');
-        }
-
-        // Close modal if clicking outside the white box
-        document.getElementById('shareOverlay').addEventListener('click', function (e) {
-            if (e.target === this) {
-                closeShareModal();
-            }
-        });
-
-        // --- 2. SHARING LOGIC ---
-        function shareTo(platform) {
-            // Get dynamic data from current page
-            const url = encodeURIComponent(window.location.href);
-            const text = encodeURIComponent(document.title); // Or use product name
-
-            let shareUrl = '';
-
-            switch (platform) {
-                case 'whatsapp':
-                    // Opens WhatsApp with: "Product Name https://yoursite.com..."
-                    shareUrl = `https://api.whatsapp.com/send?text=${text}%20${url}`;
-                    window.open(shareUrl, '_blank');
-                    break;
-
-                case 'facebook':
-                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
-                    window.open(shareUrl, '_blank');
-                    break;
-
-                case 'native':
-                    // Uses the phone's built-in share menu (Android/iOS)
-                    if (navigator.share) {
-                        navigator.share({
-                            title: document.title,
-                            text: 'Check out this product!',
-                            url: window.location.href
-                        })
-                            .then(() => console.log('Shared successfully'))
-                            .catch((error) => console.log('Error sharing:', error));
-                    } else {
-                        alert("Sharing not supported on this browser.");
-                    }
-                    break;
-            }
-        }
-
-        // --- 3. COPY LINK FUNCTION ---
-        function copyLink() {
-            const url = window.location.href;
-
-            // Modern Clipboard API
-            navigator.clipboard.writeText(url).then(() => {
-                // Close modal
-                closeShareModal();
-
-                // Show the Toast notification (using the toast we made earlier)
-                // If you don't have the toast function, use alert("Link Copied!");
-                if (typeof showToast === "function") {
-                    showToast("Link copied to clipboard!");
-                } else {
-                    alert("Link copied to clipboard!");
-                }
-            }).catch(err => {
-                console.error('Failed to copy: ', err);
-            });
-        }
-    </script>
-    <script>// ============================================
-        // 1. GLOBAL STATE & CONFIG
-        // ============================================
-        let productData = {};
-        let currentMaterial = null;
-        let currentPrice = 0;
-        let currentMoq = 10;
-        let selectedLocationName = null;
-
-        // Auth Configuration (Replace with your actual token logic)
-        const AUTH_TOKEN = localStorage.getItem("token");
-        const AUTH_TOKEN = localStorage.getItem('token');
-        const API_BASE_URL = 'https://admin.dynamiccorrugations.com'; // Update to your API domain
-
-        // ============================================
-        // 2. INITIALIZATION
-        // ============================================
-        document.addEventListener("DOMContentLoaded", async () => {
-            // Parallel loading for better performance
-            await Promise.all([
-                fetchProductData(),
-                fetchServerCart()
-            ]);
-        });
-
-        // ============================================
-        // 3. API INTERACTIONS (GET & POST)
-        // ============================================
-
-        /**
-         * 1) GET API: Fetch active cart from server
-         */
-
-        /**
-         * 2) POST API: Add item to cart on server
-         */
-        const AUTH_TOKEN = localStorage.getItem("token");
-        console.log(A, 'yyy')
-        async function postItemToCart(payload) {
-            try {
-                const response = await fetch(`${API_BASE_URL}/api/cart/items`, {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${AUTH_TOKEN}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(payload)
-                });
-
-                const result = await response.json();
-
-                if (response.ok) {
-                    showToast("Success! Item synced with server.");
-                    renderCartUI(result.updatedCart || []);
-                    loadCartSidebar(); // Refresh sidebar with latest data
-                    return true;
-                } else {
-                    showToast(`Error: ${result.message || 'Could not add item'}`);
-                    return false;
-                }
-            } catch (error) {
-                console.error("Post Cart Error:", error);
-                showToast("Network Error: Item saved locally only.");
-                return false;
-            }
-        }
-        async function loadCartSidebar() {
-
-            const token = localStorage.getItem("token");
-
-            if (!token) return;
-
-            const response = await fetch(`${API_BASE_URL}/api/cart`, {
-                method: "GET",
-                headers: {
-                    "Authorization": `Bearer ${token}`
-                }
-            });
-
-            const cart = await response.json();
-
-            console.log("Cart data:", cart);
-
-            renderCartSidebar(cart);
-
-            viewCart();
-        }
-        // ============================================
-        // 4. CORE PRODUCT LOGIC
-        // ============================================
-
-        async function fetchProductData() {
-            // Using your established fetch logic
-            try {
-                const response = await fetch(`${API_BASE_URL}/api/products`);
-                const data = await response.json();
-                productData = data.product;
-                renderProduct();
-                alert(productData.id)
-            } catch (error) { console.error("Data Load Error:", error); }
-        }
-        fetchProductData();
-
-        // ============================================
-
-        // ============================================
-        // 6. WISHLIST FUNCTIONALITY (POST)
-        // ============================================
-        async function addToWishlist() {
-            const payload = { productId: productData.id };
-
-            try {
-                const response = await fetch(`${API_BASE_URL}/api/wishlist`, {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${AUTH_TOKEN}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(payload)
-                });
-
-                if (response.ok) {
-                    showToast("❤️ Added to Wishlist!");
-                }
-            } catch (error) {
-                showToast("Error adding to wishlist.");
-            }
-        }
-
-        // ============================================
-        // 7. UI HELPERS
-        // ============================================
-        function showToast(message) {
-            const toast = document.getElementById("custom-toast");
-            const textEl = document.getElementById("toast-text");
-            if (textEl) textEl.innerText = message;
-
-            toast.classList.remove("toast-hidden");
-            toast.classList.add("toast-show");
-
-            setTimeout(() => {
-                toast.classList.add("toast-hidden");
-                toast.classList.remove("toast-show");
-            }, 3000);
-        }
-
-        function handleLocationChange(moq, locationName) {
-            currentMoq = moq;
-            selectedLocationName = locationName;
-
-            const msgEl = document.getElementById("moqMessage");
-            msgEl.innerHTML = `✅ <b>${locationName}</b> selected (Min: ${moq} pcs)`;
-            document.getElementById("qtyInput").value = moq;
-            document.querySelector('.location-wrapper').style.border = "1px solid #27ae60";
-        }
-
-        function updateQty(change) {
-            if (!selectedLocationName) {
-                showToast("⚠️ Select location first.");
-                return;
-            }
-            const input = document.getElementById("qtyInput");
-            let newVal = parseInt(input.value) + change;
-
-            if (newVal < currentMoq) {
-                showToast(`Minimum order is ${currentMoq} for ${selectedLocationName}`);
-                newVal = currentMoq;
-            }
-            input.value = newVal;
-        }</script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const productImage = document.getElementById("productImage");
-            const productName = document.getElementById("productName");
-            const productDescription = document.getElementById("productDescription");
-            const productDimensions = document.getElementById("productDimensions");
-            const productMaterial = document.getElementById("productMaterial");
-            const productApplication = document.getElementById("productApplication");
-            const productEcoFriendly = document.getElementById("productEcoFriendly");
-            const productType = document.getElementById("productType");
-            const productPrice = document.getElementById("productPrice");
-            const addToCartBtn = document.getElementById("addToCartBtn");
-
-            const selectedProduct = JSON.parse(localStorage.getItem("selectedProduct"));
-
-            if (selectedProduct) {
-                // Fetch additional product data from the API
-                fetch(`https://api.dynamiccorrugations.com/item?id=${selectedProduct.id}`)
-                    .then((response) => response.json())
-                    .then((data) => {
-                        if (data && data.data) {
-                            const product = data.data;
-                            productImage.src = `https://api.dynamiccorrugations.com/${product.images}`;
-                            productName.innerText = product.name;
-                            productDescription.innerText = product.description;
-                            productDimensions.innerText = product.dimensions;
-                            productMaterial.innerText = product.material;
-                            productApplication.innerText = product.application;
-                            productEcoFriendly.innerText = product.ecoFriendly;
-                            productType.innerText = product.type;
-                            productPrice.innerText = `₹${product.price}`;
-
-                            // Add to Cart Functionality
-                            addToCartBtn.addEventListener("click", function () {
-                                addToCart(product.id, product.name, product.price, product.images);
-                            });
-                        } else {
-                            productDetailContainer.innerHTML = "<p>Product details not found.</p>";
-                        }
-                    })
-                    .catch((error) => {
-                        console.error("Error fetching product details:", error);
-                        productDetailContainer.innerHTML = "<p>Failed to load product details.</p>";
-                    });
-            } else {
-                productDetailContainer.innerHTML = "<p>No product selected.</p>";
-            }
-
-        });
-    </script>
-
-    <script>// ---------- Global State & API Config ----------
-        const cart = [];
-        const baseURL = 'https://admin.dynamiccorrugations.com';
-        const apiURL = `${baseURL}/api/products`;
-        let currentProduct = null; // Stores the active product from API
-        let currentMultiplier = 1;
-
-        // DOM Elements
-        const renderArea = document.getElementById('details-render-area');
-        const cartModal = document.getElementById('cartModal');
-        const cartList = document.getElementById('cartList');
-        const cartTotalEl = document.getElementById('cartTotal');
-
-        // ============================================
-        // 1. DATA LOADING (API)
-        // ============================================
-        async function loadProductDetails() {
-            const params = new URLSearchParams(window.location.search);
-            const productId = params.get('id');
-
-            if (!productId) {
-                renderArea.innerHTML = `<div class="alert alert-danger">Error: No Product ID found.</div>`;
-                return;
-            }
-
-            try {
-                const response = await fetch(apiURL);
-                const result = await response.json();
-
-                if (result.success) {
-                    currentProduct = result.data.find(item => item.id === productId);
-
-                    if (currentProduct) {
-                        renderProductUI(currentProduct);
-                    } else {
-                        renderArea.innerHTML = `<div class="alert alert-warning text-center">Product not found.</div>`;
-                    }
-                }
-            } catch (error) {
-                console.error("Fetch Error:", error);
-                renderArea.innerHTML = `<div class="alert alert-danger text-center">Connection Error.</div>`;
-            }
-        }
-
-        // ============================================
-        // 2. UI RENDERING
-        // ============================================
-        function renderProductUI(product) {
-            renderArea.innerHTML = `
-        <div class="col-md-6 mb-4">
-            <div class="main-img-container">
-                <img id="mainImage" src="${baseURL}${product.mainImage}" class="product-img shadow rounded" alt="${product.title}">
-            </div>
-        </div>
-        <div class="col-md-6 ps-md-5">
-            <span class="badge bg-primary mb-3">${product.category.title}</span>
-            <h1 class="fw-bold mb-2">${product.title}</h1>
-            <p class="text-muted small">ID: ${product.id} | Status: ${product.status}</p>
-           
-            <div class="my-4 price-display-box p-3 bg-light rounded">
-                <span class="text-muted d-block small">Unit Price</span>
-                <span class="price-text h2 fw-bold text-primary">
-                    ${product.currency} <span id="dynamicPrice">${product.basePricePerPiece}</span>
-                </span>
-                <small class="text-muted">/ piece</small>
-            </div>
-
-            <div class="options-section mt-4">
-                <label class="fw-bold mb-2">Quantity</label>
-                <div class="input-group mb-3" style="width: 140px;">
-                    <button class="btn btn-outline-secondary" onclick="updateQty(-1)">-</button>
-                    <input type="number" id="qty" class="form-control text-center" value="1" min="1">
-                    <button class="btn btn-outline-secondary" onclick="updateQty(1)">+</button>
-                </div>
-
-                <label class="fw-bold mb-2">Select Quality</label>
-                <div class="quality-selector d-flex gap-2 mb-4">
-                    <div class="quality-item active" onclick="selectQuality(this, 1)">Standard</div>
-                    <div class="quality-item" onclick="selectQuality(this, 1.4)">Corrugated</div>
-                    <div class="quality-item" onclick="selectQuality(this, 1.6)">Double Wall</div>
-                </div>
-            </div>
-
-            <div class="action-buttons d-flex gap-3 mt-5">
-                <button id="addToCartBtn" class="btn btn-primary btn-lg flex-grow-1" onclick="handleAddToCart()">
-                    <i class="fas fa-shopping-cart me-2"></i>ADD TO CART
-                </button>
-                <a href="tel:+911234567890" class="btn btn-outline-success btn-lg">
-                    <i class="fas fa-phone-alt"></i>
-                </a>
-            </div>
-           
-            <button class="btn btn-link mt-3 p-0 text-muted" onclick="shareWhatsApp()">
-                <i class="fab fa-whatsapp me-1"></i> Inquiry on WhatsApp
-            </button>
-        </div>
-    `;
-        }
-
-        // ============================================
-        // 3. PRICING & QUANTITY LOGIC
-        // ============================================
-
-        function selectQuality(el, multiplier) {
-            document.querySelectorAll('.quality-item').forEach(i => i.classList.remove('active'));
-            el.classList.add('active');
-            currentMultiplier = multiplier;
-            updatePriceDisplay();
-        }
-
-        function updateQty(change) {
-            const qtyInput = document.getElementById('qty');
-            let newVal = Math.max(1, parseInt(qtyInput.value) + change);
-            qtyInput.value = newVal;
-            updatePriceDisplay();
-        }
-
-        function updatePriceDisplay() {
-            const qtyInput = document.getElementById("qtyInput");
-            if (!qtyInput || !currentUnitPrice) return;
-
-            const qty = parseInt(qtyInput.value);
-            const total = qty * currentUnitPrice;
-
-            // If you have a total price element on the main page, update it:
-            const totalDisplay = document.getElementById('itemTotalDisplay');
-            if (totalDisplay) {
-                totalDisplay.innerText = `Total: ₹ ${total.toLocaleString()}`;
-            }
-        }
-
-        function handleAddToCart() {
-            if (!currentProduct) return;
-
-            const qty = parseInt(document.getElementById('qty').value);
-            const qualityLabel = document.querySelector('.quality-item.active').innerText;
-            // Calculate total price for this specific cart entry
-            const totalPrice = Math.round(currentProduct.basePricePerPiece * currentMultiplier * qty);
-
-            const cartItem = {
-                id: Date.now(),
-                title: `${currentProduct.title} (${qualityLabel})`,
-                qty: qty,
-                price: totalPrice,
-                img: `${baseURL}${currentProduct.mainImage}`
-            };
-
-            cart.push(cartItem);
-            updateCartUI();
-            showToast(`${qty} items added to cart`);
-            animateBtn();
-        }
-
-        // ============================================
-        // 4. CART UI & UTILS
-        // ============================================
-
-        function updateCartUI() {
-            cartList.innerHTML = '';
-            let grandTotal = 0;
-
-            if (cart.length === 0) {
-                cartList.innerHTML = '<div class="text-center py-4 text-muted">Your cart is empty</div>';
-                cartTotalEl.innerText = '₹0';
-                return;
-            }
-
-            cart.forEach(item => {
-                grandTotal += item.price;
-                const div = document.createElement('div');
-                div.className = 'cart-item d-flex align-items-center mb-3 p-2 border-bottom';
-                div.innerHTML = `
-            <img src="${item.img}" style="width:50px; height:50px; object-fit:cover;" class="rounded me-3">
-            <div class="flex-grow-1">
-                <div class="fw-bold small">${item.title}</div>
-                <div class="text-muted extra-small">Qty: ${item.qty} • ₹${item.currency}</div>
-            </div>
-            <button class="btn btn-sm text-danger" onclick="removeCartItem(${item.id})">&times;</button>
-        `;
-                cartList.appendChild(div);
-            });
-            cartTotalEl.innerText = `₹${grandTotal.toLocaleString()}`;
-        }
-
-        function removeCartItem(id) {
-            const idx = cart.findIndex(i => i.id === id);
-            if (idx > -1) cart.splice(idx, 1);
-            updateCartUI();
-        }
-
-        function shareWhatsApp() {
-            const qty = document.getElementById('qty').value;
-            const quality = document.querySelector('.quality-item.active').innerText;
-            const msg = encodeURIComponent(`Hi, I am interested in:\nProduct: ${currentProduct.title}\nQuality: ${quality}\nQuantity: ${qty}\nLink: ${window.location.href}`);
-            window.open(`https://wa.me/911234567890?text=${msg}`, '_blank');
-        }
-
-        function animateBtn() {
-            const btn = document.getElementById('addToCartBtn');
-            btn.classList.add('btn-success');
-            btn.innerHTML = '<i class="fas fa-check me-2"></i>ADDED';
-            setTimeout(() => {
-                btn.classList.remove('btn-success');
-                btn.innerHTML = '<i class="fas fa-shopping-cart me-2"></i>ADD TO CART';
-            }, 2000);
-        }
-
-        // Initial Load
-        document.addEventListener('DOMContentLoaded', loadProductDetails);</script>
-    <script>
-        // ---------- Helpers & State ----------
-        const cart = [];
-        // example base price; in real app, price depends on size/quality
-        const sizeSelect = document.getElementById('sizeSelect');
-        const selectedSizeEl = document.getElementById('selectedSize');
-        const selectedPxEl = document.getElementById('selectedPx');
-        const customSizeInput = document.getElementById('customSize');
-        const qtyInput = document.getElementById('qty');
-        const cartModal = document.getElementById('cartModal');
-        const cartList = document.getElementById('cartList');
-        const cartTotalEl = document.getElementById('cartTotal');
-
-        // initialize
-        updateSizePreview();
-
-        // Image gallery change
-        function changeImage(el) {
-            const main = document.getElementById('mainImage');
-            main.src = el.src;
-        }
-
-        // Size select logic (shows custom input if user picks custom)
-        sizeSelect.addEventListener('change', updateSizePreview);
-        function updateSizePreview() {
-            const opt = sizeSelect.options[sizeSelect.selectedIndex];
-            const inches = opt.getAttribute('data-inches') || opt.text;
-            const px = opt.getAttribute('data-px') || '';
-            selectedSizeEl.innerText = inches;
-            selectedPxEl.innerText = px || '—';
-            if (opt.value === 'custom') {
-                customSizeInput.style.display = 'block';
-                customSizeInput.focus();
-            } else {
-                customSizeInput.style.display = 'none';
-                customSizeInput.value = '';
-            }
-        }
-
-        // Quality select handling
-        function selectQuality(el) {
-            document.querySelectorAll('.quality-item').forEach(i => i.classList.remove('active'));
-            el.classList.add('active');
-        }
-
-        // qty
-        function increaseQty() { qtyInput.value = Math.max(1, parseInt(qtyInput.value || 1)) + 1 }
-        function decreaseQty() { qtyInput.value = Math.max(1, parseInt(qtyInput.value || 1) - 1) }
-
-        // Add to cart logic
-        function getSelectedQuality() { return document.querySelector('.quality-item.active')?.innerText || 'Standard' }
-        function getSelectedSize() {
-            const opt = sizeSelect.options[sizeSelect.selectedIndex];
-            if (opt.value === 'custom' && customSizeInput.value.trim()) return customSizeInput.value.trim();
-            return opt.getAttribute('data-inches') || opt.text;
-        }
-        function computePrice(sizeText, qualityText, qty) {
-            // simple pricing logic for demo: base price * qty * quality multiplier
-            let mult = 1;
-            if (qualityText.toLowerCase().includes('double')) mult = 1.6;
-            if (qualityText.toLowerCase().includes('corrugated')) mult = 1.4;
-            if (qualityText.toLowerCase().includes('kraft')) mult = 1.25;
-            return Math.round(pricePerPc * mult * qty);
-        }
-
-        function handleAddToCart() {
-            const qty = parseInt(qtyInput.value || 1);
-            const size = getSelectedSize();
-            const quality = getSelectedQuality();
-            const item = {
-                id: Date.now(),
-                title: size + ' • ' + quality,
-                qty, price: computePrice(size, quality, qty),
-                img: document.getElementById('mainImage')
-            };
-            cart.push(item);
-            animateAddToCart();
-            updateCartUI();
-            // brief toast
-            showToast(`${qty} x ${size} (${quality}) added to cart`);
-        }
-
-        function addToCartView() {
-            handleAddToCart();
-            openCart();
-        }
-
-        // Cart UI
-        function updateCartUI() {
-            cartList.innerHTML = '';
-            let total = 0;
-            if (cart.length === 0) { cartList.innerHTML = '<div style="color:#667">Your cart is empty</div>'; cartTotalEl.innerText = '₹0'; return }
-            cart.forEach(i => {
-                total += i.price;
-                const div = document.createElement('div');
-                div.className = 'cart-item';
-                div.innerHTML = `
-          <img src="/images/products/Corrugated Box/Corrugated Box-23.jpeg" alt="cart item" />
-          <div style="flex:1">
-            <div style="font-weight:800">${i.title}</div>
-            <div style="font-size:13px;color:#556">Qty: ${i.qty} • ₹${i.currency}</div>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:6px">
-            <button onclick="removeCartItem(${i.id})" style="background:transparent;border:none;color:#d33;cursor:pointer">Remove</button>
-          </div>
-        `;
-                cartList.appendChild(div);
-            });
-            cartTotalEl.innerText = `₹${total}`;
-        }
-
-        function removeCartItem(id) {
-            const idx = cart.findIndex(i => i.id === id);
-            if (idx > -1) cart.splice(idx, 1);
-            updateCartUI();
-        }
-        function clearCart() { cart.length = 0; updateCartUI(); showToast('Cart cleared') }
-
-        function openCart() { cartModal.classList.add('open'); updateCartUI(); window.scrollTo({ top: 0, behavior: 'smooth' }) }
-        function toggleCart() { cartModal.classList.toggle('open'); updateCartUI() }
-
-        function checkout() {
-            if (cart.length === 0) { showToast('Cart is empty'); return }
-            // in production, route to checkout flow; here just show an alert
-            alert('Proceeding to checkout. Total: ' + cartTotalEl.innerText);
-        }
-
-        function removeCartItem(id) {
-            const pos = cart.findIndex(x => x.id === id);
-            if (pos > -1) cart.splice(pos, 1);
-            updateCartUI();
-        }
-
-        // WhatsApp share
-        function shareWhatsApp() {
-            const size = getSelectedSize();
-            const quality = getSelectedQuality();
-            const qty = parseInt(qtyInput.value || 1);
-            const url = location.href;
-            const text = encodeURIComponent(`Hi — I'm interested in this box:\nProduct: ${size} • ${quality}\nQuantity: ${qty}\nApprox Price (est): ₹${computePrice(size, quality, qty)}\nLink: ${url}\nPlease contact me for order details.`);
-            // use wa.me for mobile and web.whatsapp for web fallback
-            const wa = `https://wa.me/?text=${text}`;
-            window.open(wa, '_blank');
-        }
-
-        // Tabs
-        function openTab(evt, id) {
-            document.querySelectorAll('.tab-buttons button').forEach(b => b.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            evt.currentTarget.classList.add('active');
-            document.getElementById(id).classList.add('active');
-        }
-
-        // small toast
-        function showToast(msg = 'Saved') {
-            const t = document.createElement('div');
-            t.style.position = 'fixed'; t.style.bottom = '22px'; t.style.left = '50%'; t.style.transform = 'translateX(-50%)';
-            t.style.background = 'rgba(20,30,60,0.94)'; t.style.color = '#fff'; t.style.padding = '10px 16px'; t.style.borderRadius = '10px';
-            t.style.fontWeight = 700; t.style.zIndex = 9999; t.style.boxShadow = '0 10px 30px rgba(0,0,0,0.18)';
-            t.innerText = msg;
-            document.body.appendChild(t);
-            setTimeout(() => { t.style.transition = 'opacity .2s'; t.style.opacity = 0; setTimeout(() => t.remove(), 250) }, 1600);
-        }
-
-        // small animation for add to cart
-        function animateAddToCart() {
-            const btn = document.getElementById('addToCartBtn');
-            btn.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(-6px)' }, { transform: 'translateY(0)' }], { duration: 260, easing: 'ease' });
-            btn.style.boxShadow = '0 12px 40px rgba(0,123,255,0.12)';
-            setTimeout(() => btn.style.boxShadow = '', 300);
-        }
-
-        // click outside cart to close
-        document.addEventListener('click', (e) => {
-            if (!cartModal.contains(e.target) && !e.target.closest('.view-cart') && cartModal.classList.contains('open')) {
-                cartModal.classList.remove('open');
-            }
-        });
-
-        // accessibility: allow quality items keyboard select
-        document.querySelectorAll('.quality-item').forEach(el => {
-            el.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectQuality(el) }
-            });
-        });
-
-        // ---------- Global State & API Config ----------
-        const cart = [];
-        const baseURL = 'https://admin.dynamiccorrugations.com';
-        const apiURL = `${baseURL}/api/products`;
-        let currentProduct = null; // Stores the fetched API product object
-
-        // DOM Elements
-        const renderArea = document.getElementById('details-render-area');
-        const cartModal = document.getElementById('cartModal');
-        const cartList = document.getElementById('cartList');
-        const cartTotalEl = document.getElementById('cartTotal');
-
-        // ============================================
-        // 1. DATA LOADING (API)
-        // ============================================
-        async function loadProductDetails() {
-            const params = new URLSearchParams(window.location.search);
-            const productId = params.get('id');
-
-            if (!productId) {
-                renderArea.innerHTML = `<div class="alert alert-danger">Error: No Product ID found.</div>`;
-                return;
-            }
-
-            try {
-                const response = await fetch(apiURL);
-                const result = await response.json();
-
-                if (result.success) {
-                    currentProduct = result.data.find(item => item.id === productId);
-
-                    if (currentProduct) {
-                        renderProductUI(currentProduct);
-                    } else {
-                        renderArea.innerHTML = `<div class="alert alert-warning text-center">Product not found.</div>`;
-                    }
-                }
-            } catch (error) {
-                console.error("Fetch Error:", error);
-                renderArea.innerHTML = `<div class="alert alert-danger text-center">Connection Error: Could not load data.</div>`;
-            }
-        }
-
-        // ============================================
-        // 2. UI RENDERING
-        // ============================================
-        function renderProductUI(product) {
-            renderArea.innerHTML = `
-        <div class="col-md-6 mb-4">
-            <div class="main-img-container">
-                <img id="mainImage" src="${baseURL}${product.mainImage}" class="product-img shadow rounded" alt="${product.title}">
-            </div>
-        </div>
-        <div class="col-md-6 ps-md-5">
-            <span class="badge bg-primary mb-3">${product.category.title}</span>
-            <h1 class="fw-bold mb-2">${product.title}</h1>
-            <p class="text-muted small">ID: ${product.id} | ${product.status.toUpperCase()}</p>
-           
-            <div class="my-4 price-display-box p-3 bg-light rounded">
-                <span class="text-muted d-block small">Base Price</span>
-                <span class="price-text h2 fw-bold text-primary">${product.currency} <span id="dynamicPrice">${product.basePricePerPiece}</span></span>
-                <small class="text-muted">/ piece</small>
-            </div>
-
-            <div class="options-section mt-4">
-                <label class="fw-bold mb-2">Quantity</label>
-                <div class="input-group mb-3" style="width: 140px;">
-                    <button class="btn btn-outline-secondary" onclick="updateQty(-1)">-</button>
-                    <input type="number" id="qty" class="form-control text-center" value="1" min="1">
-                    <button class="btn btn-outline-secondary" onclick="updateQty(1)">+</button>
-                </div>
-
-                <label class="fw-bold mb-2">Select Quality</label>
-                <div class="quality-selector d-flex gap-2 mb-4">
-                    <div class="quality-item active" onclick="selectQuality(this, 1)">Standard</div>
-                    <div class="quality-item" onclick="selectQuality(this, 1.4)">Heavy Duty</div>
-                    <div class="quality-item" onclick="selectQuality(this, 1.6)">Double Wall</div>
-                </div>
-            </div>
-
-            <div class="action-buttons d-flex gap-3 mt-5">
-                <button id="addToCartBtn" class="btn btn-primary btn-lg flex-grow-1" onclick="handleAddToCart()">
-                    <i class="fas fa-shopping-cart me-2"></i>ADD TO CART
-                </button>
-                <a href="tel:+911234567890" class="btn btn-outline-success btn-lg">
-                    <i class="fas fa-phone-alt"></i>
-                </a>
-            </div>
-           
-            <button class="btn btn-link mt-3 p-0 text-muted" onclick="shareWhatsApp()">
-                <i class="fab fa-whatsapp me-1"></i> Share Requirement on WhatsApp
-            </button>
-        </div>
-    `;
-        }
-
-        // ============================================
-        // 3. LOGIC & CALCULATIONS
-        // ============================================
-
-        let currentMultiplier = 1;
-
-        function selectQuality(el, multiplier) {
-            document.querySelectorAll('.quality-item').forEach(i => i.classList.remove('active'));
-            el.classList.add('active');
-            currentMultiplier = multiplier;
-            updatePriceDisplay();
-        }
-
-        function updateQty(change) {
-            const qtyInput = document.getElementById('qty');
-            qtyInput.value = Math.max(1, parseInt(qtyInput.value) + change);
-            updatePriceDisplay();
-        }
-
-        function updatePriceDisplay() {
-            const qtyInput = document.getElementById("qtyInput");
-            if (!qtyInput || !currentUnitPrice) return;
-
-            const qty = parseInt(qtyInput.value);
-            const total = qty * currentUnitPrice;
-
-            // If you have a total price element on the main page, update it:
-            const totalDisplay = document.getElementById('itemTotalDisplay');
-            if (totalDisplay) {
-                totalDisplay.innerText = `Total: ₹ ${total.toLocaleString()}`;
-            }
-        }
-
-        function handleAddToCart() {
-            const qty = parseInt(document.getElementById('qty').value);
-            const qualityLabel = document.querySelector('.quality-item.active').innerText;
-            const totalPrice = Math.round(currentProduct.basePricePerPiece * currentMultiplier * qty);
-
-            const cartItem = {
-                id: Date.now(),
-                productId: currentProduct.id,
-                title: currentProduct.title,
-                variant: qualityLabel,
-                qty: qty,
-                price: totalPrice,
-                img: `${baseURL}${currentProduct.mainImage}`
-            };
-
-            cart.push(cartItem);
-            updateCartUI();
-            showToast(`Added ${qty} items to cart`);
-            animateBtn();
-        }
-
-        // ============================================
-        // 4. CART UI & SOCIAL
-        // ============================================
-
-        function updateCartUI() {
-            cartList.innerHTML = '';
-            let grandTotal = 0;
-
-            if (cart.length === 0) {
-                cartList.innerHTML = '<div class="text-center py-4 text-muted">Cart is empty</div>';
-                cartTotalEl.innerText = '₹0';
-                return;
-            }
-
-            cart.forEach(item => {
-                grandTotal += item.price;
-                const div = document.createElement('div');
-                div.className = 'cart-item d-flex align-items-center mb-3 p-2 border-bottom';
-                div.innerHTML = `
-            <img src="${item.img}" style="width:50px; height:50px; object-fit:cover;" class="rounded me-3">
-            <div class="flex-grow-1">
-                <div class="fw-bold small">${item.title}</div>
-                <div class="text-muted extra-small">${item.variant} • Qty: ${item.qty}</div>
-            </div>
-            <div class="fw-bold me-3">₹${item.price}</div>
-            <button class="btn btn-sm text-danger" onclick="removeCartItem(${item.id})">&times;</button>
-        `;
-                cartList.appendChild(div);
-            });
-            cartTotalEl.innerText = `₹${grandTotal.toLocaleString()}`;
-        }
-
-        function shareWhatsApp() {
-            const qty = document.getElementById('qty').value;
-            const quality = document.querySelector('.quality-item.active').innerText;
-            const msg = encodeURIComponent(`Inquiry for: ${currentProduct.title}\nQuality: ${quality}\nQuantity: ${qty}\nLink: ${window.location.href}`);
-            window.open(`https://wa.me/911234567890?text=${msg}`, '_blank');
-        }
-
-        function animateBtn() {
-            const btn = document.getElementById('addToCartBtn');
-            btn.classList.add('btn-success');
-            btn.innerHTML = '<i class="fas fa-check me-2"></i>ADDED';
-            setTimeout(() => {
-                btn.classList.remove('btn-success');
-                btn.innerHTML = '<i class="fas fa-shopping-cart me-2"></i>ADD TO CART';
-            }, 2000);
-        }
-
-        // Initial Load
-        document.addEventListener('DOMContentLoaded', loadProductDetails);
-
-    </script>
-    <script>
-        // --- VARIABLES ---
-        let pendingUpdate = null; // Stores data temporarily while popup is open
-
-        // --- 1. CONFLICT CHECK LOGIC ---
-        function addToCart() {
-            const selectedCity = document.getElementById("citySelect").value;
-            const qty = parseInt(document.getElementById("qtyInput").value);
-
-            // 1. Validation
-            if (!selectedCity) {
-                alert("Please select a Delivery Location.");
-                return;
-            }
-
-            // 2. Identify Item (Key = ProductID + MaterialID) *Ignore City in Key*
-            const key = `${productData.id}-${currentMaterial ? currentMaterial.id : 'default'}`;
-
-            // 3. Check if Item exists
-            const existingIndex = cart.findIndex(item => item.variantKey === key);
-
-            if (existingIndex > -1) {
-                // Item is in cart. Check if LOCATION matches.
-                const currentItem = cart[existingIndex];
-
-                if (currentItem.location !== selectedCity) {
-                    // ★ CONFLICT FOUND: Trigger the specific Popup ★
-
-                    // Save details to verify later
-                    pendingUpdate = {
-                        index: existingIndex,
-                        newCity: selectedCity,
-                        newQty: qty,
-                        newImage: (currentMaterial && currentMaterial.image) ? currentMaterial.image : productData.images[0]
-                    };
-
-                    // Show the specific message
-                    const msg = `Your cart contains this item for '<b>${currentItem.location}</b>'.<br>Do you want to change location to '<b>${selectedCity}</b>' and update the quantity?`;
-
-                    showConflictModal(msg);
-                    return; // STOP HERE. Wait for user to click "Yes" or "Cancel".
-                }
-
-                // If Location matches, just update normally (No popup needed)
-                updateCartItem(existingIndex, qty, selectedCity, currentItem.image);
-
-            } else {
-                // New Item (Add normally)
-                let selectedImage = (currentMaterial && currentMaterial.image) ? currentMaterial.image : productData.images[0];
-
-                cart.push({
-                    variantKey: key,
-                    productId: productData.id,
-                    name: productData.title,
-                    material: currentMaterial.name,
-                    image: selectedImage,
-                    unitPrice: currentPrice,
-                    qty: qty,
-                    totalPrice: qty * currentPrice,
-                    location: selectedCity
-                });
-                saveAndRenderCart();
-                viewCart();
-            }
-        }
-
-        // --- 2. UPDATE FUNCTION (Runs when "Yes, Update It" is clicked) ---
-        function updateCartItem(index, qty, location, image) {
-            cart[index].qty = qty;
-            cart[index].location = location; // Replace old city with new city
-            cart[index].image = image;
-            cart[index].totalPrice = qty * cart[index].unitPrice;
-
-            saveAndRenderCart();
-        }
-
-        // Listener for the "Yes" button
-        document.getElementById("confirmUpdateBtn").onclick = function () {
-            if (pendingUpdate) {
-                updateCartItem(
-                    pendingUpdate.index,
-                    pendingUpdate.newQty,
-                    pendingUpdate.newCity,
-                    pendingUpdate.newImage
-                );
-                closeConflictModal();
-                viewCart(); // Open sidebar to show the updated city
-            }
-        };
-
-        // --- 3. MODAL UTILS ---
-        function showConflictModal(msg) {
-            document.getElementById("conflictMessage").innerHTML = msg;
-            document.getElementById("conflictOverlay").classList.add("open");
-        }
-
-        function closeConflictModal() {
-            document.getElementById("conflictOverlay").classList.remove("open");
-            pendingUpdate = null; // Clear temp data
-        }
-    </script>
-    <script>
-        // Function to Open the Overlay
-        function openShareModal() {
-            document.getElementById("shareOverlay").classList.add("open");
-        }
-
-        // Function to Close the Overlay
-        function closeShareModal() {
-            document.getElementById("shareOverlay").classList.remove("open");
-        }
-
-        // Optional: Close if user clicks outside the modal (on the dark background)
-        document.getElementById("shareOverlay").addEventListener("click", function (e) {
-            if (e.target === this) {
-                closeShareModal();
-            }
-        });
-    </script>
     <script src="/js/jquery.js"></script>
     <script src="/js/plugins.js"></script>
     <script src="/js/menu.js"></script>
     <!--Template functions-->
     <script src="/js/functions.js"></script>
-    <script>
-        async function loadProductDetails() {
-            const baseURL = 'https://admin.dynamiccorrugations.com';
-            const apiURL = `${baseURL}/api/products`;
-
-            // 1. Extract the ID from the URL
-            const params = new URLSearchParams(window.location.search);
-            const productId = params.get('id');
-
-            if (!productId) {
-                console.error("No Product ID found in URL.");
-                return;
-            }
-
-            try {
-                const response = await fetch(apiURL);
-                const result = await response.json();
-
-                if (result.success) {
-                    // 2. Find the specific product in the array
-                    const product = result.data.find(item => item.id === productId);
-
-                    if (product) {
-                        // 3. Set Images
-                        const fullImgUrl = `${baseURL}${product.mainImage}`;
-                        document.getElementById('mainImage').src = fullImgUrl;
-                        document.getElementById('mainImage').alt = product.title;
-
-                        // Set thumbnail (Main image acts as first thumbnail)
-                        const thumbSlider = document.getElementById('thumbSlider');
-                        thumbSlider.innerHTML = `
-                            <img class="thumb active" src="${fullImgUrl}"
-                                 onclick="document.getElementById('mainImage').src='${fullImgUrl}'"
-                                 style="width:80px; height:80px; object-fit:cover; cursor:pointer; border:1px solid #ddd; margin-right:5px;">
-                        `;
-
-                        // 4. Set Header Details (Category, Price, Title)
-                        document.getElementById('prodCategory').innerText = product.category.title;
-
-                        // Format price with currency symbol
-                        const currencySymbol = product.currency === 'INR' ? '₹' : product.currency;
-                        document.getElementById('prodPrice').innerText = `${currencySymbol} ${product.basePricePerPiece}`;
-
-                        document.getElementById('prodTitle').innerText = product.title;
-
-                        // 5. Set Description (Using fallback if API description is missing)
-                        const descriptionArea = document.getElementById('prodDesc');
-                        descriptionArea.innerText = product.description ||
-                            `Our ${product.title} is designed for durability and strength. Ideal for e-commerce packaging, shipping, and storage needs.`;
-
-                        // 6. Set Material List (Mocking quality options)
-                        const materialList = document.getElementById('materialList');
-                        const qualities = ["Standard Kraft", "High-GSM Semi-Kraft", "Premium White"];
-                        materialList.innerHTML = qualities.map(q => `<div class="quality-item" style="display:inline-block; padding:5px 15px; border:1px solid #ddd; margin-right:5px; border-radius:4px; font-size:12px;">${q}</div>`).join('');
-
-                    } else {
-                        document.querySelector('.page-frame').innerHTML = `<h3>Product not found.</h3>`;
-                    }
-                }
-            } catch (error) {
-                console.error("Fetch Error:", error);
-            }
-        }
-
-        // Initialize on load
-        document.addEventListener('DOMContentLoaded', loadProductDetails);
-
-        // Placeholder for your existing logic (Quantity updates, etc.)
-        function updateQty(change) {
-            const qtyInput = document.getElementById('qtyInput');
-            let currentVal = parseInt(qtyInput.value);
-            qtyInput.value = Math.max(1, currentVal + change);
-        }
-    </script>
+    <script src="/js/product.js"></script>
 
     <script type="module">
 
@@ -2831,16 +939,16 @@
 
             const authView = document.getElementById("auth-view");
             const userWidget = document.getElementById("user-widget");
-            
+
             // Google login
             if (token) return;
-            
+
             // Guest login
             if (guest) {
-                
+
                 authView.style.display = "none";
                 userWidget.style.display = "block";
-                
+
                 document.getElementById("display-name").textContent = guest.name;
                 document.getElementById("user-email").textContent = guest.email;
                 document.getElementById("my-profile").style.display = "none";
@@ -2857,6 +965,51 @@
     </script>
 
 
+    <script>
+        fetch("/cart-sidebar.html")
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById("cart-container").innerHTML = data;
+            });
+    </script>
+
+    <script src="/js/cart.js"></script>
+
+
+    <script>
+        function renderRelated(related) {
+            const container = document.getElementById('relatedList');
+            related.forEach(type => {
+                container.innerHTML += `<span class="chip">${type}</span>`;
+            });
+        }
+        function renderRelated(related) {
+
+            const container = document.getElementById('relatedList');
+        
+            if (!container) return;
+        
+            container.innerHTML = "";
+        
+            if (!related || related.length === 0) {
+        
+                container.innerHTML = "<p>No related box types available.</p>";
+                return;
+        
+            }
+        
+            related.forEach(type => {
+        
+                container.innerHTML += `
+                <div class="related-item">
+                    <span class="chip">${type}</span>
+                </div>
+                `;
+        
+            });
+        
+        }
+    </script>
 </body>
 
 
