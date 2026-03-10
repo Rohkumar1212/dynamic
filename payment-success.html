@@ -1,63 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment Success</title>
     <script defer src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="bg-green-500 flex justify-center items-center h-screen">
+    <div id="main-card" style="text-align:center; margin-top:50px; font-family: sans-serif;">
+        <div id="processing-ui">
+            <h2>Processing your order...</h2>
+            <p>Please wait while we update your account.</p>
+        </div>
 
- <div id="status-container" style="text-align:center; margin-top:100px; font-family: sans-serif;">
-    <div id="processing">
-        <h2>Verifying Payment & Placing Order...</h2>
-        <p>Please do not close this window.</p>
+        <p id="message" style="color: red; font-weight: bold;"></p>
     </div>
-</div>
-<script>
-    async function finalizePaymentOrder() {
-        const token = localStorage.getItem("token") || localStorage.getItem("userguest");
-        const pendingData = JSON.parse(sessionStorage.getItem("pendingOrder"));
+    <script>
+        async function finalizePaymentOrder() {
+            const token = localStorage.getItem("token") || localStorage.getItem("userguest");
+            const pendingData = JSON.parse(sessionStorage.getItem("pendingOrder"));
 
-        if (!pendingData || !token) {
-            document.getElementById("message").innerText = "Order data missing. Please contact support.";
-            return;
-        }
+            // Safety Check: Find elements before using them
+            const messageEl = document.getElementById("message");
+            const mainCardEl = document.getElementById("main-card");
 
-        try {
-            // HIT THE CHECKOUT API
-            const response = await fetch("https://admin.dynamiccorrugations.com/api/checkout", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                },
-                body: JSON.stringify({
-                    customerFullName: pendingData.customerFullName,
-                    customerEmail: pendingData.customerEmail,
-                    customerMobile: pendingData.customerMobile,
-                    shippingAddress: pendingData.shippingAddress,
-                    paymentMethod: "payu",
-                    paymentStatus: "success"
-                })
-            });
-
-            const result = await response.json();
-
-            if (result.success) {
-                sessionStorage.removeItem("pendingOrder"); // Success! Clear the temp data
-                document.getElementById("main-card").innerHTML = `
-                    <h2 style="color:green;">✔ Order Placed Successfully!</h2>
-                    <p>Order ID: <b>${result.data.orderCode}</b></p>
-                    <a href="/index.html" class="btn">Back to Home</a>
-                `;
+            if (!pendingData || !token) {
+                if (messageEl) {
+                    messageEl.innerText = "Order data missing. Please contact support.";
+                } else {
+                    console.error("Order data missing AND #message element not found.");
+                }
+                return;
             }
-        } catch (error) {
-            console.error("Final API Call Failed:", error);
-        }
-    }
 
-    window.onload = finalizePaymentOrder;
-</script>
+            try {
+                const response = await fetch("https://admin.dynamiccorrugations.com/api/checkout", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        customerFullName: pendingData.customerFullName,
+                        customerEmail: pendingData.customerEmail,
+                        customerMobile: pendingData.customerMobile,
+                        shippingAddress: pendingData.shippingAddress,
+                        paymentMethod: "payu",
+                        paymentStatus: "success"
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    sessionStorage.removeItem("pendingOrder");
+
+                    if (mainCardEl) {
+                        mainCardEl.innerHTML = `
+                        <div style="padding: 30px; border: 2px solid #27ae60; border-radius: 10px; display: inline-block;">
+                            <h2 style="color:green;">✔ Order Placed Successfully!</h2>
+                            <p>Order ID: <b>${result.data.orderCode}</b></p>
+                            <p>Thank you for your purchase.</p>
+                            <a href="/index.html" style="text-decoration:none; padding:10px 20px; background:#f39c12; color:white; border-radius:5px; display:inline-block; margin-top:15px;">Back to Home</a>
+                        </div>
+                    `;
+                    }
+                } else {
+                    if (messageEl) messageEl.innerText = "Error: " + result.message;
+                }
+            } catch (error) {
+                console.error("Final API Call Failed:", error);
+                if (messageEl) messageEl.innerText = "Server connection error. Order update pending.";
+            }
+        }
+
+        window.onload = finalizePaymentOrder;
+    </script>
 </body>
+
 </html>
