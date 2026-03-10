@@ -1,0 +1,31 @@
+<!-- CART OVERLAY -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+
+<!-- CART MODAL -->
+<div class="cart-modal" id="cartModal">
+  <div class="cart-sidebar">
+
+    <div style="padding:15px;border-bottom:1px solid #ddd;display:flex;justify-content:space-between;">
+      <h3 style="margin:0;">Your Cart</h3>
+      <button onclick="closeCart()" style="background:none;border:none;font-size:20px;cursor:pointer;">
+        &times;
+      </button>
+    </div>
+
+    <div id="cartItemsContainer" style="flex:1;overflow-y:auto;padding:15px;">
+    </div>
+
+    <div class="cart-footer" style="padding:15px;border-top:1px solid #ddd;">
+      <div style="display:flex;justify-content:space-between;margin-bottom:10px;">
+        <strong>Total:</strong>
+        <span id="cartGrandTotal" style="font-weight:bold;color:#27ae60;">₹0</span>
+      </div>
+
+      <button onclick="proceedToCheckout()" 
+        style="width:100%;padding:12px;background:#27ae60;color:white;border:none;border-radius:5px;">
+        Proceed to Checkout
+      </button>
+    </div>
+
+  </div>
+</div>
