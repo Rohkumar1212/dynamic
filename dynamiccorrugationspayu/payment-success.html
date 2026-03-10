@@ -13,6 +13,47 @@
         <p class="text-gray-600 mt-4">Thank you for your purchase.</p>
         <a href="/" class="mt-6 inline-block px-6 py-2 bg-green-500 text-white font-bold rounded-lg hover:opacity-80 transition">Go Home</a>
     </div>
+    <script>
+        async function finalizeOrder() {
+                const userToken = localStorage.getItem("token") || localStorage.getItem("userguest");
+                const pendingData = JSON.parse(sessionStorage.getItem("pendingOrder"));
+
+                if (!pendingData || !userToken) {
+                    console.error("No pending order data found.");
+                    return;
+                }
+
+                try {
+                    const response = await fetch("https://admin.dynamiccorrugations.com/api/checkout", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${userToken}`
+                        },
+                        body: JSON.stringify({
+                            customerFullName: pendingData.customerFullName,
+                            customerEmail: pendingData.customerEmail,
+                            customerMobile: pendingData.customerMobile,
+                            paymentMethod: "payu",
+                            shippingAddress: pendingData.shippingAddress
+                        })
+                    });
+
+                    const result = await response.json();
+
+                    if (result.success) {
+                        console.log("API Success:", result.message);
+                        document.getElementById("orderMsg").innerText = "Order Placed Successfully! Code: " + result.data.orderCode;
+                        sessionStorage.removeItem("pendingOrder"); // Clear temporary data
+                    }
+                } catch (error) {
+                    console.error("Finalize Order Error:", error);
+                }
+            }
+
+            // Run this when the success page loads
+            document.addEventListener("DOMContentLoaded", finalizeOrder);
+    </script>
 
 </body>
 </html>
