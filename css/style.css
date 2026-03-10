@@ -18198,8 +18198,8 @@ a {
   .btn:not(.close):not(.mfp-close):not(.btn-creative):not(.btn-slide),
   a.btn:not([href]):not([tabindex]):not(.btn-creative):not(.btn-slide) {
     font-size: 9px;
-    height: 32px !important;
-    line-height: 23px !important;
+    height: 37px !important;
+    line-height: 33px !important;
     padding: 0 14px;
   }
 }
