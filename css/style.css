@@ -2,7 +2,6 @@
 html {
   overflow-x: hidden;
 }
-.fa-user-secret{display: none;}
 
 body .body-inner {
   padding: 0;
@@ -19073,17 +19072,17 @@ nav ul li.active a::after {
 
 /* The Red Notification Badge */
 .cart-badge {
-  background-color: #ff4757; /* Red color */
-  color: white;
-  font-size: 10px;
-  font-weight: bold;
-  padding: 2px 6px;
-  border-radius: 50%;
-  position: absolute;
-  top: -5px;
-  right: -10px;
-  min-width: 18px;
-  text-align: center;
+    background-color: #ff4757;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 0px 5px;
+    border-radius: 50%;
+    position: absolute;
+    top: -17px;
+    right: -12px;
+    min-width: 10px;
+    text-align: center;
 }
 
 /* Toast Notification */
