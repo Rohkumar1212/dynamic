@@ -224,7 +224,7 @@
         #header {
             position: relative;
             width: 100%;
-            top: 10px;
+            top: 1px;
             z-index: 199 !important;
         }
 
@@ -254,7 +254,7 @@
         .grid {
             display: grid;
             grid-template-columns: 1.5fr 1fr;
-            gap: 30px;
+            gap: 10px;
         }
 
         @media (max-width: 768px) {
@@ -479,7 +479,7 @@
 
                                     <div class="profile-actions">
                                         <div class="action-row" id="my-profile"
-                                            onclick="window.location.href='products/dashboard.html'">
+                                            onclick="window.location.href='dashboard.html'">
                                             <div class="icon-circle"><i class="fas fa-user"></i></div>
                                             <div class="action-text"><strong>My Profile</strong><span>Account
                                                     settings</span></div>
@@ -566,7 +566,79 @@
                     }
                 }
 
- 
+ const ADDRESS_API = "https://admin.dynamiccorrugations.com/api/addresses";
+    const CART_API = "https://admin.dynamiccorrugations.com/api/cart";
+
+    async function initializeCheckout() {
+        const token = localStorage.getItem("token") || localStorage.getItem("userguest");
+
+        if (!token) {
+            console.warn("No token found. User is not logged in.");
+            return;
+        }
+
+        try {
+            // 1. Fetch Cart Data for Product & Qty
+            const cartRes = await fetch(CART_API, {
+                headers: { "Authorization": `Bearer ${token}` }
+            });
+            const cartResult = await cartRes.json();
+            const cartItems = cartResult.data?.items || [];
+
+            if (cartItems.length > 0) {
+                const item = cartItems[0];
+                document.getElementById('ship_name').value = item.title || item.productName || "";
+                document.getElementById('ship_qty').value = item.quantity || 0;
+            }
+
+            // 2. Fetch User Profile/Addresses for Shipping Details
+            const addrRes = await fetch(ADDRESS_API, {
+                headers: { "Authorization": `Bearer ${token}` }
+            });
+            const addrResult = await addrRes.json();
+            const addresses = addrResult.data || [];
+
+            if (addresses.length > 0) {
+                // Priority: Use the Default address, otherwise the first one
+                const defaultAddr = addresses.find(a => a.isDefault) || addresses[0];
+
+                // Map API data to your HTML IDs
+                document.getElementById('ship_address').value = `${defaultAddr.addressLine1}, ${defaultAddr.addressLine2 || ''}`;
+                document.getElementById('ship_city').value = defaultAddr.city || "";
+                document.getElementById('ship_state').value = defaultAddr.state || "";
+                document.getElementById('ship_pincode').value = defaultAddr.pincode || "";
+
+                // If the API provides user contact info in the address object:
+                if (defaultAddr.customerName) document.querySelectorAll('#ship_name')[1].value = defaultAddr.customerName;
+                if (defaultAddr.mobile) document.getElementById('ship_phone').value = defaultAddr.mobile;
+            }
+
+        } catch (error) {
+            console.error("Auto-fill Error:", error);
+        }
+    }
+
+    /**
+     * 3. Toggle Billing Address (Same as Shipping)
+     */
+    function toggleBilling() {
+        const isSame = document.getElementById('sameAsShipping').checked;
+        const billingForm = document.getElementById('billingForm');
+
+        if (isSame) {
+            billingForm.style.display = "none";
+            // Optional: Copy shipping values to billing values here
+            document.getElementById('bill_name').value = document.querySelectorAll('#ship_name')[1].value;
+            document.getElementById('bill_address').value = document.getElementById('ship_address').value;
+            document.getElementById('bill_city').value = document.getElementById('ship_city').value;
+            document.getElementById('bill_pincode').value = document.getElementById('ship_pincode').value;
+        } else {
+            billingForm.style.display = "flex";
+        }
+    }
+
+    // Run on page load
+    document.addEventListener("DOMContentLoaded", initializeCheckout);
         </script>
         <div class="container">
 
@@ -664,7 +736,7 @@
                         <div style="border-top: 1px solid #eee; padding-top: 15px;">
                             <div class="total-row"><span>Subtotal</span> <strong id="subtotalDisplay">₹0</strong></div>
                             <div class="total-row"><span>Delivery Charges</span> <strong
-                                    id="deliverycharges">₹70</strong></div>
+                                    id="deliverycharges">₹10</strong></div>
                             <div class="total-row"><span>GST (18%)</span> <strong id="gstDisplay">₹0</strong></div>
                             <hr>
                             <div class="total-row" style="font-size: 20px; color:#d35400;">
@@ -1188,13 +1260,74 @@
 
                 // --- NEW: AUTO-FILL LOGIC ---
                 // If there are items in the cart, fill the shipping fields automatically
-                if (items.length > 0) {
-                    const firstItem = items[0];
-                    const nameField = document.getElementById('ship_name');
-                    const qtyField = document.getElementById('ship_qty');
+              /**
+   * 2. GET API: LIST ADDRESSES & AUTO-FILL CHECKOUT
+   */
+                async function fetchAddresses() {
+                    const container = document.getElementById("addressListContainer");
+                    const token = localStorage.getItem("token");
 
-                    if (nameField) nameField.value = firstItem.title || "Product";
-                    if (qtyField) qtyField.value = firstItem.quantity || 0;
+                    // Elements on checkout page to be auto-filled
+                    const shipAddr1 = document.getElementById("addr1");
+                    const shipAddr2 = document.getElementById("addr2");
+                    const shipCity = document.getElementById("addrCity");
+                    const shipState = document.getElementById("addrState");
+                    const shipPincode = document.getElementById("addrPincode");
+
+                    try {
+                        const response = await fetch(API_URL, {
+                            method: "GET",
+                            headers: { "Authorization": `Bearer ${token}` }
+                        });
+
+                        const result = await response.json();
+                        const addresses = result.data || [];
+
+                        if (addresses.length === 0) {
+                            if (container) container.innerHTML = `<p style="color:#999; text-align:center;">No saved addresses found.</p>`;
+                            return;
+                        }
+
+                        // --- AUTO-FILL LOGIC FOR CHECKOUT ---
+                        // Find the default address, or just take the first one available
+                        const defaultAddr = addresses.find(addr => addr.isDefault) || addresses[0];
+
+                        if (defaultAddr) {
+                            if (shipAddr1) shipAddr1.value = defaultAddr.addressLine1 || "";
+                            if (shipAddr2) shipAddr2.value = defaultAddr.addressLine2 || "";
+                            if (shipCity) shipCity.value = defaultAddr.city || "";
+                            if (shipState) shipState.value = defaultAddr.state || "";
+                            if (shipPincode) shipPincode.value = defaultAddr.pincode || "";
+
+                            // Also update the hidden 'selectedType' if needed
+                            selectedType = defaultAddr.type;
+                        }
+
+                        // --- RENDER ADDRESS LIST UI ---
+                        if (container) {
+                            container.innerHTML = addresses.map(addr => `
+                <div class="address-card" onclick="autoFillSelected('${addr.id}')" style="border: 1px solid #eee; padding: 15px; border-radius: 8px; margin-bottom: 10px; cursor:pointer; position:relative;">
+                    <span style="font-size: 0.7rem; background: #eee; padding: 2px 8px; border-radius: 10px; font-weight: bold; text-transform: uppercase;">
+                        ${addr.type}
+                    </span>
+                    ${addr.isDefault ? '<span style="color:green; font-size:0.7rem; margin-left:10px;">(Default)</span>' : ''}
+                    <p style="margin: 8px 0 0 0; font-weight: 600;">${addr.addressLine1}</p>
+                    <p style="margin: 0; font-size: 0.9rem; color: #666;">${addr.addressLine2}, ${addr.city}, ${addr.pincode}</p>
+                </div>
+            `).join('');
+                        }
+
+                    } catch (error) {
+                        console.error("Fetch Address Error:", error);
+                    }
+                }
+
+                /**
+                 * OPTIONAL: Let user click a card to switch addresses
+                 */
+                function autoFillSelected(addrId) {
+                    // You would call fetchAddresses again or filter the local array 
+                    // to update the inputs if the user clicks a specific address card.
                 }
                 // ----------------------------
                 cartList.innerHTML = "";
@@ -1239,7 +1372,7 @@
                 });
                 // 4. Final Calculations
                 const gst = subtotal * 0.18;
-                const delivery = items.length > 0 ? 70 : 0; // ₹0 if cart is empty
+                const delivery = items.length > 0 ? 10 : 0; // ₹0 if cart is empty
                 const grandTotal = subtotal + gst + delivery;
 
                 // 5. Update Text Displays
@@ -1389,12 +1522,12 @@
         function calculateTotals() {
             // 18% GST Logic
             const gstAmount = subtotal * 0.18;
-            const deliveryCharge = 70; // Fixed delivery charge
+            const deliveryCharge = 10; // Fixed delivery charge
             grandTotal = subtotal + gstAmount + deliveryCharge;
 
             document.getElementById("subtotalDisplay").innerText = "₹" + subtotal.toLocaleString(undefined, { minimumFractionDigits: 2 });
             document.getElementById("gstDisplay").innerText = "₹" + gstAmount.toLocaleString(undefined, { minimumFractionDigits: 2 });
-            document.getElementById("deliverycharges").innerText = "₹70.00";
+            document.getElementById("deliverycharges").innerText = "₹10.00";
             document.getElementById("grandTotalDisplay").innerText = "₹" + grandTotal.toLocaleString(undefined, { minimumFractionDigits: 2 });
         }
 
@@ -1456,59 +1589,7 @@
             return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, "0")).join("");
         }
 
-        async function processPayU(data) {
-            const key = "EjKBQq";
-            // CRITICAL: Ensure this 'salt' is the PayU Merchant Salt, NOT an RSA Private Key.
-            // A standard PayU salt is usually a 10-12 character alphanumeric string.
-            const salt = "YOUR_ACTUAL_MERCHANT_SALT";
-
-            const txnid = "TXN" + Date.now();
-            const productinfo = "Cart Order";
-
-            // CLEAN THE AMOUNT: Remove "₹" and commas, then force to 2 decimal places
-            const cleanAmount = parseFloat(data.total_amount.toString().replace(/[₹,]/g, '')).toFixed(2);
-
-            // Check if amount is valid to prevent "Invalid Amount" error
-            if (isNaN(cleanAmount) || cleanAmount <= 0) {
-                alert("Error: Total amount is invalid.");
-                document.getElementById("payBtn").disabled = false;
-                return;
-            }
-
-            // Generate Secure Hash using the CLEAN amount
-            const hash = await generatePayUHash(key, txnid, cleanAmount, productinfo, data.customer_name, data.customer_email, salt);
-
-            // Create Form
-            const form = document.createElement("form");
-            form.method = "POST";
-            // Change to "https://test.payu.in/_payment" if you are still testing
-            form.action = "https://secure.payu.in/_payment";
-
-            const fields = {
-                key,
-                txnid,
-                hash,
-                amount: cleanAmount, // Must be "500.00", NOT "₹500"
-                productinfo,
-                firstname: data.customer_name,
-                email: data.customer_email,
-                phone: data.customer_phone,
-                surl: "https://dynamiccorrugations.com/payment-success.html",
-                furl: "https://dynamiccorrugations.com/payment-failure.html"
-            };
-
-            Object.entries(fields).forEach(([k, v]) => {
-                let i = document.createElement("input");
-                i.type = "hidden";
-                i.name = k;
-                i.value = v;
-                form.appendChild(i);
-            });
-
-            document.body.appendChild(form);
-            form.submit();
-        }
-    </script>
+      </script>
 
     <script src="/js/menu.js"></script>
     <script src="/product.js"></script>
@@ -1531,7 +1612,7 @@
             // 1. AUTH CHECK
             if (!userToken) {
                 alert("Your session has expired. Please log in again.");
-                window.location.href = "login.html";
+                window.location.href = "index.html";
                 return;
             }
 
@@ -1692,12 +1773,12 @@
         function calculateTotals() {
             // 18% GST Logic
             const gstAmount = subtotal * 0.18;
-            const deliveryCharge = 70; // Fixed delivery charge
+            const deliveryCharge = 0; // Fixed delivery charge
             grandTotal = subtotal + gstAmount + deliveryCharge;
 
             document.getElementById("subtotalDisplay").innerText = "₹" + subtotal.toLocaleString(undefined, { minimumFractionDigits: 2 });
             document.getElementById("gstDisplay").innerText = "₹" + gstAmount.toLocaleString(undefined, { minimumFractionDigits: 2 });
-            document.getElementById("deliverycharges").innerText = "₹70.00";
+            document.getElementById("deliverycharges").innerText = "₹0.00";
             document.getElementById("grandTotalDisplay").innerText = "₹" + grandTotal.toLocaleString(undefined, { minimumFractionDigits: 2 });
         }
 
@@ -1784,11 +1865,11 @@
                 firstname: data.customer_name,
                 email: data.customer_email,
                 phone: data.customer_phone,
-                surl: "https://dynamiccorrugations.com/payment-success.html",
+                  surl: "https://dynamiccorrugations.com/payment-success.html",
                 furl: "https://dynamiccorrugations.com/payment-failure.html"
             };
 
-            Object.entries(fields).forEach(([k, v]) => {
+          Object.entries(fields).forEach(([k, v]) => {
                 let i = document.createElement("input");
                 i.type = "hidden"; i.name = k; i.value = v;
                 form.appendChild(i);
@@ -1813,7 +1894,7 @@
         let currentPrice = 0;
 
         // Default State
-        let currentMoq = 10;
+        let currentMoq = 1;
         let selectedLocationName = null;
 
         // Cart Load
@@ -1826,6 +1907,8 @@
         document.addEventListener("DOMContentLoaded", async () => {
             await fetchProductData();
             updateCartUI();
+            renderCart();      // Fills Product Name & Qty
+            fetchAddresses();
         });
 
 
@@ -2028,9 +2111,6 @@
             } else {
                 document.querySelector('.location-wrapper').style.border = "1px solid #ddd";
             }
-
-
-
             const qtyInput = document.getElementById("qtyInput");
             const qty = parseInt(qtyInput.value);
 
