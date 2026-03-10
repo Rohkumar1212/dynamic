@@ -37,6 +37,9 @@
         })();
     </script>
     <style>
+        .autofill{
+            display: none !important;
+        }
         .cart-sidebar {
             width: 350px;
             height: 100vh;
@@ -548,6 +551,23 @@
                 <h2 class="text-black text-center" style="color: #333;">Checkout</h2>
             </div>
         </section>
+        <script>
+            function fillShippingForm(item) {
+                    // Select the input field by its ID
+                    const nameInput = document.getElementById('ship_name');
+
+                    // Set the value from your data object
+                    if (nameInput) {
+                        // Combining name and qty if you want both, or just name
+                        nameInput.value = `${item.name} (Qty: ${item.qty})`;
+
+                        // OR: If you only want the name
+                        // nameInput.value = item.name;
+                    }
+                }
+
+ 
+        </script>
         <div class="container">
 
             <div class="grid">
@@ -556,6 +576,16 @@
                     <div class="card">
                         <h3 class="section-title">1. Shipping Address</h3>
                         <div class="form-row">
+
+                            <div class="form-group autofill">
+                                <label class="form-label">Product Details</label>
+                                <input id="ship_name" class="form-input" placeholder="Product name will appear here" required>
+                            </div>
+                            
+                            <div class="form-group autofill">
+                                <label class="form-label">Order Quantity</label>
+                                <input id="ship_qty" class="form-input" placeholder="0" readonly>
+                            </div>
                             <div class="form-group">
                                 <label class="form-label">Full Name</label>
                                 <input id="ship_name" class="form-input" placeholder="name" required>
@@ -1137,6 +1167,8 @@
                 return;
             }
 
+            
+
             try {
                 // 2. Fetch Data
                 const res = await fetch("https://admin.dynamiccorrugations.com/api/cart", {
@@ -1153,6 +1185,18 @@
                 const cartList = document.getElementById("checkoutCartList");
                 if (!cartList) return;
 
+
+                // --- NEW: AUTO-FILL LOGIC ---
+                // If there are items in the cart, fill the shipping fields automatically
+                if (items.length > 0) {
+                    const firstItem = items[0];
+                    const nameField = document.getElementById('ship_name');
+                    const qtyField = document.getElementById('ship_qty');
+
+                    if (nameField) nameField.value = firstItem.title || "Product";
+                    if (qtyField) qtyField.value = firstItem.quantity || 0;
+                }
+                // ----------------------------
                 cartList.innerHTML = "";
                 let subtotal = 0;
 
