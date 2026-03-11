@@ -1399,110 +1399,6 @@
 
 
         document.addEventListener("DOMContentLoaded", renderCart);
-        /* ============================================================
-           ORDER HANDLER (POST TO /api/checkout)
-        ============================================================ */
-        async function handleOrder() {
-            const payBtn = document.getElementById("payBtn");
-            const userToken = getAuthToken();
-
-            // 1. AUTH CHECK
-            if (!userToken) {
-                alert("Your session has expired. Please log in again.");
-                window.location.href = "login.html";
-                return;
-            }
-
-            // 2. VALIDATION OF TOTAL AMOUNT
-            // This ensures renderCart has finished and the amount is valid
-            const finalAmount = window.checkoutGrandTotal;
-            if (!finalAmount || finalAmount <= 0) {
-                alert("Error: Total amount is invalid. Please refresh the page.");
-                return;
-            }
-
-            // 3. VALIDATION OF REQUIRED FIELDS
-            const requiredIds = ["ship_name", "ship_phone", "ship_email", "ship_address", "ship_city", "ship_state", "ship_pincode"];
-            for (let id of requiredIds) {
-                const field = document.getElementById(id);
-                if (!field || !field.value.trim()) {
-                    alert("Please fill in all shipping details.");
-                    if (field) field.focus();
-                    return;
-                }
-            }
-
-            // 4. UI STATE - LOADING
-            payBtn.disabled = true;
-            payBtn.innerText = "Processing Order...";
-
-            // 5. PREPARE PAYLOAD
-            // Added 'amount' and changed paymentMethod to match your previous PayU requirements if needed
-            const checkoutPayload = {
-                customerFullName: document.getElementById("ship_name").value.trim(),
-                customerEmail: document.getElementById("ship_email").value.trim(),
-                customerMobile: document.getElementById("ship_phone").value.trim(),
-                totalAmount: finalAmount.toFixed(2), // CRITICAL: Send the amount to the API
-                shippingAddress: {
-                    line1: document.getElementById("ship_address").value.trim(),
-                    city: document.getElementById("ship_city").value.trim(),
-                    state: document.getElementById("ship_state").value.trim(),
-                    pincode: document.getElementById("ship_pincode").value.trim(),
-                    country: "IN"
-                },
-                billing: {
-                    line1: document.getElementById("bill_address").value.trim() || document.getElementById("ship_address").value.trim(),
-                    city: document.getElementById("bill_city").value.trim() || document.getElementById("ship_city").value.trim(),
-                    state: document.getElementById("ship_state").value.trim(),
-                    pincode: document.getElementById("bill_pincode").value.trim() || document.getElementById("ship_pincode").value.trim(),
-                    country: "IN"
-                },
-                paymentMethod: "PayU", // Change this based on your backend requirement (PayU or razorpay)
-                gstRate: 18
-            };
-
-            try {
-                // 6. POST TO CHECKOUT API
-                const response = await fetch("https://admin.dynamiccorrugations.com/api/checkout", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${userToken}`
-                    },
-                    body: JSON.stringify(checkoutPayload)
-                });
-
-                const result = await response.json();
-
-                if (response.ok) {
-                    // 7. SUCCESS - Proceed to Payment Gateway
-                    // If your API returns a PayU hash or redirect, handle it here.
-                    // Otherwise, if it's a direct order:
-                    alert("Order placed successfully!");
-
-                    // If you need to trigger the processPayU function you showed earlier:
-                    const paymentData = {
-                        total_amount: finalAmount,
-                        customer_name: checkoutPayload.customerFullName,
-                        customer_email: checkoutPayload.customerEmail,
-                        customer_phone: checkoutPayload.customerMobile
-                    };
-                    await processPayU(paymentData);
-
-                } else {
-                    throw new Error(result.message || "Checkout failed.");
-                }
-
-            } catch (error) {
-                console.error("Checkout Error:", error);
-                alert("❌ " + error.message);
-                payBtn.disabled = false;
-                payBtn.innerText = "Pay Now";
-            }
-        }
-        /* ============================================================
-           SUPPORTING FUNCTIONS
-        ============================================================ */
         function toggleBilling() {
             const isChecked = document.getElementById("sameAsShipping").checked;
             const billingDiv = document.getElementById("billingForm");
@@ -1531,46 +1427,7 @@
             document.getElementById("grandTotalDisplay").innerText = "₹" + grandTotal.toLocaleString(undefined, { minimumFractionDigits: 2 });
         }
 
-        /* ============================================================
-           2. ORDER HANDLER (UPDATED FOR API ITEMS)
-        ============================================================ */
-        async function handleOrder() {
-            const payBtn = document.getElementById("payBtn");
-
-            // VALIDATION
-            const requiredIds = ["ship_name", "ship_phone", "ship_email", "ship_address", "ship_city", "ship_pincode"];
-            for (let id of requiredIds) {
-                if (!document.getElementById(id).value.trim()) {
-                    alert("Please fill all required shipping details.");
-                    document.getElementById(id).focus();
-                    return;
-                }
-            }
-
-            payBtn.disabled = true;
-            payBtn.innerText = "Processing...";
-
-            const orderData = {
-                customer_name: document.getElementById("ship_name").value,
-                customer_email: document.getElementById("ship_email").value,
-                customer_phone: document.getElementById("ship_phone").value,
-                shipping_address: `${document.getElementById("ship_address").value}, ${document.getElementById("ship_city").value}, ${document.getElementById("ship_pincode").value}`,
-                total_amount: grandTotal.toFixed(2),
-                order_items: cartItems.map(i => `${i.title} - Qty: ${i.quantity} - Price: ${i.pricePerPiece}`).join("\n")
-            };
-
-            try {
-                await processPayU(orderData);
-            } catch (paymentError) {
-                console.error("Payment Error:", paymentError);
-                alert("Payment initialization failed.");
-                payBtn.disabled = false;
-                payBtn.innerText = "Pay Now";
-            }
-        }
-
-        // Initialize on page load
-        renderCart();
+     
 
 
         function formatCartForEmail() {
@@ -1605,34 +1462,34 @@
         /* ============================================================
            ORDER HANDLER (POST TO /api/checkout)
         ============================================================ */
+    /* ============================================================
+        UPDATED ORDER HANDLER: Redirects to PayU, Saves Data for Later
+    ============================================================ */
         async function handleOrder() {
             const payBtn = document.getElementById("payBtn");
             const userToken = getAuthToken();
 
-            // 1. AUTH CHECK
             if (!userToken) {
-                alert("Your session has expired. Please log in again.");
+                alert("Session expired. Please log in.");
                 window.location.href = "index.html";
                 return;
             }
 
-            // 2. VALIDATION OF REQUIRED FIELDS
+            // 1. Validate Fields
             const requiredIds = ["ship_name", "ship_phone", "ship_email", "ship_address", "ship_city", "ship_state", "ship_pincode"];
             for (let id of requiredIds) {
-                const field = document.getElementById(id);
-                if (!field.value.trim()) {
-                    alert(`Please enter your ${field.previousElementSibling.innerText}.`);
-                    field.focus();
+                if (!document.getElementById(id).value.trim()) {
+                    alert("Please fill all required shipping details.");
+                    document.getElementById(id).focus();
                     return;
                 }
             }
 
-            // 3. UI STATE - LOADING
             payBtn.disabled = true;
-            payBtn.innerText = "Processing Order...";
+            payBtn.innerText = "Redirecting to Payment...";
 
-            // 4. PREPARE PAYLOAD BASED ON YOUR API REQUIREMENTS
-            const checkoutPayload = {
+            // 2. Prepare Structured Payload
+            const pendingOrderData = {
                 customerFullName: document.getElementById("ship_name").value.trim(),
                 customerEmail: document.getElementById("ship_email").value.trim(),
                 customerMobile: document.getElementById("ship_phone").value.trim(),
@@ -1643,52 +1500,36 @@
                     pincode: document.getElementById("ship_pincode").value.trim(),
                     country: "IN"
                 },
-                // Billing follows the toggle logic (Same as shipping or custom)
                 billing: {
-                    line1: document.getElementById("bill_address").value.trim() || document.getElementById("ship_address").value.trim(),
-                    city: document.getElementById("bill_city").value.trim() || document.getElementById("ship_city").value.trim(),
-                    state: document.getElementById("ship_state").value.trim(), // Defaults to ship state
-                    pincode: document.getElementById("bill_pincode").value.trim() || document.getElementById("ship_pincode").value.trim(),
+                    line1: document.getElementById("bill_address")?.value.trim() || document.getElementById("ship_address").value.trim(),
+                    city: document.getElementById("bill_city")?.value.trim() || document.getElementById("ship_city").value.trim(),
+                    state: document.getElementById("ship_state").value.trim(),
+                    pincode: document.getElementById("bill_pincode")?.value.trim() || document.getElementById("ship_pincode").value.trim(),
                     country: "IN"
                 },
-                paymentMethod: "razorpay", // As per your API 2 requirements
-                gstRate: 18
+                paymentMethod: "payu",
+                gstRate: 18,
+                totalAmount: grandTotal // Used for display/validation later
             };
 
+            // 3. CRITICAL: Save to Session Storage
+            sessionStorage.setItem("pendingOrder", JSON.stringify(pendingOrderData));
+
+            // 4. Trigger PayU Redirect
             try {
-                // 5. POST TO CHECKOUT API
-                const response = await fetch("https://admin.dynamiccorrugations.com/api/checkout", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${userToken}`
-                    },
-                    body: JSON.stringify(checkoutPayload)
-                });
-
-                const result = await response.json();
-
-                if (response.ok) {
-                    console.log("Order Created:", result);
-
-                    // 6. CLEAR LOCAL DATA & REDIRECT
-                    // Your API marks the cart as converted, so we just clear UI and move to success
-                    alert("Order placed successfully!");
-                    window.location.href = "payment-success.html?orderId=" + (result.data?.id || "");
-                } else {
-                    throw new Error(result.message || "Checkout failed. Please try again.");
-                }
-
-            } catch (error) {
-                console.error("Checkout Error:", error);
-                alert("❌ " + error.message);
-
-                // Reset button state on error
+                const payUData = {
+                    total_amount: grandTotal.toFixed(2),
+                    customer_name: pendingOrderData.customerFullName,
+                    customer_email: pendingOrderData.customerEmail,
+                    customer_phone: pendingOrderData.customerMobile
+                };
+                await processPayU(payUData);
+            } catch (err) {
+                console.error("Payment Init Error:", err);
                 payBtn.disabled = false;
                 payBtn.innerText = "Pay Now";
             }
         }
-
         /* ============================================================
            SUPPORTING FUNCTIONS
         ============================================================ */
@@ -1717,7 +1558,7 @@
                 const userToken = getAuthToken();
                 if (!userToken) {
                     alert("Session expired. Please login again.");
-                    window.location.href = "login.html";
+                    window.location.href = "/index.html";
                     return;
                 }
 
@@ -1782,47 +1623,7 @@
             document.getElementById("grandTotalDisplay").innerText = "₹" + grandTotal.toLocaleString(undefined, { minimumFractionDigits: 2 });
         }
 
-        /* ============================================================
-           2. ORDER HANDLER (UPDATED FOR API ITEMS)
-        ============================================================ */
-        async function handleOrder() {
-            const payBtn = document.getElementById("payBtn");
-
-            // VALIDATION
-            const requiredIds = ["ship_name", "ship_phone", "ship_email", "ship_address", "ship_city", "ship_pincode"];
-            for (let id of requiredIds) {
-                if (!document.getElementById(id).value.trim()) {
-                    alert("Please fill all required shipping details.");
-                    document.getElementById(id).focus();
-                    return;
-                }
-            }
-
-            payBtn.disabled = true;
-            payBtn.innerText = "Processing...";
-
-            const orderData = {
-                customer_name: document.getElementById("ship_name").value,
-                customer_email: document.getElementById("ship_email").value,
-                customer_phone: document.getElementById("ship_phone").value,
-                shipping_address: `${document.getElementById("ship_address").value}, ${document.getElementById("ship_city").value}, ${document.getElementById("ship_pincode").value}`,
-                total_amount: grandTotal.toFixed(2),
-                order_items: cartItems.map(i => `${i.title} - Qty: ${i.quantity} - Price: ${i.pricePerPiece}`).join("\n")
-            };
-
-            try {
-                await processPayU(orderData);
-            } catch (paymentError) {
-                console.error("Payment Error:", paymentError);
-                alert("Payment initialization failed.");
-                payBtn.disabled = false;
-                payBtn.innerText = "Pay Now";
-            }
-        }
-
-        // Initialize on page load
-        renderCart();
-
+   
 
         function formatCartForEmail() {
             return cart.map(i => `${i.name} (${i.material}) - Qty: ${i.qty} - Price: ${i.totalPrice}`).join("\n");
@@ -1846,6 +1647,9 @@
             // NOTE: The salt below looks like a Private Key. Please ensure this is your actual PayU Salt.
             // Usually, a salt is a short string like "eCwWELxi".
             const salt = "MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDY3Pv7uXln8Qc5QPirbdYXKk/AKeRfWUyU51ntrB9se8tEj+dhUWxjtqtQrQVw6lXZwypgGo+GDHJTrhlohcpLzs8ZRlXikh5HfBKfW1mDR1jKWjle2KYWj3wDAOkyCi0kdEci2tq4OQZS/oJrEXZ7NRe7WF/CiXmvm75oVBYeJxCd0kJjUB8zGt5USoMvbwkRMpku0ES5I+ZonxZRH5ufzOixjRXRtwrLd5EyVjEFDiqOajQ7k02vYybTlJzvnM6NSUVGfo5/pU/kRBrii+rUMwVGBkBPpv3mPYzJOGeAjniHIuTkjcjcC1FkOk+3lKcqIq0tl2wL2qaFxNOV/3e1AgMBAAECggEAdl+hmBT0xRzWwZTKZ+DLdNeespjrVHSNDdZ+yvIiMPgdyy31sbRdQsyKFL5s8uamt/gFIHI/F3+hxDWLHvewpdKcTwKKjOMPbhu2mo+le7gtKj83g6MkfboSih0sLSlK3NQvpEHsE5Tk89aC3+inULd5XcTueGTMLGQJ+i6z5/6POe2kyezGJxtHs3oWsIiL34J14Gdbd+hdtL7dV98z3j2Q1Jp/pgHBV7fOV13/3nJzdd1Olan/Bvx75y3om6nC/hZuoM5G0wOe/pC6T+SrUdmITP1VTKeLQRPGZmrdyA4dgmAhrgP5AcEoYtLKYDCNWa3EDvHLhC3qUmf0pA33PQKBgQD5YUAxES/ii30ptdIVPVrKhxSa1u/ARvdrLmKur/srmMNjY+OLGPQ7cPJVSa+oz7x+HllWAevbmW4Vl9emRZqJde5Khtj4W5ZuIDLqJ9WCa1/Cen3We4Aczb3Js5WBs7qRh9OU2iMLwHcwzyYP6dfRTZuOgtE3DWc84n7eFL+JqwKBgQDensFLLpsCPT/z/T3wvFWFQ6INSyp2smxyUTI8Mz1405SsVuQ2zAP43uU6MnxxzlpTfZtuWEdTRz7rowwBc5yW41kVylMZZf/pNtVsHyStP62Nuz2g8GCPJwEqMoRYpNi6j4vaoJX70dxu0H79fn9GCnonkk7hcfE1YXK/4hVkHwKBgBZ0UEBayNIAN1PjIDhzXtJvmUZb5hiNC0gmVBJgnCAP0EAJxXpH0+3qPJe7W8q6ccF1YBvjbmZGiWf+VReOmtyXts4VGEI8lO3zjkIRNiNZIbU0LFJ8qkttpxIbTnHwSfNCpKV5gsBTIyhM7qNuLdWVxFTvqIDpfws3Za7/dUOjAoGAfj9twuMlSPnPQOEGtXU40qBuUDemVzYMRjBB2t38KH9kuu9z8Jd2UTamrIBhDnFFzD9ZXBR4LoQi7KLEdjZIQVGg/biFs8uie3F7SxvGQvHvzIa5BoILYGNwR6vqXhLuTa6GU2/qXqq+5aEbw0pvhxr9918DmNpzPiCLYMIn+2UCgYAWYhoMlZYgGH8XFtiOKs+8LJ84NCMyNE81/8PVdmlHkPxePjr3pJqTyHipJ9F6tikuiAEyiAN8HMRNECKIfUDEIASaQEjeaJ6WiMCsc1j9yz1chUXIeprhqlopic+TqT/5Vd1ojipcOdrKY75vJS5Zmg/X4wgEpnrCbk9krYkeYw==";
+
+
+
 
             const txnid = "TXN" + Date.now();
             const productinfo = "Cart Order";
