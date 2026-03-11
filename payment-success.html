@@ -5,17 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment Success</title>
+    <link rel="icon" type="image/png" href="/images/favicon.ico">
     <script defer src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="bg-green-500 flex justify-center items-center h-screen">
-    <div id="main-card" style="text-align:center; margin-top:50px; font-family: sans-serif;">
-        <div id="processing-ui">
-            <h2>Processing your order...</h2>
-            <p>Please wait while we update your account.</p>
+    <div id="main-card" class="flex flex-col items-center">
+        <div id="processing-ui" class="text-center">
+            <h2 class="text-white text-2xl font-semibold">Processing your order...</h2>
+            <p class="text-white opacity-80">Please wait while we update your account.</p>
         </div>
-
-        <p id="message" style="color: red; font-weight: bold;"></p>
+        <p id="message" class="text-red-600 font-bold mt-4 px-4 text-center"></p>
     </div>
     <script>
     /* ============================================================
@@ -26,8 +26,8 @@
             const mainCardEl = document.getElementById("main-card");
 
             const token = localStorage.getItem("token") || localStorage.getItem("userguest");
-            const pendingData = JSON.parse(sessionStorage.getItem("pendingOrder"));
-
+           const pendingData = JSON.parse(localStorage.getItem("pendingOrder"));
+            localStorage.removeItem("pendingOrder");
             if (!pendingData || !token) {
                 if (messageEl) messageEl.innerText = "Order data not found. If payment was deducted, contact support.";
                 return;
