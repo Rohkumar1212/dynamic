@@ -1513,7 +1513,7 @@
             };
 
             // 3. CRITICAL: Save to Session Storage
-            sessionStorage.setItem("pendingOrder", JSON.stringify(pendingOrderData));
+          localStorage.setItem("pendingOrder", JSON.stringify(pendingOrderData));
 
             // 4. Trigger PayU Redirect
             try {
