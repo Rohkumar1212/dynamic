@@ -53,6 +53,28 @@
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#ffffff" />
     <style>
+        .summary-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+@media (max-width: 600px) {
+    .summary-row {
+        grid-template-columns: 1fr; /* Single column on small screens */
+    }
+}
         .sticky-active #mainMenu nav {
             margin-top: 5px !important;
         }
@@ -1897,51 +1919,51 @@
 
         <div class="container">
 
-            <!-- <div class="summary-row">
-                <div class="card summary-card">
-                    <div class="icon-box icon-blue">
-                        <i class="far fa-calendar-alt"></i>
-                    </div>
-                    <div class="summary-text">
-                        <h3 id="stat-bookings">20</h3>
-                        <p>Total Bookings</p>
-                        <div class="tags">
-                            <span class="badge warning">4 Pending</span>
-                            <span class="badge success">16 Done</span>
-                        </div>
+        <div class="summary-row">
+            <div class="card summary-card">
+                <div class="icon-box icon-blue">
+                    <i class="far fa-calendar-alt"></i>
+                </div>
+                <div class="summary-text">
+                    <h3 id="stat-bookings">0</h3>
+                    <p>Total Bookings</p>
+                    <div class="tags">
+                        <span class="badge warning" id="booking-pending">0 Pending</span>
+                        <span class="badge success" id="booking-done">0 Done</span>
                     </div>
                 </div>
-
-                <div class="card summary-card">
-                    <div class="icon-box icon-green">
-                        <i class="fas fa-shopping-bag"></i>
-                    </div>
-                    <div class="summary-text">
-                        <h3 id="stat-orders">10</h3>
-                        <p>Total Orders</p>
-                        <div class="tags">
-                            <span class="badge warning">5 Pending</span>
-                            <span class="badge success">5 Delivered</span>
-                        </div>
+            </div>
+        
+            <div class="card summary-card">
+                <div class="icon-box icon-green">
+                    <i class="fas fa-shopping-bag"></i>
+                </div>
+                <div class="summary-text">
+                    <h3 id="stat-orders">0</h3>
+                    <p>Total Orders</p>
+                    <div class="tags">
+                        <span class="badge warning" id="order-pending">0 Pending</span>
+                        <span class="badge success" id="order-delivered">0 Delivered</span>
                     </div>
                 </div>
-
-                <div class="card summary-card">
-                    <div class="icon-box icon-purple">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </div>
-                    <div class="summary-text">
-                        <h3 id="stat-addresses">2</h3>
-                        <p>Saved Addresses</p>
-                        <div class="tags">
-                            <a href="#" onclick="app.switchTab('addresses')"
-                                style="color: var(--primary); text-decoration:none; font-size:13px; font-weight:600;">
-                                Manage Addresses →
-                            </a>
-                        </div>
+            </div>
+        
+            <div class="card summary-card">
+                <div class="icon-box icon-purple">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="summary-text">
+                    <h3 id="stat-addresses">0</h3>
+                    <p>Saved Addresses</p>
+                    <div class="tags">
+                        <a href="#" onclick="app.switchTab('addresses')"
+                            style="color: var(--primary); text-decoration:none; font-size:13px; font-weight:600;">
+                            Manage Addresses →
+                        </a>
                     </div>
                 </div>
-            </div> -->
+            </div>
+        </div>
 
             <div class="dashboard-grid mt-5">
                 <aside class="sidebar-card">
@@ -2325,7 +2347,7 @@
             // If user NOT logged in → show Login button
             if (!user) {
                 authArea.innerHTML = `
-          <a href="login.html" class="btn btn-secondary" id="loginBtn">Login</a>
+          <a href="index.html" class="btn btn-secondary" id="loginBtn">Login</a>
         `;
                 return;
             }
@@ -2620,6 +2642,47 @@
 
         // Initial Call
         fetchUserOrders();
+
+        async function updateDashboard() {
+                const API_URL = 'https://admin.dynamiccorrugations.com/api/dashboard';
+                const TOKEN = 'eyJhbGciOiJIUzI...'; // Paste your full token here
+
+                try {
+                    const response = await fetch(API_URL, {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Bearer ${TOKEN}`,
+                            'Content-Type': 'application/json'
+                        }
+                    });
+
+                    const result = await response.json();
+
+                    if (result.success) {
+                        const data = result.data;
+
+                        // 1. Update Bookings
+                        document.getElementById('stat-bookings').innerText = data.bookings.total;
+                        document.getElementById('booking-pending').innerText = `${data.bookings.pending} Pending`;
+                        document.getElementById('booking-done').innerText = `${data.bookings.done} Done`;
+
+                        // 2. Update Orders
+                        document.getElementById('stat-orders').innerText = data.totalOrders;
+                        document.getElementById('order-pending').innerText = `${data.ordersByStatus.pending} Pending`;
+                        document.getElementById('order-delivered').innerText = `${data.ordersByStatus.delivered} Delivered`;
+
+                        // 3. Update Addresses
+                        document.getElementById('stat-addresses').innerText = data.totalAddresses;
+
+                        console.log("Dashboard updated for:", data.user.fullName);
+                    }
+                } catch (error) {
+                    console.error("Error fetching dashboard data:", error);
+                }
+            }
+
+            // Call the function when the page loads
+            window.onload = updateDashboard;
     </script>
 </body>
 
