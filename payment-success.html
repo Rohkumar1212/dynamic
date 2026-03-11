@@ -18,16 +18,18 @@
         <p id="message" class="text-red-600 font-bold mt-4 px-4 text-center"></p>
     </div>
     <script>
-    /* ============================================================
-        FINALIZE ORDER: Called only after successful payment return
-    ============================================================ */
+        /* ============================================================
+            FINALIZE ORDER: Called only after successful payment return
+        ============================================================ */
         async function finalizePaymentOrder() {
             const messageEl = document.getElementById("message");
             const mainCardEl = document.getElementById("main-card");
 
             const token = localStorage.getItem("token") || localStorage.getItem("userguest");
-           const pendingData = JSON.parse(localStorage.getItem("pendingOrder"));
-           
+
+            const pendingData = JSON.parse(localStorage.getItem("pendingOrder"));
+            console.log(pendingData);
+
             if (!pendingData || !token) {
                 if (messageEl) messageEl.innerText = "Order data not found. If payment was deducted, contact support.";
                 return;
