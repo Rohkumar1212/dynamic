@@ -7,6 +7,12 @@ body .body-inner {
   padding: 0;
   margin: 0;
 }
+
+#prodTitle{
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+}
 .popup-container {
   display: none !important;
 }
