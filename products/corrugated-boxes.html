@@ -997,7 +997,7 @@
         <script src="/script.js"></script>
         <!-- end: Header -->
         <!-- Page title -->
-        <section id="page-title" class="text-light" data-bg-parallax="/images/products/Packaging-Page-Banner.jpg">
+        <section id="page-title" class="text-light" data-bg-parallax="images/products/Packaging-Page-Banner.jpg">
 
         </section>
         <!-- end: Page title -->
@@ -1017,202 +1017,135 @@
             </div>
         </section>
         <script>
-            async function loadProducts() {
-                const container = document.getElementById('product-grid');
 
-                if (!container) {
-                    console.warn("Element 'product-grid' not found. Skipping product load.");
+            const API_BASE = "https://admin.dynamiccorrugations.com";
+            
+            document.addEventListener("DOMContentLoaded", initPage);
+            
+            async function initPage() {
+            
+                const categoryId = getCategoryId();
+            
+                if (!categoryId) {
+                    document.getElementById("product-grid").innerHTML = "Category not found";
                     return;
                 }
-
-                const baseURL = 'https://admin.dynamiccorrugations.com';
-                const apiURL = `${baseURL}/api/products`;
-
+            
+                loadCategoryDetails(categoryId);
+                loadProductsByCategory(categoryId);
+            
+            }
+            
+            
+            // GET CATEGORY ID FROM URL
+            function getCategoryId() {
+            
+                const params = new URLSearchParams(window.location.search);
+                return params.get("id");
+            
+            }
+            
+            
+            // CATEGORY DETAILS
+            async function loadCategoryDetails(categoryId) {
+            
                 try {
-                    const response = await fetch(apiURL);
-                    const result = await response.json();
-
-                    if (result.success && result.data.length > 0) {
-                        const htmlContent = result.data.map(product => {
-
-                            // --- NEW OPTIMIZED LOGIC FOR SINGLE IMAGE ---
-
-                            // 1. Get raw data (could be "img1.jpg, img2.jpg" or ["img1.jpg"])
-                            let rawPath = product.mainImage || "";
-
-                            // 2. Extract only the first image if it's a list/string with commas
-                            if (typeof rawPath === 'string' && rawPath.includes(',')) {
-                                rawPath = rawPath.split(',')[0].trim();
-                            } else if (Array.isArray(rawPath)) {
-                                rawPath = rawPath[0] || "";
-                            }
-
-                            // 3. Clean the path (remove leading slashes)
-                            const cleanPath = rawPath.replace(/^\/+/, '');
-
-                            // 4. Construct the Final URL
-                            const fullImageUrl = cleanPath
-                                ? `${baseURL}/${cleanPath}`
-                                : 'https://via.placeholder.com/300x200?text=No+Image';
-
-                            // --------------------------------------------
-
-                            console.log(fullImageUrl)
-                            return `
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 shadow-sm border-0 product-card">
-                        <div class="img-wrapper" style="height: 220px; background: #f8f9fa; display: flex; align-items: center; justify-content: center;">
-                            <img src="${fullImageUrl}" 
-                                 class="card-img-top" 
-                                 alt="${product.title || 'Product Image'}"
-                                 loading="lazy" 
-                                 style="width: 100%; height: 100%; object-fit: contain;"
-                                 onerror="this.onerror=null;this.src='https://via.placeholder.com/300x200?text=Not+Found';">
-                        </div>
-                        <div class="card-body">
-                            <h6 class="text-primary small fw-bold mb-1">${product.category?.title || 'General'}</h6>
-                            <h5 class="card-title h6 mb-3" style="min-height: 40px;">${product.title}</h5>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span class="fw-bold text-dark chip">₹${product.basePricePerPiece}</span><br/>
-                                <a href="details.html?id=${product.id}" class="btn btn-sm btn-primary px-2 viewbtn rounded-pill">
-                                    View Details
-                                </a>
+            
+                    const res = await fetch(`${API_BASE}/api/categories/${categoryId}`);
+                    const result = await res.json();
+            
+                    if (!result.success) return;
+            
+                    const cat = result.data;
+            
+                    document.getElementById("pageTitle").innerText = cat.title;
+                    document.getElementById("pageDesc").innerText = cat.shortDescription;
+            
+                } catch (err) {
+            
+                    console.error("Category error:", err);
+            
+                }
+            
+            }
+            
+            
+            // PRODUCTS FILTER
+            async function loadProductsByCategory(categoryId) {
+            
+                const container = document.getElementById("product-grid");
+            
+                try {
+            
+                    const res = await fetch(`${API_BASE}/api/products`);
+                    const result = await res.json();
+            
+                    if (!result.success) return;
+            
+                    const products = result.data.filter(p => p.category?.id === categoryId);
+            
+                    if (products.length === 0) {
+            
+                        container.innerHTML = "<p>No products found</p>";
+                        return;
+            
+                    }
+            
+                    const html = products.map(product => {
+            
+                        const img = product.mainImage
+                            ? `${API_BASE}${product.mainImage}`
+                            : "https://via.placeholder.com/300x200";
+            
+                        return `
+                        <div class="col-md-4 mb-4">
+            
+                            <div class="card product-card">
+            
+                                <div class="img-wrapper">
+                                    <img src="${img}" class="card-img-top">
+                                </div>
+            
+                                <div class="card-body">
+            
+                                    <h6 class="text-primary">${product.category?.title}</h6>
+            
+                                    <h5>${product.title}</h5>
+            
+                                    <div class="d-flex justify-content-between">
+            
+                                        <span class="fw-bold">
+                                            ₹${product.basePricePerPiece}
+                                        </span>
+            
+                                        <a href="details.html?id=${product.id}" 
+                                           class="btn btn-sm btn-primary">
+                                           View
+                                        </a>
+            
+                                    </div>
+            
+                                </div>
+            
                             </div>
+            
                         </div>
-                    </div>
-                </div>`;
-                        }).join('');
-
-                        container.innerHTML = htmlContent;
-
-                    } else {
-                        container.innerHTML = '<div class="col-12 text-center"><p>No products found.</p></div>';
-                    }
-                } catch (error) {
-                    console.error("Gallery Error:", error);
-                    container.innerHTML = `<div class="col-12 text-center"><p>Server connection lost.</p></div>`;
+                        `;
+            
+                    }).join("");
+            
+                    container.innerHTML = html;
+            
+                } catch (err) {
+            
+                    console.error(err);
+                    container.innerHTML = "Server Error";
+            
                 }
+            
             }
-
-            document.addEventListener('DOMContentLoaded', loadProducts);</script>
-        <script>
-            const API_BASE = 'https://admin.dynamiccorrugations.com';
-            const mainContainer = document.getElementById('main-container');
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-            // --- STEP 1: LOAD CATEGORIES ---
-            async function loadCategories() {
-                document.getElementById('breadcrumb-nav').classList.add('d-none');
-                document.getElementById('page-title').innerText = "Our Categories";
-
-                try {
-                    const response = await fetch(`${API_BASE}/api/categories`);
-                    const result = await response.json();
-
-                    if (result.success) {
-                        const html = result.data.map(cat => `
-                <div class="col-md-4">
-                    <div class="card card-category" onclick="loadProducts('${cat.slug}', '${cat.title}')">
-                        <img src="${API_BASE}${cat.imageUrl}" class="card-img-top" alt="${cat.imageAlt}">
-                        <div class="card-body text-center">
-                            <h5 class="card-title fw-bold">${cat.title}</h5>
-                            <p class="text-muted small">${cat.status.toUpperCase()}</p>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-                        mainContainer.innerHTML = html;
-                    }
-                } catch (error) {
-                    mainContainer.innerHTML = "<p>Error loading categories.</p>";
-                }
-            }
-
-            // --- STEP 2: LOAD PRODUCTS BY CATEGORY ---
-            async function loadProducts(slug, title) {
-                document.getElementById('breadcrumb-nav').classList.remove('d-none');
-                document.getElementById('breadcrumb-current').innerText = title;
-                document.getElementById('page-title').innerText = title;
-                mainContainer.innerHTML = "Loading Products...";
-
-                try {
-                    // Assuming your API follows this pattern for products filtered by category slug
-                    const response = await fetch(`${API_BASE}/api/products?category=${slug}`);
-                    const result = await response.json();
-
-                    if (result.success && result.data.length > 0) {
-                        const html = result.data.map(prod => `
-                <div class="col-md-4">
-                    <div class="card card-category">
-                        <img src="${API_BASE}${prod.imageUrl}" class="card-img-top" onclick="viewProductDetail('${prod.id}')">
-                        <div class="card-body">
-                            <h6 class="fw-bold">${prod.title}</h6>
-                            <p class="text-primary fw-bold">₹${prod.price || 'Contact for Price'}</p>
-                            <button class="btn btn-add-cart w-100" onclick="addToCart('${prod.id}', '${prod.title}', '${prod.price}')">
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-                        mainContainer.innerHTML = html;
-                    } else {
-                        mainContainer.innerHTML = "<div class='text-center'>No products found in this category.</div>";
-                    }
-                } catch (error) {
-                    mainContainer.innerHTML = "<p>Error loading products.</p>";
-                }
-            }
-
-            // --- STEP 3: PRODUCT DETAIL VIEW ---
-            async function viewProductDetail(productId) {
-                mainContainer.innerHTML = "Loading Details...";
-                try {
-                    const response = await fetch(`${API_BASE}/api/products/${productId}`);
-                    const result = await response.json();
-                    const p = result.data;
-
-                    mainContainer.innerHTML = `
-            <div class="col-md-6">
-                <img src="${API_BASE}${p.imageUrl}" class="img-fluid rounded shadow-sm" style="background:#f9f9f9;">
-            </div>
-            <div class="col-md-6">
-                <h2 class="fw-bold">${p.title}</h2>
-                <hr>
-                <p class="text-muted">${p.description || 'Professional grade packaging solution by Dynamic Corrugations.'}</p>
-                <h3 class="text-primary mb-4">Price: ₹${p.price || '--'}</h3>
-                <div class="d-flex gap-2">
-                    <input type="number" id="qty" value="1" class="form-control" style="width:80px;">
-                    <button class="btn btn-add-cart px-5" onclick="addToCart('${p.id}', '${p.title}', '${p.price}')">Add To Cart</button>
-                </div>
-            </div>
-        `;
-                } catch (e) {
-                    mainContainer.innerHTML = "Failed to load product details.";
-                }
-            }
-
-            // --- STEP 4: CART FUNCTIONALITY ---
-            function addToCart(id, title, price) {
-                const qty = document.getElementById('qty') ? parseInt(document.getElementById('qty').value) : 1;
-                const item = { id, title, price, qty };
-
-                const existing = cart.find(i => i.id === id);
-                if (existing) {
-                    existing.qty += qty;
-                } else {
-                    cart.push(item);
-                }
-
-                localStorage.setItem('cart', JSON.stringify(cart));
-                alert(`${title} added to cart!`);
-            }
-
-            // Initialize
-            loadCategories();
-        </script>
-
-
+            
+            </script>
         <script>
             function openProduct(page) {
                 // Smooth animation on click
