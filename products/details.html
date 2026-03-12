@@ -40,7 +40,6 @@
     <link href="/css/18-x-15-x-16-inches.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="/images/favicon.ico">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-
 </head>
 
 <style>
@@ -252,10 +251,11 @@
                     <div class="radio-group" style="display: flex; gap: 20px;">
                         <label style="cursor: pointer; display: flex; align-items: center; gap: 8px;">
                             <input type="radio" name="deliveryLocation" value="Delhi NCR"
-                                onchange="handleLocationChange(1, 'Delhi NCR')">
+                                onchange="handleLocationChange(10, 'Delhi NCR')">
                             <span>
                                 <b>Delhi NCR</b><br>
                                 <small style="color: #666;">(Min 10 Pieces)</small>
+                                <small style="color: #a10303;">(Shipping charge of 70Rs)</small>
                             </span>
                         </label>
 
@@ -265,6 +265,7 @@
                             <span>
                                 <b>Outside Delhi</b><br>
                                 <small style="color: #666;">(Min 50 Pieces)</small>
+                                <small style="color: #a10303;">(Shipping charge of 150Rs)</small>
                             </span>
                         </label>
                     </div>
@@ -276,7 +277,7 @@
                 <div class="controls">
                     <div class="qty-box">
                         <button onclick="updateQty(-1)">-</button>
-                        <input type="number" id="qtyInput" value="1" readonly>
+                        <input type="number" id="qtyInput" value="10" readonly>
                         <button onclick="updateQty(1)">+</button>
                     </div>
 

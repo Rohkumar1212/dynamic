@@ -2645,7 +2645,8 @@
 
         async function updateDashboard() {
                 const API_URL = 'https://admin.dynamiccorrugations.com/api/dashboard';
-                const TOKEN = 'eyJhbGciOiJIUzI...'; // Paste your full token here
+                const TOKEN = localStorage.getItem("token")
+                alert(TOKEN)
 
                 try {
                     const response = await fetch(API_URL, {
@@ -2680,9 +2681,7 @@
                     console.error("Error fetching dashboard data:", error);
                 }
             }
-
-            // Call the function when the page loads
-            window.onload = updateDashboard;
+            window.onload = updateDashboard();
     </script>
 </body>
 
