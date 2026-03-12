@@ -121,6 +121,9 @@ section {
     transition: all 0.2s ease;
 }
 
+#page-title{
+  background-image: url("images/products/Packaging-Page-Banner.jpg") !important;
+}
 
 #cartItemsContainer {
     max-height: 238px;
