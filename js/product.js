@@ -5,6 +5,7 @@ async function loadProductDetails() {
     // 1. Extract the ID from the URL
     const params = new URLSearchParams(window.location.search);
     const productId = params.get('id');
+    console.log(apiURL);
 
     if (!productId) {
         console.error("No Product ID found in URL.");
@@ -38,7 +39,8 @@ async function loadProductDetails() {
 
                 // Format price with currency symbol
                 const currencySymbol = product.currency === 'INR' ? '₹' : product.currency;
-                document.getElementById('prodPrice').innerText = `${currencySymbol} ${product.basePricePerPiece}`;
+                document.getElementById("prodPrice").innerText =
+                  `${currencySymbol} ${product.basePricePerPiece} /Pieces`;
 
                 document.getElementById('prodTitle').innerText = product.title;
 
