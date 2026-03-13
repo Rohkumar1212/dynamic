@@ -260,10 +260,10 @@
                         </label>
 
                         <label style="cursor: pointer; display: flex; align-items: center; gap: 8px;">
-                            <input type="radio" name="deliveryLocation" value="Outside Delhi"
-                                onchange="handleLocationChange(50, 'Outside Delhi')">
+                            <input type="radio" name="deliveryLocation" value="Outside Delhi NCR"
+                                onchange="handleLocationChange(50, 'Outside Delhi NCR')">
                             <span>
-                                <b>Outside Delhi</b><br>
+                                <b>Outside Delhi NCR</b><br>
                                 <small style="color: #666;">(Min 50 Pieces)</small>
                                 <small style="color: #a10303;">(Shipping charge of 150Rs)</small>
                             </span>
@@ -276,9 +276,9 @@
                 <div id="moqAlert" class="moq-alert"></div>
                 <div class="controls">
                     <div class="qty-box">
-                        <button onclick="updateQty(-1)">-</button>
+                        <button onclick="updateQty(-5)">-</button>
                         <input type="number" id="qtyInput" value="10" readonly>
-                        <button onclick="updateQty(1)">+</button>
+                        <button onclick="updateQty(5)">+</button>
                     </div>
 
                     <div id="conflictOverlay" class="success-overlay">
@@ -353,7 +353,7 @@
     </div>
     <div id="custom-toast" class="toast-hidden">
         <div class="toast-icon">⚠️</div>
-        <div class="toast-message" id="toast-text">Minimum order for Outside Delhi is 50 pieces.</div>
+        <div class="toast-message" id="toast-text">Minimum order for Outside Delhi NCR is 50 pieces.</div>
     </div>
     <div id="cart-container"></div>
 
@@ -383,7 +383,6 @@
                 // Replace 'data.json' with your actual API URL
                 const response = await fetch(`https://admin.dynamiccorrugations.com/api/product-details?${pid}`);
                 const data = await response.json();
-
                 renderTabs(data.productTabs);
                 renderRelated(data.relatedTypes);
                 renderReviews(data.reviews);
