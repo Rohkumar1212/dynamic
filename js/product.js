@@ -67,10 +67,17 @@ async function loadProductDetails() {
 document.addEventListener('DOMContentLoaded', loadProductDetails);
 
 // Placeholder for your existing logic (Quantity updates, etc.)
-function updateQty(change) {
-    const qtyInput = document.getElementById('qtyInput');
-    let currentVal = parseInt(qtyInput.value);
-    qtyInput.value = Math.max(1, currentVal + change);
+function updateQty() {
+  const qtyInput = document.getElementById("qtyInput");
+  let currentVal = parseInt(qtyInput.value) || 0;
+
+  // If it's the first click (value is 1), jump to 5.
+  // Otherwise, just add 5.
+  if (currentVal === 1) {
+    qtyInput.value = 5;
+  } else {
+    qtyInput.value = currentVal + 5;
+  }
 }
 
 // ============================================
@@ -397,7 +404,6 @@ async function addToCart(openDrawer = false) {
     }
 }
 
-
 // ============================================
 // 6. UI HELPERS & STORAGE
 // ============================================
@@ -406,43 +412,48 @@ function finalizeAction(shouldOpenDrawer, msg) {
     else showToast(msg);
 }
 
-
 function updateCartUI() {
-    const badge = document.getElementById("headerCartCount");
-    if (badge) {
-        badge.innerText = cart.length;
-        badge.style.display = cart.length > 0 ? "inline-block" : "none";
-    }
+  const badge = document.getElementById("headerCartCount");
+  if (badge) {
+    badge.innerText = cart.length;
+    badge.style.display = cart.length > 0 ? "inline-block" : "none";
+  }
 
-    const container = document.getElementById("cartItemsContainer");
-    const totalEl = document.getElementById("cartGrandTotal");
-    if (!container) return;
+  const container = document.getElementById("cartItemsContainer");
+  const totalEl = document.getElementById("cartGrandTotal");
+  if (!container) return;
 
-    container.innerHTML = "";
-    let total = 0;
+  container.innerHTML = "";
+  let total = 0;
 
-    cart.forEach((item, index) => {
-        total += item.totalPrice;
-        container.innerHTML += `
-        <div class="cart-item">
+  cart.forEach((item, index) => {
+    total += item.totalPrice;
+    container.innerHTML += `
+        <div class="cart-item" style="display:flex; align-items:center; border-bottom:1px solid #eee; padding:10px 0;">
             <img src="${item.image}" style="width:50px; height:50px; object-fit:cover; border-radius:4px;">
             <div style="flex:1; padding-left:10px;">
                 <div style="font-weight:bold; font-size:14px">${item.name}</div>                    
-                <div style="font-size:12px; margin-top:4px;">
-                    Qty: <b>${item.qty}</b>
-                    <span style="color:#d35400; font-weight:bold; margin-left:5px;">₹${item.totalPrice.toLocaleString()}</span>
+                
+                <div style="display:flex; align-items:center; margin-top:5px; gap:10px;">
+                    <div class="qty-box" style="display:flex; align-items:center; border:1px solid #ddd; border-radius:4px;">
+                        <button onclick="updateCartQty(${index}, -5)" style="background:#f9f9f9; border:none; padding:2px 8px; cursor:pointer;">-</button>
+                        <input type="text" value="${item.qty}" readonly style="width:30px; text-align:center; border:none; font-size:12px; font-weight:bold;">
+                        <button onclick="updateCartQty(${index}, 5)" style="background:#f9f9f9; border:none; padding:2px 8px; cursor:pointer;">+</button>
+                    </div>
+                    
+                    <span style="color:#d35400; font-weight:bold; font-size:13px;">
+                        ₹${item.totalPrice.toLocaleString()}
+                    </span>
                 </div>
             </div>
-            <button onclick="removeItem(${index})" style="color:#e74c3c; background:none; border:none; cursor:pointer; font-size:18px;">
+            <button onclick="removeItem(${index})" style="color:#e74c3c; background:none; border:none; cursor:pointer; font-size:18px; padding-left:10px;">
                 &times;
             </button>
         </div>`;
-    });
+  });
 
-    if (totalEl) totalEl.innerText = "₹" + total.toLocaleString();
+  if (totalEl) totalEl.innerText = "₹" + total.toLocaleString();
 }
-
-
 
 function proceedToCheckout() {
     // Optional: Check if cart is empty before redirecting
